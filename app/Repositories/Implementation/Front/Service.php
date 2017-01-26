@@ -34,6 +34,17 @@ class Service implements ServiceInterface
         return $this->servicesTransformation->getServiceFrontTransform($servicesData);
     }
 
+    public function getServicesLanding()
+    {
+        $params = [
+            'is_active' => true,
+            'limit_data' => 2,
+        ];
+        $servicesData = $this->servicesLanding($params);
+        //dd($mainBannerData);
+        return $this->servicesTransformation->getServiceFrontTransform($servicesData);
+    }
+
     public function getServicesCategory()
     {
         $params = [
@@ -86,6 +97,42 @@ class Service implements ServiceInterface
      * @return array
      */
     protected function services($params = array(), $orderType = 'asc', $returnType = 'array', $returnSingle = false)
+    {
+
+        $services = $this->services
+            ->with('translation')
+            ->with('translations');
+
+        if(isset($params['is_active'])) {
+            $services->isActive($params['is_active']);
+        }
+
+
+        if(!$services->count())
+            return array();
+
+        switch ($returnType) {
+            case 'array':
+                if(!$returnSingle) 
+                {
+                    return $services->get()->toArray();
+                } 
+                else 
+                {
+                    return $services->first()->toArray();
+                }
+
+            break;
+        }
+    }
+
+    /**
+     * Get All Services
+     * Warning: this function doesn't redis cache
+     * @param array $params
+     * @return array
+     */
+    protected function servicesLanding($params = array(), $orderType = 'asc', $returnType = 'array', $returnSingle = false)
     {
 
         $services = $this->services

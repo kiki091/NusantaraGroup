@@ -47,7 +47,7 @@ class LandingController extends Controller
         $data['landing_page'] = $this->landingPage->getlandingPage();
         $data['branch_office'] = $this->branchOffice->getBranchOffice();
         $data['company_profile'] = $this->companyProfile->getCompanyProfile();
-        $data['services'] = $this->services->getServices();
+        $data['services'] = $this->services->getServicesLanding();
         $data['services_category'] = $this->services->getServicesCategory();
         $data['seo'] = $this->landingPage->getlandingPageSeo();
         $data['footer_content'] = $this->footerContent->getFooterContent();

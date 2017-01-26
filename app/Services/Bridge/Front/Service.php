@@ -24,6 +24,16 @@ class Service {
     }
 
     /**
+     * Get Data Services
+     * @param $params
+     * @return mixed
+     */
+    public function getServicesLanding()
+    {
+        return $this->services->getServicesLanding();
+    }
+
+    /**
      * Get Data Services Category
      * @param $params
      * @return mixed

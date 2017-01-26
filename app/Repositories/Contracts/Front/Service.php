@@ -14,6 +14,13 @@ interface Service
     public function getServices();
 
     /**
+     * Get Data Service Landing Page
+     * @param $params
+     * @return mixed
+     */
+    public function getServicesLanding();
+
+    /**
      * Get Data Services Category
      * @param $params
      * @return mixed
