@@ -374,3 +374,13 @@
         display: inline;
     }
 }
+
+@media screen and (max-width:480px){
+    .desktop-footer-block.footer-block-02 {
+        display: none;
+    }
+
+    .desktop-footer-block.footer-block-01 {
+        display: none;
+    }
+}

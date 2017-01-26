@@ -529,9 +529,9 @@ a:after {
 
 .grid figure img {
 	width: 100%;
-	display: block;
-	position: relative;
-    max-height: 250px;
+    display: inline;
+    position: relative;
+    height: 250px;
 }
 
 .grid figcaption {

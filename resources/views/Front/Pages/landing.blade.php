@@ -8,11 +8,9 @@
                         @if(isset($main_banners))
                             @foreach($main_banners as $key=> $slider)
                                 <div class="slider">
-                                    <div class="legend"></div>
                                     <div class="content">
                                         <div class="content-txt">
                                             <h1>Lorem ipsum dolor</h1>
-                                            <h2>Nam ultrices pellentesque facilisis. In semper tellus mollis nisl pulvinar vitae vulputate lorem consequat. Fusce odio tortor, pretium sit amet auctor ut, ultrices vel nibh.</h2>
                                         </div>
                                     </div>
                                     <div class="image">
@@ -97,8 +95,8 @@
                                     @if($item['service_category_id'] == '2')
                                         <div class="col-md-6">
                                             <div class="group-landing-events-item">
-                                                <div class="manic-image-container has-full-width image-loaded-version" style="overflow: hidden; position: relative; height: 296px;">
-                                                    <img src="{{ $item['images'] }}" style="display: block; position: absolute; top: 0px; left: 0px; overflow: hidden; height: 296px;">
+                                                <div class="manic-image-container has-full-width image-loaded-version" style="overflow: hidden; position: relative; height: 250px;">
+                                                    <img src="{{ $item['images'] }}" style="display: block; position: absolute; top: 0px; left: 0px; overflow: hidden; width: 100%;">
                                                 </div>
                                                 <h2>{{ strtoupper($item['title']) }}</h2>
                                                 <p>{{ substr($item['side_description'],0, 100) }}</p>
@@ -131,7 +129,7 @@
                                 @if($item['service_category_id'] == '1')
                                 <div class="col-md-4">
                                     <div class="manic-image-container has-full-width image-loaded-version" style="overflow: hidden; position: relative; height: 296px;">
-                                        <img src="{{ $item['images'] }}" style="display: block; position: absolute; top: 0px; left: 0px; overflow: hidden; height: 296px;">
+                                        <img src="{{ $item['images'] }}" style="display: block; position: absolute; top: 0px; left: 0px; overflow: hidden; height: auto;">
                                     </div>
                                     <h4> {{ strtoupper($item['title']) }} </h4>
                                     <p>
@@ -179,9 +177,9 @@
                         @foreach($branch_office as $title)
                             @foreach($title as $key=> $value)
                             <div class="col-md-4" data-scrollreveal="enter top after 0.5s">
-                                <div class="grid mask">
+                                <div class="grid mask" style="height: 296px;">
                                     <figure>
-                                        <img class="img-responsive" style="height: 250px;" src="{{ $value['thumbnail'] or '' }}" alt="{{ $value['title'] or '' }}">
+                                        <img style="width: 100%;overflow: hidden;" src="{{ $value['thumbnail'] or '' }}" alt="{{ $value['title'] or '' }}">
                                         <figcaption>
                                             <h5>{{ strtoupper($value['title']) }}</h5>
                                             <a href="{{ route('branchOfficeDetail', $value['slug']) }}" class="btn btn-primary btn-lg">See more</a>
