@@ -121,15 +121,4 @@
             })();
         </script>
 
-        <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="{{asset('themes/front/slider/unslider/src/scss/unslider.css')}}">
-        <script src="{{asset('themes/front/slider/unslider/src/js/unslider.js')}}"></script>
-        <script>
-            jQuery(document).ready(function($) {
-                $('.my-slider').unslider({
-                    autoplay: true
-                });
-            });
-        </script>
-
     <!-- Carousel -->

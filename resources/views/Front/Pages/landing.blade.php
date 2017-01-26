@@ -130,10 +130,18 @@
                             @foreach($value as $key=> $item)
                                 @if($item['service_category_id'] == '1')
                                 <div class="col-md-4">
+                                    <div class="manic-image-container has-full-width image-loaded-version" style="overflow: hidden; position: relative; height: 296px;">
+                                        <img src="{{ $item['images'] }}" style="display: block; position: absolute; top: 0px; left: 0px; overflow: hidden; height: 296px;">
+                                    </div>
                                     <h4> {{ strtoupper($item['title']) }} </h4>
                                     <p>
-                                        {{ $item['side_description'] }} 
-                                        <a href="{{ route('detailEvent', $item['slug']) }}">See more .. </a>
+                                        {{ substr($item['side_description'],0,60) }} 
+                                    </p>
+                                    <p>
+                                        <a style="color: #464646;" href="{{ route('detailEvent', $item['slug']) }}" class="arrow-cta">
+                                            Lihat Lebih Lanjut
+                                            <span class="icon icon-arrow-right-2" style="font-size: 14px;"></span>
+                                        </a>
                                     </p>
                                     
                                 </div>

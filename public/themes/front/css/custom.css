@@ -4,7 +4,14 @@
     text-decoration: none; 
 }
 
+.logo-left-desktop{
+    float: left;
+}
 
+.logo-left-mobile{
+    float: left;
+    display: none;
+}
 
 .form--error--message {
     font-size: 12px;
@@ -354,3 +361,16 @@
     margin-top: 18px;
 }
 
+/* Media Query */
+
+@media screen and (max-width:991px){
+    .logo-left-desktop{
+        float: left;
+        display: none;
+    }
+
+    .logo-left-mobile{
+        float: left;
+        display: inline;
+    }
+}
