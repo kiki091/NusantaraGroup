@@ -4,6 +4,7 @@ namespace App\Repositories\Implementation\Front;
 
 use App\Repositories\Contracts\Front\Service as ServiceInterface;
 use App\Model\Front\ServiceModel as ServiceModel;
+use App\Model\Front\ServiceModelImages as ServiceModelImages;
 use App\Model\Front\ServiceModelCategory as ServiceModelCategory;
 use App\Services\Transformation\Front\Service as ServiceTransformation;
 use Cache;
@@ -14,12 +15,14 @@ class Service implements ServiceInterface
 {
 
     protected $services;
+    protected $servicesImages;
     protected $servicesCategory;
     protected $servicesTransformation;
 
-    function __construct(ServiceModel $services, ServiceModelCategory $servicesCategory, ServiceTransformation $servicesTransformation)
+    function __construct(ServiceModel $services, ServiceModelImages $servicesImages, ServiceModelCategory $servicesCategory, ServiceTransformation $servicesTransformation)
     {
         $this->services = $services;
+        $this->servicesImages = $servicesImages;
         $this->servicesCategory = $servicesCategory;
         $this->servicesTransformation = $servicesTransformation;
     }
@@ -85,9 +88,9 @@ class Service implements ServiceInterface
             'slug' => $slug,
             'is_active' => true,
         ];
-        $servicesData = $this->servicesDetail($params, 'asc', 'array', true);
+        $servicesDataSeo = $this->servicesDetail($params, 'asc', 'array', true);
 
-        return $this->servicesTransformation->getServiceSeoFrontTransform($servicesData);
+        return $this->servicesTransformation->getServiceSeoFrontTransform($servicesDataSeo);
     }
 
     /**
@@ -235,6 +238,7 @@ class Service implements ServiceInterface
     protected function servicesDetail($params = array(), $orderType = 'asc', $returnType = 'array', $returnSingle = false)
     {
         $services = $this->services
+            ->with('banner')
             ->with('translations');
 
         if(isset($params['slug'])) {

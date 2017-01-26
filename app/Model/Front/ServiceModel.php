@@ -32,6 +32,11 @@ class ServiceModel extends Model
         return $this->belongsTo('App\Model\Front\ServiceModelCategory', 'service_category_id', 'id');
     }
 
+    public function banner()
+    {
+        return $this->hasMany('App\Model\Front\ServiceModelImages', 'services_id', 'id');
+    }
+
     /***************** Scope *****************/
 
     /**

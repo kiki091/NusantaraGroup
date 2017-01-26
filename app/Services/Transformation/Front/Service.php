@@ -123,9 +123,27 @@ class Service
         $data['side_description'] = isset($data['side_description']) ? $data['side_description'] : '';
         $data['description'] = isset($data['description']) ? $data['description'] : '';
         $data['images'] = isset($data['images']) ? asset(SERVICE_IMAGES_DIRECTORY.rawurlencode($data['images'])) : '';
+
+        $data['slider'] = $this->getSliderFromDetailServices($data);
         
         return $data;
         
+    }
+
+    protected function getSliderFromDetailServices($data)
+    {
+        try {
+
+            $returnValue = [];
+            foreach ($data['banner'] as $key => $item) {
+                $returnValue[] = asset(SERVICE_BANNER_IMAGES_DIRECTORY.rawurlencode($item['banner_images']));
+            }
+
+            return $returnValue;
+
+        } catch (\Exception $e) {
+            return [];
+        }
     }
 
     protected function setServiceSeoFrontTransform($data)

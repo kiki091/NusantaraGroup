@@ -37,7 +37,7 @@ class ServiceController extends Controller
     {
 
         $data['services_category'] = $this->service->getServicesByCategory($slug);
-dd($data['services_category']);
+
         if(!empty($data['services_category']) && $data['services_category'] != Null)
         {
             $blade = 'Front.Pages.service-category';

@@ -3,6 +3,9 @@
     color: #FFFFFF;
     text-decoration: none; 
 }
+.text-justify{
+    text-align: justify-all;
+}
 
 .logo-left-desktop{
     float: left;

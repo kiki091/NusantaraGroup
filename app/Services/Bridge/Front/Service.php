@@ -70,7 +70,7 @@ class Service {
      */
     public function getSeoService($slug)
     {
-        return $this->services->getSeoService();
+        return $this->services->getSeoService($slug);
     }
 
 }
