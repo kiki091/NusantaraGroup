@@ -1,50 +1,61 @@
         @extends('Front.main')
         @section('content')
             <div id="home" name="home">       
-                <!-- Slider -->
-                <div id="slider">
-                    <div class="slides">
-                        <!-- Looping Slider Images -->
+                <div id="bootstrap-touch-slider" class="carousel bs-slider fade  control-round indicators-line" data-ride="carousel" data-pause="hover" data-interval="5000" >
+
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#bootstrap-touch-slider" data-slide-to="0" class="active"></li>
+                        <li data-target="#bootstrap-touch-slider" data-slide-to="1"></li>
+                        <li data-target="#bootstrap-touch-slider" data-slide-to="2"></li>
+                    </ol>
+
+                    <!-- Wrapper For Slides -->
+                    <div class="carousel-inner" role="listbox">
                         @if(isset($main_banners))
                             @foreach($main_banners as $key=> $slider)
-                                <div class="slider">
-                                    <div class="content">
-                                        <div class="content-txt">
-                                            <h1>Lorem ipsum dolor</h1>
+                                <!-- Third Slide -->
+                                @if($key=='0')
+                                <div class="item active">
+                                @else
+                                <div class="item">
+                                @endif
+                                    <!-- Slide Background -->
+                                    <img src="{{ $slider['images'] }}" alt="Bootstrap Touch Slider"  class="slide-image"/>
+                                    <div class="bs-slider-overlay"></div>
+
+                                    <div class="container">
+                                        <div class="row">
+                                            <!-- Slide Text Layer -->
+                                            <div class="slide-text slide_style_left">
+                                                <h1 data-animation="animated zoomInRight">Nusantara Group</h1>
+                                                <p data-animation="animated fadeInLeft">There no happiness except in the realization that we have accomplished something By Henry Ford</p>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="image">
-                                        <img src="{{ $slider['images'] }} " class="img-responsive">
-                                    </div>
                                 </div>
+                                <!-- End of Slide -->
+
                             @endforeach
                         @endif 
-                    </div>
-                </div>
+                    </div><!-- End of Wrapper For Slides -->
+
+                    <!-- Left Control -->
+                    <a class="left carousel-control" href="#bootstrap-touch-slider" role="button" data-slide="prev">
+                        <span class="fa fa-angle-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+
+                    <!-- Right Control -->
+                    <a class="right carousel-control" href="#bootstrap-touch-slider" role="button" data-slide="next">
+                        <span class="fa fa-angle-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+
+                </div> <!-- End  bootstrap-touch-slider Slider -->
                 
             </div>
-            <!-- ==== GREYWRAP ==== -->
-            <div id="greywrap" data-scrollreveal="enter top">
-                <div class="row">
-                    <div class="col-lg-4 callout">
-                        <span class="icon icon-stack"></span>
-                        <h2>Booking Services</h2>
-                        {!! $landing_page['box_wrapper_left'] or '' !!}
-                    </div><!-- col-lg-4 -->
-                        
-                    <div class="col-lg-4 callout">
-                        <span class="icon icon-car"></span>
-                        <h2>Test Drive</h2>
-                        {!! $landing_page['box_wrapper_center'] or '' !!}
-                    </div><!-- col-lg-4 --> 
-                    
-                    <div class="col-lg-4 callout">
-                        <span class="icon icon-tag"></span>
-                        <h2>Harga Mobil</h2>
-                        {!! $landing_page['box_wrapper_right'] or '' !!}
-                    </div><!-- col-lg-4 --> 
-                </div><!-- row -->
-            </div><!-- greywrap -->
+            @include('Front.Includes.main-section')
 
             <!-- ==== ABOUT ==== -->
             <div class="container" id="about" name="about" data-scrollreveal="enter top">
@@ -166,35 +177,81 @@
                     </div><!-- row -->
                 </div>
             </div><!-- greywrap -->
-
+            <br/>
+            <br/>
             <!-- ==== PORTFOLIO ==== -->
-            <div class="" id="branch_office" name="branch_office">
-                <br>
-                <div class="col-md-12">
-                    <div class="row">   
-                        <!-- PORTFOLIO IMAGE 1 -->
-                        @if(isset($branch_office))
+            <div class="container col-md-12" id="branch_office" name="branch_office">
+                <div class="row">
+                    <h2 class="centered">KANTOR CABANG</h2>
+                    <h4 class="centered">
+                        The greatest result in life usually attained by simple means 
+                        and the exercise of ordinary qualities 
+                        These may for the most part be summed in these two : Common sense and perseverance 
+                        By Owen Feltham
+                        </h4>
+                    <hr/>
+                    <br/>
+                    @if(isset($branch_office))
                         @foreach($branch_office as $title)
                             @foreach($title as $key=> $value)
-                            <div class="col-md-4" data-scrollreveal="enter top after 0.5s">
-                                <div class="grid mask" style="height: 296px;">
-                                    <figure>
-                                        <img style="width: 100%;overflow: hidden;" src="{{ $value['thumbnail'] or '' }}" alt="{{ $value['title'] or '' }}">
-                                        <figcaption>
-                                            <h5>{{ strtoupper($value['title']) }}</h5>
-                                            <a href="{{ route('branchOfficeDetail', $value['slug']) }}" class="btn btn-primary btn-lg">See more</a>
-                                        </figcaption><!-- /figcaption -->
-                                    </figure><!-- /figure -->
-                                </div><!-- /grid-mask -->
-                            </div><!-- /col -->
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">              
+                                    <div class="hover ehover11">
+                                        <img class="img-responsive" src="{{ $value['thumbnail'] or '' }}" alt="{{ $value['title'] or '' }}">
+                                        <div class="overlay">
+                                            <h2>
+                                                <a href="{{ route('branchOfficeDetail', $value['slug']) }}">
+                                                    {{ strtoupper($value['title']) }}
+                                                </a>
+                                            </h2>
+                                        </div>              
+                                    </div>
+                                </div>
                             @endforeach
                         @endforeach
-                        @endif
-                    </div><!-- /row -->
-                    <br>
-                    <br>
+                    @endif
                 </div><!-- /row -->
             </div><!-- /container -->
+
+
+            <div class="container">
+                <div class="row">
+                    <h2 class="centered">BERITA TERKINI</h2>
+                    <hr/>
+                    <br/>
+                    <div class="col-md-7">
+                        <div id="home-carousel-01">
+                              <div class="home-carousel-01-item">
+                                <div class="manic-image-container">
+                                  <img src="http://localhost:8000/images/db/services/nusantara-daihatsu-promo-imlek.jpg" data-image-desktop="">
+                                </div>
+                              </div>
+                              <div class="home-carousel-01-item">
+                                <div class="manic-image-container">
+                                  <img src="http://localhost:8000/images/db/services/nusantara-daihatsu-promo-imlek.jpg" data-image-desktop="">
+                                </div>
+                              </div>
+                              <div class="home-carousel-01-item">
+                                <div class="manic-image-container">
+                                  <img src="http://localhost:8000/images/db/services/nusantara-daihatsu-promo-imlek.jpg" data-image-desktop="">
+                                </div>
+                              </div>
+                        </div> <!-- home-carousel-01 -->
+                    </div>
+                    <div class="col-md-5">
+                        <div id="home-carousel-01-copy">
+                            <div class="default-copy">
+                                <div class="default-copy-special-title">
+                                    <h1>Grand Opening Mazda BSD</h1>
+                                    <hr>
+                                    <h3>JAKARTA - Guna menunjang layanan purna jual, Mazda BSD mengoperasikan 12 work bay yang mampu melayani servis kendaraan hingga 30 unit setiap harinya.</h3>
+                                </div>
+                                <p><span class="first-letter">T</span>ak hanya itu, dealer ini pun memiliki layanan booking dan drop off yang memberikan keleluasaan bagi pelanggan dalam melakukan servis kendaraan. “Dalam kesempatan ini, para Zoom-Zoom lovers pun berkesempatan memperoleh promo khusus dari Mazda," ujar Sales and Marketing Director  Nusantara Group Agung Dewanto, Kamis (11/9/2014). Mazda</p>
+                                <a href="#" class="arrow-cta float-right-version">Lihat Selengkapnya <span class="icon icon-arrow-right-2" style="font-size: 14px;"></span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <!-- ==== SECTION DIVIDER6 ==== -->
             <section class="section-divider textdividerFooter divider6" id="map"></section>

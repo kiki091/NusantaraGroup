@@ -57,6 +57,7 @@
                                 <div class="form--error--message" id="form--error--message--email"></div>
                                 
                             </div>
+                            <input type="hidden" id="token" name="token" value="{{ csrf_token() }}">
                             <input type="submit" value=">">
                         </form><!-- form -->
                     </div>

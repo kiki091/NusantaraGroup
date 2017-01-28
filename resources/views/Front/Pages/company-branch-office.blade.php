@@ -14,25 +14,6 @@
                 @endif 
             </div>
         </div>
-        <!-- ==== GREYWRAP ==== -->
-        <div id="greywrap" data-scrollreveal="enter top">
-            <div class="row">
-                <div class="col-lg-4 callout">
-                    <span class="icon icon-stack"></span>
-                    <h2>Booking Services</h2>
-                </div><!-- col-lg-4 -->
-                        
-                 <div class="col-lg-4 callout">
-                    <span class="icon icon-eye"></span>
-                    <h2>Test Drive</h2>
-                </div><!-- col-lg-4 --> 
-                    
-                <div class="col-lg-4 callout">
-                    <span class="icon icon-heart"></span>
-                    <h2>Harga Mobil</h2>
-                </div><!-- col-lg-4 --> 
-            </div><!-- row -->
-        </div><!-- greywrap -->
         <!-- ==== ABOUT ==== -->
         <div class="container" id="about" name="about">
             <div class="row white">

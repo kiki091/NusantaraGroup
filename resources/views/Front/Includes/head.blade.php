@@ -30,6 +30,11 @@
     <link href="{{asset('themes/front/slider/css/slider-def.css')}}" rel="stylesheet">
     <!-- End Image Slider -->
 
+    <!-- Carousel With Side Caption Style -->
+
+    <link rel="stylesheet" type="text/css" href="{{asset('themes/front/carousel/style/slider.css')}}" />
+    <!-- End Carousel With Side Caption Style -->
+
     <!-- Javascript Animation -->
     <script type="text/javascript" src="{{asset('themes/front/animation/js/scrollreveal.js')}}"></script>
     <!-- End Javascript Animation -->
@@ -121,4 +126,9 @@
             })();
         </script>
 
-    <!-- Carousel -->
+    <!-- Gallery -->
+    <script src="{{asset('themes/front/gallery/js/rbootstrap.min.js')}}"></script>
+    <link href="{{asset('themes/front/gallery/css/effects.css')}}" rel="stylesheet"> 
+    <script src="{{asset('themes/front/slider/slider.js')}}"></script>
+    <link href="{{asset('themes/front/slider/slider.css')}}" rel="stylesheet"> 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet" media="all">
