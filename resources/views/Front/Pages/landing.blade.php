@@ -258,4 +258,5 @@
 
         <!-- /.app -->
         <!-- *** BLOG HOMEPAGE END *** -->
+        @include('Front.partials.maps-landing')
         @endsection

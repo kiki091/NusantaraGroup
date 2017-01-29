@@ -59,6 +59,7 @@ class Service
             return [
                 'title' => isset($data['title']) ? $data['title'] : '',
                 'slug' => isset($data['slug']) ? $data['slug'] : '',
+                'introduction' => isset($data['introduction']) ? $data['introduction'] : '',
                 'side_description' => isset($data['side_description']) ? $data['side_description'] : '',
                 'description' => isset($data['description']) ? $data['description'] : '',
                 'service_category_id' => isset($data['service_category_id']) ? $data['service_category_id'] : '',
@@ -106,6 +107,7 @@ class Service
         {
             return [
                 'title' => isset($servicesGroupData['title']) ? $servicesGroupData['title'] : '',
+                'introduction' => isset($data['introduction']) ? $data['introduction'] : '',
                 'side_description' => isset($servicesGroupData['side_description']) ? $servicesGroupData['side_description'] : '',
                 'description' => isset($servicesGroupData['description']) ? $servicesGroupData['description'] : '',
                 'images' => isset($servicesGroupData['images']) ? asset(SERVICE_IMAGES_DIRECTORY.rawurlencode($servicesGroupData['images'])) : ''
@@ -120,6 +122,7 @@ class Service
 
         $data['id'] = isset($data['id']) ? $data['id'] : '';
         $data['title'] = isset($data['title']) ? $data['title'] : '';
+        $data['introduction'] = isset($data['introduction']) ? $data['introduction'] : '';
         $data['side_description'] = isset($data['side_description']) ? $data['side_description'] : '';
         $data['description'] = isset($data['description']) ? $data['description'] : '';
         $data['images'] = isset($data['images']) ? asset(SERVICE_IMAGES_DIRECTORY.rawurlencode($data['images'])) : '';
