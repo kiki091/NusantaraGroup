@@ -4,16 +4,24 @@ namespace App\Http\Controllers\Front;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Model\Front\CompanyProfileModel as CompanyProfileService;
-use Response;
+use App\Services\Bridge\Front\LandingPage as LandingPageServices;
+use App\Services\Bridge\Front\CompanyProfile as CompanyProfileServices;
+use App\Services\Bridge\Front\FooterContent as FooterContentServices;
+use App\Services\Api\Response as ResponseService;
 
 class CompanyProfileController extends Controller
 {
+    protected $landingPage;
     protected $companyProfile;
+    protected $footerContent;
+    protected $response;
+    protected $validationMessage = '';
 
-    public function __construct(CompanyProfileService $companyProfile)
+    public function __construct(LandingPageServices $landingPage, CompanyProfileServices $companyProfile, FooterContentServices $footerContent)
     {
+        $this->landingPage = $landingPage;
         $this->companyProfile = $companyProfile;
+        $this->footerContent = $footerContent;
     }
 
     /**
@@ -22,25 +30,19 @@ class CompanyProfileController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index()
+    public function index(Request $request)
     {
+        $data['company_profile'] = $this->companyProfile->getCompanyProfile();
+        $data['seo'] = $this->companyProfile->getCompanyProfileSeo();
+        $data['footer_content'] = $this->footerContent->getFooterContent();
 
         $blade = 'Front.Pages.company-profile';
 
         if(view()->exists($blade))
         {
-            return view($blade);
+            return view($blade,$data);
         }
-    }
-
-    public function getData(Request $request)
-    {
-        
-        $profile_page = $this->companyProfile::all();
-        $response = [
-            'profile' => $profile_page
-        ];
-        return response()->json($response);
+        return abort(404);
     }
 }
 

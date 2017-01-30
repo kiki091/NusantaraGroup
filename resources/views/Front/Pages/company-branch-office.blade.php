@@ -59,24 +59,29 @@
                     <h1 class="centered">KANTOR CABANG {{ strtoupper($branch_office['title']) }}</h1>
                     <hr>
                     
-                    <div class="col-lg-6">
+                    <div class="col-sm-6 col-xs-12">
                         <p>
                             <table class="table table-striped">
                                 <thead>
-                                    <th>Office</th><th>Address</th>
+                                    <th>Office</th><th>Address</th><th>Show</th>
                                 </thead>
                                 <tbody>
                                     @foreach($branch_office['translations'] as $key=> $value)
                                          <tr>
                                             <td>{{ $value['title_description'] }}</td>
                                             <td>{{ $value['address'] }}</td>
+                                            <td>
+                                            <a href="#map-office" onclick="initialize('{{ $value['title_description'] }}','{{ $value['latitude'] }}','{{ $value['longitude'] }}')">
+                                                <span class="icon icon-link"></span>
+                                            </a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
                         </p>
                     </div><!-- col-lg-6 -->
-                    <div class="col-lg-6">
+                    <div class="col-sm-6 col-xs-12">
                         <p>
                             <span class="first-letter">
                                 {{ substr($branch_office['description'],0,1) }}
@@ -89,17 +94,6 @@
                 </div>
             </div><!-- row -->
         </div><!-- container -->
-        <script type="text/javascript">
-
-            // Put all locations into array
-            var markers = [
-            @foreach ($branch_office['translations'] as $key=> $location)
-                ["{{ $location['title_description'] }}", "{{ $location['latitude'] }}", "{{ $location['longitude'] }}" ], 
-            @endforeach
-            ];
-            //alert(this.markers);
-
-        </script>
         @include('Front.partials.maps-branch-office')
         
  	@endsection

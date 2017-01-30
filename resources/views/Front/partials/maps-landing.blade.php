@@ -32,7 +32,7 @@
                 var marker = new google.maps.Marker({
                     position: new google.maps.LatLng(-6.169557, 106.819661),
                     map: map,
-                    title: 'Snazzy!'
+                    title: 'Nusantara Group'
                 });
             }
         </script>

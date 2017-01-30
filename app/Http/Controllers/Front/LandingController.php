@@ -8,7 +8,7 @@ use App\Services\Bridge\Front\MainBanner as MainBannerServices;
 use App\Services\Bridge\Front\LandingPage as LandingPageServices;
 use App\Services\Bridge\Front\BranchOffice as BranchOfficeServices;
 use App\Services\Bridge\Front\CompanyProfile as CompanyProfileServices;
-use App\Services\Bridge\Front\Service as Service;
+use App\Services\Bridge\Front\Service as EventService;
 use App\Services\Bridge\Front\FooterContent as FooterContentServices;
 use App\Services\Api\Response as ResponseService;
 
@@ -28,7 +28,7 @@ class LandingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct(LandingPageServices $landingPage, MainBannerServices $mainBanner, FooterContentServices $footerContent, BranchOfficeServices $branchOffice,Service $services, CompanyProfileServices $companyProfile, ResponseService $response)
+    public function __construct(LandingPageServices $landingPage, MainBannerServices $mainBanner, FooterContentServices $footerContent, BranchOfficeServices $branchOffice, EventService $services, CompanyProfileServices $companyProfile, ResponseService $response)
     {
         //parent::__construct(DataHelper::MAIN_BANNER_DIRECTORY);
 

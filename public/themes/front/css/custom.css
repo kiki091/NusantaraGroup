@@ -1,19 +1,53 @@
 /** Your theme modifications here **/
+@media (min-width: 1200px){
+    .container-content {
+        width: 95%;
+    }
+}
+
+@media (min-width: 992px){
+    .container-content {
+        width: 95%;
+    }
+}
+
+@media (max-width:767px){
+    .container-content {
+        width: 750px;
+    }
+    .logo-left-desktop{
+        display: none;
+    }
+    .logo-left-mobile{
+        float: left;
+        display: inline;
+    }
+
+    #footer-left{
+        display: none;
+    }
+    #footer-center{
+        display: none;
+    }
+    #footer-right{
+        width: 100%;
+    }
+}
+
+.container-content {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+
 .hover-content{
     color: #FFFFFF;
     text-decoration: none; 
 }
 .text-justify{
     text-align: justify-all;
-}
-
-.logo-left-desktop{
-    float: left;
-}
-
-.logo-left-mobile{
-    float: left;
-    display: none;
 }
 
 .form--error--message {
@@ -65,17 +99,30 @@
 
 /* First Section */
 
-#desktop-footer .desktop-footer-block.footer-block-01 {
-    padding-left: 0;
-    padding-top: 2px;
-    text-align: right;
-    border-right: none;
+.visible-md {
+    display: block!important;
 }
-#desktop-footer .desktop-footer-block {
-    display: block;
+
+#desktop-footer .top-footer .container-fluid {
     position: relative;
-    padding-left: 53px;
-    padding-right: 43px;
+}
+.container-fluid.has-breakpoint {
+    max-width: 1380px;
+    margin: 0 auto;
+}
+.container-fluid {
+    padding-left: 60px;
+    padding-right: 60px;
+}
+
+#desktop-footer .top-footer {
+    background: #f6f4f1;
+    margin-top: 50px;
+    padding-bottom: 38px;
+}
+
+#desktop-footer .desktop-footer-block.footer-block-01 {
+    padding-top: 8px;
 }
 
 #desktop-footer-logo-container {
@@ -177,14 +224,14 @@
 #desktop-footer .desktop-footer-block.footer-block-03 {
     padding-right: 0;
     padding-top: 12px;
-    width: 350px;
+    width: 100%;
 }
 
 #desktop-footer .desktop-footer-block {
     display: block;
     position: relative;
-    padding-left: 53px;
-    padding-right: 43px;    
+    padding-left: 25px;
+    padding-right: 25px;    
     color: #464646;
 }
 
@@ -295,8 +342,8 @@
     margin: 0 auto;
 }
 .container-fluid {
-    padding-left: 60px;
-    padding-right: 60px;
+    padding-left: 0px;
+    padding-right: 0px;
 }
 
 .desktop-footer-copywrite {
@@ -366,15 +413,30 @@
 
 /* Media Query */
 
-@media screen and (max-width:991px){
+@media (min-width:768px) and (max-width:991px){
     .logo-left-desktop{
         float: left;
+        display: inline;
+    }
+    .logo-left-mobile{
         display: none;
     }
 
+    #footer-left{
+        display: none;
+    }
+
+    #footer-center{
+        width: 60%;
+    }
+    #footer-right{
+        width: 40%;
+    }
+}
+
+@media (min-width:992px){
     .logo-left-mobile{
-        float: left;
-        display: inline;
+        display: none;
     }
 }
 

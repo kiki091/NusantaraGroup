@@ -78,7 +78,7 @@
                             {{ substr($company_profile['description'],490, 1) }}
                         </span>
                             {{ substr($company_profile['description'],491, 578) }}, 
-                            <a href="{{ route('companyProfilePage') }}">see more</a>
+                            <a href="{{ route('companyProfilePage') }}">Baca Selengkapnya</a>
                         </div><!-- col-lg-6 -->
                 </div><!-- row -->
             </div><!-- container -->
@@ -172,7 +172,7 @@
                         <div class="col-lg-4">
                             <h2>Awards & Accolades</h2>
                             <p>Success is the sum of small efforts, repeated day and the day out By Robert Collier</p>
-                            <p><a href="{{ route('awardsPage') }}" class="btn btn-success">See more</a></p>
+                            <p><a href="{{ route('awardsPage') }}" class="btn btn-success">Lihat Lebih Lanjut</a></p>
                         </div>                  
                     </div><!-- row -->
                 </div>
@@ -180,7 +180,7 @@
             <br/>
             <br/>
             <!-- ==== PORTFOLIO ==== -->
-            <div class="container col-md-12" id="branch_office" name="branch_office">
+            <div class="container" id="branch_office" name="branch_office">
                 <div class="row">
                     <h2 class="centered">KANTOR CABANG</h2>
                     <h4 class="centered">
@@ -211,50 +211,6 @@
                     @endif
                 </div><!-- /row -->
             </div><!-- /container -->
-
-
-            <div class="container">
-                <div class="row">
-                    <h2 class="centered">BERITA TERKINI</h2>
-                    <hr/>
-                    <br/>
-                    <div class="col-md-7">
-                        <div id="home-carousel-01">
-                              <div class="home-carousel-01-item">
-                                <div class="manic-image-container">
-                                  <img src="http://localhost:8000/images/db/services/nusantara-daihatsu-promo-imlek.jpg" data-image-desktop="">
-                                </div>
-                              </div>
-                              <div class="home-carousel-01-item">
-                                <div class="manic-image-container">
-                                  <img src="http://localhost:8000/images/db/services/nusantara-daihatsu-promo-imlek.jpg" data-image-desktop="">
-                                </div>
-                              </div>
-                              <div class="home-carousel-01-item">
-                                <div class="manic-image-container">
-                                  <img src="http://localhost:8000/images/db/services/nusantara-daihatsu-promo-imlek.jpg" data-image-desktop="">
-                                </div>
-                              </div>
-                        </div> <!-- home-carousel-01 -->
-                    </div>
-                    <div class="col-md-5">
-                        <div id="home-carousel-01-copy">
-                            <div class="default-copy">
-                                <div class="default-copy-special-title">
-                                    <h1>Grand Opening Mazda BSD</h1>
-                                    <hr>
-                                    <h3>JAKARTA - Guna menunjang layanan purna jual, Mazda BSD mengoperasikan 12 work bay yang mampu melayani servis kendaraan hingga 30 unit setiap harinya.</h3>
-                                </div>
-                                <p><span class="first-letter">T</span>ak hanya itu, dealer ini pun memiliki layanan booking dan drop off yang memberikan keleluasaan bagi pelanggan dalam melakukan servis kendaraan. “Dalam kesempatan ini, para Zoom-Zoom lovers pun berkesempatan memperoleh promo khusus dari Mazda," ujar Sales and Marketing Director  Nusantara Group Agung Dewanto, Kamis (11/9/2014). Mazda</p>
-                                <a href="#" class="arrow-cta float-right-version">Lihat Selengkapnya <span class="icon icon-arrow-right-2" style="font-size: 14px;"></span></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ==== SECTION DIVIDER6 ==== -->
-            <section class="section-divider textdividerFooter divider6" id="map"></section>
 
         <!-- /.app -->
         <!-- *** BLOG HOMEPAGE END *** -->

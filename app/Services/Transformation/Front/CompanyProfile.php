@@ -32,9 +32,10 @@ class CompanyProfile
     {
 
         $dataTranform['title'] = isset($data['title']) ? $data['title'] : '';
+        $dataTranform['introduction'] = isset($data['introduction']) ? $data['introduction'] : '';
         $dataTranform['side_description'] = isset($data['side_description']) ? $data['side_description'] : '';
         $dataTranform['description'] = isset($data['description']) ? $data['description'] : '';
-        $dataTranform['images'] = isset($data['images']) ? asset('images/db/company_profile/'.rawurlencode($data['images'])) : '';
+        $dataTranform['images'] = isset($data['images']) ? asset(COMPANY_PROFILE_IMAGES_DIRECTORY.$data['images']) : '';
 
         return $dataTranform;
     }

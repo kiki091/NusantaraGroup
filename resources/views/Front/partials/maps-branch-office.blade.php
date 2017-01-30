@@ -7,7 +7,13 @@
     document.body.appendChild(script);
 });
 
-function initialize() {
+function getMarkers(title, lat, long){
+    var markers_maps = [
+        [title, lat, long],
+    ];
+}
+
+function initialize(title, lat, long) {
     var map;
     var bounds = new google.maps.LatLngBounds();
     var mapOptions = {
@@ -19,9 +25,11 @@ function initialize() {
     map.setTilt(45);
         
     // Multiple Markers
-  
+    var markers = [
+        [title, lat, long],
+    ];
 
-    console.log(markers.length);
+    console.log(markers);
                         
     // Info Window Content
     var infoWindowContent = [

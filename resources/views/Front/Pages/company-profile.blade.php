@@ -1,30 +1,73 @@
 @extends('Front.main')
     @section('content')
-    <div id="app-company-profile">
-    	<div id="content">
-            <div class="container">
 
-                <div class="col-sm-9" id="blog-post">
-                    <div class="box" v-for="companyProfile in profile_page">
+        <div id="bootstrap-touch-slider" class="carousel bs-slider fade  control-round indicators-line" data-ride="carousel" data-pause="hover" data-interval="5000" >
 
-                        <h1>@{{ companyProfile.title }}</h1>
-                        <p class="author-date">By <a href="#">John Slim</a> | June 20, 2013</p>
+            <!-- Wrapper For Slides -->
+            <div class="carousel-inner" role="listbox">
+                @if(isset($company_profile['images']))
+                    <!-- Third Slide -->
+                    <div class="item active">
+                        <!-- Slide Background -->
+                        <img src="{{$company_profile['images']}}" alt="{{ $company_profile['title'] }}"  class="slide-image"/>
+                        <div class="bs-slider-overlay"></div>
 
-                        <div id="post-content" style="text-align: justify;">
-                            <p>@{{ companyProfile.side_description }}</p>
-
-                            <p>
-                                <img :src='companyProfile.images' class="img-responsive" alt="@{{ companyProfile.title }}">
-                            </p>
-
-                            <p>@{{ companyProfile.description }}</p>
-
+                        <div class="container">
+                            <div class="row">
+                                <!-- Slide Text Layer -->
+                                <div class="slide-text slide_style_left">
+                                    <h1 data-animation="animated zoomInRight">Nusantara Group</h1>
+                                    <p data-animation="animated fadeInLeft">{{ strtoupper($company_profile['title']) }}</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- /.col-md-9 -->
-            </div>
-            <!-- /.container -->
+                    <!-- End of Slide -->
+                @endif 
+            </div><!-- End of Wrapper For Slides -->
+
         </div>
-    </div>
- 	@endsection
+        <!-- ==== ABOUT ==== -->
+        <div class="container" id="about" name="about" data-scrollreveal="enter top after 0.5s">
+            <div class="row white">
+                <br/>
+                <div class="col-md-12">
+                    <h1 class="centered medium-version">{{ $company_profile['title'] }}</h1>
+                    <h2 class="centered"> {{ $company_profile['introduction'] }} </h2>
+                    <hr>
+                    
+                    <div class="col-sm-6 col-xs-12 text-justify">
+                        <p>
+                            {!! $company_profile['side_description'] !!}
+                        </p>
+                        <p>
+                            <table class="table table-striped">
+                                <thead>
+                                    <th class="centered">Our Address</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="centered">
+                                        PT. Nusantara Batavia Motor
+                                        <br/>
+                                        Jl. Suryopranoto No 77-79, Jakarta Pusat
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <section class="section-divider textdividerFooter divider6" id="map"></section>
+                        </p>
+                    </div><!-- col-lg-6 -->
+                    <div class="col-sm-6 col-xs-12 text-justify">
+                        <p>
+                            <span class="first-letter">
+                                {!! substr($company_profile['description'],0,1) !!}
+                            </span>
+                            {!! substr($company_profile['description'],1) !!}
+                        </p>
+                    </div>
+                </div>
+            </div><!-- row -->
+        </div><!-- container -->
+        @include('Front.partials.maps-landing')
+    @endsection

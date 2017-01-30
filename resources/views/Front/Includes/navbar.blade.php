@@ -2,7 +2,7 @@
 <div id="navbar-main">
      <!-- Fixed navbar -->
     <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+        <div class="container-content">
             <div class="navbar-header">
                 <div class="col-md-2 logo-left-mobile">
                     <img src="{{ asset('images/db/main_page/logo/nusantara-group-2.png') }}" height="54px">
