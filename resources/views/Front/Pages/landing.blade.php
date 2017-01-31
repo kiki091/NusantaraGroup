@@ -67,17 +67,17 @@
                     <div class="col-lg-6">
                         <p>
                         <span class="first-letter">
-                            {{ substr($company_profile['description'],0, 1) }}
+                            {!! substr($company_profile['description'],0, 1) !!}
                         </span>
-                        {{ substr($company_profile['description'],1, 489) }}
+                        {!! substr($company_profile['description'],1, 493) !!}
                         </div><!-- col-lg-6 -->
                     
                     <div class="col-lg-6">
                         <p>
                         <span class="first-letter">
-                            {{ substr($company_profile['description'],490, 1) }}
+                            {!! substr($company_profile['description'],494, 1) !!}
                         </span>
-                            {{ substr($company_profile['description'],491, 578) }}, 
+                            {!! substr($company_profile['description'],495, 455) !!}, 
                             <a href="{{ route('companyProfilePage') }}">Baca Selengkapnya</a>
                         </div><!-- col-lg-6 -->
                 </div><!-- row -->

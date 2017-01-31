@@ -38,7 +38,10 @@
                     
                     <div class="col-sm-6 col-xs-12 text-justify">
                         <p>
-                            {!! $company_profile['side_description'] !!}
+                            <span class="first-letter">
+                                {!! substr($company_profile['side_description'],0,1) !!}
+                            </span>
+                            {!! substr($company_profile['side_description'],1) !!}
                         </p>
                         <p>
                             <table class="table table-striped">
