@@ -58,6 +58,24 @@ Route::group(['middleware' => ['web']], function ()
 			});
 		});
 
+		Route::group(array('prefix' => 'promosi'), function(){
+			Route::group(array('prefix' => 'mobil'), function(){
+				Route::get('/', 'Front\PromotionController@promotionCar')->name('promotionCar');
+				Route::get('detail/{slug}', 'Front\PromotionController@promotionCarDetail')->name('promotionCarDetail');
+			});
+
+			Route::group(array('prefix' => 'booking-service'), function(){
+				Route::get('/', 'Front\PromotionController@bookingServices')->name('bookingServices');
+				Route::get('data', 'Front\PromotionController@getDataLocation')->name('getLocationBookingServices');
+				Route::post('store', 'Front\PromotionController@storeBookingServices')->name('storeBookingServices');
+			});
+
+			Route::group(array('prefix' => 'test-drive'), function(){
+				Route::get('/', 'Front\PromotionController@testDrive')->name('testDrive');
+			});
+
+		});
+
 		Route::post('subscribe-mail', 'Front\SubscribeMailController@store')->name('subscribeMail');
 	});
 });

@@ -20,6 +20,14 @@ class BranchOffice
         return $this->setBranchOfficeFrontTransform($data);
     }
 
+    public function getBranchOfficeBookingServiceFrontTransform($data)
+    {
+        if(!is_array($data) || empty($data))
+            return array();
+
+        return $this->setBranchOfficeForBookingServiceFrontTransform($data);
+    }
+
     public function getBranchOfficeDetailFrontTransform($data)
     {
         if(!is_array($data) || empty($data))
@@ -61,6 +69,19 @@ class BranchOffice
 
         }
         return $finalData;
+    }
+
+    protected function setBranchOfficeForBookingServiceFrontTransform($data)
+    {
+        $dataTranform = array_map(function($data)
+        {
+            return [
+                'title' => isset($data['title']) ? $data['title'] : '',
+                'office_name' => isset($data['office_name']) ? $data['office_name'] : '',
+            ];
+        }, $data);
+
+        return $data;
     }
 
     protected function setBranchOfficeDetailFrontTransform($data)

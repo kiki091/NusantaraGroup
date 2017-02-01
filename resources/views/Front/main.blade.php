@@ -40,6 +40,7 @@
 	    <script src="{{asset('js/vue.js')}}"></script>
 	    <script src="{{asset('js/vue-min.js')}}"></script>
 	    <script src="{{asset('js/vue-resource.js')}}"></script>
+    	<script src="{{asset('themes/front/content/booking-service.js')}}"></script>
     	<script src="{{asset('themes/front/content/footer.js')}}"></script>
 	    
 	    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>

@@ -30,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('App\Repositories\Contracts\Front\Awards', 'App\Repositories\Implementation\Front\Awards');
         $this->app->bind('App\Repositories\Contracts\Front\Service', 'App\Repositories\Implementation\Front\Service');
         $this->app->bind('App\Repositories\Contracts\Front\CompanyProfile', 'App\Repositories\Implementation\Front\CompanyProfile');
+        $this->app->bind('App\Repositories\Contracts\Front\PromotionContent', 'App\Repositories\Implementation\Front\PromotionContent');
     }
 
     /**
@@ -47,6 +48,7 @@ class AppServiceProvider extends ServiceProvider
             'App\Repositories\Contracts\Front\Awards',
             'App\Repositories\Contracts\Front\Service',
             'App\Repositories\Contracts\Front\CompanyProfile',
+            'App\Repositories\Contracts\Front\PromotionContent',
         );
     }
 }

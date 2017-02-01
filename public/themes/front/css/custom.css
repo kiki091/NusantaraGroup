@@ -41,6 +41,22 @@
     margin-left: auto;
 }
 
+.right-cta-container {
+    text-align: right;
+}
+.square-cta {
+    width: auto;
+}
+.square-cta.light-blue-black-version {
+    background: #9fbfcb;
+}
+.square-cta.large-version {
+    font-size: 14px;
+    line-height: 40px;
+    height: 40px;
+    padding-left: 52px;
+    padding-right: 52px;
+}
 
 .hover-content{
     color: #FFFFFF;

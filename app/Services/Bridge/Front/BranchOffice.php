@@ -24,6 +24,16 @@ class BranchOffice {
     }
 
     /**
+     * Get Data Branch Office For Booking Service
+     * @param $params
+     * @return mixed
+     */
+    public function getBranchOfficeForBookingService()
+    {
+        return $this->BranchOffice->getBranchOfficeForBookingService();
+    }
+
+    /**
      * Get Detail Branch Office
      * @param $params
      * @return mixed

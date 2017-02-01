@@ -31,6 +31,13 @@ class BranchOffice implements BranchOfficeInterface
         return $this->branchOfficeTransformation->getBranchOfficeFrontTransform($branchOfficeData);
     }
 
+    public function getBranchOfficeForBookingService()
+    {
+        $branchOfficeData = $this->branchOfficeSingleTable();
+        //dd($mainBannerData);
+        return $this->branchOfficeTransformation->getBranchOfficeBookingServiceFrontTransform($branchOfficeData);
+    }
+
     public function getBranchOfficeDetail($slug)
     {
             $params = [
@@ -59,6 +66,35 @@ class BranchOffice implements BranchOfficeInterface
      * @param array $params
      * @return array
      */
+    
+    protected function branchOfficeSingleTable($params = array(), $orderType = 'asc', $returnType = 'array', $returnSingle = false)
+    {
+
+        $branchOffice = $this->branchOffice;
+
+        if(isset($params['is_active'])) {
+            $branchOffice->isActive($params['is_active']);
+        }
+
+
+        if(!$branchOffice->count())
+            return array();
+
+        switch ($returnType) {
+            case 'array':
+                if(!$returnSingle) 
+                {
+                    return $branchOffice->get()->toArray();
+                } 
+                else 
+                {
+                    return $branchOffice->first()->toArray();
+                }
+
+            break;
+        }
+    }
+
     protected function branchOffice($params = array(), $orderType = 'asc', $returnType = 'array', $returnSingle = false)
     {
 

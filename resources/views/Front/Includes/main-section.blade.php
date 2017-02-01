@@ -6,7 +6,7 @@
             <h2>Booking Services</h2>
             {!! $landing_page['box_wrapper_left'] or '' !!}
             <p>
-                Lihat Selengkapnya <span class="icon icon-arrow-right-2" style="font-size: 14px;"></span>
+                <a href="{{ route('bookingServices') }}">Lihat Selengkapnya <span class="icon icon-arrow-right-2" style="font-size: 14px;"></span></a>
             </p>
         </div><!-- col-lg-4 -->
                         
@@ -15,7 +15,7 @@
             <h2>Test Drive</h2>
             {!! $landing_page['box_wrapper_center'] or '' !!}
             <p>
-                Lihat Selengkapnya <span class="icon icon-arrow-right-2" style="font-size: 14px;"></span>
+                <a href="{{ route('testDrive') }}">Lihat Selengkapnya <span class="icon icon-arrow-right-2" style="font-size: 14px;"></span></a>
             </p>
         </div><!-- col-lg-4 --> 
                     
@@ -24,7 +24,7 @@
             <h2>Harga Mobil</h2>
             {!! $landing_page['box_wrapper_right'] or '' !!}
             <p>
-                Lihat Selengkapnya <span class="icon icon-arrow-right-2" style="font-size: 14px;"></span>
+                <a href="{{ route('promotionCar') }}">Lihat Selengkapnya <span class="icon icon-arrow-right-2" style="font-size: 14px;"></span></a>
             </p>
         </div><!-- col-lg-4 --> 
     </div><!-- row -->
