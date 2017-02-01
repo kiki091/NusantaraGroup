@@ -4,7 +4,7 @@ namespace App\Repositories\Implementation\Front;
 
 use App\Repositories\Contracts\Front\PromotionContent as PromotionContentInterface;
 use App\Model\Front\BookingServicesModel as BookingServicesModel;
-//use App\Services\Transformation\Front\PromotionContent as PromotionContentTransformation;
+use Request;
 use Cache;
 use Session;
 use DB;
@@ -14,6 +14,7 @@ class PromotionContent implements PromotionContentInterface
 
 	protected $bookingServices;
     protected $promotionTransformation;
+    protected $message;
 
     function __construct(BookingServicesModel $bookingServices)
     {
@@ -32,11 +33,11 @@ class PromotionContent implements PromotionContentInterface
 
     		if ($this->storeDataBookingServices($data) != true) {
                 DB::rollBack();
-                return $this->setResponse($this->message, false);
+                //return $this->setResponse(trans('Booking Service Gagal'), false);
             }
 
             DB::commit();
-            return $this->setResponse(trans('Booking Service Berhasil, Tunggu Email Pemberitahuan Dari Kami'), true);
+            //return $this->setResponse(trans('Booking Service Berhasil, Tunggu Email Pemberitahuan Dari Kami'), true);
     	}
     	catch (\Exception $e) {
             return $this->setResponse($e->getMessage(), false);
@@ -62,9 +63,7 @@ class PromotionContent implements PromotionContentInterface
     		$store->keterangan 				= $data['keterangan'];
     		$store->branch_office_id 		= $data['branch_office_id'];
 
-    		if($save = $store->save()) {
-                $this->lastInsertId = $store->id;
-            }
+    		$save = $store->create();
 
             return $save;
 
@@ -72,6 +71,28 @@ class PromotionContent implements PromotionContentInterface
     	catch (\Exception $e) {
             $this->message = $e->getMessage();
             return false;
+        }
+    }
+
+    /**
+     * Get Booking Services
+     * @return array
+     */
+    protected function bookingServices($params = [], $orderType = 'asc', $returnType = 'array', $returnSingle = false)
+    {
+        $bookingServices = $this->bookingServices;
+
+        if(!$bookingServices->count())
+            return array();
+
+        switch ($returnType) {
+            case 'array':
+                if(!$returnSingle) {
+                    return $bookingServices->get()->toArray();
+                } else {
+                    return $bookingServices->first()->toArray();
+                }
+                break;
         }
     }
 

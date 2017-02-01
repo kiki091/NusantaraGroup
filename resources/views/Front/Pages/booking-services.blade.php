@@ -30,36 +30,36 @@
             <div class="row white">
                 <br/>
                 <div class="col-md-12">
-                    <h1 class="centered medium-version">Booking Seervice</h1>
+                    <h1 class="centered medium-version">Booking Service</h1>
                     <h2 class="centered">Nikmati pelayanan perjanjian yang mudah dan efisien secara online</h2>
                     <hr>
                     <br/>
-                    <form action="#" method="POST" v-on:submit.prevent="storeBookingServices">
+                    <form method="POST" v-on:submit.prevent="storeBookingServices">
 
                         <div class="col-sm-6 col-xs-12 text-justify">
                             <div class="form-group">
                                 <label>Lokasi Service</label>
                                 <select name="branch_office_id" class="form-control" v-model="models.branch_office_id">
                                     <option value="">Pilih Tempat / Astra Langganan Anda</option>
-                                    <option v-for="office in responseData.branch_office" value="">@{{ office.title }}</option>
+                                    <option v-for="office in responseData.branch_office" value="@{{ office.id }}">@{{ office.title }}</option>
                                 </select>
-                                <div class="form--error--message" id="form--error--message--no_kendaraan"></div>
+                                <div class="form--error--message" id="form--error--message--branch_office_id"></div>
                             </div>
                             <div class="form-group">
                                 <label>Nomer Kendaraan</label>
-                                <input type="text" name="no_kendaraan" class="form-control" placeholder="Masukan Nomer Kendaraan Anda">
+                                <input v-model="models.no_kendaraan" type="text" name="no_kendaraan" class="form-control" placeholder="Masukan Nomer Kendaraan Anda">
                                 <div class="form--error--message" id="form--error--message--no_kendaraan"></div>
                             </div>
                         </div>
                         <div class="col-sm-6 col-xs-12 text-justify">
                             <div class="form-group">
                                 <label>Jenis Kendaraan</label>
-                                <input type="text" name="jenis_kendaraan" class="form-control" placeholder="Masukan Jenis Kendaraan">
+                                <input v-model="models.jenis_kendaraan" type="text" name="jenis_kendaraan" class="form-control" placeholder="Masukan Jenis Kendaraan">
                                 <div class="form--error--message" id="form--error--message--jenis_kendaraan"></div>
                             </div>
                             <div class="form-group">
                                 <label>Nama Lengkap</label>
-                                <input type="text" name="nama_lengkap" class="form-control" placeholder="Masukan Nama Lengkap Anda">
+                                <input v-model="models.nama_lengkap" type="text" name="nama_lengkap" class="form-control" placeholder="Masukan Nama Lengkap Anda">
                                 <div class="form--error--message" id="form--error--message--nama_lengkap"></div>
                             </div>
                         </div>
@@ -67,12 +67,12 @@
                         <div class="col-sm-6 col-xs-12 text-justify">
                             <div class="form-group">
                                 <label>Nomer Telepon</label>
-                                <input type="text" name="no_telpon" class="form-control" placeholder="Masukan Nomer Telepon Anda">
+                                <input v-model="models.no_telpon" type="text" name="no_telpon" class="form-control" placeholder="Masukan Nomer Telepon Anda">
                                 <div class="form--error--message" id="form--error--message--no_telpon"></div>
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
-                                <input type="email" name="email" class="form-control" placeholder="Masukan Email Anda">
+                                <input v-model="models.email" type="email" name="email" class="form-control" placeholder="Masukan Email Anda">
                                 <div class="form--error--message" id="form--error--message--email"></div>
                             </div>
                         </div>
@@ -80,14 +80,15 @@
                         <div class="col-sm-6 col-xs-12 text-justify">
                             <div class="form-group">
                                 <label>Tanggal Service</label>
-                                <input type="text" name="tanggal_booking" class="form-control" placeholder="Pilih Tanggal Service">
+                                <input v-model="models.tanggal_booking" type="date" name="tanggal_booking" class="form-control" placeholder="Pilih Tanggal Service">
                                 <div class="form--error--message" id="form--error--message--tanggal_booking"></div>
                             </div>
                             <div class="form-group">
                                 <label>Keterangan</label>
-                                <textarea name="keterangan" class="form-control" placeholder="Isikan Keterangan Untuk Detail Service Kendaraan"></textarea>
-                                <div class="form--error--message" id="form--error--message--no_kendaraan"></div>
+                                <textarea v-model="models.keterangan" name="keterangan" class="form-control" placeholder="Isikan Keterangan Untuk Detail Service Kendaraan"></textarea>
+                                <div class="form--error--message" id="form--error--message--keterangan"></div>
                             </div>
+                            <input type="hidden" id="token" name="token" value="{{ csrf_token() }}">
                         </div>
 
                         <div class="right-cta-container visible-md visible-lg">

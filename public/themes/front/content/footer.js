@@ -15,7 +15,7 @@ new Vue({
                 toastr.options.closeButton = true,
                 toastr.options.newestOnTop = false,
             ];
-        	var input = this.formAttr;
+        	var input = this.models;
             this.$http.post('/subscribe-mail',input).then((response) => {
                 if (response.data.success == false) {
                     $.each(response.data.errors, function(input, value){

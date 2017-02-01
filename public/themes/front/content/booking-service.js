@@ -29,9 +29,9 @@ new Vue({
                 toastr.options.newestOnTop = false,
             ];
         	var input = this.models;
-            this.$http.post('/promosi/booking-service/store',input).then((response) => {
-                if (response.data.success == false) {
-                    $.each(response.data.errors, function(input, value){
+            this.$http.post('/promosi/booking-service/store',input, function(response) {
+                if (response.status == false) {
+                    $.each(response.message, function(input, value){
                         $('input[name="' + input + '"]').focus();
                         $("#form--error--message--" + input).text(value);
                         
