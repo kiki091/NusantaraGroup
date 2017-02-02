@@ -10,7 +10,7 @@ use App\Model\Front\PromotionModel as PromotionModel;
 use App\Model\Front\PromotionImageModel as PromotionImageModel;
 use App\Model\Front\PromotionTransModel as PromotionTransModel;
 use App\Model\Front\PromotionCategoryModel as PromotionCategoryModel;
-use App\Services\Transformation\Front\PromotionTransformation as PromotionTransformation;
+use App\Services\Transformation\Front\Promotion as PromotionTransformation;
 use Cache;
 use Session;
 use DB;
@@ -51,7 +51,7 @@ class PromotionContent extends BaseImplementation implements PromotionContentInt
 
         $promotionServiceData = $this->promotionService($params, 'asc', 'array', true);
 
-        return $this->promotionTransformation->getPromotionServiceTransform($awardsData);
+        return $this->promotionTransformation->getPromotionServiceTransform($promotionServiceData);
     }
 
     /**
@@ -174,7 +174,8 @@ class PromotionContent extends BaseImplementation implements PromotionContentInt
     {
 
         $promotionService = $this->promotionService
-            ->with('category');
+            ->with('category')
+            ->with('translation');
 
         if(isset($params['is_active'])) {
             $promotionService->isActive($params['is_active']);
@@ -188,11 +189,11 @@ class PromotionContent extends BaseImplementation implements PromotionContentInt
             case 'array':
                 if(!$returnSingle) 
                 {
-                    return $promotionService->get()->toArray();
+                    return $promotionService->first()->toArray();
                 } 
                 else 
                 {
-                    return $promotionService->first()->toArray();
+                    return $promotionService->get()->toArray();
                 }
 
             break;

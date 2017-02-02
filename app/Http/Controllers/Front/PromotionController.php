@@ -47,6 +47,8 @@ class PromotionController extends Controller{
         $data['promotion'] = $this->promotion->getPromotion();
         $data['footer_content'] = $this->footerContent->getFooterContent();
         $data['seo'] = $this->landingPage->getlandingPageSeo();
+
+        //dd($data['promotion']);
         $blade = 'Front.Pages.list-promotion';
         
         if(view()->exists($blade))

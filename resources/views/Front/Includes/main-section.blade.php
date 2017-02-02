@@ -24,7 +24,7 @@
             <h2>Harga Mobil</h2>
             {!! $landing_page['box_wrapper_right'] or '' !!}
             <p>
-                <a href="{{ route('promotionCar') }}">Lihat Selengkapnya <span class="icon icon-arrow-right-2" style="font-size: 14px;"></span></a>
+                <a href="{{ route('promotion') }}">Lihat Selengkapnya <span class="icon icon-arrow-right-2" style="font-size: 14px;"></span></a>
             </p>
         </div><!-- col-lg-4 --> 
     </div><!-- row -->

@@ -18,3 +18,7 @@ define('AWARDS_IMAGES_DIRECTORY', 'images/db/awards/');
 
 define('SERVICE_IMAGES_DIRECTORY','images/db/services/');
 define('SERVICE_BANNER_IMAGES_DIRECTORY', 'images/db/services/slider/');
+
+// ================================================= Promotion Images Directory =============================================== //
+
+define('PROMOTION_IMAGES_DIRECTORY','images/db/promotion/promotion/category/mini-cooper/');

@@ -12,8 +12,7 @@ class PromotionModel extends Model
 
     protected $fillable = [
 	    'title', 
-	    'slug',
-	    'thumbnail', 
+	    'slug', 
 	    'promotion_category_id', 
 	    'created_at', 
 	    'updated_at'
@@ -22,6 +21,11 @@ class PromotionModel extends Model
     public function category()
     {
         return $this->belongsTo('App\Model\Front\PromotionCategoryModel', 'promotion_category_id', 'id');
+    }
+
+    public function translation()
+    {
+        return $this->hasMany('App\Model\Front\PromotionTransModel', 'promotion_id', 'id');
     }
 
     public function images()
