@@ -41,16 +41,26 @@ class PromotionController extends Controller{
     * Promotion Car Function 
     */
 
-    public function promotionCar(Request $request)
+    public function promotion(Request $request)
     {
-
+        $data['landing_page'] = $this->landingPage->getlandingPage();
+        $data['promotion'] = $this->promotion->getPromotion();
+        $data['footer_content'] = $this->footerContent->getFooterContent();
+        $data['seo'] = $this->landingPage->getlandingPageSeo();
+        $blade = 'Front.Pages.list-promotion';
+        
+        if(view()->exists($blade))
+        {
+            return view($blade, $data);
+        }
+        return abort(404);
     }
 
     /*
     * Promotion Detail Function
     */
 
-    public function promotionCarDetail(Request $request)
+    public function promotionDetail(Request $request)
     {
     	
     }
@@ -107,7 +117,30 @@ class PromotionController extends Controller{
 
     public function testDrive(Request $request)
     {
-    	
+    	$data['landing_page'] = $this->landingPage->getlandingPage();
+        $data['footer_content'] = $this->footerContent->getFooterContent();
+        $data['seo'] = $this->landingPage->getlandingPageSeo();
+        $blade = 'Front.Pages.test-drive';
+        
+        if(view()->exists($blade))
+        {
+            return view($blade, $data);
+        }
+        return abort(404);
+    }
+
+    public function storeBookingTestDrive(Request $request)
+    {
+        $validator = Validator::make($request->all(), $this->validationStoreBookingTestDrive($request));
+
+        if ($validator->fails()) 
+        {
+            return $this->response->setResponseErrorFormValidation($validator->messages(), false);
+        }
+        else
+        {
+            return $this->promotion->storeBookingTestDrive($request->except(['_token']));
+        }
     }
 
     /*
@@ -128,5 +161,19 @@ class PromotionController extends Controller{
     	];
 
     	return $rules;
+    }
+
+    protected function validationStoreBookingTestDrive($request = array())
+    {
+        $rules = [
+            'jenis_kendaraan'   => 'required',
+            'nama_lengkap'      => 'required',
+            'no_telpon'         => 'required',
+            'email'             => 'required|email',
+            'tanggal_booking'   => 'required',
+            'keterangan'        => 'required'
+        ];
+
+        return $rules;
     }
 }

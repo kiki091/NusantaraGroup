@@ -23,4 +23,24 @@ class PromotionContent {
         return $this->promotion->storeBookingServices($data);
     }
 
+    /**
+     * Store Booking Test Drive
+     * @param $params
+     * @return mixed
+     */
+    public function storeBookingTestDrive($data = [])
+    {
+        return $this->promotion->storeBookingTestDrive($data);
+    }
+
+    /**
+     * Get Data Promotion
+     * @param $params
+     * @return mixed
+     */
+    public function getPromotion()
+    {
+        return $this->promotion->getPromotion();
+    }
+
 }

@@ -13,5 +13,19 @@ interface PromotionContent
      */
     public function storeBookingServices($data);
 
+    /**
+     * Store Booking Test Drive
+     * @param $params
+     * @return mixed
+     */
+    public function storeBookingTestDrive($data);
+
+    /**
+     * Get Data Promotion
+     * @param $params
+     * @return mixed
+     */
+    public function getPromotion();
+
 
 }
