@@ -43,4 +43,14 @@ class PromotionContent {
         return $this->promotion->getPromotion();
     }
 
+    /**
+     * Get Data Promotion Detail
+     * @param $params
+     * @return mixed
+     */
+    public function getPromotionDetail($slug)
+    {
+        return $this->promotion->getPromotionDetail($slug);
+    }
+
 }

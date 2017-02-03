@@ -27,5 +27,12 @@ interface PromotionContent
      */
     public function getPromotion();
 
+    /**
+     * Get Data Promotion Detail
+     * @param $params
+     * @return mixed
+     */
+    public function getPromotionDetail($slug);
+
 
 }

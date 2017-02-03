@@ -62,9 +62,21 @@ class PromotionController extends Controller{
     * Promotion Detail Function
     */
 
-    public function promotionDetail(Request $request)
+    public function promotionDetail($slug)
     {
-    	
+    	$data['landing_page'] = $this->landingPage->getlandingPage();
+        $data['promotion_detail'] = $this->promotion->getPromotionDetail($slug);
+        $data['footer_content'] = $this->footerContent->getFooterContent();
+        $data['seo'] = $this->landingPage->getlandingPageSeo();
+dd($data['promotion_detail']);
+
+        $blade = 'Front.Pages.list-promotion-detail';
+        
+        if(view()->exists($blade))
+        {
+            return view($blade, $data);
+        }
+        return abort(404);
     }
 
     /*

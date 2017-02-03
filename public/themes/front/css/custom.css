@@ -41,6 +41,29 @@
     margin-left: auto;
 }
 
+.headerClass {
+    text-align: center;
+    display: table;
+    margin: 0 auto;
+    z-index: 2;
+    font-size: 30px;
+    /* letter-spacing: 0.1em; */
+    position: relative;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+.header-rule, .header-rule-white {
+    width: 30px;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#img-content{
+    opacity: 0.8;
+    border-radius: 10px;
+}
+
 .right-cta-container {
     text-align: right;
 }

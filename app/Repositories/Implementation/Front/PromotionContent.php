@@ -10,6 +10,8 @@ use App\Model\Front\PromotionModel as PromotionModel;
 use App\Model\Front\PromotionImageModel as PromotionImageModel;
 use App\Model\Front\PromotionTransModel as PromotionTransModel;
 use App\Model\Front\PromotionCategoryModel as PromotionCategoryModel;
+use App\Model\Front\PromotionDetailModel as PromotionDetailModel;
+use App\Model\Front\PromotionGalleryModel as PromotionGalleryModel;
 use App\Services\Transformation\Front\Promotion as PromotionTransformation;
 use Cache;
 use Session;
@@ -24,11 +26,13 @@ class PromotionContent extends BaseImplementation implements PromotionContentInt
     protected $promotionImageService;
     protected $promotionTransService;
     protected $promotionCategoryService;
+    protected $promotionDetailService;
+    protected $promotionGalleryService;
     protected $promotionTransformation;
     protected $message;
     protected $lastInsertId;
 
-    function __construct(BookingServicesModel $bookingServices, BookingTestDriveModel $bookingTestDrive, PromotionModel $promotionService, PromotionImageModel $promotionImageService, PromotionTransModel $promotionTransService, PromotionCategoryModel $promotionCategoryService, PromotionTransformation $promotionTransformation)
+    function __construct(BookingServicesModel $bookingServices, BookingTestDriveModel $bookingTestDrive, PromotionModel $promotionService, PromotionImageModel $promotionImageService, PromotionTransModel $promotionTransService, PromotionCategoryModel $promotionCategoryService, PromotionDetailModel $promotionDetailService,  PromotionGalleryModel $promotionGalleryService, PromotionTransformation $promotionTransformation)
     {
         $this->bookingServices = $bookingServices;
         $this->bookingTestDrive = $bookingTestDrive;
@@ -36,6 +40,8 @@ class PromotionContent extends BaseImplementation implements PromotionContentInt
         $this->promotionImageService = $promotionImageService;
         $this->promotionTransService = $promotionTransService;
         $this->promotionCategoryService = $promotionCategoryService;
+        $this->promotionDetailService = $promotionDetailService;
+        $this->promotionGalleryService = $promotionGalleryService;
         $this->promotionTransformation = $promotionTransformation;
     }
 
@@ -52,6 +58,18 @@ class PromotionContent extends BaseImplementation implements PromotionContentInt
         $promotionServiceData = $this->promotionService($params, 'asc', 'array', true);
 
         return $this->promotionTransformation->getPromotionServiceTransform($promotionServiceData);
+    }
+
+    public function getPromotionDetail($slug)
+    {
+        $params = [
+            'slug'      => $slug,
+            'is_active' => true
+        ];
+
+        $promotionServiceDetail = $this->promotionServiceDetail($params, 'asc', 'array', true);
+
+        return $this->promotionTransformation->getPromotionServiceDetailTransform($promotionServiceDetail);
     }
 
     /**
@@ -200,4 +218,46 @@ class PromotionContent extends BaseImplementation implements PromotionContentInt
         }
     }
 
+    
+
+    /**
+     * Get Promotion Detail
+     * Warning: this function doesn't redis cache
+     * @param array $params
+     * @return array
+     */
+    protected function promotionServiceDetail($params = array(), $orderType = 'asc', $returnType = 'array', $returnSingle = false)
+    {
+
+        $promotionService = $this->promotionService
+            ->with('category')
+            ->with('images')
+            ->with('detail')
+            ->with('gallery')
+            ->with('translation');
+
+        if(isset($params['is_active'])) {
+            $promotionService->isActive($params['is_active']);
+        }
+
+        if(isset($params['slug'])) {
+            $promotionService->slug($params['slug']);
+        }
+
+
+        if(!$promotionService->count())
+            return array();
+
+        switch ($returnType) {
+            case 'array':
+                if(!$returnSingle) {
+                    return $promotionService
+                    ->get()->toArray();
+                } else {
+                    return $promotionService
+                    ->first()->toArray();
+                }
+                break;
+        }
+    }
 }

@@ -8,7 +8,7 @@
                     <!-- Third Slide -->
                     <div class="item active">
                         <!-- Slide Background -->
-                        <img src="{{ asset('images/db/promotion/booking_services/fast-lane-booking-service.jpg') }}" alt="Awards"  class="slide-image"/>
+                        <img src="{{ asset('images/db/promotion/promotion/banner/promotional-banner-template.jpg') }}" alt="Awards"  class="slide-image"/>
                         <div class="bs-slider-overlay"></div>
 
                         <div class="container">
@@ -16,7 +16,6 @@
                                 <!-- Slide Text Layer -->
                                 <div class="slide-text slide_style_left">
                                     <h1 data-animation="animated zoomInRight">Nusantara Group</h1>
-                                    <p data-animation="animated fadeInLeft">Booking Seervice</p>
                                 </div>
                             </div>
                         </div>
@@ -37,31 +36,33 @@
                 </div>
 
             </div>
-        @if(isset($promotion) && !empty($promotion))
-        @foreach($promotion as $key=> $value)
+            @if(isset($promotion) && !empty($promotion))
+                @foreach($promotion as $key=> $value)
 
-            <div class="row">
+                    <div class="row">
 
-                <div class="col-lg-7 col-md-7">
-                    <a href="#">
-                        <img class="img-responsive" src="{{ $value['thumbnail'] }}" alt="{{ $value['title'] }}">
-                    </a>
-                </div>
+                        <div class="col-lg-7 col-md-7">
+                            <a href="#">
+                                <img id="img-content" class="img-responsive" src="{{ $value['thumbnail'] }}" alt="{{ $value['title'] }}">
+                            </a>
+                        </div>
 
-                <div class="col-lg-5 col-md-5">
-                    <h3>{{ $value['title']  or '' }}</h3>
-                    @foreach($value['side_description'] as $key=> $item)
-                        {!! $item or '' !!}
-                    @endforeach
-                    <a class="btn btn-primary" href="#">Baca Selengkapnya <span class="glyphicon glyphicon-chevron-right"></span></a>
-                </div>
-            </div>
-            <br/>
-            <hr/>
-            <br/>
+                        <div class="col-lg-5 col-md-5">
+                            <h3>{{ $value['title']  or '' }}</h3>
+                            @foreach($value['side_description'] as $key=> $item)
+                                {!! $item or '' !!}
+                            @endforeach
+                            <a href="{{ route('promotionDetail', $value['slug']) }}" class="arrow-cta">
+                                Lihat Lebih Lanjut
+                                <span class="icon icon-arrow-right-2" style="font-size: 14px;"></span>
+                            </a>
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
 
-        @endforeach
-        @endif
+                @endforeach
+            @endif
         </div>
         <!-- /.container -->
     @endsection

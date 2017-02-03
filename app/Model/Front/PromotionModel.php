@@ -30,7 +30,17 @@ class PromotionModel extends Model
 
     public function images()
     {
-        return $this->belongsTo('App\Model\Front\PromotionImageModel', 'promotion_id', 'id');
+        return $this->hasMany('App\Model\Front\PromotionImageModel', 'promotion_id', 'id');
+    }
+
+    public function detail()
+    {
+        return $this->hasMany('App\Model\Front\PromotionDetailModel', 'promotion_id', 'id');
+    }
+
+    public function gallery()
+    {
+        return $this->hasMany('App\Model\Front\PromotionGalleryModel', 'promotion_id', 'id');
     }
 
 
@@ -42,5 +52,13 @@ class PromotionModel extends Model
     public function scopeIsActive($query, $params = true)
     {
         return $query->where('is_active', $params);
+    }
+
+    /**
+     * @param $query
+     */
+    public function scopeSlug($query, $params = true)
+    {
+        return $query->where('slug', $params);
     }
 }
