@@ -60,10 +60,11 @@ Route::group(['middleware' => ['web']], function ()
 
 		Route::group(array('prefix' => 'promosi'), function(){
 			
-			Route::group(array('prefix' => 'list'), function(){
-				Route::get('/', 'Front\PromotionController@promotion')->name('promotion');
-				Route::get('category/{slug}', 'Front\PromotionController@promotionCategory')->name('promotionCategory');
+			Route::group(array('prefix' => 'category'), function(){
+				Route::get('/', 'Front\PromotionController@promotionCategory')->name('promotionCategory');
+				Route::get('{slug_category}', 'Front\PromotionController@promotion')->name('promotionCategoryList');
 				Route::get('detail/{slug}', 'Front\PromotionController@promotionDetail')->name('promotionDetail');
+
 			});
 
 			Route::group(array('prefix' => 'booking-service'), function(){

@@ -36,7 +36,6 @@
 
 .container-content {
     padding-right: 15px;
-    padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
 }
@@ -51,6 +50,29 @@
     position: relative;
     font-weight: 400;
     text-transform: uppercase;
+}
+
+.dmtop {
+    /* background-color: #000; */
+    background-color: #999;
+    border-radius: 50%;
+    background-image: url(../../../images/db/asset/arrow.png);
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    z-index: 9999;
+    width: 60px;
+    height: 60px;
+    text-indent: -99999px;
+    position: fixed;
+    bottom: -100px;
+    right: 25px;
+    cursor: pointer;
+    -webkit-transition: all .7s ease-in-out;
+    -moz-transition: all .7s ease-in-out;
+    -o-transition: all .7s ease-in-out;
+    -ms-transition: all .7s ease-in-out;
+    transition: opacity 0.2s ease-out;
+    overflow: auto;
 }
 
 .header-rule, .header-rule-white {

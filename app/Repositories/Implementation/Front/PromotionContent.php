@@ -49,15 +49,27 @@ class PromotionContent extends BaseImplementation implements PromotionContentInt
     * Get Data Promotion
     */
 
-    public function getPromotion($params = array())
+    public function getPromotion($slug_category)
     {
         $params = [
+            'slug_category' => $slug_category,
             'is_active' => true
         ];
 
         $promotionServiceData = $this->promotionService($params, 'asc', 'array', true);
 
         return $this->promotionTransformation->getPromotionServiceTransform($promotionServiceData);
+    }
+
+    public function getPromotionByCategory($params = array())
+    {
+        $params = [
+            'is_active' => true
+        ];
+
+        $promotionServiceDataCategory = $this->promotionServiceCategory($params, 'asc', 'array', true);
+
+        return $this->promotionTransformation->getPromotionServiceByCategoryTransform($promotionServiceDataCategory);
     }
 
     public function getPromotionDetail($slug)
@@ -183,6 +195,41 @@ class PromotionContent extends BaseImplementation implements PromotionContentInt
     }
 
     /**
+     * Get Promotion By Category
+     * Warning: this function doesn't redis cache
+     * @param array $params
+     * @return array
+     */
+    protected function promotionServiceCategory($params = array(), $orderType = 'asc', $returnType = 'array', $returnSingle = false)
+    {
+
+        $promotionCategoryService = $this->promotionCategoryService
+            ->with('translations');
+
+        if(isset($params['is_active'])) {
+            $promotionCategoryService->isActive($params['is_active']);
+        }
+
+
+        if(!$promotionCategoryService->count())
+            return array();
+
+        switch ($returnType) {
+            case 'array':
+                if(!$returnSingle) 
+                {
+                    return $promotionCategoryService->first()->toArray();
+                } 
+                else 
+                {
+                    return $promotionCategoryService->get()->toArray();
+                }
+
+            break;
+        }
+    }
+
+    /**
      * Get Promotion
      * Warning: this function doesn't redis cache
      * @param array $params
@@ -197,6 +244,12 @@ class PromotionContent extends BaseImplementation implements PromotionContentInt
 
         if(isset($params['is_active'])) {
             $promotionService->isActive($params['is_active']);
+        }
+
+        if(isset($params['slug_category'])) {
+            $promotionService->whereHas('category', function($q) use ($params) {
+                $q->slug($params['slug_category']);
+            });
         }
 
 

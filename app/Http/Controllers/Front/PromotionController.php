@@ -41,14 +41,13 @@ class PromotionController extends Controller{
     * Promotion Car Function 
     */
 
-    public function promotion(Request $request)
+    public function promotion($slug_category)
     {
         $data['landing_page'] = $this->landingPage->getlandingPage();
-        $data['promotion'] = $this->promotion->getPromotion();
+        $data['promotion'] = $this->promotion->getPromotion($slug_category);
         $data['footer_content'] = $this->footerContent->getFooterContent();
         $data['seo'] = $this->landingPage->getlandingPageSeo();
 
-        //dd($data['promotion']);
         $blade = 'Front.Pages.list-promotion';
         
         if(view()->exists($blade))
@@ -68,9 +67,24 @@ class PromotionController extends Controller{
         $data['promotion_detail'] = $this->promotion->getPromotionDetail($slug);
         $data['footer_content'] = $this->footerContent->getFooterContent();
         $data['seo'] = $this->landingPage->getlandingPageSeo();
-dd($data['promotion_detail']);
 
         $blade = 'Front.Pages.list-promotion-detail';
+        
+        if(view()->exists($blade))
+        {
+            return view($blade, $data);
+        }
+        return abort(404);
+    }
+
+    public function promotionCategory(Request $request)
+    {
+        $data['landing_page'] = $this->landingPage->getlandingPage();
+        $data['promotion_category'] = $this->promotion->getPromotionByCategory();
+        $data['footer_content'] = $this->footerContent->getFooterContent();
+        $data['seo'] = $this->landingPage->getlandingPageSeo();
+
+        $blade = 'Front.Pages.list-promotion-category';
         
         if(view()->exists($blade))
         {

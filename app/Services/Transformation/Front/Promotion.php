@@ -20,6 +20,14 @@ class Promotion
         return $this->setPromotionServiceTransform($data);
     }
 
+    public function getPromotionServiceByCategoryTransform($data)
+    {
+        if(!is_array($data) || empty($data))
+            return array();
+
+        return $this->setPromotionServiceByCategoryTransform($data);
+    }
+
     public function getPromotionServiceDetailTransform($data)
     {
         if(!is_array($data) || empty($data))
@@ -30,13 +38,35 @@ class Promotion
 
     protected function setPromotionServiceTransform($data)
     {
-        $dataTranform = array_map(function($data)
+
+
+        $dataTranform['banner_images'] = $this->setBannerImageFromCategoryPromotionTransform($data[0]['category']);
+
+        $dataTranform['content'] = array_map(function($data)
         {
             return [
                 'title' => isset($data['title']) ? $data['title'] : '',
                 'side_description' => $this->setDataTranslationPromotion($data),
                 'slug' => isset($data['slug']) ? $data['slug'] : '',
+                'category_slug' => isset($data['category']['category_slug']) ? $data['category']['category_slug'] : '',
                 'thumbnail' => isset($data['thumbnail']) ? asset(PROMOTION_IMAGES_DIRECTORY.$data['thumbnail']) : '',
+            ];
+        }, $data);
+
+        return $dataTranform;
+
+    }
+
+    protected function setPromotionServiceByCategoryTransform($data)
+    {
+        $dataTranform = array_map(function($data)
+        {
+            return [
+                'category_name' => isset($data['category_name']) ? $data['category_name'] : '',
+                'category_slug' => isset($data['category_slug']) ? $data['category_slug'] : '',
+                'thumbnail_category' => isset($data['thumbnail_category']) ? asset(PROMOTION_IMAGES_CATEGORY_DIRECTORY.$data['thumbnail_category']) : '',
+                'introduction' => isset($data['introduction']) ? $data['introduction'] : '',
+                'list_content' => $this->setDataTransformByCategory($data['translations']),
             ];
         }, $data);
 
@@ -57,6 +87,20 @@ class Promotion
         } catch (\Exception $e) {
             return [];
         }
+    }
+
+    protected function setDataTransformByCategory($data)
+    {
+        $dataTranform = array_map(function($data)
+        {
+            return [
+                'title' => isset($data['title']) ? $data['title'] : '',
+                'slug' => isset($data['slug']) ? $data['slug'] : '',
+                'thumbnail' => isset($data['thumbnail']) ? asset(PROMOTION_IMAGES_DIRECTORY.$data['thumbnail']) : '',
+            ];
+        }, $data);
+
+        return $dataTranform;
     }
 
     protected function setPromotionServiceDetailTransform($data)
@@ -138,9 +182,16 @@ class Promotion
         $dataTranform = array_map(function($data)
         {
             return [
-                'filename' => asset(PROMOTION_IMAGES_DIRECTORY.$data['filename']),
+                'filename' => asset(PROMOTION_IMAGES_GALLERY_DIRECTORY.$data['filename']),
             ];
         }, $data);
+
+        return $dataTranform;
+    }
+
+    protected function setBannerImageFromCategoryPromotionTransform($data)
+    {
+        $dataTranform = isset($data['thumbnail_category']) ? asset(PROMOTION_IMAGES_CATEGORY_DIRECTORY.$data['thumbnail_category']) : '';
 
         return $dataTranform;
     }

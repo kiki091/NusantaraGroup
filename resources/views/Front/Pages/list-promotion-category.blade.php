@@ -8,7 +8,7 @@
                     <!-- Third Slide -->
                     <div class="item active">
                         <!-- Slide Background -->
-                        <img src="{{ $promotion['banner_images'] }}" alt="Awards"  class="slide-image"/>
+                        <img src="{{ asset('images/db/promotion/promotion/banner/promotional-banner-template.jpg') }}" alt="Awards"  class="slide-image"/>
                         <div class="bs-slider-overlay"></div>
 
                         <div class="container">
@@ -16,7 +16,6 @@
                                 <!-- Slide Text Layer -->
                                 <div class="slide-text slide_style_left">
                                     <h1 data-animation="animated zoomInRight">Nusantara Group</h1>
-                                    <p><h3></h3></p>
                                 </div>
                             </div>
                         </div>
@@ -32,38 +31,30 @@
 
                 <div class="col-lg-12">
                     <h1 class="page-header centered" data-scrollreveal="enter top after 0.5s">
-                        Temukan Mobil Impian Anda
+                        TEMUKAN MOBIL IMPIAN ANDA
                     </h1>
                 </div>
 
             </div>
+            @if(isset($promotion_category) && !empty($promotion_category))
+                <div class="row" data-scrollreveal="enter top after 0.5s">
+                    @foreach($promotion_category as $key=> $value)
 
-            @if(isset($promotion['content']) && !empty($promotion['content']))
-                @foreach($promotion['content'] as $key=> $value)
-
-                    <div class="row" data-scrollreveal="enter top after 0.5s">
-
-                        <div class="col-lg-7 col-md-7">
+                        <div class="col-md-6">
                             <a href="#">
-                                <img id="img-content" class="img-responsive" src="{{ $value['thumbnail'] }}" alt="{{ $value['title'] }}">
+                                <img id="img-content" class="img-responsive" src="{{ $value['thumbnail_category'] }}" alt="{{ $value['category_name'] }}">
                             </a>
+                            <div class="col-lg-12">
+                                <h3>{{ $value['category_name']  or '' }}</h3>
+                                {!! $value['introduction']  or '' !!}
+                                <a href="{{ route('promotionCategoryList', $value['category_slug']) }}" class="arrow-cta">
+                                    Lihat Lebih Lanjut
+                                    <span class="icon icon-arrow-right-2" style="font-size: 12px;"></span>
+                                </a>
+                            </div>
                         </div>
-
-                        <div class="col-lg-5 col-md-5">
-                            <h3>{{ $value['title']  or '' }}</h3>
-                            @foreach($value['side_description'] as $key=> $item)
-                                {!! $item or '' !!}
-                            @endforeach
-                            <a href="{{ route('promotionDetail', $value['slug']) }}" class="arrow-cta">
-                                Lihat Lebih Lanjut
-                                <span class="icon icon-arrow-right-2" style="font-size: 14px;"></span>
-                            </a>
-                        </div>
-                    </div>
-                    <br/>
-                    <br/>
-
-                @endforeach
+                    @endforeach
+                </div>
             @endif
         </div>
         <!-- /.container -->

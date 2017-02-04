@@ -38,9 +38,19 @@ class PromotionContent {
      * @param $params
      * @return mixed
      */
-    public function getPromotion()
+    public function getPromotion($slug_category)
     {
-        return $this->promotion->getPromotion();
+        return $this->promotion->getPromotion($slug_category);
+    }
+
+    /**
+     * Get Data Promotion By Category
+     * @param $params
+     * @return mixed
+     */
+    public function getPromotionByCategory()
+    {
+        return $this->promotion->getPromotionByCategory();
     }
 
     /**

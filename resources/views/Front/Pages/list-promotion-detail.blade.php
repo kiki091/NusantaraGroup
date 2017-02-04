@@ -30,13 +30,13 @@
             <div class="row">
 
                 <div class="col-lg-12">
-                    <h1 class="page-header centered">
+                    <h1 class="page-header centered" data-scrollreveal="enter top after 0.5s">
                         {{ strtoupper($promotion_detail['title']) }}
                     </h1>
                 </div>
 
             </div>
-            <div class="row">
+            <div class="row" data-scrollreveal="enter top after 0.5s">
                 <div class="col-lg-8">
                     <img id="img-content" class="img-responsive img-rounded" src="{{ $promotion_detail['thumbnail'] }}">
                     <!-- take out img-rounded if you don't want the rounded corners on the image -->
@@ -49,7 +49,7 @@
 
             <hr>
 
-            <div class="row">
+            <div class="row" data-scrollreveal="enter top after 0.5s">
                 <div class="col-lg-12">
                     <div class="well text-center">
                         <h3 class="headerClass">
@@ -60,10 +60,10 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row" data-scrollreveal="enter top after 0.5s">
                 <div class="col-lg-4">
                     <h3 class="headerClass">
-                        <span class="header-rule"></span>interior design<span class="header-rule"></span>
+                        <span class="header-rule"></span>- interior design -<span class="header-rule"></span>
                     </h3>
                     <br/>
                     <img id="img-content" class="img-responsive img-rounded" src="{{ $promotion_detail['detail_images']['interior_image'] }}">
@@ -71,7 +71,7 @@
                 </div>
                 <div class="col-lg-4">
                     <h3 class="headerClass">
-                        <span class="header-rule"></span>exterior design<span class="header-rule"></span>
+                        <span class="header-rule"></span>- exterior design -<span class="header-rule"></span>
                     </h3>
                     <br/>
                     <img id="img-content" class="img-responsive img-rounded" src="{{ $promotion_detail['detail_images']['exterior_image'] }}">
@@ -79,26 +79,67 @@
                 </div>
                 <div class="col-lg-4">
                     <h3 class="headerClass">
-                        <span class="header-rule"></span>safety<span class="header-rule"></span>
+                        <span class="header-rule"></span>- safety -<span class="header-rule"></span>
                     </h3>
                     <br/>
                     <img id="img-content" class="img-responsive img-rounded" src="{{ $promotion_detail['detail_images']['safety_image'] }}">
                     {!! $promotion_detail['content']['safety_description'] !!}
                 </div>
             </div>
-
-            <div class="row">
+            @if(isset($promotion_detail['gallery']))
+            <div class="row" data-scrollreveal="enter top after 0.5s">
                 <div class="col-lg-12">
                     <h3 class="headerClass">
-                        <span class="header-rule"></span>find in location<span class="header-rule"></span>
+                        <span class="header-rule"></span>- gallery -<span class="header-rule"></span>
                     </h3>
                     <hr/>
                     <br/>
-                    <div class="col-lg-6">
-                        
+                    @foreach($promotion_detail['gallery'] as $key=> $image)
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                        <div class="hover ehover11">
+                            <img id="img-content" class="img-responsive img-rounded" src="{{ $image['filename'] }}">
+                        </div>
+                        <div class="overlay"></div>
                     </div>
+                    @endforeach
                 </div>
             </div>
+            @endif
+
+            @if(isset($promotion_detail['detail']))
+            <div class="row" data-scrollreveal="enter top after 0.5s">
+                <div class="col-lg-12">
+                        <h3 class="headerClass">
+                            <span class="header-rule"></span>- equipment -<span class="header-rule"></span>
+                        </h3>
+
+                        <hr/>
+                        <br/>
+                        <div class="col-lg-12">
+                            {!! $promotion_detail['detail']['equipment'] !!}
+                        </div>
+                        <div class="col-lg-6">
+                            {!! $promotion_detail['detail']['equipment_interior'] !!}
+                        </div>
+                        <div class="col-lg-6">
+                            {!! $promotion_detail['detail']['equipment_exterior'] !!}
+                        </div>
+                </div>
+            </div>
+            @endif
+
+            @if(isset($promotion_detail['detail']))
+            <div class="row" data-scrollreveal="enter top after 0.5s">
+                <div class="col-lg-12">
+                    <h3 class="headerClass">
+                        <span class="header-rule"></span>- information -<span class="header-rule"></span>
+                    </h3>
+                    <hr/>
+                    <br/>
+                    {!! $promotion_detail['detail']['information'] !!}
+                </div>
+            </div>
+            @endif
 
         </div>
         <!-- /.container -->
