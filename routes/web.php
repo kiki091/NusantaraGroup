@@ -80,6 +80,10 @@ Route::group(['middleware' => ['web']], function ()
 
 		});
 
+		Route::group(array('prefix' => 'karir'), function(){
+			Route::get('/', 'Front\CairerController@index')->name('carier');
+		});
+
 		Route::post('subscribe-mail', 'Front\SubscribeMailController@store')->name('subscribeMail');
 	});
 });

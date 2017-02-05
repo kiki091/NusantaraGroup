@@ -49,6 +49,7 @@
 
             <hr>
 
+            @if(isset($promotion_detail['content']['accesories_description']))
             <div class="row" data-scrollreveal="enter top after 0.5s">
                 <div class="col-lg-12">
                     <div class="well text-center">
@@ -59,7 +60,9 @@
                     </div>
                 </div>
             </div>
+            @endif
 
+            @if(isset($promotion_detail['content']))
             <div class="row" data-scrollreveal="enter top after 0.5s">
                 <div class="col-lg-4">
                     <h3 class="headerClass">
@@ -86,6 +89,8 @@
                     {!! $promotion_detail['content']['safety_description'] !!}
                 </div>
             </div>
+            @endif
+
             @if(isset($promotion_detail['gallery']))
             <div class="row" data-scrollreveal="enter top after 0.5s">
                 <div class="col-lg-12">
@@ -106,7 +111,6 @@
             </div>
             @endif
 
-            @if(isset($promotion_detail['detail']))
             <div class="row" data-scrollreveal="enter top after 0.5s">
                 <div class="col-lg-12">
                         <h3 class="headerClass">
@@ -126,9 +130,8 @@
                         </div>
                 </div>
             </div>
-            @endif
 
-            @if(isset($promotion_detail['detail']))
+            @if(isset($promotion_detail['detail']['information']))
             <div class="row" data-scrollreveal="enter top after 0.5s">
                 <div class="col-lg-12">
                     <h3 class="headerClass">

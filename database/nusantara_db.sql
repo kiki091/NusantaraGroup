@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.13, for linux-glibc2.5 (x86_64)
 --
--- Host: localhost    Database: nusantara
+-- Host: 127.0.0.1    Database: nusantara
 -- ------------------------------------------------------
 -- Server version	5.7.17-0ubuntu0.16.04.1
 
@@ -183,6 +183,92 @@ LOCK TABLES `branch_office_trans` WRITE;
 /*!40000 ALTER TABLE `branch_office_trans` DISABLE KEYS */;
 INSERT INTO `branch_office_trans` VALUES (1,'BMW Banjarmasin','Jl. A. Yani km 4,5 No. 330, Banjarmasin, Tlp : 0511 – 3275000','-3.325843','114.606069',1,'2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(2,'Daihatsu Banjarmasin','Jl. A. Yani km 4 No 323, Banjarmasin, Tlp : 0511-3264500','-3.357053','114.631762',2,'2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(3,'Ford Banjarmasin','Jl. A. Yani km. 5,8 No. 499, Banjarmasin, Tlp : 0511 – 3271000','-3.328462','114.608758',3,'2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(4,'Ford Banjarbaru','Jl. A. Yani Km. 33 Banjarbaru Kalimantan Selatan Tlp. : 0511-7083000/740110','-3.328462','114.608758',3,'2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(5,'Ford Balikpapan','Jl. Ruhuy Rahayu No.1 Ring Road, Balikpapan, Tlp : 0542 – 872788','-1.240661','116.875599',3,'2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(6,'Ford Samarinda','Jl. M. Yamin No. 80, Samarinda, Tlp : 0541 - 737 070','-0.463431','117.150401',3,'2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(7,'Ford Tanjung','Jl. Mabuun Raya No. 54 Tanjung Tlp : 0526 – 2021084','3.408497','101.198891',3,'2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(8,'Ford Palangkaraya','Jl. Cilik Riwut KM 6, Palangkaraya Tlp: 0536-3231777','-2.186860','113.894756',3,'2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(9,'Ford Jakarta Timur','Jl. MT. Haryono kav 29-30 Jakarta Timur 12820, Tlp: 021-8300313','-6.242481','106.860422',3,'2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(10,'Ford Pemuda','Jl. Pemuda no 62, Rawamangun, Jakarta Timur, Tlp: 021-47880077','-6.193081','106.889924',3,'2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(11,'Ford Bekasi','Jl. A.Yani no 1, Bekasi Barat, Tlp: 021-34178000',NULL,NULL,3,'2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(12,'Ford Pontianak','Jl. Arteri Supadjo km.2, Pontianak, Tlp : 0561 – 723241',NULL,NULL,3,'2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(13,'Ford Bontang','Jl. Brigjend Katamso No. 30 Bontang, Tlp. 0548-26734',NULL,NULL,3,'2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(14,'Ford Batu Kajang','Jl. Negara Km. 145 Batu Kajang Kalimantan Timur',NULL,NULL,3,'2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(15,'Nusantara KIA Banjarmasin','Jl. A. Yani km. 7, Banjarmasin, Tlp : 0511 – 3268000',NULL,NULL,4,'2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(16,'Nusantara KIA Balikpapan','Jl. MT. Haryono No.88 Ring Road, Balikpapan, Tlp : 0542 – 877600',NULL,NULL,4,'2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(17,'Nusantara KIA Samarinda','Jl. Wahid Hasyim No. 40 Sempaja, Samarinda, Tlp : 0541 – 7100238',NULL,NULL,4,'2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(18,'Nusantara KIA Palangkaraya ','Jl. Tjilik Riwut km 2,5 Palangkaraya Tlp : 0536 – 3311361',NULL,NULL,4,'2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(19,'Nusantara Auto World Banjarmasin','Jl. A. Yani km. 7, Banjarmasin, Tlp : 0511 – 3268000',NULL,NULL,5,'2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(20,'Nusantara Auto World Balikpapan','Jl. MT. Haryono No.88 Ring Road, Balikpapan, Tlp : 0542 – 877600',NULL,NULL,5,'2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(21,'Nusantara Auto World Samarinda','Jl. A.W. Syahrani No.18 Samarinda, Tlp : 0541 – 7100238',NULL,NULL,5,'2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(22,'Nusantara Auto World Pluit','Jl. Raya Pluit Selatan No. 56-57 Jakarta Utara, Tlp : 021 - 6695377',NULL,NULL,5,'2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(23,'Hyundai Banjarmasin','Jl. A. Yani km 6,8, Banjarmasin, Tlp : 0511 – 7480899',NULL,NULL,6,'2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(24,'Hyundai Samarinda','Jl. M Yamin RT 27, Samarinda Timur, Tlp : 0541 - 797 2345',NULL,NULL,6,'2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(25,'Mazda Banjarmasin','Jl. A. Yani km 4,5 No. 330, Banjarmasin, Tlp : 0511 – 3275000',NULL,NULL,NULL,NULL,NULL,NULL),(26,'Mazda Banjarmasin','Jl. A. Yani km 4,5 No. 330, Banjarmasin, Tlp : 0511 – 3275000',NULL,NULL,7,'2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(27,'Mazda Banjarmasin','(Pal 17) Jl. A. Yani km 17 Banjarmasin Tlp : 0511 – 6168082',NULL,NULL,7,'2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(28,'Mazda Banjarbaru','Jl. A. Yani km 35,5 Banjarmasin, Tlp : 0511 – 7456622',NULL,NULL,7,'2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(29,'Mazda Balikpapan','Jl. MT. Haryono No.88 Ring Road, Balikpapan, Tlp : 0542 – 877600',NULL,NULL,7,'2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(30,'Mazda Palembang','JL. R. Sukamto No. 1336, Palembang, Tlp : 0711 – 825861',NULL,NULL,7,'2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(31,'Mazda Palangkaraya','Jl. Cilik Riwut KM 3 Palangkaraya, Tlp:0536 - 3364321',NULL,NULL,7,'2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(32,'Mazda Pacenongan','Jl. Pecenongan 32, Jakarta Pusat-10120, Tlp : 021 – 33212307',NULL,NULL,7,'2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(33,'Mazda Suryopranoto','Jl. Suryapranoto no 77-79, Jakarta Pusat Tlp: 021-3840999',NULL,NULL,7,'2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(34,'Mazda Serpong','Jl. Raya Serpong no 30 Pondok Jagung, Tangerang Tlp: 021- 32306234',NULL,NULL,7,'2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(35,'Mazda Bintaro','Jl. Boulevard Bintaro Jaya Sektor 7 blok B7/D-02',NULL,NULL,7,'2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(36,'Mazda BSD','Jl. Raya Serpong No.8 BSD Tlp: 021-5384455',NULL,NULL,7,'2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(37,'Mazda Tangerang','Jl. MH. Thamrin No.9 Cikokol Tangerang, Banten Tlp: 021-55740099',NULL,NULL,7,'2016-12-26 04:30:32',1,'2016-12-26 04:30:32');
 /*!40000 ALTER TABLE `branch_office_trans` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `carier`
+--
+
+DROP TABLE IF EXISTS `carier`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `carier` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `job_title` varchar(35) DEFAULT NULL,
+  `slug` varchar(45) DEFAULT NULL,
+  `job_description` text,
+  `is_active` int(1) DEFAULT NULL,
+  `carier_category_id` int(5) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `carier`
+--
+
+LOCK TABLES `carier` WRITE;
+/*!40000 ALTER TABLE `carier` DISABLE KEYS */;
+INSERT INTO `carier` VALUES (1,'General Affair Staff','general-affair-staff','<ul><li>Pria</li><li>Maksimal 35 tahun</li><li>Pendidikan terakhir S1/D3 Jurusan Hukum / Manajemen / Teknik,</li><li>Pengalaman menjadi General Affair minimal 1 tahun</li><li>Pengalaman dalam mengurus perijinan, maintenance gedung, dan pekerjaan General Affairs lainnya</li><li>Dapat mengoperasikan komputer, Microsoft Office (Word, Excel, Powerpoint) dan internet</li><li>Dapat bekerja secara teamwork dan dapat bekerja dibawah tekanan</li>\n\n',1,2,'2016-12-26 04:30:32','2016-12-26 04:30:32'),(2,'Sales Fleet','sales-fleet','<ul><li>Pria</li><li>Maksimal 30 tahun</li><li>S1/D3 Semua Jurusan</li><li>Pengalaman menjadi sales otomotif minimal 1 tahun</li><li>Memiliki relasi dan jaringan yang luas dengan jajaran pemerintahan</li>',1,4,'2016-12-26 04:30:32','2016-12-26 04:30:32'),(3,'Sales Consultant','sales-consultant','<ul><li>Pria/Wanita</li><li>Maksimal 28 tahun</li><li>S1/D3 Semua Jurusan</li><li>Pengalaman menjadi sales minimal 1 tahun</li><li>Memiliki kendaraan lebih diutamakan</li>',1,4,'2016-12-26 04:30:32','2016-12-26 04:30:32'),(4,'SECURITY','security','<b>Deskripsi Perkerjaan</b> :\n<ol>Melindungi dan mengayomi lingkungan /tempat kerjanya dari setiap gangguan keamanan,</ol>\n<ol>Menegakkan peraturan tertib yang berlaku di lingkungan kerja.\nMengamankan suatu dan aset, tata instansi, proyek, bangunan, properti atau tempat dan melakukan pemantauan peralatan, pengawasan, pemeriksaaa dan jalur akses, untuk memastikan keamanan dan mencegah kerugian atau kerusakan yang disengaja.</ol>\n\n<b>Kreteria</b> :\n<ol>Pria</ol>\n<ol>Usia maksimal 32 th,</ol>\n<ol>Pendidikan minimal SMA</ol>\n<ol>Memiliki pengalaman minimal 1 tahun sebagai security</ol>\n<ol>Jujur dan disiplin</ol>\n<ol>Mampu berkomunikasi secara aktif,</ol>\n<ol>Memiliki Sertifikat Security,</ol>\n<ol>Berat Badan dan Tinggi Badan Proporsional.</ol>',1,5,'2016-12-26 04:30:32','2016-12-26 04:30:32'),(5,'SERVICE ADVISOR','service-advisor','<b>Deskripsi Perkerjaan</b> :\n<ol>Dapat bekerjasama dengan seluruh team,<ol/>\n<ol>Membantu service manager dalam mengatur kegiatan bengkel,</ol>\n<ol>Melakukan supervisi kepada team mekanik,</ol>\n<ol>Membantu keperluan customer dalam memberikan jasa servis sebaik mungkin.</ol>\n\n<b>Kreteria</b> :\n<ol>Pria</ol>\n<ol>Usia maksimal 35 th,</ol>\n<ol>Pendidikan minimal D3 Teknik Mesin,</ol>\n<ol>Memiliki pengalaman minimal 1 tahun pada posisi yang sama khususnya dalam industri otomotif (mobil),</ol>\n<ol>Memiliki jiwa kepemimpinan, disiplin, berorientasi dengan target,</ol>\n<ol>Mampu berkomunikasi secara aktif,</ol>\n<ol>Dapat bekerja dibawah tekanan</ol>\n<ol>Familiar menggunakan komputer dengan program Microsoft Office (Word, Excel, Powerpoint,Outlook), email dan internet.</ol>\n<ol>Bersedia ditempatkan di cabang wilayah Tangerang</ol>',1,5,'2016-12-26 04:30:32','2016-12-26 04:30:32'),(6,'Sample','sample',NULL,1,2,'2016-12-26 04:30:32','2016-12-26 04:30:32');
+/*!40000 ALTER TABLE `carier` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `carier_category`
+--
+
+DROP TABLE IF EXISTS `carier_category`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `carier_category` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `category_name` varchar(45) DEFAULT NULL,
+  `thumbnail` varchar(100) DEFAULT NULL,
+  `is_active` int(1) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `carier_category`
+--
+
+LOCK TABLES `carier_category` WRITE;
+/*!40000 ALTER TABLE `carier_category` DISABLE KEYS */;
+INSERT INTO `carier_category` VALUES (1,'Keuangan',NULL,1,'2016-12-26 04:30:32','2016-12-26 04:30:32'),(2,'Manajemen',NULL,1,'2016-12-26 04:30:32','2016-12-26 04:30:32'),(3,'Human Resources',NULL,1,'2016-12-26 04:30:32','2016-12-26 04:30:32'),(4,'Sales & Marketing',NULL,1,'2016-12-26 04:30:32','2016-12-26 04:30:32'),(5,'After Sales',NULL,1,'2016-12-26 04:30:32','2016-12-26 04:30:32'),(6,'Umum',NULL,1,'2016-12-26 04:30:32','2016-12-26 04:30:32');
+/*!40000 ALTER TABLE `carier_category` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `carier_page`
+--
+
+DROP TABLE IF EXISTS `carier_page`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `carier_page` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `introduction` text,
+  `side_description` text,
+  `description` text,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `carier_page`
+--
+
+LOCK TABLES `carier_page` WRITE;
+/*!40000 ALTER TABLE `carier_page` DISABLE KEYS */;
+INSERT INTO `carier_page` VALUES (1,'<p>To be able under all circumstances to practice five things are gravity,generosity of soul, sincerity, earnestness, and kindness \nBy Confucious</p>','<p><span class=\"first-letter\">Nusantara group adalah sebuah perusahaan yg dimiliki secara private dan mainly bergerak dibidang otomotif. Kami terus menerus mengembangkan cabang-cabang kami  ke seluruh pelosok Indonesia termasuk Kalimantan, Sumatera dan Jawa. Beroperasi lebih dari 25 cabang dan mempekerjakan lebih dari 1000 karyawan.</span></p>','<p>Kami mengundang seluruh professional untuk dapat bersama-sama mengembangkan karir, kualitas hidup, berpikir lebih terbuka dan tidak lupa mengesampingkan kerja keras. Kami menyadari bahwa karyawan adalah suatu asset yang berharga bagi perusahaan. Maka dari itu kami mengharapkan kerja sama dari kedua belah pihak dan komunikasi dua arah yang akan menghasilkan sebuah kesuksesan.</p>\n\n<p>Silakan melihat lowongan yang tersedia dibawah ini dan jika tidak ada lowongan yang tersedia atau yang tidak sesuai dengan harapan anda, mohon dapat mengisi formulir yang telah disediakan.</p>','2016-12-26 04:30:32','2016-12-26 04:30:32');
+/*!40000 ALTER TABLE `carier_page` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -670,11 +756,13 @@ CREATE TABLE `promotion_category` (
   `category_name` varchar(50) DEFAULT NULL,
   `category_slug` varchar(100) DEFAULT NULL,
   `thumbnail_category` varchar(100) DEFAULT NULL,
+  `introduction` tinytext,
+  `is_active` int(1) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `category_slug` (`category_slug`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -683,8 +771,67 @@ CREATE TABLE `promotion_category` (
 
 LOCK TABLES `promotion_category` WRITE;
 /*!40000 ALTER TABLE `promotion_category` DISABLE KEYS */;
-INSERT INTO `promotion_category` VALUES (1,'Mini Cooper','mini-cooper','logo.png','2017-02-02 11:08:55','2017-02-02 11:08:56');
+INSERT INTO `promotion_category` VALUES (1,'Mini Cooper','mini-cooper','mini-cooper-banner.jpg','<p><span class=\"first-letter\">L</span>orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s</p>',1,'2017-02-02 11:08:55','2017-02-02 11:08:56'),(2,'Mazda','mazda','mazda-banner.jpg','<p><span class=\"first-letter\">L</span>orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s</p>',1,'2017-02-02 11:08:55','2017-02-02 11:08:55');
 /*!40000 ALTER TABLE `promotion_category` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `promotion_detail`
+--
+
+DROP TABLE IF EXISTS `promotion_detail`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `promotion_detail` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `equipment` text,
+  `equipment_interior` text,
+  `equipment_exterior` text,
+  `information` text,
+  `promotion_id` int(10) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `promotion_id` (`promotion_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `promotion_detail`
+--
+
+LOCK TABLES `promotion_detail` WRITE;
+/*!40000 ALTER TABLE `promotion_detail` DISABLE KEYS */;
+INSERT INTO `promotion_detail` VALUES (1,'','<h5 class=\"textUpper\"><b>JOHN COOPER WORKS INTERIOR.</b></h5>\n<p>\n Hold on tightly to the multi-function leather steering wheel and John Cooper Works gear knob. And be gripped by the double cloth sports seats as you press down on stainless steel pedals. Plus even more interior sports equipment.\n</p>','<h5 class=\"textUpper\"><b>JOHN COOPER WORKS EXTERIOR.</b></h5>\n\n<p>\nRev up with 18-inch Grip Spoke light alloy wheels and the John Cooper Works Aerodynamic Bodykit including rear roof spoiler. If you like choose the sport suspension settings -this kit is super fit for the road.\n</p>','<div class=\"col-lg-6\">\n<div class=\"section-title text-left\">\n	<h4 class=\"textUpper header-linear\"><b>Technical Info.</b></h4>\n</div>\n<p>The MINI Cooper Clubman go-karts with the flow. Reaching 0-100 km/h in 9.1 seconds, and hitting 205 km/h with ease. Other numbers that are equally impressive are its 5 seats and 6 doors.\n</p>\n</div>\n\n<div class=\"col-lg-6\">\n<table class=\"table table-striped\">\n<thead>\n<tr>\n<th>Performance </th><th>Data</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Output</td>\n<td>100 kW (136 hp) @ 4,400 rpm</td>\n</tr>\n<tr>\n<td>Max. torque/engine speed</td>\n<td>220 Nm @ 1,250 rpm</td>\n</tr>\n<tr>\n<td>Acceleration (0-100 km/h)</td>\n<td>9.1 s</td>\n</tr>\n<tr>\n<td>Top speed</td>\n<td>205 km/h</td>\n</tr>\n<tr>\n<td>Flexibility 80-120 km/h (4th/5th gear)</td>\n<td>10.1 s</td>\n</tr>\n<tr>\n<td>Fuel consumption (urban)</td>\n<td>6.5-6.2 [6.3-6.1] l/100 km</td>\n</tr>\n<tr>\n<td>Fuel consumption (extra-urban)</td>\n<td>4.6-4.4 [4.7-4.5] l/100 km</td>\n</tr>\n</tbody>\n</table>\n</div>\n',2,'2017-02-03 12:14:59','2017-02-03 12:14:57'),(2,NULL,'<h5 class=\"textUpper\"><b>JOHN COOPER WORKS INTERIOR.</b></h5>\n<p>\n Hold on tightly to the multi-function leather steering wheel and John Cooper Works gear knob. And be gripped by the double cloth sports seats as you press down on stainless steel pedals. Plus even more interior sports equipment.\n</p>','<h5 class=\"textUpper\"><b>JOHN COOPER WORKS EXTERIOR.</b></h5>\n\n<p>\nRev up with 18-inch Grip Spoke light alloy wheels and the John Cooper Works Aerodynamic Bodykit including rear roof spoiler. If you like choose the sport suspension settings -this kit is super fit for the road.\n</p>','<div class=\"col-lg-6\">\n<div class=\"section-title text-left\">\n	<h4 class=\"textUpper header-linear\"><b>Technical Info.</b></h4>\n</div>\n<p>Ready, steady, go-kart. Reaching 0-100 in 8.7 seconds for the MINI Cooper Cabrio is a breeze. It also makes lightwork of roof mechanics, opening in less than 20 seconds.</p>\n</div>\n\n<div class=\"col-lg-6\">\n<table class=\"table table-striped\">\n<thead>\n<tr>\n<th>Performance </th><th>Data</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Output</td>\n<td>100 kW (136 hp) @ 4,400 rpm</td>\n</tr>\n<tr>\n<td>Max. torque/engine speed</td>\n<td>220 Nm @ 1,250 rpm</td>\n</tr>\n<tr>\n<td>Acceleration (0-100 km/h)</td>\n<td>9.1 s</td>\n</tr>\n<tr>\n<td>Top speed</td>\n<td>205 km/h</td>\n</tr>\n<tr>\n<td>Flexibility 80-120 km/h (4th/5th gear)</td>\n<td>10.1 s</td>\n</tr>\n<tr>\n<td>Fuel consumption (urban)</td>\n<td>6.5-6.2 [6.3-6.1] l/100 km</td>\n</tr>\n<tr>\n<td>Fuel consumption (extra-urban)</td>\n<td>4.6-4.4 [4.7-4.5] l/100 km</td>\n</tr>\n</tbody>\n</table>\n</div>\n',1,'2017-02-03 12:14:59','2017-02-03 12:14:59');
+/*!40000 ALTER TABLE `promotion_detail` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `promotion_gallery`
+--
+
+DROP TABLE IF EXISTS `promotion_gallery`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `promotion_gallery` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `filename` varchar(100) DEFAULT NULL,
+  `promotion_id` int(10) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `promotion_id` (`promotion_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `promotion_gallery`
+--
+
+LOCK TABLES `promotion_gallery` WRITE;
+/*!40000 ALTER TABLE `promotion_gallery` DISABLE KEYS */;
+INSERT INTO `promotion_gallery` VALUES (1,'mini-clubman.png',2,'2017-02-03 12:07:26','2017-02-03 12:07:27'),(2,'mini-clubman-2.png',2,'2017-02-03 12:07:33','2017-02-03 12:07:27'),(3,'mini-clubman-3.png',2,'2017-02-03 12:07:32','2017-02-03 12:07:28'),(4,'mini-cooper-cabrio.png',1,'2017-02-03 12:36:30','2017-02-03 12:36:29'),(7,'mini-cooper-cabrio-2.png',1,'2017-02-03 12:07:31','2017-02-03 12:07:31'),(8,'mini-cooper-cabrio-3.png',1,'2017-02-03 12:07:31','2017-02-03 12:07:31'),(9,'mini-cooper-cabrio-4.png',1,'2017-02-03 12:07:31','2017-02-03 12:07:31'),(10,'mini-cooper-cabrio-5.png',1,'2017-02-03 12:07:31','2017-02-03 12:07:31'),(11,'mini-cooper-cabrio-6.png',1,'2017-02-03 12:07:31','2017-02-03 12:07:31'),(12,'mini-cooper-cabrio-7.png',1,'2017-02-03 12:07:31','2017-02-03 12:07:31'),(13,'mini-cooper-cabrio-8.png',1,'2017-02-03 12:07:31','2017-02-03 12:07:31'),(15,'mini-clubman-6.png',2,'2017-02-03 12:07:31','2017-02-03 12:07:31'),(16,'mini-clubman-7.png',2,'2017-02-03 12:07:31','2017-02-03 12:07:31'),(17,'mini-clubman-8.png',2,'2017-02-03 12:07:31','2017-02-03 12:07:31'),(18,'mini-clubman-4.png',2,'2017-02-03 12:07:31','2017-02-03 12:07:31'),(19,'mini-clubman-5.png',2,'2017-02-03 12:07:31','2017-02-03 12:07:31');
+/*!40000 ALTER TABLE `promotion_gallery` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -706,7 +853,7 @@ CREATE TABLE `promotion_images` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `promotion_id` (`promotion_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -715,7 +862,7 @@ CREATE TABLE `promotion_images` (
 
 LOCK TABLES `promotion_images` WRITE;
 /*!40000 ALTER TABLE `promotion_images` DISABLE KEYS */;
-INSERT INTO `promotion_images` VALUES (1,'mini-cabrio.jpg','interior.png','exterior.png','safety-4.png','accessories-4.png',1,'2017-02-02 11:10:00','2017-02-02 11:10:02');
+INSERT INTO `promotion_images` VALUES (1,'mini-cabrio.jpg','mini-cooper-cabrio-interior-design.png','exterior.png','safety-4.png','accessories-mini-cooper-cabrio.png',1,'2017-02-02 11:10:00','2017-02-02 11:10:02'),(2,'mini-clubman.jpg','interior-mini-clubman.png','exterior-mini-clubman.png','safety-mini-clubman.png','accessories-mini-clubman.png',2,'2017-02-03 11:45:53','2017-02-03 11:45:55');
 /*!40000 ALTER TABLE `promotion_images` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -728,7 +875,7 @@ DROP TABLE IF EXISTS `promotion_trans`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `promotion_trans` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `introduction` tinytext,
+  `introduction` mediumtext,
   `side_description` mediumtext,
   `description` text,
   `interior_description` text,
@@ -743,7 +890,7 @@ CREATE TABLE `promotion_trans` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `promotion_id` (`promotion_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -752,7 +899,7 @@ CREATE TABLE `promotion_trans` (
 
 LOCK TABLES `promotion_trans` WRITE;
 /*!40000 ALTER TABLE `promotion_trans` DISABLE KEYS */;
-INSERT INTO `promotion_trans` VALUES (1,'<p>\r\nThe new MINI Convertible is back with a thirst for more thrills. With a sleeker design, go-kart handling and smart technology, it’s ready for next-level open-air adventure.\r\n<br>\r\n<br>\r\n</p>','<p>\r\nAdventurers are always prepared for anything. That’s why safety comes first in the new MINI Convertible. A new invisible rollover crash system is the latest addition to an array of features that protect you and your fellow passengers. Letting you focus on seizing the moment.\r\n</p>\r\n                        ',NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `promotion_trans` VALUES (1,'<p>\n<span class=\"first-letter\">T</span>he MINI Cooper Cabrio has grown - and we\'re not just talking size. While it\'s sleeker appearance adds inches, it\'s evolved in style too with more elegant design details, such as a flatter elongated bonnet.\n<br>\n<br>\n</p>','<p>\r\nAdventurers are always prepared for anything. That’s why safety comes first in the new MINI Convertible. A new invisible rollover crash system is the latest addition to an array of features that protect you and your fellow passengers. Letting you focus on seizing the moment.\r\n</p>\r\n                        ','<table class=\"table table-striped\">\r\n <thead>\r\n <th>Harga</th><th>Type</th>\r\n </thead>\r\n<tbody>\r\n<tr>\r\n<td>IDR 789,000,000</td><td>MINI COOPER S CABRIO</td>\r\n</tr>\r\n</tbody>\r\n</table>','<p>\r\n<span class=\"first-letter\">W</span>hen it’s nice out, why wait to take it all in? Quick and quiet, the new electrical hood mechanism means you can get a full view in just 18 seconds – even when you’re driving. It’s also a full soft top that keeps its options open; especially now you can opt for the MINI Yours Union Jack design. A 3-in-1 convertible roof, it can be up, down or used as sunroof, opening a gap of around 40 cm to let in the breeze.\r\n</p>','<p>\r\n<span class=\"first-letter\">T</span>here’s no doubt about it – the new MINI Convertible is a smooth operator. Slightly longer yet agile proportions create a more streamlined silhouette that’s accentuated by a precisely defined roofline. It’s sleek all round.\r\n</p>','<p>\r\n<span class=\"first-letter\">A</span>dventurers are always prepared for anything. That’s why safety comes first in the new MINI Convertible. A new invisible rollover crash system is the latest addition to an array of features that protect you and your fellow passengers. Letting you focus on seizing the moment.\r\n</p>','<p>\r\nMake the new MINI Convertible even more of a headturner. Sleeker and smarter, just add your personal style to guarantee it gets noticed. Throw out the rulebook: it\'s time to get creative with a large choice of exterior and interior accessories.\r\n</p>',1,'Mini Cooper Cabrio','Mini Cooper Cabrio',NULL,'2017-02-03 07:30:07','2017-02-03 07:30:12'),(2,'<p>\r\n<span class=\"first-letter\">T</span>he new MINI Convertible is back with a thirst for more thrills. With a sleeker design, go-kart handling and smart technology, it’s ready for next-level open-air adventure.\r\n<br>\r\n<br>\r\n</p>','<p>\r\n The new MINI Clubman is more versatile than ever. It´s the MINI for all occasions, doing everything with panache and verve. Of course, the most important feature in the MINI Clubman is you. Intelligent Driving Assist featu\r\n</p>','<table class=\"table table-striped\">\r\n <thead>\r\n <th>Harga</th><th>Type</th>\r\n </thead>\r\n<tbody>\r\n<tr>\r\n<td>IDR 869,000,000</td><td>MINI COOPER S CLUBMAN</td>\r\n</tr>\r\n</tbody>\r\n</table>','<p>\r\n<span class=\"first-letter\">T</span>he new MINI Clubman is longer and wider than the previous model – and what it’s gained, it uses wisely. The extra space accommodates the introduction of five seats, extra rear legroom and a bigger boot, as well as a super flexible 40:20:40 rear-seat split. Fittingly, the new centre console takes centre stage, gladly utilising extra space freed up by the use of an Electric Parking brake. It’s all gain, and no pain.\r\n</p>','<p>\r\n <span class=\"first-letter\">N</span>ew design lines add even more flair to the distinctive MINI character with striking front, side and rear spoilers. And an extended roofline embraces the extra dimensions onboard heartily - complemented by unique body colours. MINI icons such as the hexagonal grille, side scuttles and big round lights at the front are given a fresh and funky twist. While the familiar Clubman Split Doors at the rear are now surrounded by broad shoulders and horizontal lights for an athletic stance. On top, the illuminated fin antenna on the roof definitely brings out the high in Highlight.\r\n</p>','<p>\r\n<span class=\"first-letter\">O</span>f course, the most important feature in the MINI Clubman is you. Intelligent Driving Assist features act instantly on impact, and ensure that safety is priority number one. So you can feel secure wherever the MINI Clubman takes you.\r\n</p>','<p>\r\nLike you, the new MINI Clubman is a social animal. It stays ahead of the curve by staying connected. The optional MINI Connected package links you up to social feeds, online music, driving information, in-car apps and much more, in a way that only MINI can do.\r\n</p>',2,'Mini Cooper Clubman','Mini Cooper Clubman',NULL,'2017-02-03 07:30:08','2017-02-03 07:30:13');
 /*!40000 ALTER TABLE `promotion_trans` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1020,4 +1167,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-02-03  0:24:12
+-- Dump completed on 2017-02-05 14:18:08

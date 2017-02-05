@@ -37,7 +37,7 @@
                                 <nav>
                                     <ul>
                                       <li><a href=""><h4>LAYANAN</h4></a></li>
-                                      <li><a href=""><h4>KARIR</h4></a></li>
+                                      <li><a href="{{ route('carier') }}"><h4>KARIR</h4></a></li>
                                     </ul>
                                 </nav>
                             </div>
