@@ -346,6 +346,7 @@ CREATE TABLE `company_history` (
   `side_description` text COLLATE utf8_unicode_ci,
   `year` int(4) DEFAULT NULL,
   `description` text COLLATE utf8_unicode_ci,
+  `is_active` int(1) DEFAULT NULL,
   `meta_title` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   `meta_keyword` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   `meta_description` text COLLATE utf8_unicode_ci,
@@ -362,8 +363,35 @@ CREATE TABLE `company_history` (
 
 LOCK TABLES `company_history` WRITE;
 /*!40000 ALTER TABLE `company_history` DISABLE KEYS */;
-INSERT INTO `company_history` VALUES (1,'Sejarah Perusahaan 1975',NULL,1975,'Nusantara Indah Group memulai usahanya sebagai importir mobil dengan merk Morina, Chevrolet, Citroen, dan Alfra Romeo.','Sejarah Perusahaan 1975','Sejarah Perusahaan 1975','Sejarah Perusahaan 1975','2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(2,'Sejarah Perusahaan 1981','',1981,'Nusantara Indah Group terpilih sebagai dealer resmi Mazda untuk Kalimantan Selatan dan Tengah dengan nama UD. Nusantara Indah','Sejarah Perusahaan 1981','Sejarah Perusahaan 1981','Sejarah Perusahaan 1981','2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(3,'Sejarah Perusahaan 1982',NULL,1982,'Nusantara Indah Group terpilih sebagai dealer resmi Isuzu untuk Kalimantan Selatan dan Tengah dengan nama PT. Surya Nusantara','Sejarah Perusahaan 1982','Sejarah Perusahaan 1982','Sejarah Perusahaan 1982','2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(4,'Sejarah Perusahaan 1985',NULL,1985,'Nusantara Indah Group terpilih sebagai dealer resmi utk Daihatsu di Kalimantan Selatan.','Sejarah Perusahaan 1985','Sejarah Perusahaan 1985','Sejarah Perusahaan 1985','2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(5,'Sejarah Perusahaan 1996',NULL,1996,'Nusantara Indah Group memutuskan untuk menjadi dealer utama Mobil Timor untuk kawasan Indonesia Timur  dibawah nama PT Putra Borneo Nusantara Indah. Kita juga membentuk perusahaan keuangan untuk mensupport pembelian mobil baru bagi para pemilik kendaraan bermotor','Sejarah Perusahaan 1996','Sejarah Perusahaan 1996','Sejarah Perusahaan 1996','2016-12-26 04:30:32',1,'2016-12-26 04:30:32');
+INSERT INTO `company_history` VALUES (1,'Sejarah Perusahaan 1975',NULL,1975,'Nusantara Indah Group memulai usahanya sebagai importir mobil dengan merk Morina, Chevrolet, Citroen, dan Alfra Romeo.',1,'Sejarah Perusahaan 1975','Sejarah Perusahaan 1975','Sejarah Perusahaan 1975','2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(2,'Sejarah Perusahaan 1981','',1981,'Nusantara Indah Group terpilih sebagai dealer resmi Mazda untuk Kalimantan Selatan dan Tengah dengan nama UD. Nusantara Indah',1,'Sejarah Perusahaan 1981','Sejarah Perusahaan 1981','Sejarah Perusahaan 1981','2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(3,'Sejarah Perusahaan 1982',NULL,1982,'Nusantara Indah Group terpilih sebagai dealer resmi Isuzu untuk Kalimantan Selatan dan Tengah dengan nama PT. Surya Nusantara',1,'Sejarah Perusahaan 1982','Sejarah Perusahaan 1982','Sejarah Perusahaan 1982','2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(4,'Sejarah Perusahaan 1985',NULL,1985,'Nusantara Indah Group terpilih sebagai dealer resmi utk Daihatsu di Kalimantan Selatan.',1,'Sejarah Perusahaan 1985','Sejarah Perusahaan 1985','Sejarah Perusahaan 1985','2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(5,'Sejarah Perusahaan 1996',NULL,1996,'Nusantara Indah Group memutuskan untuk menjadi dealer utama Mobil Timor untuk kawasan Indonesia Timur  dibawah nama PT Putra Borneo Nusantara Indah. Kita juga membentuk perusahaan keuangan untuk mensupport pembelian mobil baru bagi para pemilik kendaraan bermotor',1,'Sejarah Perusahaan 1996','Sejarah Perusahaan 1996','Sejarah Perusahaan 1996','2016-12-26 04:30:32',1,'2016-12-26 04:30:32');
 /*!40000 ALTER TABLE `company_history` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `company_history_image`
+--
+
+DROP TABLE IF EXISTS `company_history_image`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `company_history_image` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `filename` varchar(100) DEFAULT NULL,
+  `is_active` int(1) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `company_history_image`
+--
+
+LOCK TABLES `company_history_image` WRITE;
+/*!40000 ALTER TABLE `company_history_image` DISABLE KEYS */;
+INSERT INTO `company_history_image` VALUES (1,'company-history.jpg',1,'2016-12-26 04:30:32','2016-12-26 04:30:32');
+/*!40000 ALTER TABLE `company_history_image` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1167,4 +1195,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-02-05 14:18:08
+-- Dump completed on 2017-02-06  0:22:18

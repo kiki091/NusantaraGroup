@@ -24,3 +24,7 @@ define('SERVICE_BANNER_IMAGES_DIRECTORY', 'images/db/services/slider/');
 define('PROMOTION_IMAGES_DIRECTORY','images/db/promotion/promotion/category/mini-cooper/');
 define('PROMOTION_IMAGES_GALLERY_DIRECTORY','images/db/promotion/promotion/category/gallery/');
 define('PROMOTION_IMAGES_CATEGORY_DIRECTORY','images/db/promotion/promotion/category/banner/');
+
+// ================================================= Company History Images Directory =============================================== //
+
+define('COMPANY_HISTORY_IMAGES_DIRECTORY','images/db/company_history/');

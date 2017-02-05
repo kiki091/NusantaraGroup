@@ -46,7 +46,6 @@ Route::group(['middleware' => ['web']], function ()
 
 			Route::group(array('prefix' => 'sejarah-perusahaan'), function () {
 				Route::get('/', 'Front\CompanyHistoryController@index')->name('companyHistoryPage');
-				Route::get('data', 'Front\CompanyHistoryController@getData')->name('companyHistoryPageGetData');
 			});
 
 			Route::group(array('prefix' => 'kantor-cabang'), function () {

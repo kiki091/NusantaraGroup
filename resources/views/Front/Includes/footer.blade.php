@@ -31,7 +31,7 @@
                                 <nav>
                                     <ul>
                                       <li><a href=""><h4>BERITA</h4></a></li>
-                                      <li><a href=""><h4>HUBUNGI KAMI</h4></a></li>
+                                      <li><a href="{{ route('companyHistoryPage') }}"><h4>SEJARAH PERUSAHAAN</h4></a></li>
                                     </ul>
                                 </nav>
                                 <nav>

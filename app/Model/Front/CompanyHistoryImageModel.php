@@ -4,17 +4,14 @@ namespace App\Model\Front;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CompanyHistoryModel extends Model
+class CompanyHistoryImageModel extends Model
 {
-    protected $table = 'company_history';
+    protected $table = 'company_history_image';
     public $timestamps = true;
 
 
     protected $fillable = [
-	    'title', 
-	    'side_description',
-	    'year', 
-	    'description',
+	    'filename'
     ];
 
     /***************** Scope *****************/
