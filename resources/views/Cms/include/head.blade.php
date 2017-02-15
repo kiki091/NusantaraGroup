@@ -15,3 +15,5 @@
 
 <!-- Custom Theme Style -->
 <link href="{{ asset('themes/cms/build/css/custom.min.css') }}" rel="stylesheet">
+<!-- Laroute JS -->
+<script src="{{ asset('js/laroute.js') }}"></script>
