@@ -24,13 +24,13 @@ class User
      */
     protected function setAuthSessionTransform($data)
     {
+        $dataTransform['user_id']               = isset($data['id']) ? $data['id'] : '';
+        $dataTransform['name']                  = isset($data['name']) ? $data['name'] : '';
+        $dataTransform['email']                 = isset($data['email']) ? $data['email'] : '';
+        $dataTransform['property_location_id']  = isset($data['property_location_id']) ? $data['property_location_id'] : '';
+        $dataTransform['location']              = $this->locationBuilder($data);
 
-        return [
-            'user_id' => isset($data['id']) ? $data['id'] : '',
-            'name' => isset($data['name']) ? $data['name'] : '',
-            'email' => isset($data['email']) ? $data['email'] : '',
-            'location' => $this->locationBuilder($data),
-        ];
+        return $dataTransform;
     }
 
     /**
@@ -45,8 +45,9 @@ class User
 
         $location = $data['location'];
 
-        $dataLocation['location_name'] = $location['name'];
-        $dataLocation['property_slug'] = $location['property_location_slug'];
+        $dataLocation['property_id']    = $location['id'];
+        $dataLocation['location_name']  = $location['name'];
+        $dataLocation['property_slug']  = $location['property_location_slug'];
 
         return $dataLocation;
     }

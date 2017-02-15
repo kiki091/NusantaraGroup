@@ -27,7 +27,8 @@
             "App\\": "app/"
         },
         "files": [
-            "app/Services/Assets/main.php"
+            "app/Services/Assets/main.php",
+            "app/Services/Assets/Dimension.php"
         ]
     },
     "autoload-dev": {

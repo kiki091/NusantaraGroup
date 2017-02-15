@@ -57,7 +57,7 @@ class User extends BaseImplementation implements UserInterface
         Session::forget('user_info');
         Session::set('user_info', $data);
 
-        return true;
+        return $data;
     }
 
     /**

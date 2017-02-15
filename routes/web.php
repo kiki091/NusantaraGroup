@@ -90,6 +90,14 @@ Route::group(['middleware' => ['web']], function ()
 			Route::post('auth', 'Cms\AuthController@authenticate')->name('authenticate');
 			Route::get('logout', 'Cms\AuthController@logout')->name('logout');
 			Route::get('dashboard', 'Cms\DashboardController@index')->name('CmsDashboard');
+
+			// Static Page
+
+			Route::group(array('prefix' => 'static-page' ), function(){
+				Route::get('/', 'Cms\pages\StaticPageController@index')->name('StaticPage');
+				Route::get('data', 'Cms\pages\StaticPageController@getData')->name('StaticPageGetData');
+				Route::post('store', 'Cms\pages\StaticPageController@store')->name('StoreStaticPage');
+			});
 		});
 
 	});

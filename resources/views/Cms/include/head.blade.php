@@ -3,6 +3,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta id="token" name="token" value="{{ csrf_token() }}">
 
 <title>Nusantara Group </title>
 
@@ -15,5 +16,6 @@
 
 <!-- Custom Theme Style -->
 <link href="{{ asset('themes/cms/build/css/custom.min.css') }}" rel="stylesheet">
-<!-- Laroute JS -->
-<script src="{{ asset('js/laroute.js') }}"></script>
+<link href="{{ asset('themes/cms/css/custom.css') }}" rel="stylesheet">
+    	
+<script src="{{asset('themes/cms/js/function.js')}}"></script>

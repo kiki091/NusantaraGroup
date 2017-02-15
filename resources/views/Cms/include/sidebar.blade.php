@@ -16,10 +16,10 @@
                 <ul class="nav side-menu">
                     <li>
                         <a>
-                          <i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span>
+                          <i class="fa fa-home"></i> Pages <span class="fa fa-chevron-down"></span>
                         </a>
                         <ul class="nav child_menu">
-                            <li><a href="#">Dashboard</a></li>
+                            <li><a href="{{ route('StaticPage') }}">Static Page</a></li>
                         </ul>
                     </li> 
                 </ul>

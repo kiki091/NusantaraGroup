@@ -20,6 +20,18 @@
   			</div>
   		</div>
 
+		<!-- Laroute JS -->
+		<script src="{{ asset('js/laroute.js') }}"></script>
+		
+  		<!-- Vue -->
+
+	    <script src="{{asset('js/vue.js')}}"></script>
+	    <script src="{{asset('js/vue-min.js')}}"></script>
+	    <script src="{{asset('js/vue-resource.js')}}"></script>
+    	<script src="{{asset('themes/cms/content/static-page.js')}}"></script>
+
+		<!-- End Vue -->
+
   		<!-- jQuery -->
 	    <script src="{{ asset('themes/cms/vendors/jquery/dist/jquery.min.js') }}"></script>
 	    <!-- Bootstrap -->
