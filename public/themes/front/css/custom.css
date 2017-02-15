@@ -512,3 +512,58 @@
 }
 
 
+#error-banner-text {
+    position: absolute;
+    top: 160px;
+    left: 0;
+    width: 100%;
+}
+
+#error-banner-text-content {
+    text-align: center;
+}
+
+#error-banner-text-content h1 {
+    margin-bottom: 24px;
+}
+h1.large-version {
+    font-family: "Harriet Display Light",TimesNewRoman,'Times New Roman',Times,Baskerville,Georgia,serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 70px;
+}
+
+#error-banner-text-content p {
+    font-family: "Harriet Display Light",TimesNewRoman,'Times New Roman',Times,Baskerville,Georgia,serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 32px;
+}
+
+#error-banner-text-content .cta-container {
+    padding-top: 43px;
+}
+
+#error-banner-text-content .cta-container .arrow-cta {
+    margin-right: 0px;
+}
+.arrow-cta.back-version {
+    padding-left: 18px;
+}
+.arrow-cta {
+    font-family: "Gotham A","Gotham B",Verdana,Geneva,sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 21px;
+    text-transform: uppercase;
+    letter-spacing: .075em;
+    color: #464646;
+    display: inline-block;
+    vertical-align: top;
+    zoom: 1;
+    padding-right: 18px;
+    position: relative;
+}

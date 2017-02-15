@@ -14,7 +14,7 @@
 Route::group(['middleware' => ['web']], function () 
 {
     Route::group(['domain' => env('WORLD_WIDE_WEB') . env('DOMAIN_PREFIX') . env('APP_DOMAIN')], function() 
-	{
+    {
 		Route::get('/', 'Front\LandingController@index')->name('homePage');
 
 		Route::group(array('prefix' => 'contact-us'), function (){
@@ -84,9 +84,30 @@ Route::group(['middleware' => ['web']], function ()
 		});
 
 		Route::post('subscribe-mail', 'Front\SubscribeMailController@store')->name('subscribeMail');
+
+		Route::group(array('prefix' => 'cms'), function(){
+			Route::get('/', 'Cms\AuthController@index')->name('login');
+			Route::post('auth', 'Cms\AuthController@authenticate')->name('authenticate');
+			Route::get('logout', 'Cms\AuthController@logout')->name('logout');
+			Route::get('dashboard', 'Cms\DashboardController@index')->name('CmsDashboard');
+		});
+
 	});
+
+	/*Route::group(['domain' => env('DOMAIN_PREFIX_CMS') . env('APP_DOMAIN')], function()
+	{
+		//Login Group
+        Route::group(array('prefix' => 'login'), function () {
+            Route::get('/', 'Ayana\Cms\AuthController@index')->name('login');
+            Route::post('auth', 'Ayana\Cms\AuthController@authenticate')->name('authenticate');
+        });
+
+        //Logout
+        Route::get('logout', 'Ayana\Cms\AuthController@logout')->name('logout');
+
+        //Change Password
+        Route::post('change-password', 'Ayana\Cms\AuthController@changePassword')->name('changePassword');
+
+	});*/
 });
-
-
-Auth::routes();
 

@@ -33,6 +33,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('App\Repositories\Contracts\Front\PromotionContent', 'App\Repositories\Implementation\Front\PromotionContent');
         $this->app->bind('App\Repositories\Contracts\Front\Carier', 'App\Repositories\Implementation\Front\Carier');
         $this->app->bind('App\Repositories\Contracts\Front\CompanyHistory', 'App\Repositories\Implementation\Front\CompanyHistory');
+
+
+        
+        $this->app->bind('App\Repositories\Contracts\Auth\User', 'App\Repositories\Implementation\Auth\User');
     }
 
     /**
@@ -53,6 +57,7 @@ class AppServiceProvider extends ServiceProvider
             'App\Repositories\Contracts\Front\PromotionContent',
             'App\Repositories\Contracts\Front\Carier',
             'App\Repositories\Contracts\Front\CompanyHistory',
+            'App\Repositories\Contracts\Auth\User',
         );
     }
 }

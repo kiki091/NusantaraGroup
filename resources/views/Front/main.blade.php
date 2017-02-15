@@ -22,7 +22,6 @@
 			<!-- *** CONTENT *** -->
 		    @yield('content')
 			<!-- *** CONTENT END *** -->
-			</div>
 
 			<!-- *** FOOTER *** -->
 			@include('Front.Includes.footer')

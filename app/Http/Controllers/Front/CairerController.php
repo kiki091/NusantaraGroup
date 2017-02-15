@@ -44,6 +44,10 @@ class CairerController extends Controller
                 return view($blade, $data);
             }
         }
+        else
+        {
+            return abort(404);
+        }
 
         
     }

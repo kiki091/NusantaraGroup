@@ -44,6 +44,10 @@ class AwardsController extends Controller
                 return view($blade, $data);
             }
         }
+        else
+        {
+            return abort(404);
+        }
 
         
     }
