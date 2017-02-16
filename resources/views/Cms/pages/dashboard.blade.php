@@ -1,10 +1,7 @@
 @extends('Cms.main')
-    @section('content')
+@section('content')
 
     <!-- page content -->
-    <div class="right_col" role="main">
-        @include('Cms.include.page-title')
-    </div>
+    @include('Cms.include.page-title')
     <!-- /page content -->
-
-	@endsection
+@endsection

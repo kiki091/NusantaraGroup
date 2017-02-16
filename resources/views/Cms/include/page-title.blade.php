@@ -1,6 +1,6 @@
+
 <div class="page-title">
-    <div class="row">
-        <div class="col-md-12">
+    <div class="row-header">
 	        <div class="title_left">
 	            <h3>{{ $page_title }}
 		            <br/>
@@ -11,6 +11,5 @@
 			        </small>
 		        </h3>
 	    	</div>
-		</div>
 	</div>
 </div>

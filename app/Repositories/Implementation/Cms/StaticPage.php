@@ -13,13 +13,17 @@ use DB;
 class StaticPage extends BaseImplementation implements StaticPageInterface
 {
 
+    protected $message;
     protected $staticPage;
+    protected $lastInsertId;
     protected $staticPageformation;
+    protected $uniqueIdThumbnailPrefix = '';
 
     function __construct(StaticPageModels $staticPage, StaticPageTransformation $staticPageformation)
     {
         $this->staticPage = $staticPage;
         $this->staticPageformation = $staticPageformation;
+        $this->uniqueIdThumbnailPrefix = uniqid(PREFIX_FILENAME_NUSANTARA_IMAGE);
     }
 
     public function getData($params)
@@ -69,6 +73,64 @@ class StaticPage extends BaseImplementation implements StaticPageInterface
                 }
 
             break;
+        }
+    }
+
+    public function store($params)
+    {
+        try {
+
+            DB::beginTransaction();
+
+            $this->lastInsertId = $params['id'];
+
+            if ($this->storeData($params) != true) {
+                DB::rollBack();
+                return $this->setResponse($this->message, false);
+            }
+
+            DB::commit();
+            return $this->setResponse($this->message), true);
+        } catch (\Exception $e) {
+            return $this->setResponse($e->getMessage(), false);
+        }
+    }
+
+    /**
+     * Store Data
+     * @param $data
+     * @return mixed
+     */
+    protected function storeData($params)
+    {
+        try {
+
+                $store                      = $this->staticPage;
+                $store                      = $this->staticPage->find($params['id']);
+                
+                $store->site_title          = isset($data['site_title']) ? $data['site_title'] : '';
+                $store->logo_images         = $this->uniqueIdThumbnailPrefix . '_' . $data['logo_images']->getClientOriginalName();
+                $store->favicon_images      = $this->uniqueIdThumbnailPrefix . '_' . $data['favicon_images']->getClientOriginalName();
+                $store->og_images           = $this->uniqueIdThumbnailPrefix . '_' . $data['og_images']->getClientOriginalName();
+                $store->site_name           = isset($data['site_name']) ? $data['site_name'] : '';
+                $store->og_title            = isset($data['og_title']) ? $data['og_title'] : '';
+                $store->og_description      = isset($data['og_description']) ? $data['og_description'] : '';
+                $store->box_wrapper_left    = isset($data['box_wrapper_left']) ? $data['box_wrapper_left'] : '';
+                $store->box_wrapper_center  = isset($data['box_wrapper_center']) ? $data['box_wrapper_center'] : '';
+                $store->box_wrapper_right   = isset($data['box_wrapper_right']) ? $data['box_wrapper_right'] : '';
+                $store->meta_title          = isset($data['meta_title']) ? $data['meta_title'] : '';
+                $store->meta_keyword        = isset($data['meta_keyword']) ? $data['meta_keyword'] : '';
+                $store->meta_description    = isset($data['meta_description']) ? $data['meta_description'] : '';
+
+                if($save = $store->save()) {
+                    $this->lastInsertId = $store->id;
+                }
+
+                return $save;
+
+        } catch (\Exception $e) {
+            $this->message = $e->getMessage();
+            return false;
         }
     }
 

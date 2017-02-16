@@ -3,7 +3,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta id="token" name="token" value="{{ csrf_token() }}">
+<meta id="_token" name="_token" value="{{ csrf_token() }}">
 
 <title>Nusantara Group </title>
 
@@ -18,4 +18,10 @@
 <link href="{{ asset('themes/cms/build/css/custom.min.css') }}" rel="stylesheet">
 <link href="{{ asset('themes/cms/css/custom.css') }}" rel="stylesheet">
     	
-<script src="{{asset('themes/cms/js/function.js')}}"></script>
+<script src="{{ asset('themes/cms/js/function.js') }}"></script>
+<!-- notify -->
+<script src="{{ elixir('js/bower_components/jquery/dist/jquery.min.js') }}"></script>
+
+<!-- <script type="text/javascript" src="{{asset('js/bower_components/notify-js/Notify.js')}}"></script> -->
+<link href="{{ asset('themes/cms/css/notify.css') }}" rel="stylesheet"><!-- 
+<script type="text/javascript" src="{{asset('js/bower_components/notifyjs/dist/notify.js')}}"></script> -->

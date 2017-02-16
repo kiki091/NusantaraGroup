@@ -1,4 +1,8 @@
-    new Vue({
+function crudStaticPage() {
+    Vue.http.headers.common['X-CSRF-TOKEN'] = $("#_token").attr("value");
+    Vue.use(VueHtml5Editor)
+
+    var controller = new Vue({
     	el: '#static-page',
         data: {
             models: {
@@ -63,34 +67,40 @@
                     })
             },
 
-            store: function(){
-                var config_notif = [
-                    toastr.options.showMethod = 'slideDown',
-                    toastr.options.closeButton = true,
-                    toastr.options.newestOnTop = false,
-                ];
-            	var input = this.models;
-                this.$http.post('/cms/static-page/store',input, function(response) {
+            storeData: function(event){
+
+                this.clearErorrMessage();
+
+                var form = new FormData();
+
+                for (var key in this.models) {
+                    form.append(key, this.models[key])
+                }
+
+                var domain = laroute.url('/cms/static-page/store', []);
+                this.$http.post(domain, form, function(response) {
                     if (response.status == false) {
-                        $.each(response.message, function(input, value){
-                            $('input[name="' + input + '"]').focus();
-                            $("#form--error--message--" + input).text(value);
-                            
-                        });
-                        this.config_notif;
-                        toastr.error('Gagal menyimpan data !!')
-                    }
-                    else
-                    {
-                        this.resetForm()
+                        if(response.is_error_form_validation) {
+
+                            var message_validation = ''
+                            $.each(response.message, function(key, value){
+                                $('input[name="' + key + '"]').focus();
+                                $("#form--error--message--" + key).text(value)
+                            });
+
+                            pushNotifErrorMessage();
+                        } else {
+                            pushNotifErrorMessage();
+                        }
+                    } else {
+                        $('.btn__add__cancel').click();
+                        this.fetchData()
                         this.clearErorrMessage()
-                        this.config_notif;
-                        toastr.success('Berhasil');
+                        pushNotif(response.status, response.message);
+                        this.resetForm()
                     }
-                    
-                },(response) => {
-                    this.formErrors = response.data;
-                });
+                })
+                
             },
 
             clearErorrMessage: function(){
@@ -111,6 +121,26 @@
                 this.models.meta_title = ''
                 this.models.meta_keyword = ''
                 this.models.meta_description = ''
+            },
+
+            importTemplate: function(id) {
+                try {
+                    switch(id) {
+                        case 'template-box-wrapper-left':
+                            CKEDITOR.instances['editor-1'].setData($('#' + id).html());
+                        break;
+                        case 'template-box-wrapper-center':
+                            CKEDITOR.instances['editor-2'].setData($('#' + id).html());
+                        break;
+                        case 'template-box-wrapper-right':
+                            CKEDITOR.instances['editor-3'].setData($('#' + id).html());
+                        break;
+                    default :
+
+                    }
+                } catch (err) {
+                    toastr.error(false, err.message);
+                }
             }
 
         },
@@ -119,3 +149,4 @@
             this.fetchData()
         }
     });
+}

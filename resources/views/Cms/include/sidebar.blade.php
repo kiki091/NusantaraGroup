@@ -4,6 +4,7 @@
             <!-- <a href="#" class="site_title text-center">
                 <img src="{{ asset('images/db/main_page/logo/nusantara-group-2.png') }}" height="54px">
             </a> -->
+            <img src="" class="image-header">
         </div>
 
         <div class="clearfix"></div>
@@ -19,7 +20,9 @@
                           <i class="fa fa-home"></i> Pages <span class="fa fa-chevron-down"></span>
                         </a>
                         <ul class="nav child_menu">
-                            <li><a href="{{ route('StaticPage') }}">Static Page</a></li>
+                            <li>
+                                <a href="#static-page" onclick="menuStaticPage()">Static Page</a>
+                            </li>
                         </ul>
                     </li> 
                 </ul>

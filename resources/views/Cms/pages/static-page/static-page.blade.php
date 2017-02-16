@@ -1,9 +1,6 @@
-@extends('Cms.main')
-    @section('content')
 
     <!-- page content -->
     <div id="static-page">
-    <div class="right_col" role="main">
         
     @include('Cms.include.page-title')
         <div class="row">
@@ -70,7 +67,4 @@
 	        </div>
         </div>
     </div>
-    </div>
     <!-- /page content -->
-
-	@endsection

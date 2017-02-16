@@ -83,11 +83,25 @@ class StaticPageController extends CmsController
      * Validation Store 
      * @return array
      */
-    private function validationStoreDiningVenue($request = array())
+    private function validationStore($request = array())
     {
     	$rules = [
+            'id'                    => 'required',
     		'site_title'            => 'required',
     		'logo_images'   		=> 'required|dimensions:width='.LOGO_WIDTH.',height='.LOGO_HEIGHT.'|max:'. MAX_IMAGE_SIZE .'|mimes:png',
-    	];	
+            'favicon_images'        => 'required|dimensions:width='.FAVICON_WIDTH.',height='.FAVICON_HEIGHT.'|max:'. FAVICON_SIZE .'|mimes:png,ico',
+            'og_images'             => 'required|dimensions:width='.OG_IMAGE_WIDTH.',height='.OG_IMAGE_HEIGHT.'|max:'. OG_IMAGE_SIZE .'|mimes:png,jpeg,jpg',
+            'site_name'             => 'required',
+            'og_title'              => 'required',
+            'og_description'        => 'required',
+            'box_wrapper_left'      => 'required',
+            'box_wrapper_center'    => 'required',
+            'box_wrapper_right'     => 'required',
+            'meta_title'            => 'required',
+            'meta_keyword'          => 'required',
+            'meta_description'      => 'required',
+    	];
+
+        return $rules;
     }
 }

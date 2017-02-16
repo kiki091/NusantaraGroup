@@ -23,4 +23,14 @@ class StaticPage {
         return $this->staticPage->getData($params);
     }
 
+    /**
+     * Store Data 
+     * @param $params
+     * @return mixed
+     */
+    public function store($params = [])
+    {
+        return $this->staticPage->store($params);
+    }
+
 }
