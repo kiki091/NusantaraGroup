@@ -97,6 +97,8 @@ Route::group(['middleware' => ['web']], function ()
 				Route::get('/', 'Cms\pages\StaticPageController@index')->name('StaticPage');
 				Route::get('data', 'Cms\pages\StaticPageController@getData')->name('StaticPageGetData');
 				Route::post('store', 'Cms\pages\StaticPageController@store')->name('StoreStaticPage');
+				Route::post('edit', 'Cms\pages\StaticPageController@edit')->name('EditStaticPage');
+				Route::post('change-status', 'Cms\pages\StaticPageController@changeStatus')->name('ChangeStatusStaticPage');
 			});
 		});
 

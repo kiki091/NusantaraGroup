@@ -33,4 +33,22 @@ class StaticPage {
         return $this->staticPage->store($params);
     }
 
+    /**
+     * Edit Data 
+     * @param $params
+     * @return mixed
+     */
+    public function edit($params = [])
+    {
+        return $this->staticPage->edit($params);
+    }
+
+    /**
+     * Get Change Status
+     */
+    public function changeStatus($params = [])
+    {
+        return $this->staticPage->changeStatus($params);
+    }
+
 }

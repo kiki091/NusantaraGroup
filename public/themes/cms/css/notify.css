@@ -41,22 +41,35 @@
     position: absolute;
 }
 
-.notif__form__error {
+.notif__form {
     width: 420px;
     position: relative;
     display: -ms-flexbox;
     display: flex;
 }
+.notif__success{
+    background-color: #00b930;
+}
 
-.notif__form__error .notif__icon {
+.notif__error{
     background-color: #DE6060;
+}
+
+.notif__form .notif__icon {
     position: relative;
     width: 49px;
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
 }
 
-.notif__form__error .notif__icon img {
+.notif__form .notif__icon {
+    position: relative;
+    width: 49px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.notif__form .notif__icon img {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -65,7 +78,7 @@
     margin: auto;
 }
 
-notif__form__error .notif__msg {
+.notif__form .notif__msg {
     background-color: #fff;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
@@ -73,7 +86,7 @@ notif__form__error .notif__msg {
     width: calc(100% - 49px);
 }
 
-.notif__form__error .notif__close {
+.notif__form .notif__close {
     border: none;
     background-color: transparent;
     padding: 0;
@@ -87,7 +100,7 @@ notif__form__error .notif__msg {
     top: 24px;
 }
 
-.notif__form__error .notif__content {
+.notif__form .notif__content {
     font-size: 15px;
     color: #424242;
     margin: 7px 19px 7px 0;
@@ -97,26 +110,26 @@ notif__form__error .notif__msg {
     position: relative;
 }
 
-.notif__form__error .notif__content__ul {
+.notif__form .notif__content__ul {
     overflow-y: auto;
     max-height: 200px;
     overflow-x: hidden;
     word-break: break-word;
 }
 
-.notif__form__error .notif__content__ul .notif__content__li {
+.notif__form .notif__content__ul .notif__content__li {
     letter-spacing: 0.3px;
     list-style-type: disc;
     margin-left: 18px;
     color: #DE6060;
 }
 
-.notif__form__error .notif__content__ul .notif__content__li .text {
+.notif__form .notif__content__ul .notif__content__li .text {
     font-size: 12px;
     color: #627F8F;
 }
 
-.notif__form__error .notif__msg {
+.notif__form .notif__msg {
     background-color: #fff;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;

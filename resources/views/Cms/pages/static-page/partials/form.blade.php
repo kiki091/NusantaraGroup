@@ -1,10 +1,10 @@
-<form action="#" method="POST" id="StaticPageForm" enctype="multipart/form-data" v-on:submit.prevent="storeData">
+<form action="#" method="POST" id="StaticPageForm" enctype="multipart/form-data" files="true" @submit.prevent>
 	<div class="main__content__form__layer" id="toggle-form-content" style="display: none; margin-top: 2%;">
 		<div class="create__form__wrapper">
 			<div class="form--top flex-between">
 				<div class="form__title"><h2>Form Static Page</h2></div>
 				<div class="form--top__btn">
-					<a href="#" class="btn__add__cancel" onclick="buttonClickClose()">Cancel</a>
+					<a href="#" class="btn__add__cancel" onclick="buttonClickClose()" @click="resetForm">Cancel</a>
 				</div>
 			</div>
 			<div class="form--mid">
@@ -44,11 +44,13 @@
 										<button class="upload__img__remove" @click="removeImage('logo_images')"></button>
 									</div>
 									<div class="form--error--message" id="form--error--message--logo_images"></div>
-									<!-- upload tip -->
+												<!-- upload tip -->
 									<div class="upload__tip">
-										<span><b>Upload Tip: </b>Please upload high resolution photo only with format of *png. (With maximum width of {{ LOGO_WIDTH }} x {{ LOGO_HEIGHT }} px on landscape)</span>
+										<span><b>Upload Tip: </b>Please upload high resolution photo only with format of *png. (With maximum width of {{ LOGO_WIDTH }} x {{ LOGO_HEIGHT }} px)</span>
 									</div>
+									<input type="hidden" name="old_logo_images" value="@{{ models.old_logo_images }}">
 								</div>
+								
 							</div>
 
 							<div class="create__form__row">
@@ -116,7 +118,7 @@
 									<label>Box Wrapper Left</label>
 									<label class="cms__insert__template" @click="importTemplate('template-box-wrapper-left')">Import Template</label>
 									<div class="field__icon">
-										<textarea models.box_wrapper_left" name="box_wrapper_left" class="ckeditor" id="editor-1" style="width: 500px"></textarea>
+										<textarea v-model="models.box_wrapper_left" name="box_wrapper_left" style="margin: 0px; width: 500px; height: 125px;"></textarea>
 									</div>
 									<div class="form--error--message" id="form--error--message--box_wrapper_left"></div>
 								</div>
@@ -127,7 +129,7 @@
 									<label>Box Wrapper Center</label>
 									<label class="cms__insert__template" @click="importTemplate('template-box-wrapper-center')">Import Template</label>
 									<div class="field__icon">
-										<textarea models.box_wrapper_center" name="box_wrapper_center" class="ckeditor" id="editor-2" style="width: 500px"></textarea>
+										<textarea v-model="models.box_wrapper_center" name="box_wrapper_center" style="margin: 0px; width: 500px; height: 125px;"></textarea>
 									</div>
 									<div class="form--error--message" id="form--error--message--box_wrapper_center"></div>
 								</div>
@@ -138,7 +140,7 @@
 									<label>Box Wrapper Right</label>
 									<label class="cms__insert__template" @click="importTemplate('template-box-wrapper-right')">Import Template</label>
 									<div class="field__icon">
-										<textarea models.box_wrapper_right" name="box_wrapper_right" class="ckeditor" id="editor-3" style="width: 500px"></textarea>
+										<textarea v-model="models.box_wrapper_right" name="box_wrapper_right" style="margin: 0px; width: 500px; height: 125px;"></textarea>
 									</div>
 									<div class="form--error--message" id="form--error--message--box_wrapper_right"></div>
 								</div>
@@ -184,8 +186,8 @@
 					<div class="create__form__row flex-between">
 						<div class="new__form__btn">
 							<input type="hidden" id="_token" name="_token" value="{{ csrf_token() }}">
-							<input v-model="models.id" type="hidden" name="id" value="@{{ models.id }}">
-							<button class="btn__form" type="submit">Save</button>
+							<input v-model="models.id" type="hidden" name="id">
+							<button class="btn__form" type="submit" @click="storeData">Save</button>
 						</div>
 					</div>
 				</div>

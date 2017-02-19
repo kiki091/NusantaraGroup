@@ -262,6 +262,35 @@ h2 {
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
 }
 
+.switch .switch-input:checked ~ .switch-label:after {
+    opacity: 1;
+}
+
+.switch .switch-input:checked ~ .switch-label:before {
+    opacity: 0;
+}
+
+.switch .switch-label:before, .switch .switch-label:after {
+    position: absolute;
+    top: 50%;
+    margin-top: -.5em;
+    line-height: 1;
+    transition: inherit;
+}
+
+.switch .switch-label:before {
+    content: attr(data-off);
+    left: 12px;
+    color: #FFFFFF;
+}
+
+.switch .switch-label:after {
+    content: attr(data-on);
+    right: 18px;
+    color: #FFFFFF;
+    opacity: 0;
+}
+
 .btn__delete {
     color: #ffffff;
     position: relative;

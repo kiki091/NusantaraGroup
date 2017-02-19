@@ -4,6 +4,8 @@ namespace App\Repositories\Implementation;
 
 use Request;
 use Session;
+use Cache;
+use Artisan;
 
 class BaseImplementation
 {

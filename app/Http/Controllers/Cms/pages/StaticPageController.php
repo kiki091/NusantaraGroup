@@ -56,7 +56,10 @@ class StaticPageController extends CmsController
      */
     public function getData(Request $request)
     {
-    	$data['static_page'] = $this->staticPage->getData();
+        $location = $this->getUserLocation();
+        $property_location_id = $location['property_id'];
+
+    	$data['static_page'] = $this->staticPage->getData($property_location_id);
 
     	return $this->response->setResponse(trans('success_get_data'), true, $data);
     }
@@ -67,7 +70,8 @@ class StaticPageController extends CmsController
 
     public function store(Request $request)
     {
-    	$validator = Validator::make($request->all(), $this->validationStore($request));
+
+    	/*$validator = Validator::make($request->all(), $this->validationStore($request));
 
         if ($validator->fails()) {
             //TODO: case fail
@@ -76,7 +80,27 @@ class StaticPageController extends CmsController
         } else {
             //TODO: case pass
             return $this->staticPage->store($request->except(['_token']));
-        }
+        }*/
+        return $this->staticPage->store($request->except(['_token']));
+    }
+
+    /**
+     * Edit 
+     */
+    public function edit(Request $request)
+    {
+        return $this->staticPage->edit($request->except(['_token']));
+    }
+
+    /**
+     * Change status
+     * @param Request $request
+     * @return mixed
+     */
+    public function changeStatus(Request $request)
+    {
+        return $this->staticPage->changeStatus($request->except(['_token']));
+        
     }
 
     /**
@@ -104,4 +128,5 @@ class StaticPageController extends CmsController
 
         return $rules;
     }
+
 }

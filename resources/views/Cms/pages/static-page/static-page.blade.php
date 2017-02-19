@@ -14,12 +14,12 @@
 		        			<h2>Static Page</h2>
 		        		</div>
 		        		<div class="content__btn">
-		        			<a href="#" class="btn__add" id="toggle-form" onclick="buttonClickOpen()">Edit</a>
+		        			<a href="#" class="btn__add" id="toggle-form" onclick="buttonClickOpen()" @click="editData(responseData.static_page.id)">Edit</a>
 		        		</div>
 		        	</div>
 		        	<div class="content__bottom">
 						<ul class="news__list sortable" id="sort">
-							<li class="news__list__wrapper sort-item" v-for="page in responseData">
+							<li class="news__list__wrapper sort-item">
 								<div class="news__list__detail">
 									<div class="drag__control">
 										<div class="handle">
@@ -27,28 +27,20 @@
 										</div>
 									</div>
 									<div class="news__list__detail__left">
-										<img :src="page.logo_images">
+										<img :src="responseData.static_page.logo_images">
 									</div>
 									<div class="news__list__detail__middle-right">
 										<div class="news__list__detail__middle">
 											<div class="news__list__desc">
 												<div class="news__name">
-													<a href="#" class="title__name content__edit__hover">@{{ page.site_name }}</a>
-												</div>
-												<div class="news__desc flex">
-													<a href="#" class="news__cat pin-item pin-item-disable" data-hover-pin="Pin to landing page" data-hover-unpin="Unpin from landing page">
-														<i class="ico-pin">@include('Cms.svg-logo.ico-pin')
-														</i>
-														<span>Not pinned to landing page</span>
-													</a>
+													<a href="#" class="title__name content__edit__hover" @click="editData(responseData.static_page.id)">@{{ responseData.static_page.site_name }}</a>
 												</div>
 											</div>
 										</div>
 										<div class="news__list__detail__right">
 											<label class="switch">
-												<input class="switch-input" name="is_active" id="check_1" type="checkbox"/>
-												<span class="switch-label" data-on="Active" data-off="Inactive"></span> 
-												<span class="switch-handle"></span>
+												<input class="switch-input" id="check_1" type="checkbox" :checked="responseData.static_page.is_active == true" @change="changeStatus(responseData.static_page.id)"/>
+                                            	<span class="switch-label" data-on="Active" data-off="Inactive"></span> <span class="switch-handle"></span>
 											</label>
 
 											{{--<a href="#" class="btn__action__list">

@@ -6,6 +6,7 @@ function crudStaticPage() {
     	el: '#static-page',
         data: {
             models: {
+                id: '',
             	site_title : '',
                 logo_images : '',
                 site_name : '',
@@ -25,6 +26,7 @@ function crudStaticPage() {
             favicon_images : '',
             og_images : '',
             form_add_title: "Form Static Page",
+            id: '',
             responseData: {},
         },
         methods: {
@@ -62,7 +64,7 @@ function crudStaticPage() {
                         if(response.data.status == true) {
                             this.$set('responseData', response.data.data)
                         } else {
-                            toastr.error('Gagal !!')
+                            pushNotifMessage(response.data.status, response.data.message)
                         }
                     })
             },
@@ -84,23 +86,80 @@ function crudStaticPage() {
 
                             var message_validation = ''
                             $.each(response.message, function(key, value){
-                                $('input[name="' + key + '"]').focus();
+                                $('input[name="' + key.replace(".", "_") + '"]').focus();
                                 $("#form--error--message--" + key).text(value)
                             });
 
-                            pushNotifErrorMessage();
+                            pushNotifMessage(response.status,response.message);
                         } else {
-                            pushNotifErrorMessage();
+                            pushNotifMessage(response.status,response.message);
                         }
                     } else {
                         $('.btn__add__cancel').click();
                         this.fetchData()
                         this.clearErorrMessage()
-                        pushNotif(response.status, response.message);
+                        pushNotifMessage(response.status, response.message);
                         this.resetForm()
                     }
                 })
                 
+            },
+
+            editData: function (id) {
+                console.log(id)
+                var payload = []
+                payload['id'] = id
+
+                var form = new FormData();
+
+                for (var key in payload) {
+                    form.append(key, payload[key])
+                }
+
+                this.resetForm()
+
+                var domain = laroute.url('/cms/static-page/edit', []);
+                this.$http.post(domain, form).then(function(response) {
+                    response = response.data
+                    if (response.status) {
+                        this.models = response.data;
+                        this.logo_images = response.data.logo_images
+                        this.favicon_images = response.data.favicon_images
+                        this.og_images = response.data.og_images
+
+                        this.form_add_title = "Edit Static Page"
+                        $('.btn__add').click()
+
+                        destroyInstanceCkEditor()
+                        replaceToCkEditor()
+
+                    } else {
+                        pushNotifMessage(response.status,response.message)
+                    }
+                })
+            },
+
+            changeStatus: function(id) {
+                var payload = []
+                payload['id'] = id
+
+                var form = new FormData();
+
+                for (var key in payload) {
+                    form.append(key, payload[key])
+                }
+
+                var domain = laroute.url('/cms/static-page/change-status', []);
+                this.$http.post(domain, form).then(function(response) {
+                    response = response.data
+                    if (response.status == false) {
+                        this.fetchData()
+                        pushNotifMessage(response.status,response.message);
+                    }
+                    else{
+                        pushNotifMessage(response.status,response.message);
+                    }
+                })
             },
 
             clearErorrMessage: function(){
@@ -109,11 +168,8 @@ function crudStaticPage() {
             
             resetForm: function(){
             	this.models.site_title = ''
-                this.models.logo_images = ''
                 this.models.site_name = ''
-                this.models.favicon_images = ''
                 this.models.og_title = ''
-                this.models.og_images = ''
                 this.models.og_description = ''
                 this.models.box_wrapper_left = ''
                 this.models.box_wrapper_center = ''
@@ -121,6 +177,10 @@ function crudStaticPage() {
                 this.models.meta_title = ''
                 this.models.meta_keyword = ''
                 this.models.meta_description = ''
+
+                this.logo_images = ''
+                this.favicon_images = ''
+                this.og_images = ''
             },
 
             importTemplate: function(id) {

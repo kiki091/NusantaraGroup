@@ -30,6 +30,11 @@ class StaticPageModel extends Model
 
     /***************** Scope *****************/
 
+    public function property_location()
+    {
+        return $this->hasMany('App\Model\PropertyLocation', 'id', 'property_location_id');
+    }
+
     /**
      * @param $query
      */
@@ -41,8 +46,16 @@ class StaticPageModel extends Model
     /**
      * @param $query
      */
-    public function scopeisPropertyId($query, $data = true)
+    public function scopePropertyId($query, $data)
     {
         return $query->where('property_location_id', $data);
+    }
+
+    /**
+     * @param $query
+     */
+    public function scopeId($query, $id)
+    {
+        return $query->where('id', $id);
     }
 }

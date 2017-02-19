@@ -60,13 +60,26 @@ function pushNotif(status, message, autoHide, position)
     });
 }
 
-function pushNotifErrorMessage()
+function pushNotifMessage(status,message)
 {
+    console.log(status)
 	var time = '5000';
 	var container = $('.notifyjs-corner');
 
-    $('.notifyjs-corner').removeClass('hidden');
-    $('.notifyjs-corner').slideDown(400).fadeIn('slow');
+    if(status == true)
+    {
+        $('.notifyjs-corner').removeClass('hidden');
+        $('.notif__form').addClass('notif__success');
+        $("#data-value").text(message);
+        $('.notifyjs-corner').slideDown(400).fadeIn('slow');
+    }
+    else
+    {
+        $('.notifyjs-corner').removeClass('hidden');
+        $('.notif__form').addClass('notif__error');
+        $("#data-value").text(message);
+        $('.notifyjs-corner').slideDown(400).fadeIn('slow');
+    }
 
     function remove_notice() {
 		container.stop().fadeOut('slow').remove()
