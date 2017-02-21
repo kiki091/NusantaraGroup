@@ -105,7 +105,6 @@ function crudStaticPage() {
                         this.clearErorrMessage()
                         this.fetchData()
                         hideLoading()
-                        this.resetForm()
                     }
                 })
                 

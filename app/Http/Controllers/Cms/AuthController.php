@@ -85,6 +85,18 @@ class AuthController extends Controller
 
     }
 
+    /**
+     * Determine if the class is using the ThrottlesLogins trait.
+     *
+     * @return bool
+     */
+    protected function isUsingThrottlesLoginsTrait()
+    {
+        return in_array(
+            ThrottlesLogins::class, class_uses_recursive(static::class)
+        );
+    }
+
 
     /**
      * Manage redirect after login
