@@ -14,7 +14,7 @@ ul {
     overflow: hidden;
     position: relative;
     height: 145px;
-    background: #eeeeee;
+    background: #ffffff;
     width: 100%;
 }
 
@@ -27,7 +27,7 @@ ul {
 }
 
 .main__content__layer {
-    background: #f7f7f7;
+    background: #ffffff;
     box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.1);
     margin: 15px 1% 15px 1%;
 }
@@ -93,7 +93,7 @@ h2 {
 
 .news__list .news__list__wrapper {
     border-bottom: 1px solid #e9ebee;
-    background: #f7f7f7;
+    background: #ffffff;
     position: relative !important;
     top: 0px !important;
 }
@@ -313,7 +313,7 @@ svg:not(:root) {
 */
 
 .main__content__form__layer {
-    background: #f7f7f7;
+    background: #ffffff;
     box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.1);
     margin: 10px 1% 20px 1%;
     position: relative;
@@ -446,7 +446,7 @@ input, textarea, select {
     display: flex;
     -ms-flex-align: center;
     align-items: center;
-    background: #eeeeee;
+    background: #ffffff;
     padding: 7px;
     border: 1px solid #dcd5d5;
     color: #505050;
@@ -495,7 +495,7 @@ input, textarea, select {
 .row-header {
     margin-right: -20px;
     margin-left: -20px;
-    background: #eee;
+    background: #ffffff;
     border-bottom: 1px #d2c1c1 solid;
     min-height: 125px;
 }

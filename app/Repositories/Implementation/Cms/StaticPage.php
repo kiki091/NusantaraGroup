@@ -229,7 +229,7 @@ class StaticPage extends BaseImplementation implements StaticPageInterface
                 $store->meta_description    = isset($params['meta_description']) ? $params['meta_description'] : '';
 
                 if (!empty($params['logo_images'])) {
-                    dd($params['logo_images']);
+                    
                     $store->logo_images      = isset($params['logo_images']) ? $this->uniqueIdImagePrefix . '_' . $params['logo_images']->getClientOriginalName() : '';
                 }
 

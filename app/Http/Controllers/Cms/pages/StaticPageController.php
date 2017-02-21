@@ -71,7 +71,7 @@ class StaticPageController extends CmsController
     public function store(Request $request)
     {
 
-    	/*$validator = Validator::make($request->all(), $this->validationStore($request));
+    	$validator = Validator::make($request->all(), $this->validationStore($request));
 
         if ($validator->fails()) {
             //TODO: case fail
@@ -79,9 +79,8 @@ class StaticPageController extends CmsController
 
         } else {
             //TODO: case pass
-            return $this->staticPage->store($request->except(['_token']));
-        }*/
-        return $this->staticPage->store($request->except(['_token']));
+            return $this->staticPage->store($request->except(['_token', 'logo_url', 'favicon_url', 'og_url']));
+        }
     }
 
     /**
@@ -126,7 +125,32 @@ class StaticPageController extends CmsController
             'meta_description'      => 'required',
     	];
 
+        if ($this->isEditMode($request->input()))
+        {
+            if (is_null($request->file('logo_images'))) {
+                unset($rules['logo_images']);
+            }
+
+            if (is_null($request->file('favicon_images'))) {
+                unset($rules['favicon_images']);
+            }
+
+            if (is_null($request->file('og_images'))) {
+                unset($rules['og_images']);
+            }
+        }
+
         return $rules;
+    }
+
+    /**
+     * Check is edit mode or no
+     * @param $data
+     * @return bool
+     */
+    protected function isEditMode($data)
+    {
+        return isset($data['id']) && !empty($data['id']) ? true : false;
     }
 
 }

@@ -6,7 +6,9 @@
 <meta id="_token" name="_token" value="{{ csrf_token() }}">
 
 <title>Nusantara Group </title>
-
+<!-- 
+	CSS STYLE ASSETS
+ -->
 <!-- Bootstrap -->
 <link href="{{ asset('themes/cms/vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
 <!-- Font Awesome -->
@@ -17,11 +19,23 @@
 <!-- Custom Theme Style -->
 <link href="{{ asset('themes/cms/build/css/custom.min.css') }}" rel="stylesheet">
 <link href="{{ asset('themes/cms/css/custom.css') }}" rel="stylesheet">
-    	
+<link href="{{ asset('js/bower_components/hold-on/HoldOn.min.css') }}" rel="stylesheet">
+<!-- 
+	End Style Css
+ -->
+
+ <!-- 
+	JS FILE ASSETS
+ -->	
+<script src="{{ elixir('js/bower_components/jquery/dist/jquery.min.js') }}"></script>
 <script src="{{ asset('themes/cms/js/function.js') }}"></script>
 <!-- notify -->
-<script src="{{ elixir('js/bower_components/jquery/dist/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/bower_components/hold-on/HoldOn.min.js') }}"></script>
 
 <!-- <script type="text/javascript" src="{{asset('js/bower_components/notify-js/Notify.js')}}"></script> -->
 <link href="{{ asset('themes/cms/css/notify.css') }}" rel="stylesheet"><!-- 
 <script type="text/javascript" src="{{asset('js/bower_components/notifyjs/dist/notify.js')}}"></script> -->
+
+ <!-- 
+	END JS FILE ASSETS
+ -->	

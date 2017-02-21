@@ -6,16 +6,13 @@
 <script type="text/javascript" src="{{elixir('themes/cms/js/notify.js')}}"></script>
 <script type="text/javascript" src="{{ elixir('js/components/general.js') }}"></script>
 <script type="text/javascript" src="{{ elixir('js/menu/main.js') }}"></script>
+
 <!-- Vue -->
 <script src="{{asset('js/vue.js')}}"></script>
 <script src="{{asset('js/vue-min.js')}}"></script>
 <script src="{{asset('js/vue-resource.js')}}"></script>
 <script src="{{asset('themes/cms/content/static-page.js')}}"></script>
 <!-- End Vue -->
-
-<!-- vue html5 editor -->
-<script src="{{asset('js/bower_components/vue-html5-editor/dist/vue-html5-editor.js')}}"></script>
-<!-- End vue html5 editor -->
 
 <!-- jQuery -->
 <script src="{{ asset('themes/cms/vendors/jquery/dist/jquery.min.js') }}"></script>

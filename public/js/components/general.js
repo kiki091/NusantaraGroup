@@ -35,36 +35,12 @@ function setupCKEDITOR(){
 	});
 }
 
-function pushNotif(status, message, autoHide, position)
+function pushNotifMessage(status,message, validation)
 {
-    if (typeof autoHide == 'undefined') {
-        autoHide = true
-    }
-
-    if (typeof position == 'undefined') {
-        position = 'bottom left'
-    }
-
-    var className = '';
-    if (status == false) {
-        var className = 'error';
-    }
-    $.notify({
-        title: message
-    }, {
-        style: 'foo',
-        autoHide: autoHide,
-        clickToHide: false,
-        position: position,
-        className: className
-    });
-}
-
-function pushNotifMessage(status,message)
-{
-    console.log(status)
-	var time = '5000';
-	var container = $('.notifyjs-corner');
+    
+    var time = '10000';
+    var container = $('.notifyjs-corner');
+    var message_error_title = 'Sorry, there are few missing contents detected, please complete all the required fields.';
 
     if(status == true)
     {
@@ -77,46 +53,31 @@ function pushNotifMessage(status,message)
     {
         $('.notifyjs-corner').removeClass('hidden');
         $('.notif__form').addClass('notif__error');
-        $("#data-value").text(message);
+        $("#data-value").text(message_error_title);
+        $("#data-validation").html(validation);
         $('.notifyjs-corner').slideDown(400).fadeIn('slow');
     }
 
     function remove_notice() {
-		container.stop().fadeOut('slow').remove()
-	}
-	
-	var timer =  setInterval(remove_notice, time);
+        container.stop().fadeOut('slow').remove()
+    }
+    
+    var timer =  setInterval(remove_notice, time);
 }
 
-function pushNotifV2(status, title, message, autoHide, position)
+
+function showLoadingData()
 {
-    if (typeof autoHide == 'undefined') {
-        autoHide = true
-    }
+    var options = {
+        theme:"sk-cube-grid",
+        textColor:"white"
+    };
+    HoldOn.open(options);
+}
 
-    if (typeof title == 'undefined' || title == '' || title == 'default') {
-        title = 'Sorry, there are few missing contents detected, please complete all the required fields.'
-    }
-
-    if (typeof position == 'undefined') {
-        position = 'bottom left'
-    }
-
-    var className = '';
-    if (status == false) {
-        var className = 'error';
-    }
-
-    $.notify({
-        title: title,
-        message: message,
-    }, {
-        style: 'notif-msg',
-        autoHide: autoHide,
-        clickToHide: false,
-        position: position,
-        className: className
-    });
+function hideLoading()
+{
+    HoldOn.close();
 }
 
 function replaceToCkEditor()

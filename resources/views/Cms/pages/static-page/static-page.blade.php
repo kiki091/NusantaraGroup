@@ -8,7 +8,7 @@
 
 				@include('Cms.pages.static-page.partials.form')
 
-		        <div class="main__content__layer">
+		        <div class="main__content__layer" style="margin-top: 5%;">
 		        	<div class="content__top flex-between">
 		        		<div class="content__title">
 		        			<h2>Static Page</h2>
@@ -27,7 +27,7 @@
 										</div>
 									</div>
 									<div class="news__list__detail__left">
-										<img :src="responseData.static_page.logo_images">
+										<img :src="responseData.static_page.logo_url">
 									</div>
 									<div class="news__list__detail__middle-right">
 										<div class="news__list__detail__middle">

@@ -10,6 +10,7 @@
 						<p class="notif__content">
 							<span data-notify-html="title" id="data-value"></span>
 						</p>
+						<p class="notif__content"><ul class="notif__content__ul" id="data-validation"></ul></p>
 					</div>
 				</div>
 			</div>

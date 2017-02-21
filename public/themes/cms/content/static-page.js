@@ -1,6 +1,6 @@
+
 function crudStaticPage() {
     Vue.http.headers.common['X-CSRF-TOKEN'] = $("#_token").attr("value");
-    Vue.use(VueHtml5Editor)
 
     var controller = new Vue({
     	el: '#static-page',
@@ -27,6 +27,7 @@ function crudStaticPage() {
             og_images : '',
             form_add_title: "Form Static Page",
             id: '',
+            edit: false,
             responseData: {},
         },
         methods: {
@@ -71,7 +72,8 @@ function crudStaticPage() {
 
             storeData: function(event){
 
-                this.clearErorrMessage();
+                this.clearErorrMessage()    
+                showLoadingData();
 
                 var form = new FormData();
 
@@ -88,17 +90,21 @@ function crudStaticPage() {
                             $.each(response.message, function(key, value){
                                 $('input[name="' + key.replace(".", "_") + '"]').focus();
                                 $("#form--error--message--" + key).text(value)
+                                message_validation += '<li class="notif__content__li"><span class="text" >' + value + '</span></li>'
                             });
 
-                            pushNotifMessage(response.status,response.message);
+                            hideLoading()
+                            pushNotifMessage(response.status,response.message, message_validation);
                         } else {
-                            pushNotifMessage(response.status,response.message);
+                            hideLoading()
                         }
                     } else {
-                        $('.btn__add__cancel').click();
-                        this.fetchData()
-                        this.clearErorrMessage()
+                        
+                        $('.form--top__btn a').click()
                         pushNotifMessage(response.status, response.message);
+                        this.clearErorrMessage()
+                        this.fetchData()
+                        hideLoading()
                         this.resetForm()
                     }
                 })
@@ -106,7 +112,7 @@ function crudStaticPage() {
             },
 
             editData: function (id) {
-                console.log(id)
+                this.edit = true
                 var payload = []
                 payload['id'] = id
 
@@ -123,9 +129,9 @@ function crudStaticPage() {
                     response = response.data
                     if (response.status) {
                         this.models = response.data;
-                        this.logo_images = response.data.logo_images
-                        this.favicon_images = response.data.favicon_images
-                        this.og_images = response.data.og_images
+                        this.logo_images = response.data.logo_url
+                        this.favicon_images = response.data.favicon_url
+                        this.og_images = response.data.og_url
 
                         this.form_add_title = "Edit Static Page"
                         $('.btn__add').click()

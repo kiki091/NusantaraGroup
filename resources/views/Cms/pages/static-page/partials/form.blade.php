@@ -7,7 +7,7 @@
 					<a href="#" class="btn__add__cancel" onclick="buttonClickClose()" @click="resetForm">Cancel</a>
 				</div>
 			</div>
-			<div class="form--mid">
+			<div class="form--mid" v-if="edit == true">
 				<div class="create__form content__tab active__content">
 					<div class="form__group__row">
 						<div id="form-accordion">
@@ -43,6 +43,8 @@
 										<input type="text" v-model="image" hidden="hidden" />
 										<button class="upload__img__remove" @click="removeImage('logo_images')"></button>
 									</div>
+
+
 									<div class="form--error--message" id="form--error--message--logo_images"></div>
 												<!-- upload tip -->
 									<div class="upload__tip">
