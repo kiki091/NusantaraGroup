@@ -1,36 +1,44 @@
 
-function crudStaticPage() {
+function crudMainBanner() {
     Vue.http.headers.common['X-CSRF-TOKEN'] = $("#_token").attr("value");
 
     var controller = new Vue({
     	el: '#app',
         data: {
             models: {
-                id: '',
-            	site_title : '',
-                logo_images : '',
-                site_name : '',
-                favicon_images : '',
-                og_title : '',
-                og_images : '',
-                og_description : '',
-                box_wrapper_left : '',
-                box_wrapper_center : '',
-                box_wrapper_right : '',
-                is_active : '',
-                meta_title : '',
-                meta_keyword : '',
-                meta_description : ''
+                title: '',
+                images : {0: '', 1:'', 2:'', 3: ''},
             },
-            logo_images : '',
-            favicon_images : '',
-            og_images : '',
-            form_add_title: "Form Static Page",
+            images : {0: '', 1:'', 2:'', 3: ''},
+            delete_payload: {
+                id: '',
+            },
+            form_add_title: "Form Main Banner",
             id: '',
             edit: false,
             responseData: {},
         },
         methods: {
+
+            showDeleteModal: function(id, sectionDelete) {
+                this.showModal = true;
+                this.delete_payload.id = id;
+                this.sectionDelete = sectionDelete
+
+                $('.popup__mask__alert').addClass('is-visible');
+
+                // add class di container saat popup
+                $('.container__main').addClass('popupContainer');
+            },
+
+            closeDeleteModal: function() {
+                this.showModal = false;
+
+                // remove class di container saat popup
+                setTimeout(function() {
+                    $('.popup__mask__alert').removeClass('is-visible');
+                }, 300);
+            },
 
             onImageChange: function(element, e) {
                 var files = e.target.files || e.dataTransfer.files
@@ -59,7 +67,7 @@ function crudStaticPage() {
             },
 
             fetchData: function(){
-                var domain  = laroute.url('/cms/static-page/data', []);
+                var domain  = laroute.url('/cms/main-banner/data', []);
 
                     this.$http.get(domain).then(function (response) {
                         if(response.data.status == true) {
@@ -81,7 +89,7 @@ function crudStaticPage() {
                     form.append(key, this.models[key])
                 }
 
-                var domain = laroute.url('/cms/static-page/store', []);
+                var domain = laroute.url('/cms/main-banner/store', []);
                 this.$http.post(domain, form, function(response) {
                     if (response.status == false) {
                         if(response.is_error_form_validation) {
@@ -123,7 +131,7 @@ function crudStaticPage() {
 
                 this.resetForm()
 
-                var domain = laroute.url('/cms/static-page/edit', []);
+                var domain = laroute.url('/cms/main-banner/edit', []);
                 this.$http.post(domain, form).then(function(response) {
                     response = response.data
                     if (response.status) {
@@ -154,7 +162,7 @@ function crudStaticPage() {
                     form.append(key, payload[key])
                 }
 
-                var domain = laroute.url('/cms/static-page/change-status', []);
+                var domain = laroute.url('/cms/main-banner/change-status', []);
                 this.$http.post(domain, form).then(function(response) {
                     response = response.data
                     if (response.status == false) {
@@ -165,6 +173,28 @@ function crudStaticPage() {
                         pushNotifMessage(response.status,response.message);
                     }
                 })
+            },
+
+            deleteData: function(id) {
+                
+                var domain = laroute.url('/cms/main-banner/delete', []);
+                var form = new FormData();
+
+                form.append('id', id);
+                
+                this.$http.post(domain, form).then(function (response) {
+                    response = response.data
+                    if (response.status === true)
+                    {
+                        this.delete_payload.id = '';
+                        this.fetchData()
+                    }
+                    this.showModal = false
+                    setTimeout(function() {
+                        $('.popup__mask__alert').removeClass('is-visible');
+                    }, 300);
+                    pushNotif(response.status, response.message);
+                });
             },
 
             clearErorrMessage: function(){

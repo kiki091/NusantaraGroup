@@ -21,3 +21,10 @@ if(!defined('FAVICON_HEIGHT')) define('FAVICON_HEIGHT', 64);
 if(!defined('OG_IMAGE_SIZE')) define('OG_IMAGE_SIZE', 1000);
 if(!defined('OG_IMAGE_WIDTH')) define('OG_IMAGE_WIDTH', 1200);
 if(!defined('OG_IMAGE_HEIGHT')) define('OG_IMAGE_HEIGHT', 315);
+
+/*
+* Main Banner
+*/
+if(!defined('MAIN_BANNER_SIZE')) define('MAIN_BANNER_SIZE', 1000);
+if(!defined('MAIN_BANNER_WIDTH')) define('MAIN_BANNER_WIDTH', 1200);
+if(!defined('MAIN_BANNER_HEIGHT')) define('MAIN_BANNER_HEIGHT', 315);

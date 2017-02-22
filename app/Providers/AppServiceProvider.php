@@ -38,6 +38,7 @@ class AppServiceProvider extends ServiceProvider
         
         $this->app->bind('App\Repositories\Contracts\Auth\User', 'App\Repositories\Implementation\Auth\User');
         $this->app->bind('App\Repositories\Contracts\Cms\StaticPage', 'App\Repositories\Implementation\Cms\StaticPage');
+        $this->app->bind('App\Repositories\Contracts\Cms\MainBanner', 'App\Repositories\Implementation\Cms\MainBanner');
     }
 
     /**
@@ -60,6 +61,7 @@ class AppServiceProvider extends ServiceProvider
             'App\Repositories\Contracts\Front\CompanyHistory',
             'App\Repositories\Contracts\Auth\User',
             'App\Repositories\Contracts\Cms\StaticPage',
+            'App\Repositories\Contracts\Cms\MainBanner',
         );
     }
 }

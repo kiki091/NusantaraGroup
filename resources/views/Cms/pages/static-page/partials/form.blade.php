@@ -4,7 +4,7 @@
 			<div class="form--top flex-between">
 				<div class="form__title"><h2>Form Static Page</h2></div>
 				<div class="form--top__btn">
-					<a href="#" class="btn__add__cancel" onclick="buttonClickClose()" @click="resetForm">Cancel</a>
+					<a href="#" class="btn__add__cancel" @click="resetForm">Cancel</a>
 				</div>
 			</div>
 			<div class="form--mid" v-if="edit == true">

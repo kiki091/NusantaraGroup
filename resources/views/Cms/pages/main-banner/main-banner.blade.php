@@ -6,20 +6,21 @@
         <div class="row">
 	        <div class="col-md-12 col-sm-12 col-xs-12">
 
-				@include('Cms.pages.static-page.partials.form')
-
-		        <div class="main__content__layer" style="margin-top: 5%;">
+	        	@include('Cms.pages.main-banner.partials.form')
+		        <div class="main__content__layer" style="margin-top: 5%;" v-for="(main_banner_key, main_banner) in responseData.banner">
 		        	<div class="content__top flex-between">
 		        		<div class="content__title">
-		        			<h2>Static Page</h2>
+		        			<h2 v-if="main_banner_key == 'banner::landing'">Main Banner</h2>
+		        			<h2 v-if="main_banner_key == 'banner::promotion'">Promotion Banner</h2>
+
 		        		</div>
 		        		<div class="content__btn">
-		        			<a href="#" class="btn__add" id="toggle-form" @click="editData(responseData.static_page.id)">Edit</a>
+		        			<a href="#" class="btn__add" id="toggle-form">Add Banner</a>
 		        		</div>
 		        	</div>
 		        	<div class="content__bottom">
 						<ul class="news__list sortable" id="sort">
-							<li class="news__list__wrapper sort-item">
+							<li class="news__list__wrapper sort-item" v-for="banner in main_banner">
 								<div class="news__list__detail">
 									<div class="drag__control">
 										<div class="handle">
@@ -27,28 +28,28 @@
 										</div>
 									</div>
 									<div class="news__list__detail__left">
-										<img :src="responseData.static_page.logo_url">
+										<img :src="banner.banner_url">
 									</div>
 									<div class="news__list__detail__middle-right">
 										<div class="news__list__detail__middle">
 											<div class="news__list__desc">
 												<div class="news__name">
-													<a href="#" class="title__name content__edit__hover" @click="editData(responseData.static_page.id)">@{{ responseData.static_page.site_name }}</a>
+													<a href="#" class="title__name content__edit__hover" @click="editData(banner.id)">@{{ banner.title }}</a>
 												</div>
 											</div>
 										</div>
 										<div class="news__list__detail__right">
 											<label class="switch">
-												<input class="switch-input" id="check_1" type="checkbox" :checked="responseData.static_page.is_active == true" @change="changeStatus(responseData.static_page.id)"/>
+												<input class="switch-input" id="check_1" type="checkbox" :checked="banner.is_active == true" @change="changeStatus(banner.id)"/>
                                             	<span class="switch-label" data-on="Active" data-off="Inactive"></span> <span class="switch-handle"></span>
 											</label>
 
 											{{--<a href="#" class="btn__action__list">
 												<i class="ico-photo-edit flex">@include('Cms.svg-logo.ico-photo-edit')</i>
-											</a>
+											</a>--}}
 											<a href="#" class="btn__delete">
 												<i class="ico-delete">@include('Cms.svg-logo.ico-delete')</i>
-											</a>--}}
+											</a>
 										</div>
 									</div>
 								</div>

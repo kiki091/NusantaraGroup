@@ -100,6 +100,16 @@ Route::group(['middleware' => ['web']], function ()
 				Route::post('edit', 'Cms\pages\StaticPageController@edit')->name('EditStaticPage');
 				Route::post('change-status', 'Cms\pages\StaticPageController@changeStatus')->name('ChangeStatusStaticPage');
 			});
+
+			// Main Banner
+
+			Route::group(array('prefix' => 'main-banner' ), function(){
+				Route::get('/', 'Cms\pages\MainBannerController@index')->name('MainBanner');
+				Route::get('data', 'Cms\pages\MainBannerController@getData')->name('MainBannerGetData');
+				Route::post('store', 'Cms\pages\MainBannerController@store')->name('StoreMainBanner');
+				Route::post('edit', 'Cms\pages\MainBannerController@edit')->name('EditMainBanner');
+				Route::post('change-status', 'Cms\pages\MainBannerController@changeStatus')->name('ChangeStatusMainBanner');
+			});
 		});
 
 	});

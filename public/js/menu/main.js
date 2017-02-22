@@ -3,8 +3,13 @@ function menuStaticPage()
     $('.right_col').load(laroute.url('/cms/static-page', []), function()
     {
     	initStaticPage()
-        console.log('menu runing')
     });
+}
 
-
+function menuMainBanner()
+{
+    $('.right_col').load(laroute.url('/cms/main-banner', []), function()
+    {
+    	initMainBanner()
+    });
 }

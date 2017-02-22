@@ -8,6 +8,10 @@ namespace App\Services\Assets;
 
 // Company Profile Images Bnaner 
 
+define('MAIN_BANNER_IMAGES_DIRECTORY', 'images/db/main_banner/');
+
+// Company Profile Images Bnaner 
+
 define('COMPANY_PROFILE_IMAGES_DIRECTORY', 'images/db/company_profile/');
 
 // Awards Images Directory

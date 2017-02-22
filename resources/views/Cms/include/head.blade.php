@@ -20,6 +20,8 @@
 <link href="{{ asset('themes/cms/build/css/custom.min.css') }}" rel="stylesheet">
 <link href="{{ asset('themes/cms/css/custom.css') }}" rel="stylesheet">
 <link href="{{ asset('js/bower_components/hold-on/HoldOn.min.css') }}" rel="stylesheet">
+<link href="{{ asset('themes/cms/css/notify.css') }}" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{{ asset('js/bower_components/alert/dist/sweetalert.css') }}">
 <!-- 
 	End Style Css
  -->
@@ -31,10 +33,7 @@
 <script src="{{ asset('themes/cms/js/function.js') }}"></script>
 <!-- notify -->
 <script type="text/javascript" src="{{ asset('js/bower_components/hold-on/HoldOn.min.js') }}"></script>
-
-<!-- <script type="text/javascript" src="{{asset('js/bower_components/notify-js/Notify.js')}}"></script> -->
-<link href="{{ asset('themes/cms/css/notify.css') }}" rel="stylesheet"><!-- 
-<script type="text/javascript" src="{{asset('js/bower_components/notifyjs/dist/notify.js')}}"></script> -->
+<script src="{{ asset('js/bower_components/alert/dist/sweetalert.min.js') }}"></script>
 
  <!-- 
 	END JS FILE ASSETS

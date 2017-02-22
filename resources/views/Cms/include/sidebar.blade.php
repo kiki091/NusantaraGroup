@@ -25,6 +25,9 @@
                             <li>
                                 <a href="#static-page" onclick="menuStaticPage()">Static Page</a>
                             </li>
+                            <li>
+                                <a href="#main-banner" onclick="menuMainBanner()">Main Banner</a>
+                            </li>
                         </ul>
                     </li> 
                 </ul>
