@@ -197,9 +197,15 @@ class MainBanner extends BaseImplementation implements MainBannerInterface
         }
     }
 
-    public function edit($params)
+    public function edit($params, $key)
     {
+        $data = [
+            'banner_key' => $key
+        ];
 
+        $singleData = $this->mainBanner($data, 'asc', 'array', true);
+
+        return $this->setResponse(trans('message.cms_success_get_data'), true, $this->mainBannerformation->getSingleForEditMainBannerTransform($singleData));
     }
 
     public function changeStatus($params)
