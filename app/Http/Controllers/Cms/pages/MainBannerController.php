@@ -40,7 +40,7 @@ class MainBannerController extends CmsController
            return redirect()->route('login');
         }
         
-    	$data['page_title'] = 'Static Page';
+    	$data['page_title'] = 'Main Banner';
     	$data['user'] = $this->user->setAuthSession();
     	$data['location'] = $this->getUserLocation();
 
@@ -58,10 +58,10 @@ class MainBannerController extends CmsController
      */
     public function getData(Request $request)
     {
-        $location = $this->getUserLocation();
+        $location = $this->getUserLocation('id');
         $property_location_id = $location['property_id'];
 
-    	$data['banner'] = $this->mainBanner->getData($property_location_id);
+    	$data['banner'] = $this->mainBanner->getData($property_location_id, self::MAIN_BANNER_KEY);
 
     	return $this->response->setResponse(trans('success_get_data'), true, $data);
     }
@@ -73,7 +73,7 @@ class MainBannerController extends CmsController
     public function store(Request $request)
     {
 
-    	$validator = Validator::make($request->all(), $this->validationStore($request));
+    	/*$validator = Validator::make($request->all(), $this->validationStore($request));
 
         if ($validator->fails()) {
             //TODO: case fail
@@ -82,7 +82,9 @@ class MainBannerController extends CmsController
         } else {
             //TODO: case pass
             return $this->mainBanner->store($request->except(['_token'], self::MAIN_BANNER_KEY  ));
-        }
+        }*/
+
+        return $this->mainBanner->store($request->except(['_token']), $this->getLocationId(), self::MAIN_BANNER_KEY);
     }
 
     /**

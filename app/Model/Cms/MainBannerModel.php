@@ -27,6 +27,14 @@ class MainBannerModel extends Model
     /**
      * @param $query
      */
+    public function scopeIsKey($query, $data = true)
+    {
+        return $query->where('banner_key', $data);
+    }
+
+    /**
+     * @param $query
+     */
     public function scopePropertyId($query, $data)
     {
         return $query->where('property_location_id', $data);
@@ -35,7 +43,7 @@ class MainBannerModel extends Model
     /**
      * @param $query
      */
-    public function scopeId($query, $id)
+    public function scopeIsId($query, $id)
     {
         return $query->where('id', $id);
     }

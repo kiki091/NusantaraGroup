@@ -11,26 +11,26 @@ interface MainBanner
      * @param $params
      * @return mixed
      */
-    public function getData($params);
+    public function getData($params, $key);
 
     /**
      * Store Data 
      * @param $params
      * @return mixed
      */
-    public function store($params, $key);
+    public function store($params, $property_id, $key);
 
     /**
      * Edit Data 
      * @param $params
      * @return mixed
      */
-    public function edit($params, $key);
+    public function edit($params);
 
     /**
      * Change Status
      * @param $params
      * @return mixed
      */
-    public function changeStatus($params, $key);
+    public function changeStatus($params);
 }

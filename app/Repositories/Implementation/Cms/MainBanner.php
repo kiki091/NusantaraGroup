@@ -29,10 +29,11 @@ class MainBanner extends BaseImplementation implements MainBannerInterface
         $this->uniqueIdImagePrefix = uniqid(PREFIX_FILENAME_NUSANTARA_IMAGE);
     }
 
-    public function getData($params)
+    public function getData($params, $key)
     {
         $data = [
-            "property_location_id" => $params
+            "property_location_id" => $params,
+            "banner_key"           => $key
         ];
 
         $mainBannerData = $this->mainBanner($data, 'asc', 'array', true);
@@ -46,13 +47,13 @@ class MainBanner extends BaseImplementation implements MainBannerInterface
      * @return bool
      */
 
-    public function store($params, $key)
+    public function store($params, $property_id, $key)
     {
         try {
 
             DB::beginTransaction();
 
-            if ($this->storeData($params, $key) != true) {
+            if ($this->storeData($params, $property_id, $key) != true) {
                 DB::rollBack();
                 return $this->setResponse($this->message, false);
             }
@@ -61,51 +62,11 @@ class MainBanner extends BaseImplementation implements MainBannerInterface
                 DB::rollBack();
                 return $this->setResponse($this->message, false);
             }
-            
-
-            if (!$this->isEditMode($params)) {
-                if ($this->storeImage($params) != true) {
-                    DB::rollBack();
-                    return $this->setResponse($this->message, false);
-                }
-            }
 
             DB::commit();
             return $this->setResponse(trans('message.cms_upload_image_failed'), true);
         } catch (\Exception $e) {
             return $this->setResponse($e->getMessage(), false);
-        }
-    }
-
-    /**
-     * Store Images
-     * @param $data
-     * @return mixed
-     */
-    protected function storeImage($data)
-    {
-        try {
-
-            if (isset($data['images']) && !empty($data['images'])) {
-                $finalData = [];
-                foreach ($data['images'] as $key => $item) {
-
-                    $finalData[] = [
-                        "images" => $this->uniqueIdImagePrefix . '_' .$item->getClientOriginalName(),
-                    ];
-                }
-
-                if ($this->mainBanner->insert($finalData) != true) {
-                    $this->message = trans('message.cms_upload_image_failed');
-                    return false;
-                }
-            }
-
-            return true;
-
-        } catch (\Exception $e) {
-            $this->message = $e->getMessage();
-            return false;
         }
     }
 
@@ -118,14 +79,10 @@ class MainBanner extends BaseImplementation implements MainBannerInterface
     {
         try {
 
-            if (isset($data['images']) && !empty($data['images'])) {
-
-                foreach ($data['images'] as $key => $item) {
-
-                    if (!$this->detailImageUploader($item))
-                        return false;
+            if (!empty($data['images'])) {
+                if (!$this->detailImageUploader($data)) {
+                    return false;
                 }
-
             }
 
             return true;
@@ -141,27 +98,33 @@ class MainBanner extends BaseImplementation implements MainBannerInterface
      * @param $file
      * @return bool
      */
-    protected function detailImageUploader($file, $path = MAIN_BANNER_IMAGES_DIRECTORY)
+    protected function detailImageUploader($data)
     {
-        if(!empty($file)) {
-            if ($file->isValid()) {
+        if($data['images']->isValid()) {
 
-                $filename = $this->uniqueIdImagePrefix . '_' .$file->getClientOriginalName();
+            $filename = $this->uniqueIdImagePrefix . '_' . $data['images']->getClientOriginalName();
 
-                if (! $file->move('./' . $path, $filename)) {
-                    $this->message = trans('message.cms_upload_image_failed');
-                    return false;
-                }
-
-                return true;
-
-            } else {
-                $this->message = $file->getErrorMessage();
+            if (! $data['images']->move('./' . MAIN_BANNER_IMAGES_DIRECTORY, $filename)) {
+                $this->message = trans('message.cms_upload_image_failed');
                 return false;
             }
-        }
 
-        return true;
+            return true;
+
+        } else {
+            $this->message = $data['images']->getErrorMessage();
+            return false;
+        }
+    }
+
+    /**
+     * Check need edit Mode or No
+     * @param $data
+     * @return bool
+     */
+    protected function isEditMode($data)
+    {
+        return isset($data['id']) && !empty($data['id']) ? true : false;
     }
 
     /**
@@ -169,7 +132,7 @@ class MainBanner extends BaseImplementation implements MainBannerInterface
      * @param $data
      * @return mixed
      */
-    protected function storeData($params, $key)
+    protected function storeData($params, $property_id, $key)
     {
         try {
 
@@ -179,28 +142,39 @@ class MainBanner extends BaseImplementation implements MainBannerInterface
                 $store                  = $this->mainBanner->find($params['id']);
             }
 
-            $store->title               = $params['title'];
-            $store->banner_key          = $key;
+            $store->title                = $params['title'];
+            $store->banner_key           = $key;
+            $store->is_active            = true;
+            $store->property_location_id =  $property_id;
 
             if (!$this->isEditMode($params)) 
             {
-                $store->created_by          = Auth::id();
-                $store->created_at          = $this->mysqlDateTimeFormat();
+                $store->created_by   = $this->getUserId();
+                $store->created_at   = $this->mysqlDateTimeFormat();
             }
 
-            if($save = $mainBanner->save()) {
-                $this->lastInsertId = $mainBanner->id;
+            if (!empty($params['images'])) {
+                    
+                $store->images      = isset($params['images']) ? $this->uniqueIdImagePrefix . '_' . $params['images']->getClientOriginalName() : '';
+            }
+
+            if($save = $store->save()) {
+                $this->lastInsertId = $store->id;
             }
 
             return $save;
 
         }
+        catch (\Exception $e) {
+            $this->message = $e->getMessage();
+            return false;
+        }
     }
 
-    public function edit($params, $key)
+    public function edit($params)
     {
         $data = [
-            'banner_key' => $key
+            'id' => $params
         ];
 
         $singleData = $this->mainBanner($data, 'asc', 'array', true);
@@ -228,8 +202,12 @@ class MainBanner extends BaseImplementation implements MainBannerInterface
             $mainBanner->isActive($data['is_active']);
         }
 
+        if(isset($data['banner_key'])) {
+            $mainBanner->isKey($data['banner_key']);
+        }
+
         if(isset($data['id'])) {
-            $mainBanner->id($data['id']);
+            $mainBanner->isId($data['id']);
         }
 
         if(isset($data['property_location_id'])) {
@@ -240,14 +218,11 @@ class MainBanner extends BaseImplementation implements MainBannerInterface
         if(!$mainBanner->count())
             return array();
 
-        switch ($returnType) {
-            case 'array':
-                if($returnSingle) {
-                    return $mainBanner->get()->toArray();
-                } else {
-                    return $mainBanner->first()->toArray();
-                }
-                break;
+        if(isset($data['id'])) 
+        {
+            return $mainBanner->first()->toArray();
         }
+        
+        return $mainBanner->get()->toArray();
     }
 }

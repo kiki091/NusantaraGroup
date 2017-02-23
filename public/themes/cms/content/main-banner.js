@@ -6,10 +6,11 @@ function crudMainBanner() {
     	el: '#app',
         data: {
             models: {
+                id:'',
                 title: '',
-                images : {0: '', 1:'', 2:'', 3: ''},
+                images : '',
             },
-            images : {0: '', 1:'', 2:'', 3: ''},
+            images : '',
             delete_payload: {
                 id: '',
             },
@@ -107,7 +108,7 @@ function crudMainBanner() {
                             hideLoading()
                         }
                     } else {
-                        
+                        this.resetForm()
                         $('.btn__add__cancel').click()
                         pushNotifMessage(response.status, response.message);
                         this.clearErorrMessage()
@@ -136,15 +137,10 @@ function crudMainBanner() {
                     response = response.data
                     if (response.status) {
                         this.models = response.data;
-                        this.logo_images = response.data.logo_url
-                        this.favicon_images = response.data.favicon_url
-                        this.og_images = response.data.og_url
+                        this.images = response.data.image_url
 
-                        this.form_add_title = "Edit Static Page"
+                        this.form_add_title = "Edit Main Banner"
                         $('.btn__add').click()
-
-                        destroyInstanceCkEditor()
-                        replaceToCkEditor()
 
                     } else {
                         pushNotifMessage(response.status,response.message)
@@ -202,41 +198,10 @@ function crudMainBanner() {
             },
             
             resetForm: function(){
-            	this.models.site_title = ''
-                this.models.site_name = ''
-                this.models.og_title = ''
-                this.models.og_description = ''
-                this.models.box_wrapper_left = ''
-                this.models.box_wrapper_center = ''
-                this.models.box_wrapper_right = ''
-                this.models.meta_title = ''
-                this.models.meta_keyword = ''
-                this.models.meta_description = ''
-
-                this.logo_images = ''
-                this.favicon_images = ''
-                this.og_images = ''
+            	this.models.id = ''
+                this.models.title = ''
+                this.images = ''
             },
-
-            importTemplate: function(id) {
-                try {
-                    switch(id) {
-                        case 'template-box-wrapper-left':
-                            CKEDITOR.instances['editor-1'].setData($('#' + id).html());
-                        break;
-                        case 'template-box-wrapper-center':
-                            CKEDITOR.instances['editor-2'].setData($('#' + id).html());
-                        break;
-                        case 'template-box-wrapper-right':
-                            CKEDITOR.instances['editor-3'].setData($('#' + id).html());
-                        break;
-                    default :
-
-                    }
-                } catch (err) {
-                    toastr.error(false, err.message);
-                }
-            }
 
         },
 

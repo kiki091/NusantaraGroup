@@ -75,7 +75,7 @@ function crudStaticPage() {
                 this.clearErorrMessage()    
                 showLoadingData();
 
-                var form = new FormData();
+                var form = new FormData('#StaticPageForm');
 
                 for (var key in this.models) {
                     form.append(key, this.models[key])

@@ -27,19 +27,30 @@ class MainBanner
             return [
                 'id'             => isset($data['id']) ? $data['id'] : '',
                 'title'          => isset($data['title']) ? $data['title'] : '',
-                'banner_key'     => isset($data['banner_key']) ? $data['banner_key'] : '',
                 'banner_url'     => isset($data['images']) ? asset(MAIN_BANNER_IMAGES_DIRECTORY.rawurlencode($data['images'])) : '',
                 'is_active'      => isset($data['is_active']) ? $data['is_active'] : '',
                 
             ];
         }, $data);
 
-        $finalData = [];
-        foreach ($dataTranform as $item) {
-            $finalData[$item['banner_key']][] = $item;
+        return $dataTranform;
+    }
 
-        }
-        return $finalData;
+    public function getSingleForEditMainBannerTransform($data)
+    {
+        if(!is_array($data) || empty($data))
+            return array();
+
+        return $this->setSingleForEditMainBannerTransform($data);
+    }
+
+    protected function setSingleForEditMainBannerTransform($data)
+    {
+        $dataTranform['id'] = isset($data['id']) ? $data['id'] : '';
+        $dataTranform['title'] = isset($data['title']) ? $data['title'] : '';
+        $dataTranform['image_url'] = isset($data['images']) ? asset(MAIN_BANNER_IMAGES_DIRECTORY.rawurlencode($data['images'])) : '';
+
+        return $dataTranform;
     }
 
 

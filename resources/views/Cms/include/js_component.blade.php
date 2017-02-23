@@ -10,6 +10,9 @@
 <script src="{{asset('js/vue.js')}}"></script>
 <script src="{{asset('js/vue-min.js')}}"></script>
 <script src="{{asset('js/vue-resource.js')}}"></script>
+<!-- <script type="text/javascript" src="{{asset('js/vue/2.0/vue.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/vue/2.0/vue.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/vue/2.0/vue-resource.js')}}"></script> -->
 <script src="{{asset('themes/cms/content/static-page.js')}}"></script>
 <script src="{{asset('themes/cms/content/main-banner.js')}}"></script>
 <!-- End Vue -->

@@ -18,9 +18,9 @@ class MainBanner {
      * @param $params
      * @return mixed
      */
-    public function getData($params = [])
+    public function getData($params, $key)
     {
-        return $this->mainBanner->getData($params);
+        return $this->mainBanner->getData($params, $key);
     }
 
     /**
@@ -28,9 +28,9 @@ class MainBanner {
      * @param $params
      * @return mixed
      */
-    public function store($params, $key)
+    public function store($params, $property_id, $key)
     {
-        return $this->mainBanner->store($params, $key);
+        return $this->mainBanner->store($params, $property_id, $key);
     }
 
     /**
@@ -38,17 +38,17 @@ class MainBanner {
      * @param $params
      * @return mixed
      */
-    public function edit($params, $key)
+    public function edit($params)
     {
-        return $this->mainBanner->edit($params, $key);
+        return $this->mainBanner->edit($params);
     }
 
     /**
      * Get Change Status
      */
-    public function changeStatus($params, $key)
+    public function changeStatus($params)
     {
-        return $this->mainBanner->changeStatus($params, $key);
+        return $this->mainBanner->changeStatus($params);
     }
 
 }

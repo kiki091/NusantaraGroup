@@ -38,4 +38,11 @@ class CmsController extends Controller
     	}
     	return $value;
     }
+
+    public function getLocationId()
+    {
+        $location = $this->getUserLocation();
+        $property_location_id = $location['property_id'];
+        return $property_location_id;
+    }
 }

@@ -7,11 +7,10 @@
 	        <div class="col-md-12 col-sm-12 col-xs-12">
 
 	        	@include('Cms.pages.main-banner.partials.form')
-		        <div class="main__content__layer" style="margin-top: 5%;" v-for="(main_banner_key, main_banner) in responseData.banner">
+		        <div class="main__content__layer" style="margin-top: 5%;">
 		        	<div class="content__top flex-between">
 		        		<div class="content__title">
-		        			<h2 v-if="main_banner_key == 'banner::landing'">Main Banner</h2>
-		        			<h2 v-if="main_banner_key == 'banner::promotion'">Promotion Banner</h2>
+		        			<h2>Main Banner</h2>
 
 		        		</div>
 		        		<div class="content__btn">
@@ -20,7 +19,7 @@
 		        	</div>
 		        	<div class="content__bottom">
 						<ul class="news__list sortable" id="sort">
-							<li class="news__list__wrapper sort-item" v-for="banner in main_banner">
+							<li class="news__list__wrapper sort-item" v-for="banner in responseData.banner">
 								<div class="news__list__detail">
 									<div class="drag__control">
 										<div class="handle">

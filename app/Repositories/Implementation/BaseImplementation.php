@@ -6,6 +6,7 @@ use Request;
 use Session;
 use Cache;
 use Artisan;
+use Auth;
 
 class BaseImplementation
 {
@@ -41,6 +42,15 @@ class BaseImplementation
     protected function getMyIp()
     {
         return Request::ip();
+    }
+
+    /**
+     * Get User ID
+     * @return mixed
+     */
+    protected function getUserId()
+    {
+        return Auth::id();
     }
 
     /**

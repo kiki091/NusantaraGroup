@@ -492,6 +492,10 @@ input, textarea, select {
     border: 1px solid #DE6060;
 }
 
+.upload__img .upload__img__remove:before{
+    content: '\00D7';
+}
+
 .row-header {
     margin-right: -20px;
     margin-left: -20px;
