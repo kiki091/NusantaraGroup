@@ -109,6 +109,7 @@ Route::group(['middleware' => ['web']], function ()
 				Route::post('store', 'Cms\pages\MainBannerController@store')->name('StoreMainBanner');
 				Route::post('edit', 'Cms\pages\MainBannerController@edit')->name('EditMainBanner');
 				Route::post('change-status', 'Cms\pages\MainBannerController@changeStatus')->name('ChangeStatusMainBanner');
+				Route::post('delete', 'Cms\pages\MainBannerController@delete')->name('DeleteMainBanner');
 			});
 		});
 

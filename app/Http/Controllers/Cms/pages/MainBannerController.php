@@ -107,6 +107,17 @@ class MainBannerController extends CmsController
     }
 
     /**
+     * Delete Data
+     * @param Request $request
+     * @return mixed
+     */
+    public function delete(Request $request)
+    {
+        return $this->mainBanner->delete($request->except(['_token']));
+        
+    }
+
+    /**
      * Validation Store 
      * @return array
      */

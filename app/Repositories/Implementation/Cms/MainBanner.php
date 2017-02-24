@@ -64,7 +64,7 @@ class MainBanner extends BaseImplementation implements MainBannerInterface
             }
 
             DB::commit();
-            return $this->setResponse(trans('message.cms_upload_image_failed'), true);
+            return $this->setResponse(trans('message.cms_upload_image_success'), true);
         } catch (\Exception $e) {
             return $this->setResponse($e->getMessage(), false);
         }
@@ -131,30 +131,32 @@ class MainBanner extends BaseImplementation implements MainBannerInterface
      * @param $data
      * @return mixed
      */
-    protected function storeData($params, $property_id, $key)
+    protected function storeData($data, $property_id, $key)
     {
         try {
 
             $store                      = $this->mainBanner;
 
-            if ($this->isEditMode($params)) {
-                $store                  = $this->mainBanner->find($params['id']);
+            if ($this->isEditMode($data)) {
+                
+                $store                  = $this->mainBanner->find($data['id']);
             }
 
-            if (!$this->isEditMode($params))
+            $store->title                = $data['title'];
+
+            if (!$this->isEditMode($data))
             {
-                $store->title                = $params['title'];
                 $store->banner_key           = $key;
                 $store->is_active            = true;
                 $store->property_location_id =  $property_id;
                 $store->created_by           = $this->getUserId();
                 $store->created_at           = $this->mysqlDateTimeFormat();
-                $store->images               = $params['images']->getClientOriginalName();
+                $store->images               = $this->uniqueIdImagePrefix . '_' .$data['images']->getClientOriginalName();
             }
             else {
-                if (!empty($params['images'])) {
+                if (!empty($data['images'])) {
                     
-                    $store->images      = isset($params['images']) ? $this->uniqueIdImagePrefix . '_' . $params['images']->getClientOriginalName() : '';
+                    $store->images      = isset($data['images']) ? $this->uniqueIdImagePrefix . '_' . $data['images']->getClientOriginalName() : '';
                 }
             }
 
@@ -182,9 +184,35 @@ class MainBanner extends BaseImplementation implements MainBannerInterface
         return $this->setResponse(trans('message.cms_success_get_data'), true, $this->mainBannerformation->getSingleForEditMainBannerTransform($singleData));
     }
 
-    public function changeStatus($params)
+    public function changeStatus($data)
     {
-        
+        try {
+
+            if (!isset($data['id']) && empty($data['id']))
+
+                return $this->setResponse(trans('message.cms_required_id'), false);
+
+            DB::beginTransaction();
+
+            $oldData = $this->mainBanner->id($data['id'])->first()->toArray();
+
+            $updatedData = [
+                'is_active' => $oldData['is_active'] ? false : true,
+                'updated_at' => $this->mysqlDateTimeFormat()
+            ];
+
+            $changeStatus = $this->mainBanner->id($data['id'])->update($updatedData);
+
+            if($changeStatus) {
+                DB::commit();
+                return $this->setResponse(trans('message.cms_success_update_status_general'), true);
+            }
+
+            DB::rollBack();
+            return $this->setResponse(trans('message.cms_failed_update_status_general'), false);
+        } catch (\Exception $e) {
+            return $this->setResponse($e->getMessage(), false);
+        }
     }
 
     /**
@@ -195,6 +223,101 @@ class MainBanner extends BaseImplementation implements MainBannerInterface
     protected function isEditMode($data)
     {
         return isset($data['id']) && !empty($data['id']) ? true : false;
+    }
+
+    /**
+     * Delete Data
+     * @param $params
+     * @return mixed
+     */
+    public function delete($data)
+    {
+        try {
+            if (!isset($data['id']) && empty($data['id']))
+                return $this->setResponse(trans('message.cms_required_id'), false);
+
+            DB::beginTransaction();
+
+            $params = [
+                "id" => $data['id']
+            ];
+            $mainBannerData = $this->getSingleMainBanner($params);
+
+            if (!$this->removeMainBannerFiles($mainBannerData['image_url'])) {
+                DB::rollback();
+                return $this->setResponse($this->message, false);
+            }
+
+            if (!$this->removeMainBanner($params)) {
+                DB::rollback();
+                return $this->setResponse($this->message, false);
+            }
+
+            DB::commit();
+            return $this->setResponse(trans('message.cms_success_delete_data_general'), true);
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            return $this->setResponse($e->getMessage(), false);
+        }
+    }
+
+    /**
+     * Get Single Dining Offers
+     * @param $params
+     */
+    public function getSingleMainBanner($params) {
+
+        $primaryData = $this->mainBanner($params, 'asc', 'array', true);
+
+        return $this->mainBannerformation->getSingleForEditMainBannerTransform($primaryData);
+    }
+
+    /**
+     * remove Main Banner Files
+     * @param $data
+     */
+    protected function removeMainBannerFiles($data)
+    {
+        try {
+
+            $filename        = isset($data['images']) && !empty($data['images']) ? $data['images'] : uniqid();
+
+            if (file_exists('./' . MAIN_BANNER_IMAGES_DIRECTORY . $filename)) {
+                unlink('./' . MAIN_BANNER_IMAGES_DIRECTORY . $filename);
+            }
+
+            return true;
+
+        } catch (\Exception $e) {
+            $this->message = $e->getMessage();
+            return false;
+        }
+    }
+
+    /**
+     * Remove Main Banner Data From Database
+     * @param $data
+     * @return bool
+     */
+    protected function removeMainBanner($data)
+    {
+        try {
+
+            $delete = $this->mainBanner
+                ->id($data['id'])
+                ->forceDelete();
+
+            if ($delete)
+                return true;
+
+            $this->message = trans('message.cms_failed_delete_data_general');
+            return false;
+
+        } catch (\Exception $e) {
+            $this->message = $e->getMessage();
+            return false;
+        }
     }
 
     /**
@@ -217,7 +340,7 @@ class MainBanner extends BaseImplementation implements MainBannerInterface
         }
 
         if(isset($data['id'])) {
-            $mainBanner->isId($data['id']);
+            $mainBanner->id($data['id']);
         }
 
         if(isset($data['property_location_id'])) {

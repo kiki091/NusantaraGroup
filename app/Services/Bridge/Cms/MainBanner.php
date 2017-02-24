@@ -51,4 +51,12 @@ class MainBanner {
         return $this->mainBanner->changeStatus($params);
     }
 
+    /**
+     * Delete Data
+     */
+    public function delete($params)
+    {
+        return $this->mainBanner->delete($params);
+    }
+
 }

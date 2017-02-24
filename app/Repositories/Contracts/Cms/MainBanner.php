@@ -33,4 +33,11 @@ interface MainBanner
      * @return mixed
      */
     public function changeStatus($params);
+
+    /**
+     * Delete Data
+     * @param $params
+     * @return mixed
+     */
+    public function delete($params);
 }

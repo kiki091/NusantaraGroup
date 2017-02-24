@@ -43,7 +43,7 @@ class MainBannerModel extends Model
     /**
      * @param $query
      */
-    public function scopeIsId($query, $id)
+    public function scopeid($query, $id)
     {
         return $query->where('id', $id);
     }

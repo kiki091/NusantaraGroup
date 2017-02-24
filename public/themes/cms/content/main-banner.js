@@ -29,7 +29,7 @@ function crudMainBanner() {
                 $('.popup__mask__alert').addClass('is-visible');
 
                 // add class di container saat popup
-                $('.container__main').addClass('popupContainer');
+                $('.main_container').addClass('popupContainer');
             },
 
             closeDeleteModal: function() {
@@ -149,6 +149,7 @@ function crudMainBanner() {
             },
 
             changeStatus: function(id) {
+                console.log(id)
                 var payload = []
                 payload['id'] = id
 
@@ -189,7 +190,7 @@ function crudMainBanner() {
                     setTimeout(function() {
                         $('.popup__mask__alert').removeClass('is-visible');
                     }, 300);
-                    pushNotif(response.status, response.message);
+                    pushNotifMessage(response.status, response.message);
                 });
             },
 

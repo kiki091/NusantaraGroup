@@ -6,6 +6,29 @@
         <div class="row">
 	        <div class="col-md-12 col-sm-12 col-xs-12">
 
+	        	<modal :show.sync="showModal">
+					<div class="popup__mask__alert">
+						<div class="popup__wrapper__alert">
+							<div class="popup__layer__alert">
+								<div class="alert__message__wrapper">
+									<div class="alert__message">
+										<img src="{{ asset('themes/cms/images/logo-alert.png') }}" alt="">
+										<h3>Alert!</h3>
+										<label>Are you sure that you want to delete this?</label>
+									</div>
+									<div class="alert__message__btn">
+										<div class="new__form__btn">
+											<a href="#" class="btn__form__reset" @click.prevent="closeDeleteModal">Cancel</a>
+											<a href="#" class="btn__form__create" @click="deleteData(delete_payload.id)">Confirm</a>
+										</div>
+									</div>
+									<button class="alert__message__close" @click.prevent="closeDeleteModal"></button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</modal>
+
 	        	@include('Cms.pages.main-banner.partials.form')
 		        <div class="main__content__layer" style="margin-top: 5%;">
 		        	<div class="content__top flex-between">
@@ -46,7 +69,7 @@
 											{{--<a href="#" class="btn__action__list">
 												<i class="ico-photo-edit flex">@include('Cms.svg-logo.ico-photo-edit')</i>
 											</a>--}}
-											<a href="#" class="btn__delete">
+											<a href="#" class="btn__delete" @click="showDeleteModal(banner.id)">
 												<i class="ico-delete">@include('Cms.svg-logo.ico-delete')</i>
 											</a>
 										</div>

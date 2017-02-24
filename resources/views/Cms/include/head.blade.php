@@ -15,6 +15,8 @@
 <link href="{{ asset('themes/cms/vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
 <!-- jQuery custom content scroller -->
 <link href="{{ asset('themes/cms/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css') }}" rel="stylesheet"/>
+<!-- PopUp Style -->
+<link href="{{ asset('themes/cms/css/_popup.css') }}" rel="stylesheet">
 
 <!-- Custom Theme Style -->
 <link href="{{ asset('themes/cms/build/css/custom.min.css') }}" rel="stylesheet">
