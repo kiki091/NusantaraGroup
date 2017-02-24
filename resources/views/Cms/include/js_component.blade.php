@@ -3,8 +3,8 @@
 <script type="text/javascript" src="{{ asset('js/bower_components/ckeditor/ckeditor.js') }}"></script>
 <!-- Laroute JS -->
 <script src="{{ asset('js/laroute.js') }}"></script>
-<script type="text/javascript" src="{{ elixir('js/components/general.js') }}"></script>
-<script type="text/javascript" src="{{ elixir('js/menu/main.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/components/general.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/menu/main.js') }}"></script>
 
 <!-- Vue -->
 <script src="{{asset('js/vue.js')}}"></script>

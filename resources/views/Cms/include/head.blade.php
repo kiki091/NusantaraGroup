@@ -29,7 +29,7 @@
  <!-- 
 	JS FILE ASSETS
  -->	
-<script src="{{ elixir('js/bower_components/jquery/dist/jquery.min.js') }}"></script>
+<script src="{{ asset('js/bower_components/jquery/dist/jquery.min.js') }}"></script>
 <script src="{{ asset('themes/cms/js/function.js') }}"></script>
 <!-- notify -->
 <script type="text/javascript" src="{{ asset('js/bower_components/hold-on/HoldOn.min.js') }}"></script>

@@ -84,7 +84,7 @@ class MainBannerController extends CmsController
             return $this->mainBanner->store($request->except(['_token'], self::MAIN_BANNER_KEY  ));
         }*/
 
-        return $this->mainBanner->store($request->except(['_token']), $this->getLocationId(), self::MAIN_BANNER_KEY);
+        return $this->mainBanner->store($request->except(['_token', 'image_url']), $this->getLocationId(), self::MAIN_BANNER_KEY);
     }
 
     /**

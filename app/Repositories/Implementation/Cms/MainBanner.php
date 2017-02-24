@@ -79,9 +79,18 @@ class MainBanner extends BaseImplementation implements MainBannerInterface
     {
         try {
 
-            if (!empty($data['images'])) {
-                if (!$this->detailImageUploader($data)) {
+            if (!$this->isEditMode($data)){
+
+                if (!$this->detailImageUploader($data)){
                     return false;
+                }
+            }
+            else{
+
+                if (!empty($data['images'])) {
+                    if (!$this->detailImageUploader($data)) {
+                        return false;
+                    }
                 }
             }
 
@@ -118,16 +127,6 @@ class MainBanner extends BaseImplementation implements MainBannerInterface
     }
 
     /**
-     * Check need edit Mode or No
-     * @param $data
-     * @return bool
-     */
-    protected function isEditMode($data)
-    {
-        return isset($data['id']) && !empty($data['id']) ? true : false;
-    }
-
-    /**
      * Store Data
      * @param $data
      * @return mixed
@@ -142,20 +141,21 @@ class MainBanner extends BaseImplementation implements MainBannerInterface
                 $store                  = $this->mainBanner->find($params['id']);
             }
 
-            $store->title                = $params['title'];
-            $store->banner_key           = $key;
-            $store->is_active            = true;
-            $store->property_location_id =  $property_id;
-
-            if (!$this->isEditMode($params)) 
+            if (!$this->isEditMode($params))
             {
-                $store->created_by   = $this->getUserId();
-                $store->created_at   = $this->mysqlDateTimeFormat();
+                $store->title                = $params['title'];
+                $store->banner_key           = $key;
+                $store->is_active            = true;
+                $store->property_location_id =  $property_id;
+                $store->created_by           = $this->getUserId();
+                $store->created_at           = $this->mysqlDateTimeFormat();
+                $store->images               = $params['images']->getClientOriginalName();
             }
-
-            if (!empty($params['images'])) {
+            else {
+                if (!empty($params['images'])) {
                     
-                $store->images      = isset($params['images']) ? $this->uniqueIdImagePrefix . '_' . $params['images']->getClientOriginalName() : '';
+                    $store->images      = isset($params['images']) ? $this->uniqueIdImagePrefix . '_' . $params['images']->getClientOriginalName() : '';
+                }
             }
 
             if($save = $store->save()) {
@@ -185,6 +185,16 @@ class MainBanner extends BaseImplementation implements MainBannerInterface
     public function changeStatus($params)
     {
         
+    }
+
+    /**
+     * Check need edit Mode or No
+     * @param $data
+     * @return bool
+     */
+    protected function isEditMode($data)
+    {
+        return isset($data['id']) && !empty($data['id']) ? true : false;
     }
 
     /**
