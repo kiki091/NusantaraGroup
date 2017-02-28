@@ -94,6 +94,7 @@ function crudStaticPage() {
                             });
 
                             hideLoading()
+                            //pushNotifV2(response.status, 'default', message_validation, false);
                             pushNotifMessage(response.status,response.message, message_validation);
                         } else {
                             hideLoading()
@@ -107,6 +108,50 @@ function crudStaticPage() {
                         hideLoading()
                     }
                 })
+
+                /*var vm = this;
+                var optForm      = {
+
+                    dataType: "json",
+
+                    beforeSerialize: function(form, options) {
+                        for (instance in CKEDITOR.instances)
+                            CKEDITOR.instances[instance].updateElement();
+                    },
+                    beforeSend: function(){
+                        showLoadingData(true)
+                        vm.clearErorrMessage()
+                    },
+                    success: function(response){
+                        if (response.status == false) {
+                            if(response.is_error_form_validation) {
+
+                                var message_validation = ''
+                                $.each(response.message, function(key, value){
+                                    $('input[name="' + key.replace(".", "_") + '"]').focus();
+                                    $("#form--error--message--" + key.replace(".", "_")).text(value)
+                                    message_validation += '<li class="notif__content__li"><span class="text" >' + value + '</span></li>'
+                                });
+                                pushNotifMessage(response.status,response.message, message_validation);
+
+                            } else {
+                                pushNotifMessage(response.status, response.message);
+                            }
+                        } else {
+                            vm.fetchData()
+                            vm.resetForm()
+                            pushNotifMessage(response.status, response.message);
+                            $('.btn__add__cancel').click();
+                        }
+                    },
+                    complete: function(response){
+                        hideLoading()
+                    }
+
+                };
+
+                $("#StaticPageForm").ajaxForm(optForm);
+                $("#StaticPageForm").submit();*/
                 
             },
 

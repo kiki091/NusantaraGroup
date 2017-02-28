@@ -65,6 +65,37 @@ function pushNotifMessage(status,message, validation)
     var timer =  setInterval(remove_notice, time);
 }
 
+function pushNotifV2(status, title, message, autoHide, position)
+{
+    if (typeof autoHide == 'undefined') {
+        autoHide = true
+    }
+
+    if (typeof title == 'undefined' || title == '' || title == 'default') {
+        title = 'Sorry, there are few missing contents detected, please complete all the required fields.'
+    }
+
+    if (typeof position == 'undefined') {
+        position = 'bottom left'
+    }
+
+    var className = '';
+    if (status == false) {
+        var className = 'error';
+    }
+
+    $.notify({
+        title: title,
+        message: message,
+    }, {
+        style: 'notif-msg',
+        autoHide: autoHide,
+        clickToHide: false,
+        position: position,
+        className: className
+    });
+}
+
 
 function showLoadingData()
 {
@@ -114,7 +145,17 @@ function showModalDelete()
     });
 }
 
+function mainGeneral(){
+    notify();
+}
+
 // INIT FUNCTION WEB CMS
+function initBookingServices()
+{
+    crudBookingServices();
+    buttonClickOpen();
+    buttonClickClose();
+}
 
 function initStaticPage()
 {
@@ -127,6 +168,14 @@ function initStaticPage()
 function initMainBanner()
 {
     crudMainBanner();
+    buttonClickOpen();
+    buttonClickClose();
+    replaceToCkEditor();
+}
+
+function initBranchOffice()
+{
+    crudBranchOffice();
     buttonClickOpen();
     buttonClickClose();
     replaceToCkEditor();
