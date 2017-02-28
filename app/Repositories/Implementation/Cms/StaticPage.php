@@ -20,13 +20,13 @@ class StaticPage extends BaseImplementation implements StaticPageInterface
     protected $message;
     protected $staticPage;
     protected $lastInsertId;
-    protected $staticPageformation;
+    protected $staticPageTransformation;
     protected $uniqueIdImagePrefix = '';
 
-    function __construct(StaticPageModels $staticPage, StaticPageTransformation $staticPageformation)
+    function __construct(StaticPageModels $staticPage, StaticPageTransformation $staticPageTransformation)
     {
         $this->staticPage = $staticPage;
-        $this->staticPageformation = $staticPageformation;
+        $this->staticPageTransformation = $staticPageTransformation;
         $this->uniqueIdImagePrefix = uniqid(PREFIX_FILENAME_NUSANTARA_IMAGE);
     }
 
@@ -38,7 +38,7 @@ class StaticPage extends BaseImplementation implements StaticPageInterface
 
         $staticPageData = $this->staticPage($data, 'asc', 'array', true);
         
-        return $this->staticPageformation->getStaticPageCmsTransform($staticPageData);
+        return $this->staticPageTransformation->getStaticPageCmsTransform($staticPageData);
     }
 
     /**
@@ -265,7 +265,7 @@ class StaticPage extends BaseImplementation implements StaticPageInterface
 
         $singleData = $this->staticPage($data, 'asc', 'array', true);
 
-        return $this->setResponse(trans('message.cms_success_get_data'), true, $this->staticPageformation->getSingleForEditStaticPageTransform($singleData));
+        return $this->setResponse(trans('message.cms_success_get_data'), true, $this->staticPageTransformation->getSingleForEditStaticPageTransform($singleData));
     }
 
     /**

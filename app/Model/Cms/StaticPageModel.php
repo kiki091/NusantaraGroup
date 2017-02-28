@@ -9,7 +9,6 @@ class StaticPageModel extends Model
     protected $table = 'static_page';
     public $timestamps = true;
 
-
     protected $fillable = [
 	    'site_title',
         'logo_images',

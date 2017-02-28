@@ -14,6 +14,11 @@ define('MAIN_BANNER_IMAGES_DIRECTORY', 'images/db/main_banner/');
 
 define('COMPANY_PROFILE_IMAGES_DIRECTORY', 'images/db/company_profile/');
 
+// Thumbnail Branch Office Images 
+
+define('THUMBNAIL_BRANCH_OFFICE_IMAGES_DIRECTORY', 'images/db/branch_office/');
+define('BRANCH_OFFICE_IMAGES_SLIDER_DIRECTORY', 'images/db/branch_office/slider/');
+
 // Awards Images Directory
 
 define('AWARDS_IMAGES_DIRECTORY', 'images/db/awards/');
