@@ -91,6 +91,15 @@ Route::group(['middleware' => ['web']], function ()
 			Route::get('logout', 'Cms\AuthController@logout')->name('logout');
 			Route::get('dashboard', 'Cms\DashboardController@index')->name('CmsDashboard');
 
+			// Booking Services
+			Route::group(array('prefix' => 'booking-services' ), function(){
+				Route::get('/', 'Cms\pages\BookingServicesController@index')->name('BookingServices');
+				Route::get('data', 'Cms\pages\BookingServicesController@getData')->name('getDataBookingServices');
+				Route::post('store', 'Cms\pages\BookingServicesController@store')->name('storeBookingServices');
+				Route::post('show', 'Cms\pages\BookingServicesController@showData')->name('showDataBookingServices');
+				Route::get('search', 'Cms\pages\BookingServicesController@searchData')->name('searchBookingServices');
+			});
+
 			// Static Page
 
 			Route::group(array('prefix' => 'static-page' ), function(){
@@ -110,6 +119,15 @@ Route::group(['middleware' => ['web']], function ()
 				Route::post('edit', 'Cms\pages\MainBannerController@edit')->name('EditMainBanner');
 				Route::post('change-status', 'Cms\pages\MainBannerController@changeStatus')->name('ChangeStatusMainBanner');
 				Route::post('delete', 'Cms\pages\MainBannerController@delete')->name('DeleteMainBanner');
+			});
+
+			// Branch Office
+
+			Route::group(array('prefix' => 'branch-office' ), function(){
+				Route::get('/', 'Cms\pages\BranchOfficeController@index')->name('BranchOffice');
+				Route::get('data', 'Cms\pages\BranchOfficeController@getData')->name('GetDataBranchOffice');
+				Route::post('store', 'Cms\pages\BranchOfficeController@store')->name('StoreBranchOffice');
+				Route::post('change-status', 'Cms\pages\BranchOfficeController@changeStatus')->name('ChangeStatusBranchOffice');
 			});
 		});
 
