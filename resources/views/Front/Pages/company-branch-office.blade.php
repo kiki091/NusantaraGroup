@@ -20,7 +20,7 @@
                             <div class="item">
                         @endif
                             <!-- Slide Background -->
-                            <img src="{{ $slider }}" alt="Bootstrap Touch Slider"  class="slide-image"/>
+                            <img src="{{ $slider }}" alt="Nusantara Group"  class="slide-image"/>
                             <div class="bs-slider-overlay"></div>
 
                             <div class="container">

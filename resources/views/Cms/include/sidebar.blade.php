@@ -18,15 +18,30 @@
                     <li>
                         <a>
                           <i class="fa">
+                              @include('Cms.svg-logo.sidebar.ico-email')
+                          </i>Messages <span class="fa fa-chevron-down"></span>
+                        </a>
+                        <ul class="nav child_menu">
+                            <li>
+                                <a href="#booking-services" onclick="menuBookingServices()">Booking Services</a>
+                            </li>   
+                        </ul>
+                    </li> 
+                    <li>
+                        <a>
+                          <i class="fa">
                               @include('Cms.svg-logo.sidebar.ico-pages')
                           </i>Pages <span class="fa fa-chevron-down"></span>
                         </a>
                         <ul class="nav child_menu">
                             <li>
                                 <a href="#static-page" onclick="menuStaticPage()">Static Page</a>
-                            </li>
+                            </li>   
                             <li>
                                 <a href="#main-banner" onclick="menuMainBanner()">Main Banner</a>
+                            </li> 
+                            <li>
+                                <a href="#branch-office" onclick="menuBranchOffice()">Branch Office</a>
                             </li>
                         </ul>
                     </li> 

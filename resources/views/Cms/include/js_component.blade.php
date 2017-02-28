@@ -15,10 +15,12 @@
 <script type="text/javascript" src="{{asset('js/vue/2.0/vue-resource.js')}}"></script> -->
 <script src="{{asset('themes/cms/content/static-page.js')}}"></script>
 <script src="{{asset('themes/cms/content/main-banner.js')}}"></script>
+<script src="{{asset('themes/cms/content/booking-services.js')}}"></script>
+<script src="{{asset('themes/cms/content/branch-office.js')}}"></script>
 <!-- End Vue -->
 
 <!-- jQuery plugins -->
-<script src="{{ asset('themes/cms/vendors/jquery/dist/jquery.min.js') }}"></script>
+<!-- <script src="{{ asset('themes/cms/vendors/jquery/dist/jquery.min.js') }}"></script> -->
 <!-- Bootstrap -->
 <script src="{{ asset('themes/cms/vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <!-- FastClick -->

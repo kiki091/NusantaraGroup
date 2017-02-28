@@ -32,11 +32,14 @@
 	JS FILE ASSETS
  -->	
 <script src="{{ asset('js/bower_components/jquery/dist/jquery.min.js') }}"></script>
+<!-- <script src="{{ asset('js/bower_components/jquery/jQuery-2.1.4.min.js') }}"></script> -->
 <script src="{{ asset('themes/cms/js/function.js') }}"></script>
 <!-- notify -->
+<script type="text/javascript" src="{{ asset('js/bower_components/notifyjs/dist/notify.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/bower_components/hold-on/HoldOn.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('themes/cms/js/notify.js') }}"></script>
+<script src="{{ asset('themes/cms/js/plugins.js') }}"></script>
 <script src="{{ asset('js/bower_components/alert/dist/sweetalert.min.js') }}"></script>
-
  <!-- 
 	END JS FILE ASSETS
  -->	
