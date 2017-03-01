@@ -385,9 +385,6 @@ class BranchOffice extends BaseImplementation implements BranchOfficeInterface
             $branchOffice->id($data['id']);
         }
 
-        
-
-
         if(!$branchOffice->count())
             return array();
 
@@ -432,6 +429,251 @@ class BranchOffice extends BaseImplementation implements BranchOfficeInterface
                 }
 
             break;
+        }
+    }
+
+    /**
+     * Get Single Branch Office
+     * @param $params
+     */
+    public function getSingleBranchOffice($params) {
+
+        $primaryData = $this->branchOffice($params, 'asc', 'array', true);
+
+        return $this->branchOffice->getSingleBranchOfficeCmsTransform($primaryData);
+    }
+
+    /**
+     * Delete Data Branch Office
+     * @param $params
+     * @return mixed
+     */
+    public function delete($data)
+    {
+        try {
+            if (!isset($data['id']) && empty($data['id']))
+                return $this->setResponse(trans('message.cms_required_id'), false);
+
+            DB::beginTransaction();
+
+            $params = [
+                "id" => $data['id']
+            ];
+
+            $branchOfficeData = $this->getSingleBranchOffice($params);
+
+            if (!$this->removeBranchOfficeFiles($branchOfficeData['thumbnail_url'])) {
+                DB::rollback();
+                return $this->setResponse($this->message, false);
+            }
+            
+            if (!$this->removeBranchOffice($params)) {
+                DB::rollback();
+                return $this->setResponse($this->message, false);
+            }
+
+            if(!$this->removeAllDataImageById($params)){
+                DB::rollback();
+                return $this->setResponse($this->message, false);
+            }
+
+            if(!$this->removeAllOfficeDetailById($params)){
+                DB::rollback();
+                return $this->setResponse($this->message, false);
+            }
+
+            DB::commit();
+            $this->flushRedisLikeKey('meeting');
+            return $this->setResponse(trans('message.cms_offer_landing_success_remove_data'), true);
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            return $this->setResponse($e->getMessage(), false);
+        }
+    }
+
+    /**
+     * remove Branch Office Files
+     * @param $data
+     */
+    protected function removeBranchOfficeFiles($data)
+    {
+        try {
+
+            $filename        = isset($data['thumbnail']) && !empty($data['thumbnail']) ? $data['thumbnail'] : uniqid();
+
+            if (file_exists('./' . THUMBNAIL_BRANCH_OFFICE_IMAGES_DIRECTORY . $filename)) {
+                unlink('./' . THUMBNAIL_BRANCH_OFFICE_IMAGES_DIRECTORY . $filename);
+            }
+
+            return true;
+
+        } catch (\Exception $e) {
+            $this->message = $e->getMessage();
+            return false;
+        }
+    }
+
+    /**
+     * Remove Branch Office From Database
+     * @param $data
+     * @return bool
+     */
+    protected function removeBranchOffice($data)
+    {
+        try {
+
+            $delete = $this->branchOffice
+                ->id($data['id'])
+                ->forceDelete();
+
+            if ($delete)
+                return true;
+
+            $this->message = trans('message.cms_failed_delete_data_general');
+            return false;
+
+        } catch (\Exception $e) {
+            $this->message = $e->getMessage();
+            return false;
+        }
+    }
+
+    /**
+     * Delete Image Slider
+     * @param $data
+     */
+    
+    public function removeAllDataImageById($data)
+    {
+        try {
+            if (!isset($data['id']) && empty($data['id']))
+                return $this->setResponse(trans('message.cms_required_id'), false);
+
+            DB::beginTransaction();
+
+            $oldData = $this->branchOfficeImages->find($data['id']);
+
+            if($this->branchOfficeImages->where('office_id', $data['id'])->delete()) {
+
+                unlink('./'.BRANCH_OFFICE_IMAGES_SLIDER_DIRECTORY . $oldData->images);
+
+                DB::commit();
+            }
+
+            DB::rollBack();
+
+        } catch (\Exception $e) {
+            return $this->setResponse($e->getMessage(), false);
+        }
+    }
+
+    public function deleteImage($data)
+    {
+        try {
+            if (!isset($data['id']) && empty($data['id']))
+                return $this->setResponse(trans('message.cms_required_id'), false);
+
+            DB::beginTransaction();
+
+            $oldData = $this->branchOfficeImages->find($data['id']);
+
+            if($this->branchOfficeImages->where('id', $data['id'])->delete()) {
+
+                unlink('./'.BRANCH_OFFICE_IMAGES_SLIDER_DIRECTORY . $oldData->images);
+
+                DB::commit();
+                
+                return $this->setResponse(trans('message.cms_success_delete_data_general'), true);
+            }
+
+            DB::rollBack();
+            return $this->setResponse(trans('message.cms_failed_delete_data_general'), false);
+
+        } catch (\Exception $e) {
+            return $this->setResponse($e->getMessage(), false);
+        }
+    }
+
+    /**
+     * Delete Office Detail
+     * @param $params
+     * @return mixed
+     */
+    public function removeAllOfficeDetailById($data)
+    {
+        try {
+            if (!isset($data['id']) && empty($data['id']))
+                return $this->setResponse(trans('message.cms_required_id'), false);
+
+            DB::beginTransaction();
+
+            $params = [
+                "id" => $data['id']
+            ];
+
+            $oldData = $this->branchOfficeTrans->find($data['id']);
+
+            if($this->branchOfficeTrans->where('branch_office_id', $data['id'])->delete()) {
+
+                DB::commit();
+            }
+
+            DB::rollBack();
+
+        } catch (\Exception $e) {
+            return $this->setResponse($e->getMessage(), false);
+        }
+    }
+
+    public function deleteOfficeDetail($data)
+    {
+        try {
+            if (!isset($data['id']) && empty($data['id']))
+                return $this->setResponse(trans('message.cms_required_id'), false);
+
+            DB::beginTransaction();
+
+            $params = [
+                "id" => $data['id']
+            ];
+
+            if (!$this->removeOfficeDetail($params)) {
+                DB::rollback();
+                return $this->setResponse($this->message, false);
+            }
+
+            DB::commit();
+            return $this->setResponse(trans('message.cms_success_delete_data_general'), true);
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            return $this->setResponse($e->getMessage(), false);
+        }
+    }
+
+    /**
+     * Remove Office Detail From Database
+     * @param $data
+     * @return bool
+     */
+    protected function removeOfficeDetail($data)
+    {
+        try {
+
+            $delete = $this->branchOfficeTrans
+                ->id($data['id'])
+                ->forceDelete();
+
+            if ($delete)
+                return true;
+
+            $this->message = trans('message.cms_failed_delete_data_general');
+            return false;
+
+        } catch (\Exception $e) {
+            $this->message = $e->getMessage();
+            return false;
         }
     }
 }

@@ -53,4 +53,34 @@ class BranchOffice {
         return $this->branchOffice->changeStatus($params);
     }
 
+    /**
+     * Delete Data
+     * @param $params
+     * @return mixed
+     */
+    public function delete($params)
+    {
+        return $this->branchOffice->delete($params);
+    }
+
+    /**
+     * Delete Image Slider
+     * @param $params
+     * @return mixed
+     */
+    public function deleteImage($params)
+    {
+        return $this->branchOffice->deleteImage($params);
+    }
+
+    /**
+     * Delete Office
+     * @param $params
+     * @return mixed
+     */
+    public function deleteOfficeDetail($params)
+    {
+        return $this->branchOffice->deleteOfficeDetail($params);
+    }
+
 }

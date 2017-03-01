@@ -29,6 +29,14 @@ class BranchOffice
         return $this->setBranchOfficeTranslationCmsTransform($data);
     }
 
+    public function getSingleBranchOfficeCmsTransform($data)
+    {
+        if(!is_array($data) || empty($data))
+            return array();
+
+        return $this->setSingleBranchOfficeCmsTransform($data);
+    }
+
     /**
      * Get Branch Office Transformation For Insert
      * @param $data
@@ -103,5 +111,19 @@ class BranchOffice
         }catch (\Exception $e) {
             return false;
         }
+    }
+
+    protected function setSingleBranchOfficeCmsTransform($data)
+    {
+        $dataTranform['id'] = isset($data['id']) ? $data['id'] : '';
+        $dataTranform['title'] = isset($data['title']) ? $data['title'] : '';
+        $dataTranform['slug'] = isset($data['slug']) ? $data['slug'] : '';
+        $dataTranform['side_description'] = isset($data['side_description']) ? $data['side_description'] : '';
+        $dataTranform['description'] = isset($data['description']) ? $data['description'] : '';
+        $dataTranform['office_name'] = isset($data['office_name']) ? $data['office_name'] : '';
+        $dataTranform['address'] = isset($data['address']) ? $data['address'] : '';
+        $dataTranform['thumbnail_url'] = isset($data['thumbnail']) ? asset(THUMBNAIL_BRANCH_OFFICE_IMAGES_DIRECTORY.rawurlencode($data['thumbnail'])) : '';
+
+        return $dataTranform;
     }
 }

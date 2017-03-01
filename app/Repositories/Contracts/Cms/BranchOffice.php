@@ -34,4 +34,25 @@ interface BranchOffice
      */
     public function changeStatus($params);
 
+    /**
+     * Delete Data
+     * @param $params
+     * @return mixed
+     */
+    public function delete($params);
+
+    /**
+     * Delete Image Slider
+     * @param $params
+     * @return mixed
+     */
+    public function deleteImage($params);
+
+    /**
+     * Delete Office Detail
+     * @param $params
+     * @return mixed
+     */
+    public function deleteOfficeDetail($params);
+
 }

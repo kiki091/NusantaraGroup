@@ -119,6 +119,28 @@ class BranchOfficeController extends CmsController
     }
 
     /**
+     * Delete Image Slider
+     * @param Request $request
+     * @return mixed
+     */
+    public function deleteImage(Request $request)
+    {
+        return $this->branchOffice->deleteImage($request->except(['_token']));
+        
+    }
+
+    /**
+     * Delete Office
+     * @param Request $request
+     * @return mixed
+     */
+    public function deleteOfficeDetail(Request $request)
+    {
+        return $this->branchOffice->deleteOfficeDetail($request->except(['_token']));
+        
+    }
+
+    /**
      * Validation Store 
      * @return array
      */
