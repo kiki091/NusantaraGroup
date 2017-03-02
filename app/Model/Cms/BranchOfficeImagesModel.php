@@ -15,10 +15,20 @@ class BranchOfficeImagesModel extends Model
         'updated_at'
     ];
 
+    public function translations()
+    {
+        return $this->hasMany('App\Model\Cms\BranchOfficeModel', 'id', 'office_id');
+    }
+
     /**
      * @param $query
      */
     public function scopeId($query, $params = true)
+    {
+        return $query->where('id', $params);
+    }
+
+    public function scopeIsOffice($query, $params = true)
     {
         return $query->where('office_id', $params);
     }

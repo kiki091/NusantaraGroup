@@ -115,6 +115,7 @@ class BranchOffice
 
     protected function setSingleBranchOfficeCmsTransform($data)
     {
+
         $dataTranform['id'] = isset($data['id']) ? $data['id'] : '';
         $dataTranform['title'] = isset($data['title']) ? $data['title'] : '';
         $dataTranform['slug'] = isset($data['slug']) ? $data['slug'] : '';
@@ -122,6 +123,7 @@ class BranchOffice
         $dataTranform['description'] = isset($data['description']) ? $data['description'] : '';
         $dataTranform['office_name'] = isset($data['office_name']) ? $data['office_name'] : '';
         $dataTranform['address'] = isset($data['address']) ? $data['address'] : '';
+        $dataTranform['thumbnail'] = isset($data['thumbnail']) ? $data['thumbnail'] : '';
         $dataTranform['thumbnail_url'] = isset($data['thumbnail']) ? asset(THUMBNAIL_BRANCH_OFFICE_IMAGES_DIRECTORY.rawurlencode($data['thumbnail'])) : '';
 
         return $dataTranform;

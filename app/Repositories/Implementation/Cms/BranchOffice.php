@@ -433,6 +433,39 @@ class BranchOffice extends BaseImplementation implements BranchOfficeInterface
     }
 
     /**
+     * Get All Data Image Slider
+     * Warning: this function doesn't redis cache
+     * @param array $params
+     * @return array
+     */
+    protected function branchOfficeImages($data = array(), $orderType = 'desc', $returnType = 'array', $returnSingle = false)
+    {
+
+        $branchOfficeImages = $this->branchOfficeImages->with('translations_image');
+
+        if(isset($data['id'])) {
+            $branchOfficeImages->id($data['id']);
+        }
+
+        if(isset($data['office_id'])) {
+            $branchOfficeImages->isOffice($data['office_id']);
+
+        }
+
+        if(!$branchOfficeImages->count())
+            return array();
+
+        if(isset($data['id']))
+        {
+            return $branchOfficeImages->first()->toArray();
+        }else
+        {
+            return $branchOfficeImages->get()->toArray();
+        }
+        
+    }
+
+    /**
      * Get Single Branch Office
      * @param $params
      */
@@ -440,7 +473,7 @@ class BranchOffice extends BaseImplementation implements BranchOfficeInterface
 
         $primaryData = $this->branchOffice($params, 'asc', 'array', true);
 
-        return $this->branchOffice->getSingleBranchOfficeCmsTransform($primaryData);
+        return $this->branchOfficeTransformation->getSingleBranchOfficeCmsTransform($primaryData);
     }
 
     /**
@@ -462,7 +495,7 @@ class BranchOffice extends BaseImplementation implements BranchOfficeInterface
 
             $branchOfficeData = $this->getSingleBranchOffice($params);
 
-            if (!$this->removeBranchOfficeFiles($branchOfficeData['thumbnail_url'])) {
+            if (!$this->removeBranchOfficeFiles($branchOfficeData['thumbnail'])) {
                 DB::rollback();
                 return $this->setResponse($this->message, false);
             }
@@ -500,7 +533,7 @@ class BranchOffice extends BaseImplementation implements BranchOfficeInterface
     {
         try {
 
-            $filename        = isset($data['thumbnail']) && !empty($data['thumbnail']) ? $data['thumbnail'] : uniqid();
+            $filename        = isset($data) && !empty($data) ? $data : uniqid();
 
             if (file_exists('./' . THUMBNAIL_BRANCH_OFFICE_IMAGES_DIRECTORY . $filename)) {
                 unlink('./' . THUMBNAIL_BRANCH_OFFICE_IMAGES_DIRECTORY . $filename);
@@ -552,7 +585,8 @@ class BranchOffice extends BaseImplementation implements BranchOfficeInterface
 
             DB::beginTransaction();
 
-            $oldData = $this->branchOfficeImages->find($data['id']);
+            //$oldData = $this->branchOfficeImages->find($data['id']);
+            $oldData = $this->getDeleteImageSlider($data['id']);
 
             if($this->branchOfficeImages->where('office_id', $data['id'])->delete()) {
 
@@ -566,6 +600,20 @@ class BranchOffice extends BaseImplementation implements BranchOfficeInterface
         } catch (\Exception $e) {
             return $this->setResponse($e->getMessage(), false);
         }
+    }
+
+    /**
+     * Get Delete Image Slider
+     * @param $params
+     */
+    public function getDeleteImageSlider($params) {
+        $data = [
+            'office_id' => $params
+        ];
+
+        $primaryData = $this->branchOfficeImages($data, 'asc', 'array', true);
+dd($primaryData);
+        //return $this->branchOfficeTransformation->getSingleBranchOfficeCmsTransform($primaryData);
     }
 
     public function deleteImage($data)
