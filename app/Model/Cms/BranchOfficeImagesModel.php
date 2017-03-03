@@ -17,7 +17,7 @@ class BranchOfficeImagesModel extends Model
 
     public function translations()
     {
-        return $this->hasMany('App\Model\Cms\BranchOfficeModel', 'id', 'office_id');
+        return $this->belongsTo('App\Model\Cms\BranchOfficeModel', 'id', 'office_id');
     }
 
     /**

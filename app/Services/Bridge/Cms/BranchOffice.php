@@ -44,6 +44,16 @@ class BranchOffice {
     }
 
     /**
+     * Edit Data
+     * @param $params
+     * @return mixed
+     */
+    public function edit($params)
+    {
+        return $this->branchOffice->edit($params);
+    }
+
+    /**
      * Change Status
      * @param $params
      * @return mixed

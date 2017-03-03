@@ -67,7 +67,7 @@
 								
 							</div>
 							
-							<div class="create__form__row">
+							<div class="create__form__row" v-if="edit == false">
 								<div class="new__form__field width-auto">
 									<label>Slider Image</label>
 									<div class="form__photo__uploader">

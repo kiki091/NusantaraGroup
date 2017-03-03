@@ -66,9 +66,9 @@
                                             	<span class="switch-label" data-on="Active" data-off="Inactive"></span> <span class="switch-handle"></span>
 											</label>
 
-											{{--<a href="#" class="btn__action__list">
+											<a href="#" class="btn__action__list" @click="editImageSlider(branch_office.id)">
 												<i class="ico-photo-edit flex">@include('Cms.svg-logo.ico-photo-edit')</i>
-											</a>--}}
+											</a>
 											<a href="#" class="btn__delete" @click="showDeleteModal(branch_office.id)">
 												<i class="ico-delete">@include('Cms.svg-logo.ico-delete')</i>
 											</a>

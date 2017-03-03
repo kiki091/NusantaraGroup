@@ -127,6 +127,7 @@ Route::group(['middleware' => ['web']], function ()
 				Route::get('/', 'Cms\pages\BranchOfficeController@index')->name('BranchOffice');
 				Route::get('data', 'Cms\pages\BranchOfficeController@getData')->name('GetDataBranchOffice');
 				Route::post('store', 'Cms\pages\BranchOfficeController@store')->name('StoreBranchOffice');
+				Route::post('edit', 'Cms\pages\BranchOfficeController@edit')->name('EditBranchOffice');
 				Route::post('change-status', 'Cms\pages\BranchOfficeController@changeStatus')->name('ChangeStatusBranchOffice');
 				Route::post('delete', 'Cms\pages\BranchOfficeController@delete')->name('DeleteBranchOffice');
 				Route::post('delete-detail', 'Cms\pages\BranchOfficeController@deleteOfficeDetail')->name('DeleteDetailBranchOffice');

@@ -123,9 +123,103 @@ class BranchOffice
         $dataTranform['description'] = isset($data['description']) ? $data['description'] : '';
         $dataTranform['office_name'] = isset($data['office_name']) ? $data['office_name'] : '';
         $dataTranform['address'] = isset($data['address']) ? $data['address'] : '';
-        $dataTranform['thumbnail'] = isset($data['thumbnail']) ? $data['thumbnail'] : '';
+        $dataTranform['thumbnail_image'] = isset($data['thumbnail']) ? $data['thumbnail'] : '';
         $dataTranform['thumbnail_url'] = isset($data['thumbnail']) ? asset(THUMBNAIL_BRANCH_OFFICE_IMAGES_DIRECTORY.rawurlencode($data['thumbnail'])) : '';
 
+        $dataTranform['total_detail_image'] = isset($data['slider']) ? $this->setDefaultTotalDetailImage($data['slider']) : [];
+
+        $dataTranform['images_url'] = isset($data['slider']) ? $this->setImageUrlImagesForEdit($data['slider'], 'images') : [];
+
+        $dataTranform['slider'] = isset($data['slider']) ? $this->populateImagesForEdit($data['slider'], 'images') : [];
+
+        $dataTranform['branch_office'] = $this->getBranchOfficeTranslation($data['branch_office']);
+dd($dataTranform);
         return $dataTranform;
+    }
+
+    /**
+     * Get Branch Office Translation
+     * @param $data
+     */
+    protected function getBranchOfficeTranslation($data)
+    {
+        return array_map(function($data)
+        {
+            return [
+                'title_description' => isset($data['title_description']) ? $data['title_description'] : '',
+                'address' => isset($data['address']) ? $data['address'] : '',
+                'latitude' => isset($data['latitude']) ? $data['latitude'] : '',
+                'longitude' => isset($data['longitude']) ? $data['longitude'] : '',
+            ];
+        }, $data);
+    }
+
+    /**
+     * Set Default Total Detail Image For Edit Branch Office
+     * @param $data
+     * @param $index
+     * @return array
+     */
+    protected function setDefaultTotalDetailImage($data)
+    {
+        try {
+
+            $returnValue = [];
+            $totalImages = count($data);
+
+            for($i=0; $i<$totalImages; $i++) {
+                $returnValue[] = $i;
+            }
+
+            return $returnValue;
+
+        } catch (\Exception $e) {
+            return [];
+        }
+    }
+
+    /**
+     * Populate Images URL For Edit Branch Office
+     * @param $data
+     * @param $index
+     * @return array
+     */
+    protected function populateImagesForEdit($data, $index)
+    {
+        try {
+
+            return array_map(function($data)
+            {
+                return [
+                    'id' => isset($data['id']) ? $data['id'] : '',
+                    'images' => isset($data['images']) ? $data['images'] : '',
+                ];
+            }, $data);
+
+        } catch (\Exception $e) {
+            return [];
+        }
+    }
+
+    /**
+     * Set Images URL For Edit Branch Office
+     * @param $data
+     * @param $index
+     * @return array
+     */
+    protected function setImageUrlImagesForEdit($data, $index)
+    {
+        try {
+
+            $returnValue = [];
+            foreach ($data as $key => $item) {
+                $returnValue[] = asset(BRANCH_OFFICE_IMAGES_SLIDER_DIRECTORY.rawurlencode($item[$index]));
+            }
+
+            return $returnValue;
+
+        } catch (\Exception $e) {
+            return [];
+        }
     }
 }

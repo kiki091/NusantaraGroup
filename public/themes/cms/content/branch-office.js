@@ -252,10 +252,15 @@ function crudBranchOffice() {
                     response = response.data
                     if (response.status) {
                         this.models = response.data;
-                        this.images = response.data.image_url
+                        this.thumbnail = response.data.thumbnail_url
 
-                        this.form_add_title = "Edit Main Banner"
+                        this.default_total_detail_image = []
+                        this.form_add_title = "Edit Branch Office"
                         $('.btn__add').click()
+
+                        
+                        destroyInstanceCkEditor()
+                        replaceToCkEditor()
 
                     } else {
                         pushNotifMessage(response.status,response.message)

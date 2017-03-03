@@ -16,6 +16,11 @@ class BranchOfficeModel extends Model
 	    'update_at',
     ];
 
+    public function branch_office()
+    {
+        return $this->hasMany('App\Model\Cms\BranchOfficeTransModel', 'branch_office_id', 'id');
+    }
+
     public function property_location()
     {
         return $this->hasMany('App\Model\PropertyLocation', 'id', 'property_location_id');
@@ -23,12 +28,12 @@ class BranchOfficeModel extends Model
 
     public function translation()
     {
-        return $this->belongsTo('App\Model\Cms\BranchOfficeTransModel', 'branch_office_id', 'id');
+        return $this->belongsTo('App\Model\Cms\BranchOfficeTransModel', 'id', 'branch_office_id');
     }
 
     public function slider()
     {
-        return $this->hasMany('App\Model\Front\CompanyBranchOfficeModelImages', 'office_id', 'id');
+        return $this->hasMany('App\Model\Cms\BranchOfficeImagesModel', 'office_id', 'id');
     }
     
     /***************** Scope *****************/

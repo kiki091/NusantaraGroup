@@ -28,6 +28,13 @@ interface BranchOffice
     public function store($params, $property_location_id);
 
     /**
+     * Edit Data
+     * @param $params
+     * @return mixed
+     */
+    public function edit($params);
+
+    /**
      * Change Status
      * @param $params
      * @return mixed
