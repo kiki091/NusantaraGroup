@@ -258,12 +258,46 @@ function crudBranchOffice() {
                         this.form_add_title = "Edit Branch Office"
                         $('.btn__add').click()
 
-                        
+
                         destroyInstanceCkEditor()
                         replaceToCkEditor()
 
                     } else {
                         pushNotifMessage(response.status,response.message)
+                    }
+                })
+            },
+
+            editImageSlider: function (id) {
+                this.edit   = true
+
+                var payload = []
+                payload['id'] = id
+                payload['_token'] = token
+
+                var form = new FormData();
+
+                for (var key in payload) {
+                    form.append(key, payload[key])
+                }
+
+                this.resetForm()
+
+                var domain = laroute.url('/cms/branch-office/edit', []);
+                this.$http.post(domain, form).then(function(response) {
+                    response = response.data
+                    if (response.status) {
+                        this.id = response.data.id
+                        this.filename = response.data.images_url
+                        this.total_detail_image = response.data.total_detail_image
+                        this.images_edit = response.data.slider
+
+                        this.form_add_title = "Edit Image Slider Branch Office"
+                        this.default_total_detail_image = [];
+                        $('#toggle-form-photo-uploader-content').slideDown(400)
+
+                    } else {
+                        pushNotif(response.status, response.message)
                     }
                 })
             },
