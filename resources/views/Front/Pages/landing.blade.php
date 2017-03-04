@@ -5,9 +5,13 @@
 
                     <!-- Indicators -->
                     <ol class="carousel-indicators">
-                        <li data-target="#bootstrap-touch-slider" data-slide-to="0" class="active"></li>
-                        <li data-target="#bootstrap-touch-slider" data-slide-to="1"></li>
-                        <li data-target="#bootstrap-touch-slider" data-slide-to="2"></li>
+                        @for($i=1;$i<=$count;$i++)
+                        @if($i == 1)
+                        <li data-target="#bootstrap-touch-slider" data-slide-to="{{ $i }}" class="active"></li>
+                        @else
+                        <li data-target="#bootstrap-touch-slider" data-slide-to="{{ $i }}"></li>
+                        @endif
+                        @endfor
                     </ol>
 
                     <!-- Wrapper For Slides -->
@@ -15,7 +19,7 @@
                         @if(isset($main_banners))
                             @foreach($main_banners as $key=> $slider)
                                 <!-- Third Slide -->
-                                @if($key=='0')
+                                @if($key == 0)
                                 <div class="item active">
                                 @else
                                 <div class="item">
@@ -179,6 +183,28 @@
             </div><!-- greywrap -->
             <br/>
             <br/>
+
+            <div class="container" style="margin-bottom: 5%">
+                <div class="captions">
+                    <div class="caption" name="c0">
+                        <h2>Energias Renovables</h2>
+                        <p><span class="first-letter">S</span>tunningly located on rocks amidst of the sparkling Indian Ocean, these two awe–inspiring spa villas are the pinnacle of our Bali luxury spa. Surrounded by the sea, each spa villa has been ingeniously designed </p>
+                    </div>
+                    <div class="caption" name="c1">
+                        <h2>Energia Eolica</h2>
+                        <p><span class="first-letter">S</span>tunningly located on rocks amidst of the sparkling Indian Ocean, these two awe–inspiring spa villas are the pinnacle of our Bali luxury spa. Surrounded by the sea, each spa villa has been ingeniously designed</p>
+                    </div>
+                    <div id="buttons">
+                        <div id="left" value="left" onClick="show_previous()"></div>
+                        <div id="rigth" value="rigth" onClick="show_next()"></div>
+                    </div>
+                </div>
+                <div class="slider">
+                    <div class="slide" name="0" style="background-image:url(/themes/front/carousel/images/eolic.jpg)"></div>
+                    <div class="slide" name="1" style="background-image:url(/themes/front/carousel/images/eolic2.jpg)"></div>
+                </div>
+            </div>
+
             <!-- ==== PORTFOLIO ==== -->
             <div class="container" id="branch_office" name="branch_office">
                 <div class="row">
@@ -214,5 +240,4 @@
 
         <!-- /.app -->
         <!-- *** BLOG HOMEPAGE END *** -->
-        @include('Front.partials.maps-landing')
         @endsection

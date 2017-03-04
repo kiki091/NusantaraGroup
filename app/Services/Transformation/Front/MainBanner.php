@@ -22,13 +22,15 @@ class MainBanner
 
     protected function setMainBannerFrontTransform($data)
     {
-        return array_map(function($data)
+        $dataTranform = array_map(function($data)
         {
             return [
                 'title' => isset($data['title']) ? $data['title'] : '',
-                'images' => isset($data['images']) ? asset('images/db/main_banner/'.rawurlencode($data['images'])) : ''
+                'images' => isset($data['images']) ? asset(MAIN_BANNER_IMAGES_DIRECTORY.rawurlencode($data['images'])) : ''
             ];
         }, $data);
+
+        return $dataTranform;
     }
 
 }

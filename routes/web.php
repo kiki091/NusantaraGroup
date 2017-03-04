@@ -85,6 +85,11 @@ Route::group(['middleware' => ['web']], function ()
 
 		Route::post('subscribe-mail', 'Front\SubscribeMailController@store')->name('subscribeMail');
 
+	});
+
+	Route::group(['domain' => env('DOMAIN_PREFIX_CMS') . env('APP_DOMAIN')], function() 
+    {
+
 		Route::group(array('prefix' => 'cms'), function(){
 			Route::get('/', 'Cms\AuthController@index')->name('login');
 			Route::post('auth', 'Cms\AuthController@authenticate')->name('authenticate');
@@ -130,8 +135,13 @@ Route::group(['middleware' => ['web']], function ()
 				Route::post('edit', 'Cms\pages\BranchOfficeController@edit')->name('EditBranchOffice');
 				Route::post('change-status', 'Cms\pages\BranchOfficeController@changeStatus')->name('ChangeStatusBranchOffice');
 				Route::post('delete', 'Cms\pages\BranchOfficeController@delete')->name('DeleteBranchOffice');
-				Route::post('delete-detail', 'Cms\pages\BranchOfficeController@deleteOfficeDetail')->name('DeleteDetailBranchOffice');
-				Route::post('delete-image-slider', 'Cms\pages\BranchOfficeController@deleteImage')->name('DeleteImageSliderBranchOffice');
+
+				Route::post('edit-slider', 'Cms\pages\BranchOfficeController@editImageSlider')->name('BranchOfficeEditImageSlider');
+				Route::post('delete-image-slider', 'Cms\pages\BranchOfficeController@deleteImageSlider')->name('DeleteImageSliderBranchOffice');
+				
+				Route::post('delete-office-detail', 'Cms\pages\BranchOfficeController@deleteOfficeDetail')->name('DeleteDetailBranchOffice');
+
+				
 			});
 		});
 

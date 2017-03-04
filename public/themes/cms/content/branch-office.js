@@ -23,8 +23,13 @@ function crudBranchOffice() {
                 ],
 
             },
+            branch_office_edit: [
+                {title_description: '',address: '',latitude: '',longitude: '',}
+            ],
             thumbnail: '',
             images: {0: '', 1:'', 2:'', 3: ''},
+            images_edit: {0: '', 1:'', 2:'', 3: ''},
+            slider_edit: {0: '', 1:'', 2:'', 3: ''},
             delete_payload: {
                 id: '',
             },
@@ -138,6 +143,52 @@ function crudBranchOffice() {
                 this.models[variable] = ''
             },
 
+            removeImageSliderFromServer: function (id, index) {
+
+                var payload = []
+                payload['id'] = id
+
+                var form = new FormData();
+
+                for (var key in payload) {
+                    form.append(key, payload[key])
+                }
+
+                var domain = laroute.url('/cms/branch-office/delete-image-slider', []);
+                this.$http.post(domain, form).then(function(response) {
+                    response = response.data
+
+                    if (response.status) {
+                        this.total_detail_image.$remove(index)
+                    }
+
+                    pushNotifMessage(response.status, response.message)
+                })
+            },
+
+            removeBranchOfficeDataFromServer: function (id, index, item) {
+
+                var payload = []
+                payload['id'] = id
+
+                var form = new FormData();
+
+                for (var key in payload) {
+                    form.append(key, payload[key])
+                }
+
+                var domain = laroute.url('/cms/branch-office/delete-office-detail', []);
+                this.$http.post(domain, form).then(function(response) {
+                    response = response.data
+
+                    if (response.status) {
+                        this.models.branch_office.$remove(item);
+                    }
+
+                    pushNotifMessage(response.status, response.message)
+                })
+            },
+
             fetchData: function(){
                 var domain  = laroute.url('/cms/branch-office/data', []);
 
@@ -151,42 +202,6 @@ function crudBranchOffice() {
             },
 
             storeData: function(event){
-
-                /*this.clearErorrMessage()    
-                showLoadingData();
-
-                var form = new FormData();
-
-                for (var key in this.models) {
-                    form.append(key, this.models[key])
-                }
-
-                var domain = laroute.url('/cms/branch-office/store', []);
-                this.$http.post(domain, form, function(response) {
-                    if (response.status == false) {
-                        if(response.is_error_form_validation) {
-
-                            var message_validation = ''
-                            $.each(response.message, function(key, value){
-                                $('input[name="' + key.replace(".", "_") + '"]').focus();
-                                $("#form--error--message--" + key).text(value)
-                                message_validation += '<li class="notif__content__li"><span class="text" >' + value + '</span></li>'
-                            });
-
-                            hideLoading()
-                            pushNotifMessage(response.status,response.message, message_validation);
-                        } else {
-                            hideLoading()
-                        }
-                    } else {
-                        this.resetForm()
-                        $('.btn__add__cancel').click()
-                        pushNotifMessage(response.status, response.message);
-                        this.clearErorrMessage()
-                        this.fetchData()
-                        hideLoading()
-                    }
-                })*/
 
                 var vm = this;
                 var optForm      = {
@@ -253,8 +268,9 @@ function crudBranchOffice() {
                     if (response.status) {
                         this.models = response.data;
                         this.thumbnail = response.data.thumbnail_url
+                        this.total_office = response.data.total_office
 
-                        this.default_total_detail_image = []
+                        this.default_total_office = []
                         this.form_add_title = "Edit Branch Office"
                         $('.btn__add').click()
 
@@ -273,7 +289,6 @@ function crudBranchOffice() {
 
                 var payload = []
                 payload['id'] = id
-                payload['_token'] = token
 
                 var form = new FormData();
 
@@ -288,18 +303,64 @@ function crudBranchOffice() {
                     response = response.data
                     if (response.status) {
                         this.id = response.data.id
-                        this.filename = response.data.images_url
+                        this.images_edit = response.data.images_url
                         this.total_detail_image = response.data.total_detail_image
-                        this.images_edit = response.data.slider
+                        this.slider_edit = response.data.slider
 
                         this.form_add_title = "Edit Image Slider Branch Office"
                         this.default_total_detail_image = [];
                         $('#toggle-form-photo-uploader-content').slideDown(400)
 
                     } else {
-                        pushNotif(response.status, response.message)
+                        pushNotifMessage(response.status, response.message)
                     }
                 })
+            },
+
+            postEditImageSlider: function(event) {
+                var vm = this;
+                var optForm      = {
+
+                    dataType: "json",
+
+                    beforeSerialize: function(form, options) {
+                        for (instance in CKEDITOR.instances)
+                            CKEDITOR.instances[instance].updateElement();
+                    },
+                    beforeSend: function(){
+                        showLoadingData(true)
+                        vm.clearErorrMessage()
+                    },
+                    success: function(response){
+                        if (response.status == false) {
+                            if(response.is_error_form_validation) {
+
+                                var message_validation = ''
+                                $.each(response.message, function(key, value){
+                                    $('input[id="' + key.replace(".", "_") + '"]').focus();
+                                    $("#form--error--message--" + key.replace(".", "_")).text(value)
+                                    message_validation += '<li class="notif__content__li"><span class="text" >' + value + '</span></li>'
+                                });
+                                pushNotifMessage(response.status,response.message, message_validation);
+
+                            } else {
+                                pushNotifMessage(response.status, response.message);
+                            }
+                        } else {
+                            vm.fetchData()
+                            vm.resetForm()
+                            pushNotifMessage(response.status, response.message);
+                            $('.btn__add__cancel').click();
+                        }
+                    },
+                    complete: function(response){
+                        hideLoading()
+                    }
+
+                };
+
+                $("#BranchOfficeFormEditImageSliderForm").ajaxForm(optForm);
+                $("#BranchOfficeFormEditImageSliderForm").submit();
             },
 
             changeStatus: function(id) {
@@ -382,6 +443,9 @@ function crudBranchOffice() {
                 $('select').prop('selectedIndex', 0);
                 $('textarea').val('');
 
+/*                for (instance in CKEDITOR.instances)
+                    CKEDITOR.instances[instance].updateElement();*/
+
                 this.clearErorrMessage()
 
             },
@@ -398,11 +462,48 @@ function crudBranchOffice() {
                 } catch (err) {
                     pushNotifMessage(false, err.message);
                 }
-            }
+            },
+
+            sortable: function() {
+                var vm = this;
+
+                setTimeout(function(){
+                    Sortable.create(document.getElementById('sort'), {
+                        draggable: 'li.sort-item',
+                        ghostClass: "sort-ghost",
+                        handle: '.handle',
+                        animation: 300,
+                        onUpdate: function(evt) {
+                            vm.reorder(evt.oldIndex, evt.newIndex);
+                        }
+                    });
+
+                }, 100);
+            },
+
+            reorder: function(oldIndex, newIndex) {
+                //get id list
+                var ids = document.getElementsByClassName('sort-item'),
+                    id_order  = [].map.call(ids, function(input) {
+                        return input.getAttribute('data-id');
+                    });
+
+                var domain  = laroute.url('/cms/branch-office/order', []);
+
+                var payload = {list_order: id_order };
+
+                this.$http.post(domain, payload).then(function(response) {
+                    if (response.data.status == false) {
+                        this.fetchData()
+                        pushNotifMessage(response.status, response.message);
+                    }
+                });
+            },
 
         },
 
         ready: function () {
+            this.sortable()
             this.fetchData()
         }
     });

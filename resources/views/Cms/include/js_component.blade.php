@@ -1,10 +1,11 @@
 
 <script type="text/javascript" src="{{ asset('js/jquery.form.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/sortable.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/bower_components/ckeditor/ckeditor.js') }}"></script>
 <!-- Laroute JS -->
 <script src="{{ asset('js/laroute.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/components/general.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/menu/main.js') }}"></script>
+<!-- End Laroute JS -->
+
 
 <!-- Vue -->
 <script src="{{asset('js/vue.js')}}"></script>
@@ -13,11 +14,17 @@
 <!-- <script type="text/javascript" src="{{asset('js/vue/2.0/vue.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/vue/2.0/vue.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/vue/2.0/vue-resource.js')}}"></script> -->
+<!-- End Vue -->
+<!-- Component JS -->
+<script type="text/javascript" src="{{ asset('js/components/general.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/components/main.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/menu/menu.js') }}"></script>
+<!-- End Component JS -->
+
 <script src="{{asset('themes/cms/content/static-page.js')}}"></script>
 <script src="{{asset('themes/cms/content/main-banner.js')}}"></script>
 <script src="{{asset('themes/cms/content/booking-services.js')}}"></script>
 <script src="{{asset('themes/cms/content/branch-office.js')}}"></script>
-<!-- End Vue -->
 
 <!-- jQuery plugins -->
 <!-- <script src="{{ asset('themes/cms/vendors/jquery/dist/jquery.min.js') }}"></script> -->

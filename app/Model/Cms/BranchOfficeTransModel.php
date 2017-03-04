@@ -23,9 +23,17 @@ class BranchOfficeTransModel extends Model
     /**
      * @param $query
      */
-    public function scopeId($query, $params = true)
+    public function scopeOfficeId($query, $params = true)
     {
         return $query->where('branch_office_id', $params);
+    }
+
+    /**
+     * @param $query
+     */
+    public function scopeId($query, $params = true)
+    {
+        return $query->where('id', $params);
     }
 
 }

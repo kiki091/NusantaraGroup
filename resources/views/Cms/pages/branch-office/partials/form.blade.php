@@ -161,6 +161,12 @@
 								<span class="form__group__title">Branch Office</span>
 							</div>
 							<div v-for="branch_office in models.branch_office">
+
+								<div class="create__form__row" v-if="edit == true && branch_office.office_id != NULL" style="float: right;">
+									<a href="javascript:void(0);" class="btn__delete" @click="removeBranchOfficeDataFromServer(branch_office.office_id, $index, branch_office)" title="Delete data">
+										<i class="ico-delete">@include('Cms.svg-logo.ico-delete')</i>
+									</a>
+								</div>
 								<div class="create__form__row">
 									<div class="new__form__field">
 										<label>Office Title</label>
@@ -201,12 +207,14 @@
 									</div>
 								</div>
 
-								<div class="create__form__row">
+								<div class="create__form__row" v-if="edit == false">
 									<a href="javascript:void(0);" v-if="$index != 0" class="btn__delete" @click="removeMoreOffice(branch_office, $index)">
 										<i class="ico-delete">@include('Cms.svg-logo.ico-delete')</i>
 									</a>
 								</div>
 
+								
+								<hr/>
 							</div>
 							<div class="create__form__row" id="add-more-office">
 								<a href="javascript:void(0);" class="add__link" @click="addMoreOffice" v-if="default_total_office.length + total_office.length != 4">+ Add another office</a>

@@ -133,7 +133,13 @@ class BranchOffice
         $dataTranform['slider'] = isset($data['slider']) ? $this->populateImagesForEdit($data['slider'], 'images') : [];
 
         $dataTranform['branch_office'] = $this->getBranchOfficeTranslation($data['branch_office']);
-dd($dataTranform);
+
+        $dataTranform['total_office'] = isset($data['branch_office']) ? $this->setDefaultTotalBranchOffice($data['branch_office']) : [];
+
+        $dataTranform['meta_title'] = isset($data['meta_title']) ? $data['meta_title'] : '';
+        $dataTranform['meta_keyword'] = isset($data['meta_keyword']) ? $data['meta_keyword'] : '';
+        $dataTranform['meta_description'] = isset($data['meta_description']) ? $data['meta_description'] : '';
+
         return $dataTranform;
     }
 
@@ -146,6 +152,7 @@ dd($dataTranform);
         return array_map(function($data)
         {
             return [
+                'office_id' => isset($data['id']) ? $data['id'] : '',
                 'title_description' => isset($data['title_description']) ? $data['title_description'] : '',
                 'address' => isset($data['address']) ? $data['address'] : '',
                 'latitude' => isset($data['latitude']) ? $data['latitude'] : '',
@@ -168,6 +175,30 @@ dd($dataTranform);
             $totalImages = count($data);
 
             for($i=0; $i<$totalImages; $i++) {
+                $returnValue[] = $i;
+            }
+
+            return $returnValue;
+
+        } catch (\Exception $e) {
+            return [];
+        }
+    }
+
+    /**
+     * Set Default Total Detail Branch Office For Edit
+     * @param $data
+     * @param $index
+     * @return array
+     */
+    protected function setDefaultTotalBranchOffice($data)
+    {
+        try {
+
+            $returnValue = [];
+            $totalData = count($data);
+
+            for($i=0; $i<$totalData; $i++) {
                 $returnValue[] = $i;
             }
 

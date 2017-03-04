@@ -30,6 +30,7 @@
 				</modal>
 
 	        	@include('Cms.pages.branch-office.partials.form')
+				@include('Cms.pages.branch-office.partials.form-edit-image-slider')
 		        <div class="main__content__layer" style="margin-top: 5%;">
 		        	<div class="content__top flex-between">
 		        		<div class="content__title">
@@ -41,8 +42,8 @@
 		        		</div>
 		        	</div>
 		        	<div class="content__bottom">
-						<ul class="news__list sortable" id="sort">
-							<li class="news__list__wrapper sort-item" v-for="branch_office in responseData.branch_office">
+						<ul class="news__list sortable" id="sort" v-sort>
+							<li class="news__list__wrapper sort-item" v-for="branch_office in responseData.branch_office" data-id="@{{ branch_office.id }}">
 								<div class="news__list__detail">
 									<div class="drag__control">
 										<div class="handle">
@@ -56,7 +57,7 @@
 										<div class="news__list__detail__middle">
 											<div class="news__list__desc">
 												<div class="news__name">
-													<a href="#" class="title__name content__edit__hover" @click="editData(branch_office.id)">@{{ branch_office.title }}</a>
+													<a href="#edit-data" class="title__name content__edit__hover" title="Edit Data" @click="editData(branch_office.id)">@{{ branch_office.title }}</a>
 												</div>
 											</div>
 										</div>
@@ -66,10 +67,14 @@
                                             	<span class="switch-label" data-on="Active" data-off="Inactive"></span> <span class="switch-handle"></span>
 											</label>
 
-											<a href="#" class="btn__action__list" @click="editImageSlider(branch_office.id)">
+											{{--<a href="#edit-office-detail" class="btn__action__list" title="Edit Office Detail" >
+												<i class="ico-pencil flex">@include('Cms.svg-logo.ico-pencil')</i>
+											</a>--}}
+											
+											<a href="#edit-image-slider" class="btn__action__list" @click="editImageSlider(branch_office.id)">
 												<i class="ico-photo-edit flex">@include('Cms.svg-logo.ico-photo-edit')</i>
 											</a>
-											<a href="#" class="btn__delete" @click="showDeleteModal(branch_office.id)">
+											<a href="#delete-data" class="btn__delete" @click="showDeleteModal(branch_office.id)">
 												<i class="ico-delete">@include('Cms.svg-logo.ico-delete')</i>
 											</a>
 										</div>

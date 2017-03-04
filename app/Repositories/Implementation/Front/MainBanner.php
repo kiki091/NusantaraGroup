@@ -21,9 +21,13 @@ class MainBanner implements MainBannerInterface
         $this->mainBannerTransformation = $mainBannerTransformation;
     }
 
-    public function getMainBanner()
+    public function getMainBanner($param = array())
     {
-        $mainBannerData = $this->mainBanner();
+        $data = [
+            'is_active' => true,
+        ];
+
+        $mainBannerData = $this->mainBanner($data, 'asc', 'array', true);
         //dd($mainBannerData);
         return $this->mainBannerTransformation->getMainBannerFrontTransform($mainBannerData);
     }
@@ -34,19 +38,21 @@ class MainBanner implements MainBannerInterface
      * @param array $params
      * @return array
      */
-    protected function mainBanner($returnType = 'array', $returnSingle = false)
+    protected function mainBanner($data = array(), $orderType = 'asc', $returnType = 'array', $returnSingle = false)
     {
 
-        $mainBanner = $this->mainBanner;
+        $mainBanner = $this->mainBanner->with('property_location');
         
-        //$mainBanner->orderBy('created_at', 'desc');
+        if(isset($data['is_active'])) {
+            $mainBanner->isActive($data['is_active']);
+        }
 
         if(!$mainBanner->count())
             return array();
 
         switch ($returnType) {
             case 'array':
-                if(!$returnSingle) 
+                if($returnSingle) 
                 {
                     return $mainBanner->get()->toArray();
                 }

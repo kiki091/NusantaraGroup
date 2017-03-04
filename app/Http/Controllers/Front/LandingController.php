@@ -51,7 +51,8 @@ class LandingController extends Controller
         $data['services_category'] = $this->services->getServicesCategory();
         $data['seo'] = $this->landingPage->getlandingPageSeo();
         $data['footer_content'] = $this->footerContent->getFooterContent();
-        //dd($data['services_category']);
+        $data['count'] = count($data['main_banners']);
+        //dd($c);
         $blade = 'Front.Pages.landing';
         
         if(view()->exists($blade))

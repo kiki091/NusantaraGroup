@@ -196,7 +196,7 @@ h2 {
     display: flex;
     -ms-flex-align: center;
     align-items: center;
-    width: 150px;
+    max-width: 250px;
     -ms-flex-pack: end;
     justify-content: flex-end;
     transition: .3s;
@@ -291,6 +291,12 @@ h2 {
     opacity: 0;
 }
 
+.btn__action__list {
+    position: relative;
+    margin: 8px 8px 8px 13px;
+    transition: all .3s;
+}
+
 .btn__delete {
     color: #ffffff;
     position: relative;
@@ -329,6 +335,12 @@ svg:not(:root) {
 #box, #box2, #box3 {
     position: relative;
 }
+.create__form__wrapper .form--top .form__title {
+    font-family: "harriet_regular";
+    color: #4A4A4A;
+    font-size: 21px;
+}
+
 .form--wizard--tab {
     border-bottom: 1px solid #F3F4F6;
 }

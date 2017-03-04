@@ -1,0 +1,101 @@
+
+/***********************************************************/
+/** Author: Gerardo A. Riano *******************************/
+/** Simple Slider Style		 *******************************/
+/**	June 05 - 2014           *******************************/
+/***********************************************************/
+
+.slider
+{
+	width: 70%;
+	height: 380px;
+	float: right;
+	opacity: 0.5;
+}
+
+.captions
+{
+	width: 30%;
+	height: 380px;
+	float: right;
+	background: #f6f4f1;
+}
+
+/************************ CAPTION ************************/
+
+.caption h2
+{
+	position: relative;
+	color: #84796a;
+	font-family: "Harriet Display Light",TimesNewRoman,'Times New Roman',Times,Baskerville,Georgia,serif;
+	margin: 50px 30px 10px 30px;
+	z-index: 2;
+}
+
+.caption h5
+{
+	position: relative;
+	color: #84796a;
+	font-family: "Harriet Display Light",TimesNewRoman,'Times New Roman',Times,Baskerville,Georgia,serif;
+	margin-left: 30px;
+	margin-right: 30px;
+	z-index: 2;
+}
+
+.caption p
+{
+	position: relative;
+	color: #84796a;
+	font-family: sans-serif;
+	font-weight: normal;
+	font-size: 0.8em;
+	margin-left: 30px;
+	margin-right: 30px;
+	z-index: 2;
+	margin-top: 40px;
+	text-align: justify;
+	margin-bottom: 30px;
+}
+
+/************************ SLIDE ************************/
+
+.slide
+{
+	height: 380px;
+	width: 100%;
+	background-size: cover;
+	background-position: center;
+	position: absolute;
+	z-index: 2;
+}
+
+/************************ BUTTONS ************************/
+
+#buttons
+{	
+	margin-left: 30px;
+	z-index: 10;
+	width: 50px;
+	height: 25px;
+	display: inline;
+}
+
+#left
+{
+	background-image: url('images/arr.png');
+	background-position: left;
+	width: 25px;
+	height: 25px;
+	display: inline-block;
+	cursor: pointer;
+}
+
+#rigth
+{
+	background-image: url('images/arr.png');
+	background-position: right;
+	width: 25px;
+	height: 25px;
+	display: inline-block;
+	cursor: pointer;
+}

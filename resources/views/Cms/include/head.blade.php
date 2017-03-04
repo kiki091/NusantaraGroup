@@ -32,7 +32,7 @@
 	JS FILE ASSETS
  -->	
 <script src="{{ asset('js/bower_components/jquery/dist/jquery.min.js') }}"></script>
-<!-- <script src="{{ asset('js/bower_components/jquery/jQuery-2.1.4.min.js') }}"></script> -->
+<script src="{{ asset('js/bower_components/jquery/dist/jquery-ui.js') }}"></script>
 <script src="{{ asset('themes/cms/js/function.js') }}"></script>
 <!-- notify -->
 <script type="text/javascript" src="{{ asset('js/bower_components/notifyjs/dist/notify.js') }}"></script>

@@ -407,10 +407,12 @@ class BranchOffice extends BaseImplementation implements BranchOfficeInterface
         	->with('translation');
 
         if(isset($data['branch_office_id'])) {
-            $branchOfficeTrans->id($data['branch_office_id']);
+            $branchOfficeTrans->officeId($data['branch_office_id']);
         }
 
-
+        if(isset($data['id'])) {
+            $branchOfficeTrans->id($data['id']);
+        }
 
         if(!$branchOfficeTrans->count())
             return array();
@@ -531,7 +533,7 @@ class BranchOffice extends BaseImplementation implements BranchOfficeInterface
      * @param $data
      */
 
-    public function deleteImage($data)
+    public function deleteImageSlider($data)
     {
         try {
             if (!isset($data['id']) && empty($data['id']))
@@ -597,6 +599,7 @@ class BranchOffice extends BaseImplementation implements BranchOfficeInterface
      */
     protected function removeOfficeDetail($data)
     {
+        
         try {
 
             $delete = $this->branchOfficeTrans
@@ -629,4 +632,84 @@ class BranchOffice extends BaseImplementation implements BranchOfficeInterface
 
         return $this->setResponse(trans('message.cms_success_get_data'), true, $this->branchOfficeTransformation->getSingleBranchOfficeCmsTransform($singleBranchOfficeData));
     }
+
+    /**
+     * Edit Image Slider Branch Office
+     * @param $data
+     */
+    public function editImageSlider($data)
+    {
+        try {
+
+            DB::beginTransaction();
+
+            $this->lastInsertId = $data['id'];
+
+            if ($this->storeBranchOfficeImages($data) != true) {
+                DB::rollBack();
+                return $this->setResponse($this->message, false);
+            }
+
+            if ($this->uploadImageDetail($data) != true) {
+                DB::rollBack();
+                return $this->setResponse($this->message, false);
+            }
+
+            DB::commit();
+            return $this->setResponse(trans('message.cms_update_image_slider_success'), true);
+
+        } catch (\Exception $e) {
+            return $this->setResponse($e->getMessage(), false);
+        }
+    }
+
+    /**
+     * Order Data
+     * @param $data
+     */
+    public function order($data)
+    {
+        try {
+            DB::beginTransaction();
+
+            if ($this->orderData($data)) {
+                DB::commit();
+                return $this->setResponse(trans('message.cms_success_ordering'), true);
+            }
+
+            DB::rollBack();
+            return $this->setResponse(trans('message.cms_failed_ordering'), false);
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return $this->setResponse($e->getMessage(), false);
+        }
+    }
+
+    /**
+     * Order List Data
+     * @param $data
+     */
+    protected function orderData($data)
+    {
+        try {
+            $i = 1 ;
+            foreach ($data as $key => $val) {
+                $orderValue = $i++;
+
+                $branchOffice           = BranchOfficeModel::find($val);
+
+                $branchOffice->order  = $orderValue;
+
+                $branchOffice->save();
+            }
+
+            return true;
+
+        } catch (Exception $e) {
+            $this->message = $e->getMessage();
+            return false;
+        }
+    }
+
 }

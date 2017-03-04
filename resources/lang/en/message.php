@@ -11,4 +11,7 @@
     	'cms_success_store_data_general' => 'Success store data.',
     	'cms_success_delete_data_general' => 'Success delete data.',
     	'cms_failed_delete_data_general' => 'Failed delete data.',
+      'cms_update_image_slider_success' => 'Update images slider success',
+      'cms_success_ordering' => 'Order data success',
+      'cms_failed_ordering' => 'Oeder data failed',
   ];

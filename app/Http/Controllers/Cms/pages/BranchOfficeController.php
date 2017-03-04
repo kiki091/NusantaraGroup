@@ -41,7 +41,7 @@ class BranchOfficeController extends CmsController
            return redirect()->route('login');
         }
         
-    	$data['page_title'] = 'Main Banner';
+    	$data['page_title'] = 'Branch Office';
     	$data['user'] = $this->user->setAuthSession();
     	$data['location'] = $this->getUserLocation();
 
@@ -97,6 +97,27 @@ class BranchOfficeController extends CmsController
     }
 
     /**
+     * Edit Image Slider
+     */
+
+    public function editImageSlider(Request $request)
+    {
+        
+        $validator = Validator::make($request->all(), $this->validateEditImageSlider($request));
+
+        if ($validator->fails()) {
+            //TODO: case fail
+            return $this->response->setResponseErrorFormValidation($validator->messages(), false);
+
+        } else {
+            //TODO: case pass
+            return $this->branchOffice->editImageSlider($request->except(['_token']));
+        }
+        
+    }
+
+
+    /**
      * Change status
      * @param Request $request
      * @return mixed
@@ -105,6 +126,17 @@ class BranchOfficeController extends CmsController
     {
         return $this->branchOffice->changeStatus($request->except(['_token']));
         
+    }
+
+    /**
+     * Ordering 
+     * @param Request $request
+     * @return mixed
+     */
+
+    public function order(Request $request)
+    {
+        //return $this->branchOffice->order($request->input('list_order');
     }
 
     /**
@@ -123,9 +155,9 @@ class BranchOfficeController extends CmsController
      * @param Request $request
      * @return mixed
      */
-    public function deleteImage(Request $request)
+    public function deleteImageSlider(Request $request)
     {
-        return $this->branchOffice->deleteImage($request->except(['_token']));
+        return $this->branchOffice->deleteImageSlider($request->except(['_token']));
         
     }
 
@@ -171,6 +203,15 @@ class BranchOfficeController extends CmsController
                 unset($rules['images.*']);
             }
         }
+
+        return $rules;
+    }
+
+    private function validateEditImageSlider($request = array())
+    {
+        $rules = [
+            'images.*'                => 'required|dimensions:width='.BRANCH_OFFICE_IMAGES_WIDTH.',height='.BRANCH_OFFICE_IMAGES_HEIGHT.'|max:'. BRANCH_OFFICE_THUMBNAIL_SIZE .'|mimes:jpeg,jpg',
+        ];
 
         return $rules;
     }

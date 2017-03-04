@@ -31,15 +31,16 @@
     <!-- End Image Slider -->
 
     <!-- Carousel With Side Caption Style -->
-
-    <link rel="stylesheet" type="text/css" href="{{asset('themes/front/carousel/style/slider.css')}}" />
+    <link href="{{asset('themes/front/carousel/style/slider.css')}}" rel="stylesheet">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="{{asset('themes/front/carousel/js/slider.js')}}"></script>
     <!-- End Carousel With Side Caption Style -->
 
     <!-- Javascript Animation -->
     <script type="text/javascript" src="{{asset('themes/front/animation/js/scrollreveal.js')}}"></script>
     <!-- End Javascript Animation -->
     
-    <link rel="stylesheet" type="text/css" href="https://cloud.typography.com/6245934/7028772/css/fonts.css" />
 
 
     <!-- Anmasi Loading Page -->
@@ -51,34 +52,12 @@
     <!-- End Anmasi Loading Page -->
 
 
-    <!-- js file -->
-    <script src="{{asset('themes/front/shield/js/jquery.min.js')}}"></script>
+    <!-- Javascript file -->
+    <!-- <script src="{{asset('themes/front/shield/js/jquery.min.js')}}"></script> -->
     <script type="text/javascript" src="{{asset('themes/front/shield/js/modernizr.custom.js')}}"></script>
     <script src="{{asset('themes/front/js/respond.min.js')}}"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="{{asset('css/bower_components/toastr/toastr.css')}}">
     <script type="text/javascript" src="{{asset('js/bower_components/toastr/toastr.min.js')}}"></script>
-
-    <!-- <script type="text/javascript" src="{{ asset('themes/front/API/google-maps/style.js')}} "></script>
-
-    <script>
-        function initMap() {
-            var uluru = {lat: -6.169557, lng: 106.819661};
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 15,
-                center: uluru
-            });
-            var marker = new google.maps.Marker({
-                position: uluru,
-                map: map
-            });
-        }
-    </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAr9WjGsW6KZ91tJl_hBfjaAAMco9dc0p4&callback=initMap">
-    </script> -->
-
-
 
     <script type="text/javascript">
         (function() {
@@ -89,9 +68,17 @@
         })();
     </script>
 
-    <!-- Gallery -->
+    <!-- Main Gallery -->
+
     <script src="{{asset('themes/front/gallery/js/rbootstrap.min.js')}}"></script>
     <link href="{{asset('themes/front/gallery/css/effects.css')}}" rel="stylesheet"> 
-    <script src="{{asset('themes/front/slider/slider.js')}}"></script>
-    <link href="{{asset('themes/front/slider/slider.css')}}" rel="stylesheet"> 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet" media="all">
+
+    <!-- End Main Gallery -->
+
+    <!-- Main Banner JS -->
+
+    <script src="{{asset('themes/front/slider/slider.js')}}"></script>
+    <link href="{{asset('themes/front/slider/slider.css')}}" rel="stylesheet">
+
+    <!-- End Main Banner JS --> 

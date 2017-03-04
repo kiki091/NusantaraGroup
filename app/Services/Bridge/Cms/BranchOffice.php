@@ -54,6 +54,16 @@ class BranchOffice {
     }
 
     /**
+     * Edit Image Slider
+     * @param $params
+     * @return mixed
+     */
+    public function editImageSlider($params)
+    {
+        return $this->branchOffice->editImageSlider($params);
+    }
+
+    /**
      * Change Status
      * @param $params
      * @return mixed
@@ -61,6 +71,16 @@ class BranchOffice {
     public function changeStatus($params)
     {
         return $this->branchOffice->changeStatus($params);
+    }
+
+    /**
+     * Order Data
+     * @param $params
+     * @return mixed
+     */
+    public function order($params)
+    {
+        return $this->branchOffice->order($params);
     }
 
     /**
@@ -78,9 +98,9 @@ class BranchOffice {
      * @param $params
      * @return mixed
      */
-    public function deleteImage($params)
+    public function deleteImageSlider($params)
     {
-        return $this->branchOffice->deleteImage($params);
+        return $this->branchOffice->deleteImageSlider($params);
     }
 
     /**
