@@ -74,7 +74,7 @@ class BranchOfficeController extends CmsController
     public function store(Request $request)
     {
 
-    	/*$validator = Validator::make($request->all(), $this->validationStore($request));
+    	$validator = Validator::make($request->all(), $this->validationStore($request));
 
         if ($validator->fails()) {
             //TODO: case fail
@@ -82,10 +82,9 @@ class BranchOfficeController extends CmsController
 
         } else {
             //TODO: case pass
-            return $this->mainBanner->store($request->except(['_token'], self::MAIN_BANNER_KEY  ));
-        }*/
+            return $this->branchOffice->store($request->except(['_token']), $this->getLocationId());
+        }
 
-        return $this->branchOffice->store($request->except(['_token']), $this->getLocationId());
     }
 
     /**

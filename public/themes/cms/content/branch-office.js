@@ -162,7 +162,7 @@ function crudBranchOffice() {
                         this.total_detail_image.$remove(index)
                     }
 
-                    pushNotifMessage(response.status, response.message)
+                    pushNotifV3(response.status, response.message)
                 })
             },
 
@@ -185,20 +185,21 @@ function crudBranchOffice() {
                         this.models.branch_office.$remove(item);
                     }
 
-                    pushNotifMessage(response.status, response.message)
+                    pushNotifV3(response.status, response.message)
                 })
             },
 
             fetchData: function(){
                 var domain  = laroute.url('/cms/branch-office/data', []);
 
-                    this.$http.get(domain).then(function (response) {
-                        if(response.data.status == true) {
-                            this.$set('responseData', response.data.data)
-                        } else {
-                            pushNotifMessage(response.data.status, response.data.message)
-                        }
-                    })
+                this.$http.get(domain).then(function (response) {
+                    response = response.data
+                    if(response.status == true) {
+                        this.$set('responseData', response.data)
+                    } else {
+                        pushNotifV3(response.status, response.message)
+                    }
+                })
             },
 
             storeData: function(event){
@@ -229,12 +230,12 @@ function crudBranchOffice() {
                                 pushNotifMessage(response.status,response.message, message_validation);
 
                             } else {
-                                pushNotifMessage(response.status, response.message);
+                                pushNotifV3(response.status, response.message);
                             }
                         } else {
                             vm.fetchData()
                             vm.resetForm()
-                            pushNotifMessage(response.status, response.message);
+                            pushNotifV3(response.status, response.message);
                             $('.btn__add__cancel').click();
                         }
                     },
@@ -279,7 +280,7 @@ function crudBranchOffice() {
                         replaceToCkEditor()
 
                     } else {
-                        pushNotifMessage(response.status,response.message)
+                        pushNotifV3(response.status,response.message)
                     }
                 })
             },
@@ -312,7 +313,7 @@ function crudBranchOffice() {
                         $('#toggle-form-photo-uploader-content').slideDown(400)
 
                     } else {
-                        pushNotifMessage(response.status, response.message)
+                        pushNotifV3(response.status, response.message)
                     }
                 })
             },
@@ -344,12 +345,12 @@ function crudBranchOffice() {
                                 pushNotifMessage(response.status,response.message, message_validation);
 
                             } else {
-                                pushNotifMessage(response.status, response.message);
+                                pushNotifV3(response.status, response.message);
                             }
                         } else {
                             vm.fetchData()
                             vm.resetForm()
-                            pushNotifMessage(response.status, response.message);
+                            pushNotifV3(response.status, response.message);
                             $('.btn__add__cancel').click();
                         }
                     },
@@ -379,10 +380,10 @@ function crudBranchOffice() {
                     response = response.data
                     if (response.status == false) {
                         this.fetchData()
-                        pushNotifMessage(response.status,response.message);
+                        pushNotifV3(response.status,response.message);
                     }
                     else{
-                        pushNotifMessage(response.status,response.message);
+                        pushNotifV3(response.status,response.message);
                     }
                 })
             },
@@ -405,7 +406,7 @@ function crudBranchOffice() {
                     setTimeout(function() {
                         $('.popup__mask__alert').removeClass('is-visible');
                     }, 300);
-                    pushNotifMessage(response.status, response.message);
+                    pushNotifV3(response.status, response.message);
                 });
             },
 
@@ -460,7 +461,7 @@ function crudBranchOffice() {
 
                     }
                 } catch (err) {
-                    pushNotifMessage(false, err.message);
+                    pushNotifV3(false, err.message);
                 }
             },
 
@@ -496,10 +497,10 @@ function crudBranchOffice() {
                     response = response.data
                     if (response.status == false) {
                         this.fetchData()
-                        pushNotifMessage(response.status, response.message);
+                        pushNotifV3(response.status, response.message);
                     }
                     this.fetchData()
-                    pushNotifMessage(response.status, response.message);
+                    pushNotifV3(response.status, response.message);
                 });
             },
 

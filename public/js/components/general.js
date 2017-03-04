@@ -104,6 +104,8 @@ function property() {
         btn.parent().closest('.main__wrapper__content').find('.main__content__form__layer').slideUp(400);
     });
 
+    notify();
+
 }
 
 function setupCKEDITOR(){
@@ -204,14 +206,54 @@ function pushNotifV2(status, title, message, autoHide, position)
     });
 }
 
+function pushNotifV3(status, message)
+{
+    var time = '5000';
+    if(status == true)
+    {
+        new TabbedNotification({
+            title: 'Success !!',
+            text: message,
+            type: 'info',
+            sound: false
+        });
+    }
+    else{
+        new TabbedNotification({
+            title: 'Failed !!',
+            text: message,
+            type: 'error',
+            sound: false
+        });
+    }
+
+    function hideNotif()
+    {
+        var tabid = idname = '';
+
+        $('.notification_close', function(e) {
+            idname = $(this).parent().parent().attr("id");
+            tabid = '10';
+            $('#ntf' + tabid).remove();
+            $('.notifications a').first().addClass('active');
+            $('#notif-group div').first().css('display', 'block');
+        });
+    }
+
+    var timer =  setInterval(hideNotif, time);
+}
+
+
+
 
 function showLoadingData()
 {
     var options = {
         theme:"sk-cube-grid",
-        textColor:"white"
+        textColor:"white",
     };
     HoldOn.open(options);
+    
 }
 
 function hideLoading()
@@ -253,8 +295,13 @@ function showModalDelete()
     });
 }
 
+function scrollTop()
+{
+    $('.main_container').scrollTop(0);
+}
+
 function mainGeneral(){
-    notify();
+    notif();
 }
 
 // INIT FUNCTION WEB CMS

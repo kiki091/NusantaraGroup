@@ -21,7 +21,7 @@ function notify(){
   });
 
   /* FORM ERROR STYLE */
-  var img = '../svg/ico-important.svg';
+  var img = '../themes/cms/svg/ico-important.svg';
   var count = $( '.notif__content__li' ).size();
   $.notify.addStyle('notif-msg', {
     html:

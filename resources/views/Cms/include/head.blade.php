@@ -24,6 +24,7 @@
 <link href="{{ asset('js/bower_components/hold-on/HoldOn.min.css') }}" rel="stylesheet">
 <link href="{{ asset('themes/cms/css/notify.css') }}" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="{{ asset('js/bower_components/alert/dist/sweetalert.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('js/bower_components/pacejs/pace-theme-flash.css') }}">
 <!-- 
 	End Style Css
  -->
@@ -33,6 +34,7 @@
  -->	
 <script src="{{ asset('js/bower_components/jquery/dist/jquery.min.js') }}"></script>
 <script src="{{ asset('js/bower_components/jquery/dist/jquery-ui.js') }}"></script>
+<script data-pace-options='{ "ajax": false }' src="{{ asset('js/bower_components/pacejs/pace.js') }}"></script>
 <script src="{{ asset('themes/cms/js/function.js') }}"></script>
 <!-- notify -->
 <script type="text/javascript" src="{{ asset('js/bower_components/notifyjs/dist/notify.js') }}"></script>

@@ -33,7 +33,9 @@
 <!-- FastClick -->
 <script src="{{ asset('themes/cms/vendors/fastclick/lib/fastclick.js') }}"></script>
 <!-- NProgress -->
-<script src="{{ asset('themes/cms/vendors/nprogress/nprogress.js') }}"></script>
+<!-- <script src="{{ asset('themes/cms/vendors/nprogress/nprogress.js') }}"></script> -->
+<!-- PNotify -->
+<script src="{{ asset('themes/cms/vendors/pnotify/dist/pnotify.js') }}"></script>
 <!-- jQuery custom content scroller -->
 <script src="{{ asset('themes/cms/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js') }}"></script>
 <!-- Custom Theme Scripts -->
