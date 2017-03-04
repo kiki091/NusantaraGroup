@@ -133,6 +133,7 @@ Route::group(['middleware' => ['web']], function ()
 				Route::get('data', 'Cms\pages\BranchOfficeController@getData')->name('GetDataBranchOffice');
 				Route::post('store', 'Cms\pages\BranchOfficeController@store')->name('StoreBranchOffice');
 				Route::post('edit', 'Cms\pages\BranchOfficeController@edit')->name('EditBranchOffice');
+				Route::post('order', 'Cms\pages\BranchOfficeController@order')->name('OrderDataBranchOffice');
 				Route::post('change-status', 'Cms\pages\BranchOfficeController@changeStatus')->name('ChangeStatusBranchOffice');
 				Route::post('delete', 'Cms\pages\BranchOfficeController@delete')->name('DeleteBranchOffice');
 

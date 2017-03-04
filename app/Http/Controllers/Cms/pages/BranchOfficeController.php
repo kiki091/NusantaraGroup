@@ -136,7 +136,7 @@ class BranchOfficeController extends CmsController
 
     public function order(Request $request)
     {
-        //return $this->branchOffice->order($request->input('list_order');
+        return $this->branchOffice->order($request->input('list_order'));
     }
 
     /**

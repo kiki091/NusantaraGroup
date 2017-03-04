@@ -493,10 +493,13 @@ function crudBranchOffice() {
                 var payload = {list_order: id_order };
 
                 this.$http.post(domain, payload).then(function(response) {
-                    if (response.data.status == false) {
+                    response = response.data
+                    if (response.status == false) {
                         this.fetchData()
                         pushNotifMessage(response.status, response.message);
                     }
+                    this.fetchData()
+                    pushNotifMessage(response.status, response.message);
                 });
             },
 

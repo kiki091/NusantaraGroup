@@ -383,6 +383,13 @@ class BranchOffice extends BaseImplementation implements BranchOfficeInterface
             $branchOffice->id($data['id']);
         }
 
+        if(isset($params['order_by'])) {
+            $branchOffice->orderBy($params['order_by'], $orderType);
+        } else {
+            $branchOffice->orderBy('order', $orderType);
+            $branchOffice->orderBy('created_at', 'desc');
+        }
+
         if(!$branchOffice->count())
             return array();
 
