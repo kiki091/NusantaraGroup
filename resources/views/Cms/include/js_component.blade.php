@@ -21,6 +21,7 @@
 <script type="text/javascript" src="{{ asset('js/menu/menu.js') }}"></script>
 <!-- End Component JS -->
 
+<script src="{{asset('themes/cms/content/awards.js')}}"></script>
 <script src="{{asset('themes/cms/content/static-page.js')}}"></script>
 <script src="{{asset('themes/cms/content/main-banner.js')}}"></script>
 <script src="{{asset('themes/cms/content/booking-services.js')}}"></script>

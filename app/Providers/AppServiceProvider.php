@@ -41,6 +41,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('App\Repositories\Contracts\Cms\MainBanner', 'App\Repositories\Implementation\Cms\MainBanner');
         $this->app->bind('App\Repositories\Contracts\Cms\BookingServices', 'App\Repositories\Implementation\Cms\BookingServices');
         $this->app->bind('App\Repositories\Contracts\Cms\BranchOffice', 'App\Repositories\Implementation\Cms\BranchOffice');
+        $this->app->bind('App\Repositories\Contracts\Cms\Awards', 'App\Repositories\Implementation\Cms\Awards');
     }
 
     /**
@@ -62,10 +63,12 @@ class AppServiceProvider extends ServiceProvider
             'App\Repositories\Contracts\Front\Carier',
             'App\Repositories\Contracts\Front\CompanyHistory',
             'App\Repositories\Contracts\Auth\User',
+            
             'App\Repositories\Contracts\Cms\StaticPage',
             'App\Repositories\Contracts\Cms\MainBanner',
             'App\Repositories\Contracts\Cms\BookingServices',
             'App\Repositories\Contracts\Cms\BranchOffice',
+            'App\Repositories\Contracts\Cms\Awards',
         );
     }
 }

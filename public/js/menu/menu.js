@@ -29,3 +29,11 @@ function menuBranchOffice()
         initBranchOffice()
     });
 }
+
+function menuAwards()
+{
+    $('.right_col').load(laroute.url('/cms/awards', []), function()
+    {
+        initAwards()
+    });
+}

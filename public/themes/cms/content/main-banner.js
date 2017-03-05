@@ -110,7 +110,7 @@ function crudMainBanner() {
                     } else {
                         this.resetForm()
                         $('.btn__add__cancel').click()
-                        pushNotifMessage(response.status, response.message);
+                        pushNotifV3(response.status, response.message);
                         this.clearErorrMessage()
                         this.fetchData()
                         hideLoading()
@@ -143,13 +143,13 @@ function crudMainBanner() {
                         $('.btn__add').click()
 
                     } else {
-                        pushNotifMessage(response.status,response.message)
+                        pushNotifV3(response.status,response.message)
                     }
                 })
             },
 
             changeStatus: function(id) {
-                console.log(id)
+                
                 var payload = []
                 payload['id'] = id
 
@@ -164,10 +164,10 @@ function crudMainBanner() {
                     response = response.data
                     if (response.status == false) {
                         this.fetchData()
-                        pushNotifMessage(response.status,response.message);
+                        pushNotifV3(response.status,response.message);
                     }
                     else{
-                        pushNotifMessage(response.status,response.message);
+                        pushNotifV3(response.status,response.message);
                     }
                 })
             },
@@ -190,7 +190,7 @@ function crudMainBanner() {
                     setTimeout(function() {
                         $('.popup__mask__alert').removeClass('is-visible');
                     }, 300);
-                    pushNotifMessage(response.status, response.message);
+                    pushNotifV3(response.status, response.message);
                 });
             },
 

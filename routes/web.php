@@ -141,8 +141,29 @@ Route::group(['middleware' => ['web']], function ()
 				Route::post('delete-image-slider', 'Cms\pages\BranchOfficeController@deleteImageSlider')->name('DeleteImageSliderBranchOffice');
 				
 				Route::post('delete-office-detail', 'Cms\pages\BranchOfficeController@deleteOfficeDetail')->name('DeleteDetailBranchOffice');
+			});
 
-				
+			// Awards
+
+			Route::group(array('prefix' => 'awards' ), function(){
+				Route::get('/', 'Cms\pages\AwardsController@index')->name('Awards');
+				Route::get('data', 'Cms\pages\AwardsController@getData')->name('AwardsGetData');
+
+				Route::post('store', 'Cms\pages\AwardsController@store')->name('AwardsStore');
+				Route::post('store-banner', 'Cms\pages\AwardsController@storeBanner')->name('AwardsStoreBanner');
+
+				Route::post('edit', 'Cms\pages\AwardsController@edit')->name('AwardsEditData');
+				Route::post('edit-banner', 'Cms\pages\AwardsController@editBanner')->name('AwardsEditBanner');
+
+				Route::post('order', 'Cms\pages\AwardsController@order')->name('AwardsOrderData');
+				Route::post('order-banner', 'Cms\pages\AwardsController@orderBanner')->name('AwardsOrderBanner');
+
+				Route::post('change-status', 'Cms\pages\AwardsController@changeStatus')->name('AwardsChangeStatus');
+				Route::post('change-status-banner', 'Cms\pages\AwardsController@changeStatusBanner')->name('AwardsChangeStatusBanner');
+
+				Route::post('delete', 'Cms\pages\AwardsController@delete')->name('AwardsDeleteData');
+				Route::post('delete-banner', 'Cms\pages\AwardsController@deleteBanner')->name('AwardsDeleteBanner');
+
 			});
 		});
 

@@ -335,3 +335,11 @@ function initBranchOffice()
     buttonClickClose();
     replaceToCkEditor();
 }
+
+function initAwards()
+{
+    crudAwards();
+    buttonClickOpen();
+    buttonClickClose();
+    replaceToCkEditor();
+}
