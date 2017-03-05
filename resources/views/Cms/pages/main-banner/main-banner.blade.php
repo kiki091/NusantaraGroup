@@ -41,8 +41,8 @@
 		        		</div>
 		        	</div>
 		        	<div class="content__bottom">
-						<ul class="news__list sortable" id="sort">
-							<li class="news__list__wrapper sort-item" v-for="banner in responseData.banner">
+						<ul class="news__list sortable" id="sort" v-sort>
+							<li class="news__list__wrapper sort-item" v-for="banner in responseData.banner" data-id="@{{ banner.id }}">
 								<div class="news__list__detail">
 									<div class="drag__control">
 										<div class="handle">

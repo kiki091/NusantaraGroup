@@ -52,6 +52,14 @@ class MainBanner {
     }
 
     /**
+     * Order Data
+     */
+    public function order($params)
+    {
+        return $this->mainBanner->order($params);
+    }
+
+    /**
      * Delete Data
      */
     public function delete($params)

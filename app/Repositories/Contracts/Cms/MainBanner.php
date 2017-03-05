@@ -35,6 +35,13 @@ interface MainBanner
     public function changeStatus($params);
 
     /**
+     * Order Data
+     * @param $params
+     * @return mixed
+     */
+    public function order($params);
+
+    /**
      * Delete Data
      * @param $params
      * @return mixed

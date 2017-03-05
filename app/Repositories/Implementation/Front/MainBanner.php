@@ -3,7 +3,7 @@
 namespace App\Repositories\Implementation\Front;
 
 use App\Repositories\Contracts\Front\MainBanner as MainBannerInterface;
-use App\Model\Front\MainBanner as MainBannerModel;
+use App\Model\Front\MainBanner as MainBannerModels;
 use App\Services\Transformation\Front\MainBanner as MainBannerTransformation;
 use Cache;
 use Session;
@@ -15,7 +15,7 @@ class MainBanner implements MainBannerInterface
     protected $mainBanner;
     protected $mainBannerTransformation;
 
-    function __construct(MainBannerModel $mainBanner, MainBannerTransformation $mainBannerTransformation)
+    function __construct(MainBannerModels $mainBanner, MainBannerTransformation $mainBannerTransformation)
     {
         $this->mainBanner = $mainBanner;
         $this->mainBannerTransformation = $mainBannerTransformation;

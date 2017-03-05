@@ -7,7 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 class MainBannerModel extends Model
 {
     protected $table = 'main_banner';
-    protected $fillable = ['images', 'title', 'is_active'];
+    public $timestamps = true;
+
+    protected $fillable = [
+        'images', 
+        'title', 
+        'is_active',
+        'order',
+        'created_at', 
+        'created_by',
+        'updated_at',
+    ];
 
     /***************** Scope *****************/
 

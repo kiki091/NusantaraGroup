@@ -5,7 +5,7 @@ namespace App\Repositories\Implementation\Cms;
 use Illuminate\Http\Request;
 use App\Repositories\Implementation\BaseImplementation;
 use App\Repositories\Contracts\Cms\MainBanner as MainBannerInterface;
-use App\Model\Cms\MainBannerModel as MainBannerModels;
+use App\Model\Cms\MainBannerModel as MainBannerModel;
 use App\Services\Transformation\Cms\MainBanner as MainBannerTransformation;
 use Cache;
 use Session;
@@ -19,13 +19,13 @@ class MainBanner extends BaseImplementation implements MainBannerInterface
 	protected $message;
     protected $mainBanner;
     protected $lastInsertId;
-    protected $mainBannerformation;
+    protected $mainBannerTransformation;
     protected $uniqueIdImagePrefix = '';
 
-    function __construct(MainBannerModels $mainBanner, MainBannerTransformation $mainBannerformation)
+    function __construct(MainBannerModel $mainBanner, MainBannerTransformation $mainBannerTransformation)
     {
         $this->mainBanner = $mainBanner;
-        $this->mainBannerformation = $mainBannerformation;
+        $this->mainBannerTransformation = $mainBannerTransformation;
         $this->uniqueIdImagePrefix = uniqid(PREFIX_FILENAME_NUSANTARA_IMAGE);
     }
 
@@ -38,7 +38,7 @@ class MainBanner extends BaseImplementation implements MainBannerInterface
 
         $mainBannerData = $this->mainBanner($data, 'asc', 'array', true);
        
-        return $this->mainBannerformation->getMainBannerCmsTransform($mainBannerData);
+        return $this->mainBannerTransformation->getMainBannerCmsTransform($mainBannerData);
     }
 
     /**
@@ -181,7 +181,7 @@ class MainBanner extends BaseImplementation implements MainBannerInterface
 
         $singleData = $this->mainBanner($data, 'asc', 'array', true);
 
-        return $this->setResponse(trans('message.cms_success_get_data'), true, $this->mainBannerformation->getSingleForEditMainBannerTransform($singleData));
+        return $this->setResponse(trans('message.cms_success_get_data'), true, $this->mainBannerTransformation->getSingleForEditMainBannerTransform($singleData));
     }
 
     public function changeStatus($data)
@@ -270,7 +270,7 @@ class MainBanner extends BaseImplementation implements MainBannerInterface
 
         $primaryData = $this->mainBanner($params, 'asc', 'array', true);
 
-        return $this->mainBannerformation->getSingleForEditMainBannerTransform($primaryData);
+        return $this->mainBannerTransformation->getSingleForEditMainBannerTransform($primaryData);
     }
 
     /**
@@ -347,6 +347,13 @@ class MainBanner extends BaseImplementation implements MainBannerInterface
             $mainBanner->propertyId($data['property_location_id']);
         }
 
+        if(isset($params['order_by'])) {
+            $mainBanner->orderBy($params['order_by'], $orderType);
+        } else {
+            $mainBanner->orderBy('order', $orderType);
+            $mainBanner->orderBy('created_at', 'desc');
+        }
+
 
         if(!$mainBanner->count())
             return array();
@@ -358,4 +365,54 @@ class MainBanner extends BaseImplementation implements MainBannerInterface
         
         return $mainBanner->get()->toArray();
     }
+
+    /**
+     * Order Data
+     * @param $data
+     */
+    public function order($data)
+    {
+        try {
+            DB::beginTransaction();
+
+            if ($this->orderData($data)) {
+                DB::commit();
+                return $this->setResponse(trans('message.cms_success_ordering'), true);
+            }
+
+            DB::rollBack();
+            return $this->setResponse(trans('message.cms_failed_ordering'), false);
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return $this->setResponse($e->getMessage(), false);
+        }
+    }
+
+    /**
+     * Order List Data
+     * @param $data
+     */
+    protected function orderData($data)
+    {
+        try {
+            $i = 1 ;
+            foreach ($data as $key => $val) {
+                $orderValue = $i++;
+
+                $mainBanner         = MainBannerModel::find($val);
+
+                $mainBanner->order  = $orderValue;
+
+                $mainBanner->save();
+            }
+
+            return true;
+
+        } catch (Exception $e) {
+            $this->message = $e->getMessage();
+            return false;
+        }
+    }
+
 }

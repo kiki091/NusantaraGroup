@@ -73,7 +73,7 @@ class MainBannerController extends CmsController
     public function store(Request $request)
     {
 
-    	/*$validator = Validator::make($request->all(), $this->validationStore($request));
+    	$validator = Validator::make($request->all(), $this->validationStore($request));
 
         if ($validator->fails()) {
             //TODO: case fail
@@ -81,10 +81,10 @@ class MainBannerController extends CmsController
 
         } else {
             //TODO: case pass
-            return $this->mainBanner->store($request->except(['_token'], self::MAIN_BANNER_KEY  ));
-        }*/
+            return $this->mainBanner->store($request->except(['_token', 'image_url']), $this->getLocationId(), self::MAIN_BANNER_KEY);
+        }
 
-        return $this->mainBanner->store($request->except(['_token', 'image_url']), $this->getLocationId(), self::MAIN_BANNER_KEY);
+        
     }
 
     /**
@@ -103,6 +103,17 @@ class MainBannerController extends CmsController
     public function changeStatus(Request $request)
     {
         return $this->mainBanner->changeStatus($request->except(['_token']));
+        
+    }
+
+    /**
+     * Order Data
+     * @param Request $request
+     * @return mixed
+     */
+    public function order(Request $request)
+    {
+        return $this->mainBanner->order($request->except(['_token']));
         
     }
 

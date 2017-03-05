@@ -12,9 +12,9 @@ class BranchOfficeModel extends Model
     protected $fillable = [
         'slug',
         'order',
-	    'create_at', 
-	    'create_by',
-	    'update_at',
+	    'created_at', 
+	    'created_by',
+	    'updated_at',
     ];
 
     public function branch_office()
