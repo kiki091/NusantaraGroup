@@ -2,9 +2,25 @@
 <div class="top_nav">
     <div class="nav_menu">
         <nav class="" role="navigation">
-            <div class="nav toggle">
-                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+
+            <div class="toggle__sidebar">
+                <div class="bar">
+                    <a id="menu_toggle">
+                    <span class="bar-1"></span>
+                    <span class="bar-2"></span>
+                    <span class="bar-3"></span>
+                    </a>
+                </div>
             </div>
+            <div class="header__selector__dropdown">
+                <div class="dropdown__select__list" id="selector-dropdown">
+                    <span class="display__name">CMS</span>
+                </div>
+            </div>
+
+            <!-- <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div> -->
 
             <ul class="nav navbar-nav navbar-right">
                 <li class="">

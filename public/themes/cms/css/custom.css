@@ -4,18 +4,170 @@
 * Publish Feb, 2017
 * Author By @kiki
 */
+body.fixed {
+    width: 100%;
+}
+
+
+.container__main{
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: calc(100vh - 40px);
+    backface-visibility: hidden;
+    transform: translateZ(0);
+}
 
 ul {
 	list-style-type: none;
 	padding-left: 0;
 }
 
-.image-header{
+.login__background {
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.login__header {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+    justify-content: center;
+    margin-bottom: 5%;
+}
+
+.login__header img {
+    width: 25%;
+    height: 10%;
+}
+
+.error--state--message {
+    color: #FF6358 !important;
+}
+
+.btn__submit__login {
+    height: 40px;
+}
+
+.btn__submit__login {
+    font-family: "brandon_medium";
+    width: 100%;
+    background: #9FBFCB;
+    border: 1px solid transparent;
+    height: 35px;
+    margin-top: 0px;
+    color: #ffffff;
+    transition: all .2s;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.image-header {
     overflow: hidden;
     position: relative;
     height: 145px;
     background: #ffffff;
     width: 100%;
+    padding: 6%;
+    border-bottom: 1px #d2c1c1 solid;
+}
+
+.filter__content {
+    color: #9FBFCB;
+}
+
+.toggle__sidebar {
+    height: 55px;
+    width: 40px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all .3s;
+    float: left;
+    border-right: 1px solid #f4f2ef;
+}
+
+.toggle__sidebar .bar {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-align: end;
+    align-items: flex-end;
+    transition: all .3s;
+    width: 50%;
+}
+
+.toggle__sidebar .bar .bar-1 {
+    height: 2px;
+    display: block;
+    background-color: #9FBFCB;
+    width: 10px;
+    position: relative;
+    top: -3px;
+    transition: all .3s;
+}
+
+.toggle__sidebar .bar .bar-1:before {
+    content: "";
+    width: 0;
+    height: 0;
+    border-top: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+    border-right: 4px solid #9FBFCB;
+    position: absolute;
+    left: -4px;
+    top: -1px;
+}
+
+.toggle__sidebar .bar .bar-2 {
+    height: 2px;
+    display: block;
+    background-color: #9FBFCB;
+    width: 7px;
+    position: relative;
+    transition: all .3s;
+}
+
+.toggle__sidebar .bar .bar-3 {
+    height: 2px;
+    display: block;
+    background-color: #9FBFCB;
+    width: 14px;
+    position: relative;
+    bottom: -3px;
+    transition: all .3s;
+}
+
+.dropdown__select__list {
+    margin-left: 10px;
+    position: relative;
+    float: left;
+}
+
+.dropdown__select__list .display__name {
+    font-family: "harriet_regular";
+    margin: 0;
+    line-height: 55px;
+    height: auto;
+    font-size: 20px;
+    text-transform: uppercase;
+    /* display: block; */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    transition: all .2s;
 }
 
 .width-auto {
@@ -780,7 +932,7 @@ input, textarea, select {
 
 .img__preview__overlay {
   position: fixed;
-  z-index: 99;
+  z-index: 9999;
   display: none;
   top: 0;
   bottom: 0;
@@ -788,6 +940,12 @@ input, textarea, select {
   left: 0;
   margin: 0;
   background-color: rgba(0, 0, 0, 0.5); }
+
+
+.popup__upload__preview__container .main_container {
+    position: relative;
+    z-index: 11;
+}
 
 .img__preview__popup {
   display: -ms-flexbox;

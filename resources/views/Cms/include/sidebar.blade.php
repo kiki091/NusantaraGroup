@@ -4,7 +4,7 @@
             <!-- <a href="#" class="site_title text-center">
                 <img src="{{ asset('images/db/main_page/logo/nusantara-group-2.png') }}" height="54px">
             </a> -->
-            <img src="" class="image-header">
+            <img src="{{ asset('themes/cms/svg/webpack.svg') }}" class="image-header">
         </div>
 
         <div class="clearfix"></div>
@@ -36,14 +36,17 @@
                         </a>
                         <ul class="nav child_menu">
                             <li>
-                                <a href="#static-page" onclick="menuStaticPage()">Static Page</a>
-                            </li>   
-                            <li>
-                                <a href="#main-banner" onclick="menuMainBanner()">Main Banner</a>
+                                <a href="#awards" onclick="menuAwards()">Awards</a>
                             </li> 
                             <li>
                                 <a href="#branch-office" onclick="menuBranchOffice()">Branch Office</a>
                             </li>
+                            <li>
+                                <a href="#main-banner" onclick="menuMainBanner()">Main Banner</a>
+                            </li>
+                            <li>
+                                <a href="#static-page" onclick="menuStaticPage()">Static Page</a>
+                            </li>   
                         </ul>
                     </li> 
                 </ul>

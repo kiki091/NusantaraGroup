@@ -365,7 +365,7 @@ function crudBranchOffice() {
             },
 
             changeStatus: function(id) {
-                console.log(id)
+                
                 var payload = []
                 payload['id'] = id
 

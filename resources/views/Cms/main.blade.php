@@ -4,7 +4,7 @@
   	@include('Cms.include.head')
   	</head>
 
-  	<body class="nav-md">
+  	<body class="nav-md fixed">
       @include('Cms.include.notify')
   		<div class="container body">
       		<div class="main_container">
@@ -25,6 +25,7 @@
       </div>
       @include('Cms.include.vars')
   		@include('Cms.include.js_component')
-		
+		  @section('scripts')
+      @show
   	</body>
 </html>

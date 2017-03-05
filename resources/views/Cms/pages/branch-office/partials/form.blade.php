@@ -70,7 +70,7 @@
 							<div class="create__form__row" v-if="edit == false">
 								<div class="new__form__field width-auto">
 									<label>Slider Image</label>
-									<div class="form__photo__uploader">
+									<div class="form__photo__uploader single__image">
 										<small>Drop <span><b>Main image</b></span> in this area. Sort images by "draging and droping" in the desired position</small>
 
 										<div class="form__photo__uploader__wrapper flex flex-align-center">

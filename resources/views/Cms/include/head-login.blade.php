@@ -8,10 +8,9 @@
 
 <!-- Bootstrap -->
 <link href="{{ asset('themes/cms/vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+<link href="{{ asset('themes/cms/css/custom.css') }}" rel="stylesheet">
 <!-- Font Awesome -->
 <link href="{{ asset('themes/cms/vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
-<!-- Animate.css -->
-<link href="https://colorlib.com/polygon/gentelella/css/animate.min.css" rel="stylesheet">
 
 <!-- Custom Theme Style -->
 <link href="{{ asset('themes/cms/build/css/custom.min.css') }}" rel="stylesheet">
