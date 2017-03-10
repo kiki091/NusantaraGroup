@@ -1,1 +1,0 @@
-<p>Jadwalkan kehadiran di showroom kami untuk mendapatkan test kendaraan idaman anda gratis.. </p>
