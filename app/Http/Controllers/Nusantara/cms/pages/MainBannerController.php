@@ -111,10 +111,10 @@ class MainBannerController extends CmsController
      * @param Request $request
      * @return mixed
      */
+
     public function order(Request $request)
     {
-        return $this->mainBanner->order($request->except(['_token']));
-        
+        return $this->mainBanner->order($request->input('list_order'));
     }
 
     /**
