@@ -76,7 +76,7 @@ class AwardsController extends CmsController
 
     public function store(Request $request)
     {
-    	/*$validator = Validator::make($request->all(), $this->validationStore($request));
+    	$validator = Validator::make($request->all(), $this->validationStore($request));
 
         if ($validator->fails()) {
             //TODO: case fail
@@ -86,8 +86,7 @@ class AwardsController extends CmsController
             //TODO: case pass
             
             return $this->awards->store($request->except(['_token']), $this->getLocationId());
-        }*/
-        return $this->awards->store($request->except(['_token']), $this->getLocationId());
+        }
     }
 
     /**
@@ -97,7 +96,7 @@ class AwardsController extends CmsController
     public function storeBanner(Request $request)
     {
 
-        /*$validator = Validator::make($request->all(), $this->validationStore($request));
+        $validator = Validator::make($request->all(), $this->validationStore($request));
 
         if ($validator->fails()) {
             //TODO: case fail
@@ -106,9 +105,7 @@ class AwardsController extends CmsController
         } else {
             //TODO: case pass
             return $this->mainBanner->store($request->except(['_token'], self::MAIN_BANNER_KEY  ));
-        }*/
-
-        return $this->mainBanner->store($request->except(['_token', 'image_url']), $this->getLocationId(), self::MAIN_BANNER_KEY);
+        }
     }
 
     /**
@@ -203,8 +200,7 @@ class AwardsController extends CmsController
 
     		'office_name'           => 'required',
     		'thumbnail'   		    => 'required|dimensions:width='.AWARDS_THUMBNAIL_WIDTH.',height='.AWARDS_THUMBNAIL_HEIGHT.'|max:'. AWARDS_THUMBNAIL_SIZE .'|mimes:jpg,jpeg',
-            'images'                => 'required|dimensions:width='.AWARDS_IMAGES_WIDTH.',height='.AWARDS_IMAGES_HEIGHT.'|max:'. AWARDS_THUMBNAIL_SIZE .'|mimes:jpg,jpeg',
-            'description'           => 'required',
+            'filename'                => 'required|dimensions:width='.AWARDS_IMAGES_WIDTH.',height='.AWARDS_IMAGES_HEIGHT.'|max:'. AWARDS_THUMBNAIL_SIZE .'|mimes:jpg,jpeg',
             'meta_title'            => 'required',
             'meta_keyword'          => 'required',
             'meta_description'      => 'required',
@@ -212,8 +208,8 @@ class AwardsController extends CmsController
 
         if ($this->isEditMode($request->input()))
         {
-            if (is_null($request->file('images'))) {
-                unset($rules['images']);
+            if (is_null($request->file('filename'))) {
+                unset($rules['filename']);
             }
         }
 

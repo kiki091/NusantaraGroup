@@ -33,6 +33,11 @@
 												<div class="news__name">
 													<a href="#" class="title__name content__edit__hover" >@{{ booking.nama_lengkap }}</a>
 												</div>
+												<div class="news__desc flex">
+													<a href="#" class="news__cat pin-item">
+													Booking Nomer : @{{ booking.no_booking }}
+													</a>
+												</div>
 											</div>
 										</div>
 										<div class="news__list__detail__right">
