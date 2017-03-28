@@ -341,9 +341,35 @@ class Awards extends BaseImplementation implements AwardsInterface
         return $this->setResponse(trans('message.cms_success_get_data'), true, $this->awardsTransformation->getSingleAwardsCmsTransform($singleAwardsData));
     }
 
-    public function changeStatus($params)
+    public function changeStatus($data)
     {
-        
+        try {
+
+            if (!isset($data['id']) && empty($data['id']))
+
+                return $this->setResponse(trans('message.cms_required_id'), false);
+
+            DB::beginTransaction();
+
+            $oldData = $this->awards->id($data['id'])->first()->toArray();
+
+            $updatedData = [
+                'is_active' => $oldData['is_active'] ? false : true,
+                'updated_at' => $this->mysqlDateTimeFormat()
+            ];
+
+            $changeStatus = $this->awards->id($data['id'])->update($updatedData);
+
+            if($changeStatus) {
+                DB::commit();
+                return $this->setResponse(trans('message.cms_success_update_status_general'), true);
+            }
+
+            DB::rollBack();
+            return $this->setResponse(trans('message.cms_failed_update_status_general'), false);
+        } catch (\Exception $e) {
+            return $this->setResponse($e->getMessage(), false);
+        }
     }
 
     public function delete($params)
