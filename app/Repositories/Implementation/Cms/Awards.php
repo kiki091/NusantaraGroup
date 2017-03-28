@@ -60,8 +60,10 @@ class Awards extends BaseImplementation implements AwardsInterface
             $awards->isActive($data['is_active']);
         }
 
-        if(isset($params['order_by'])) {
-            $awards->orderBy($params['order_by'], $orderType);
+        if(isset($data['order_by'])) {
+            $awards->orderBy($data['order_by'], $orderType);
+        } else {
+            $awards->orderBy('order', $orderType);
         }
 
         if(isset($data['id'])) {
@@ -343,6 +345,7 @@ class Awards extends BaseImplementation implements AwardsInterface
 
     public function changeStatus($data)
     {
+     
         try {
 
             if (!isset($data['id']) && empty($data['id']))
@@ -377,8 +380,54 @@ class Awards extends BaseImplementation implements AwardsInterface
         
     }
 
-    public function order($params)
+    /**
+     * Order Data
+     * @param $data
+     */
+
+    public function order($data)
     {
-        
+        try {
+            DB::beginTransaction();
+
+            if ($this->orderData($data)) {
+                DB::commit();
+                return $this->setResponse(trans('message.cms_success_ordering'), true);
+            }
+
+            DB::rollBack();
+            return $this->setResponse(trans('message.cms_failed_ordering'), false);
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return $this->setResponse($e->getMessage(), false);
+        }
+    }
+
+    /**
+     * Order List Data
+     * @param $data
+     */
+
+    protected function orderData($data)
+    {
+        try {
+            $i = 1 ;
+            foreach ($data as $key => $val) {
+                $orderValue = $i++;
+
+                $awardsData           = $this->awards->find($val);
+
+                $awardsData->order  = $orderValue;
+
+                $awardsData->save();
+            }
+
+            return true;
+
+        } catch (Exception $e) {
+            $this->message = $e->getMessage();
+            return false;
+        }
     }
 }
