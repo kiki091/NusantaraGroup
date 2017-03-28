@@ -99,11 +99,11 @@ Route::group(['middleware' => ['web']], function ()
 
 		// Booking Services
 		Route::group(array('prefix' => 'booking-services' ), function(){
-			Route::get('/', 'Nusantara\cms\pages\BookingServicesController@index')->name('BookingServices');
-			Route::get('data', 'Nusantara\cms\pages\BookingServicesController@getData')->name('getDataBookingServices');
-			Route::post('store', 'Nusantara\cms\pages\BookingServicesController@store')->name('storeBookingServices');
-			Route::post('show', 'Nusantara\cms\pages\BookingServicesController@showData')->name('showDataBookingServices');
-			Route::get('search', 'Nusantara\cms\pages\BookingServicesController@searchData')->name('searchBookingServices');
+			Route::get('/', 'Nusantara\cms\reservation\BookingServicesController@index')->name('BookingServices');
+			Route::get('data', 'Nusantara\cms\reservation\BookingServicesController@getData')->name('getDataBookingServices');
+			Route::post('store', 'Nusantara\cms\reservation\BookingServicesController@store')->name('storeBookingServices');
+			Route::post('show', 'Nusantara\cms\reservation\BookingServicesController@showData')->name('showDataBookingServices');
+			Route::get('search', 'Nusantara\cms\reservation\BookingServicesController@searchData')->name('searchBookingServices');
 		});
 
 		// Static Page

@@ -44,7 +44,7 @@ class BookingServicesController extends CmsController
     	$data['user'] = $this->user->setAuthSession();
     	$data['location'] = $this->getUserLocation();
 
-        $blade = URL_BLADE_CMS.'.booking-services.booking-services';
+        $blade = self::URL_BLADE_CMS.'.booking-services.booking-services';
 
         if(view()->exists($blade)) 
         {

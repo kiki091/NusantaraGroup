@@ -66,7 +66,7 @@ function crudBookingServices() {
                     form.append(key, payload[key])
                 }
 
-                var domain = laroute.url('/booking-services/show', []);
+                var domain = '/booking-services/show';
                 this.$http.post(domain, form).then(function(response) {
                     response = response.data
                     if (response.status) {
@@ -83,7 +83,7 @@ function crudBookingServices() {
 
             
             fetchData: function(){
-                var domain  = laroute.url('/booking-services/data', []);
+                var domain  = '/booking-services/data';
 
                     this.$http.get(domain).then(function (response) {
                         if(response.data.status == true) {
