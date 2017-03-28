@@ -65,6 +65,29 @@ ul {
     letter-spacing: 1.5px;
 }
 
+.btn__form__create {
+    color: #ffffff;
+    background: #9FBFCB;
+    margin-left: 10px;
+}
+
+.btn__form__create {
+    background: #9FBFCB;
+    border: 1px solid #e6e7ea;
+    padding: 0 20px;
+    height: 25px;
+    color: #ffffff;
+    font-family: "brandon_medium";
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    transition: all .3s;
+    font-size: 11px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
 .image-header {
     overflow: hidden;
     position: relative;
