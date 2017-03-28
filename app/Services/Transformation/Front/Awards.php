@@ -33,7 +33,7 @@ class Awards
 
                 'meta_description' => isset($data['meta_description']) ? $data['meta_description'] : '',
 
-                'images' => isset($data['images']) ? asset(AWARDS_IMAGES_DIRECTORY.rawurlencode($data['images'])) : '',
+                'images' => isset($data['filename']) ? asset(AWARDS_IMAGES_DIRECTORY.rawurlencode($data['filename'])) : '',
 
                 'thumbnail' => isset($data['thumbnail']) ? asset(AWARDS_IMAGES_DIRECTORY.rawurlencode($data['thumbnail'])) : '',
                 

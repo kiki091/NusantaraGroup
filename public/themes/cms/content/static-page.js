@@ -59,57 +59,20 @@ function crudStaticPage() {
             },
 
             fetchData: function(){
-                var domain  = laroute.url('/cms/static-page/data', []);
+                var domain  = '/static-page/data';
 
-                    this.$http.get(domain).then(function (response) {
-                        if(response.data.status == true) {
-                            this.$set('responseData', response.data.data)
-                        } else {
-                            pushNotifMessage(response.data.status, response.data.message)
-                        }
-                    })
+                this.$http.get(domain).then(function (response) {
+                    if(response.data.status == true) {
+                        this.$set('responseData', response.data.data)
+                    } else {
+                        pushNotifV3(response.data.status, response.data.message)
+                    }
+                })
             },
 
             storeData: function(event){
 
-                this.clearErorrMessage()    
-                showLoadingData();
-
-                var form = new FormData('#StaticPageForm');
-
-                for (var key in this.models) {
-                    form.append(key, this.models[key])
-                }
-
-                var domain = laroute.url('/cms/static-page/store', []);
-                this.$http.post(domain, form, function(response) {
-                    if (response.status == false) {
-                        if(response.is_error_form_validation) {
-
-                            var message_validation = ''
-                            $.each(response.message, function(key, value){
-                                $('input[name="' + key.replace(".", "_") + '"]').focus();
-                                $("#form--error--message--" + key).text(value)
-                                message_validation += '<li class="notif__content__li"><span class="text" >' + value + '</span></li>'
-                            });
-
-                            hideLoading()
-                            //pushNotifV2(response.status, 'default', message_validation, false);
-                            pushNotifMessage(response.status,response.message, message_validation);
-                        } else {
-                            hideLoading()
-                        }
-                    } else {
-                        
-                        $('.btn__add__cancel').click()
-                        pushNotifMessage(response.status, response.message);
-                        this.clearErorrMessage()
-                        this.fetchData()
-                        hideLoading()
-                    }
-                })
-
-                /*var vm = this;
+                var vm = this;
                 var optForm      = {
 
                     dataType: "json",
@@ -132,15 +95,15 @@ function crudStaticPage() {
                                     $("#form--error--message--" + key.replace(".", "_")).text(value)
                                     message_validation += '<li class="notif__content__li"><span class="text" >' + value + '</span></li>'
                                 });
-                                pushNotifMessage(response.status,response.message, message_validation);
+                                pushNotifV3(response.status,response.message, message_validation);
 
                             } else {
-                                pushNotifMessage(response.status, response.message);
+                                pushNotifV3(response.status, response.message);
                             }
                         } else {
                             vm.fetchData()
                             vm.resetForm()
-                            pushNotifMessage(response.status, response.message);
+                            pushNotifV3(response.status, response.message);
                             $('.btn__add__cancel').click();
                         }
                     },
@@ -151,7 +114,7 @@ function crudStaticPage() {
                 };
 
                 $("#StaticPageForm").ajaxForm(optForm);
-                $("#StaticPageForm").submit();*/
+                $("#StaticPageForm").submit();
                 
             },
 
@@ -168,7 +131,7 @@ function crudStaticPage() {
 
                 this.resetForm()
 
-                var domain = laroute.url('/cms/static-page/edit', []);
+                var domain = '/static-page/edit';
                 this.$http.post(domain, form).then(function(response) {
                     response = response.data
                     if (response.status) {
@@ -184,7 +147,7 @@ function crudStaticPage() {
                         replaceToCkEditor()
 
                     } else {
-                        pushNotifMessage(response.status,response.message)
+                        pushNotifV3(response.status,response.message)
                     }
                 })
             },
@@ -199,15 +162,15 @@ function crudStaticPage() {
                     form.append(key, payload[key])
                 }
 
-                var domain = laroute.url('/cms/static-page/change-status', []);
+                var domain = '/static-page/change-status';
                 this.$http.post(domain, form).then(function(response) {
                     response = response.data
                     if (response.status == false) {
                         this.fetchData()
-                        pushNotifMessage(response.status,response.message);
+                        pushNotifV3(response.status,response.message);
                     }
                     else{
-                        pushNotifMessage(response.status,response.message);
+                        pushNotifV3(response.status,response.message);
                     }
                 })
             },

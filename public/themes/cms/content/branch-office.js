@@ -154,7 +154,7 @@ function crudBranchOffice() {
                     form.append(key, payload[key])
                 }
 
-                var domain = laroute.url('/branch-office/delete-image-slider', []);
+                var domain = '/branch-office/delete-image-slider';
                 this.$http.post(domain, form).then(function(response) {
                     response = response.data
 
@@ -177,7 +177,7 @@ function crudBranchOffice() {
                     form.append(key, payload[key])
                 }
 
-                var domain = laroute.url('/branch-office/delete-office-detail', []);
+                var domain = '/branch-office/delete-office-detail';
                 this.$http.post(domain, form).then(function(response) {
                     response = response.data
 
@@ -190,7 +190,7 @@ function crudBranchOffice() {
             },
 
             fetchData: function(){
-                var domain  = laroute.url('/branch-office/data', []);
+                var domain  = '/branch-office/data';
 
                 this.$http.get(domain).then(function (response) {
                     response = response.data
@@ -263,7 +263,7 @@ function crudBranchOffice() {
 
                 this.resetForm()
 
-                var domain = laroute.url('/branch-office/edit', []);
+                var domain = '/branch-office/edit';
                 this.$http.post(domain, form).then(function(response) {
                     response = response.data
                     if (response.status) {
@@ -299,7 +299,7 @@ function crudBranchOffice() {
 
                 this.resetForm()
 
-                var domain = laroute.url('/branch-office/edit', []);
+                var domain = '/branch-office/edit';
                 this.$http.post(domain, form).then(function(response) {
                     response = response.data
                     if (response.status) {
@@ -375,7 +375,7 @@ function crudBranchOffice() {
                     form.append(key, payload[key])
                 }
 
-                var domain = laroute.url('/branch-office/change-status', []);
+                var domain = '/branch-office/change-status';
                 this.$http.post(domain, form).then(function(response) {
                     response = response.data
                     if (response.status == false) {
@@ -390,7 +390,7 @@ function crudBranchOffice() {
 
             deleteData: function(id) {
                 
-                var domain = laroute.url('/branch-office/delete', []);
+                var domain = '/branch-office/delete';
                 var form = new FormData();
 
                 form.append('id', id);
@@ -489,7 +489,7 @@ function crudBranchOffice() {
                         return input.getAttribute('data-id');
                     });
 
-                var domain  = laroute.url('/branch-office/order', []);
+                var domain  = '/branch-office/order';
 
                 var payload = {list_order: id_order };
 

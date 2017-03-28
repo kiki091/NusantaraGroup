@@ -113,7 +113,7 @@ class MainBannerController extends CmsController
      */
     public function order(Request $request)
     {
-        return $this->mainBanner->order($request->except(['_token']));
+        return $this->mainBanner->order($request->input('list_order'));
         
     }
 

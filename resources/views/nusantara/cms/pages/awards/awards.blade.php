@@ -88,7 +88,7 @@
 
 		        		</div>
 		        		<div class="content__btn">
-		        			<a href="#" class="btn__add btn_add_awards" id="toggle-form" @click="resetForm">Add Awards</a>
+		        			<a href="#" class="btn__add btn_add_awards" id="toggle-form-awards" @click="resetForm">Add Awards</a>
 		        		</div>
 		        	</div>
 		        	<div class="content__bottom">
@@ -101,7 +101,7 @@
 										</div>
 									</div>
 									<div class="news__list__detail__left">
-										<img :src="awards.images_url">
+										<img :src="awards.filename_url">
 									</div>
 									<div class="news__list__detail__middle-right">
 										<div class="news__list__detail__middle">

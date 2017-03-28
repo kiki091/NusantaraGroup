@@ -16,26 +16,41 @@ function crudAwards() {
                 id:'',
                 office_name: '',
                 thumbnail: '',
-                images : '',
-                description : '',
+                filename : '',
+                awards: [
+                    { description: ''}
+                ],
                 meta_title : '',
                 meta_keyword : '',
                 meta_description : '',
             },
 
             thumbnail: '',
-            images : '',
+            filename : '',
+            awards: [
+                { description: ''}
+            ],
             delete_payload: {
                 id: '',
             },
             form_add_title_banner: "Banner",
             form_add_title: "Awards",
             sectionDelete : 'awards',
+            default_total_description : [0],
+            total_description : [],
             id: '',
             edit: false,
             responseData: {},
         },
         methods: {
+
+            addMoreDescription: function() {
+                this.models.awards.splice(this.models.awards.length + 1, 0, {description: '',});
+            },
+
+            removeMoreDescription: function(item, index) {
+                this.models.awards.$remove(item);
+            },
 
             showDeleteModal: function(id, sectionDelete) {
                 this.showModal = true;
@@ -84,8 +99,7 @@ function crudAwards() {
             },
 
             fetchData: function(){
-                var domain  = laroute.url('/awards/data', []);
-                this.$http.get(domain).then(function (response) {
+                this.$http.get('/awards/data', []).then(function (response) {
                     if(response.data.status == true) {
                         this.$set('responseData', response.data.data)
                     } else {
@@ -96,42 +110,45 @@ function crudAwards() {
 
             storeData: function(event){
 
-                this.clearErorrMessage()    
-                showLoadingData();
+                var vm = this;
+                var optForm      = {
 
-                var form = new FormData();
+                    dataType: "json",
 
-                for (var key in this.banner) {
-                    form.append(key, this.banner[key])
-                }
+                    beforeSend: function(){
+                        showLoadingData(true)
+                        vm.clearErorrMessage()
+                    },
+                    success: function(response){
+                        if (response.status == false) {
+                            if(response.is_error_form_validation) {
 
-                var domain = laroute.url('/awards/store-banner', []);
-                this.$http.post(domain, form, function(response) {
-                    if (response.status == false) {
-                        if(response.is_error_form_validation) {
+                                var message_validation = ''
+                                $.each(response.message, function(key, value){
+                                    $('input[name="' + key.replace(".", "_") + '"]').focus();
+                                    $("#form--error--message--" + key.replace(".", "_")).text(value)
+                                    message_validation += '<li class="notif__content__li"><span class="text" >' + value + '</span></li>'
+                                });
+                                pushNotifMessage(response.status,response.message, message_validation);
 
-                            var message_validation = ''
-                            $.each(response.message, function(key, value){
-                                $('input[name="' + key.replace(".", "_") + '"]').focus();
-                                $("#form--error--message--" + key).text(value)
-                                message_validation += '<li class="notif__content__li"><span class="text" >' + value + '</span></li>'
-                            });
-
-                            hideLoading()
-                            pushNotifMessage(response.status,response.message, message_validation);
+                            } else {
+                                pushNotifV3(response.status, response.message);
+                            }
                         } else {
-                            hideLoading()
+                            vm.fetchData()
+                            vm.resetForm()
+                            pushNotifV3(response.status, response.message);
+                            $('.btn__add__cancel').click();
                         }
-                    } else {
-                        this.resetForm()
-                        $('.btn__add__cancel').click()
-                        pushNotifV3(response.status, response.message);
-                        this.clearErorrMessage()
-                        this.fetchData()
+                    },
+                    complete: function(response){
                         hideLoading()
                     }
-                })
-                
+
+                };
+
+                $("#FormMainBanner").ajaxForm(optForm);
+                $("#FormMainBanner").submit();
             },
 
             storeDataAwards: function(event){
@@ -195,8 +212,7 @@ function crudAwards() {
 
                 this.resetForm()
 
-                var domain = laroute.url('/awards/edit-banner', []);
-                this.$http.post(domain, form).then(function(response) {
+                this.$http.post('/awards/edit-banner', form).then(function(response) {
                     response = response.data
                     if (response.status) {
                         this.models = response.data;
@@ -224,13 +240,14 @@ function crudAwards() {
 
                 this.resetForm()
 
-                var domain = laroute.url('/awards/edit', []);
+                var domain = '/awards/edit';
                 this.$http.post(domain, form).then(function(response) {
+
                     response = response.data
                     if (response.status) {
                         this.models = response.data;
                         this.thumbnail = response.data.thumbnail_url
-                        this.images = response.data.image_url
+                        this.filename = response.data.filename_url
 
                         this.form_add_title = "Edit Awards"
                         $('.btn_add_awards').click()
@@ -252,7 +269,7 @@ function crudAwards() {
                     form.append(key, payload[key])
                 }
 
-                var domain = laroute.url('/awards/change-status-banner', []);
+                var domain = '/awards/change-status-banner';
                 this.$http.post(domain, form).then(function(response) {
                     response = response.data
                     if (response.status == false) {
@@ -278,7 +295,7 @@ function crudAwards() {
                     form.append(key, payload[key])
                 }
 
-                var domain = laroute.url('/awards/change-status', []);
+                var domain = '/awards/change-status';
                 this.$http.post(domain, form).then(function(response) {
                     response = response.data
                     if (response.status == false) {
@@ -295,7 +312,7 @@ function crudAwards() {
 
             deleteDataBanner: function(id) {
                 
-                var domain = laroute.url('/awards/delete-banner', []);
+                var domain = '/awards/delete-banner';
                 var form = new FormData();
 
                 form.append('id', id);
@@ -319,7 +336,7 @@ function crudAwards() {
 
             deleteData: function(id) {
                 
-                var domain = laroute.url('/awards/delete', []);
+                var domain = '/awards/delete';
                 var form = new FormData();
 
                 form.append('id', id);
@@ -348,15 +365,20 @@ function crudAwards() {
             
             resetForm: function(){
 
+                this.models.awards = [
+                    { description : '',}
+                ]
+
             	this.models.id = ''
                 this.models.office_name = ''
-                this.models.description = ''
                 this.models.meta_title = ''
                 this.models.meta_keyword = ''
                 this.models.meta_description = ''
 
                 this.thumbnail = ''
-                this.images = ''
+                this.filename = ''
+                this.default_total_description = [0];
+                this.total_description = [];
             },
 
             sortable: function() {
@@ -400,7 +422,7 @@ function crudAwards() {
                         return input.getAttribute('data-id');
                     });
 
-                var domain  = laroute.url('/awards/order', []);
+                var domain  = '/awards/order';
 
                 var payload = {list_order: id_order };
 
@@ -422,7 +444,7 @@ function crudAwards() {
                         return input.getAttribute('data-id');
                     });
 
-                var domain  = laroute.url('/awards/order-banner', []);
+                var domain  = '/awards/order-banner';
 
                 var payload = {list_order: id_order };
 

@@ -84,9 +84,245 @@ class Awards extends BaseImplementation implements AwardsInterface
         return $awards->get()->toArray();
     }
 
-    public function store($params, $property_id)
+    public function store($data, $property_id)
     {
+        try {
 
+            DB::beginTransaction();
+
+            if ($this->storeAwards($data, $property_id) != true) {
+
+                DB::rollBack();
+                return $this->setResponse($this->message, false);
+            }
+
+            if ($this->storeAwardsTranslation($data) != true) {
+
+                DB::rollBack();
+                return $this->setResponse($this->message, false);
+            }
+
+            //TODO: THUMBNAIL UPLOAD
+            if ($this->uploadThumbnail($data) != true) {
+                DB::rollBack();
+                return $this->setResponse($this->message, false);
+            }
+
+            if ($this->uploadImages($data) != true) {
+                DB::rollBack();
+                return $this->setResponse($this->message, false);
+            }
+
+            DB::commit();
+            return $this->setResponse(trans('message.cms_success_store_data_general'), true);
+        } catch (\Exception $e) {
+            return $this->setResponse($e->getMessage(), false);
+        }
+    }
+
+    /**
+     * Store Awards
+     * @param $data
+     * @return mixed
+     */
+
+    protected function storeAwards($data, $property_id)
+    {
+        try {
+
+            $store                          = $this->awards;
+
+            if ($this->isEditMode($data)) {
+                $store                      = $this->awards->find($data['id']);
+            }
+
+            $store->office_name         = isset($data['office_name']) ? $data['office_name'] : "";
+            $store->meta_title          = isset($data['meta_title']) ? $data['meta_title'] : "";
+            $store->meta_keyword        = isset($data['meta_keyword']) ? $data['meta_keyword'] : "";
+            $store->meta_description    = isset($data['meta_description']) ? $data['meta_description'] : "";
+
+            if (!$this->isEditMode($data)) 
+            {
+                $store->is_active               = true;
+                $store->property_location_id    = $property_id;
+                $store->thumbnail               = $this->uniqueIdImagePrefix . '_' .$data['thumbnail']->getClientOriginalName();
+                $store->filename               = $this->uniqueIdImagePrefix . '_' .$data['filename']->getClientOriginalName();
+                $store->created_by              = $this->getUserId();
+                $store->created_at              = $this->mysqlDateTimeFormat();
+                $store->updated_at              = $this->mysqlDateTimeFormat();
+
+            } else {
+                //TODO: Edit Mode Thumbnail Checker
+                if (!empty($data['thumbnail'])) {
+                    $store->thumbnail       = $this->uniqueIdImagePrefix . '_' .$data['thumbnail']->getClientOriginalName();
+                }
+
+                if (!empty($data['filename'])) {
+                    $store->filename       = $this->uniqueIdImagePrefix . '_' .$data['filename']->getClientOriginalName();
+                }
+            }
+
+            if($save = $store->save()) {
+                $this->lastInsertId = $store->id;
+            }
+
+            return $save;
+
+        } catch (\Exception $e) {
+            $this->message = $e->getMessage();
+            return false;
+        }
+    }
+
+    /**
+     * Storing Awards Translation to database
+     * @param $data
+     * @param $key
+     * @return bool
+     */
+    protected function storeAwardsTranslation($data)
+    {
+        if ($this->isEditMode($data)) {
+            $this->removeAwardsTranslation($data['id']);
+        }
+
+        $finalData = $this->awardsTransformation->getDataForAwardsTranslation($data['awards'], $this->lastInsertId, $this->isEditMode($data));
+        return $this->awardsTrans->insert($finalData);
+    }
+
+    /**
+     * Remove Awards Translation by ID
+     * @param $mainBannerId
+     * @return bool
+     */
+    protected function removeAwardsTranslation($accOfferId)
+    {
+        if (empty($accOfferId))
+            return false;
+
+        return $this->branchOfficeTrans->where('awards_id', $accOfferId)->delete();
+    }
+
+    /**
+     * Upload Thumbnail
+     * @param $data
+     * @return bool
+     */
+    protected function uploadThumbnail($data)
+    {
+        try {
+            if (!$this->isEditMode($data)) {
+
+                if ( !$this->thumbnailUploader($data)) {
+                    return false;
+                }
+
+            } else {
+                //TODO: Edit Mode
+                if (!empty($data['thumbnail'])) {
+                    if (!$this->thumbnailUploader($data)) {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+
+        } catch (\Exception $e) {
+            $this->message = $e->getMessage();
+            return false;
+        }
+
+    }
+
+    /**
+     * Thumbnail Uploader
+     * @param $data
+     * @return bool
+     */
+    protected function thumbnailUploader($data)
+    {
+        if ($data['thumbnail']->isValid()) {
+
+            $filename = $this->uniqueIdImagePrefix . '_' .$data['thumbnail']->getClientOriginalName();
+
+            if (! $data['thumbnail']->move('./' . AWARDS_IMAGES_DIRECTORY, $filename)) {
+                $this->message = trans('message.cms_upload_thumbnail_failed');
+                return false;
+            }
+
+            return true;
+
+        } else {
+            $this->message = $data['thumbnail']->getErrorMessage();
+            return false;
+        }
+    }
+
+    /**
+     * Upload Images
+     * @param $data
+     * @return bool
+     */
+    protected function uploadImages($data)
+    {
+        try {
+            if (!$this->isEditMode($data)) {
+
+                if ( !$this->imagesUploader($data)) {
+                    return false;
+                }
+
+            } else {
+                //TODO: Edit Mode
+                if (!empty($data['filename'])) {
+                    if (!$this->imagesUploader($data)) {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+
+        } catch (\Exception $e) {
+            $this->message = $e->getMessage();
+            return false;
+        }
+
+    }
+
+    /**
+     * Images Uploader
+     * @param $data
+     * @return bool
+     */
+    protected function imagesUploader($data)
+    {
+        if ($data['filename']->isValid()) {
+
+            $filename = $this->uniqueIdImagePrefix . '_' .$data['filename']->getClientOriginalName();
+
+            if (! $data['filename']->move('./' . AWARDS_IMAGES_DIRECTORY, $filename)) {
+                $this->message = trans('message.cms_upload_thumbnail_failed');
+                return false;
+            }
+
+            return true;
+
+        } else {
+            $this->message = $data['filename']->getErrorMessage();
+            return false;
+        }
+    }
+
+    /**
+     * Check need edit Mode or No
+     * @param $data
+     * @return bool
+     */
+    protected function isEditMode($data)
+    {
+        return isset($data['id']) && !empty($data['id']) ? true : false;
     }
 
     public function edit($params)

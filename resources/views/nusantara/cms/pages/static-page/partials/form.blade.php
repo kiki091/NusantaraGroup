@@ -1,4 +1,4 @@
-<form action="#" method="POST" id="StaticPageForm" enctype="multipart/form-data" files="true" @submit.prevent>
+<form action="{{ route('StoreStaticPage') }}" method="POST" id="StaticPageForm" enctype="multipart/form-data" files="true" @submit.prevent>
 	<div class="main__content__form__layer" id="toggle-form-content" style="display: none; margin-top: 2%;">
 		<div class="create__form__wrapper">
 			<div class="form--top flex-between">
