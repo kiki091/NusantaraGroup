@@ -1,5 +1,5 @@
 <!-- top navigation -->
-<div class="top_nav">
+<div class="top_nav" id="template_change_password">
     <div class="nav_menu">
         <nav class="" role="navigation">
 
@@ -30,6 +30,11 @@
                     </a>
                     <ul class="dropdown-menu dropdown-usermenu pull-right">
                         <li>
+                            <a href="#" @click="showForm()">
+                                <i class="fa fa-lock pull-right"></i> Change Password
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{ route('logout') }}">
                                 <i class="fa fa-sign-out pull-right"></i> Log Out
                             </a>
@@ -41,5 +46,54 @@
             </ul>
         </nav>
     </div>
+
+    <modal :show.sync="showModal">
+    <div class="popup__mask popup--changepass">
+        <div class="popup__wrapper popup--changepass__wrapper">
+            <div class="popup__layer popup--changepass__layer">
+                <div class="popup__layer--header">
+                    <div class="header--title">
+                        <h1>Change Password</h1>
+                    </div>
+                    <div class="header--btn">
+                        <a href="#" class="btn__add__cancel" @click.prevent="closeForm">Close</a>
+                    </div>
+                </div>
+                <div class="popup__notif">
+                    <span>@{{ notif }}</span>
+                </div>
+                <div class="popup__layer--content">
+                    <div class="content--main">
+                        <!-- notification alert form popup -->
+                        <!-- <div class="info--notif--popup notif--success"><span>@{{ notif }}</span></div> -->
+                        <!-- ------------- -->
+                        <div class="form__password">
+                            <form action="#" method="POST" enctype="multipart/form-data" @submit.prevent>
+                                <div class="new__form__field">
+                                    <label>Old Password</label>
+                                    <input v-model="models.old_password" type="password" class="new__form__input__field" name="old_pass" id="old-password-field">
+                                    <div class="form--error--message"><span id="error-old-password"></span></div>
+                                </div>
+                                <div class="new__form__field">
+                                    <label>New Password</label>
+                                    <input v-model="models.new_password" type="password" class="new__form__input__field" name="new_pass" id="new-password-field">
+                                    <div class="form--error--message"><span id="error-new-password"></span></div>
+                                </div>
+                                <div class="new__form__field">
+                                    <label>Confirm Password</label>
+                                    <input v-model="models.confirm_password" type="password" class="new__form__input__field" name="confirm_pass" id="confirm-password-field">
+                                    <div class="form--error--message"><span id="error-confirm-password"></span></div>
+                                </div>
+                                <div class="new__form__btn">
+                                    <button type="submit" class="btn__form__create submit-form" @click="changePassword()">Change Password</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </modal>
 </div>
 <!-- /top navigation -->

@@ -1065,3 +1065,132 @@ input, textarea, select {
 
 .right {
   float: right; }
+
+.popup__mask__alert, .popup--changepass {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s 0s, visibility 0s 0.3s;
+}
+
+.popup__mask {
+    position: fixed;
+    z-index: 99;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: opacity .3s ease;
+}
+
+.popup__mask .popup__wrapper {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    transition: all .3s ease;
+}
+
+@media only screen and (max-width: 1280px){
+
+    .popup__mask .popup__wrapper .popup__layer {
+        width: 60%;
+    }
+}
+
+.popup__mask .popup__wrapper .popup__layer {
+    width: 700px;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+    transition: all .3s ease;
+}
+
+.popup--changepass .popup--changepass__layer {
+    transform: translateY(-40px);
+    transition-property: transform;
+    transition-duration: 0.3s;
+}
+
+.popup__mask .popup__wrapper .popup__layer .popup__layer--header {
+    padding: 15px 30px;
+}
+
+.popup__mask .popup__wrapper .popup__layer .popup__layer--header {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    border-bottom: 2px solid #F3F4F6;
+}
+
+.popup__mask .popup__wrapper .popup__layer .header--title h1 {
+    font-family: "harriet_regular";
+    font-size: 32px;
+    margin: 15px 0 10px 0;
+    color: #627F8F;
+    font-weight: normal;
+    letter-spacing: 0;
+    text-transform: capitalize;
+}
+
+.popup__mask .popup__wrapper .popup__layer .popup__notif {
+    height: 0px;
+    opacity: 0;
+    background-color: #9FBFCB;
+    color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-align: center;
+    align-items: center;
+    box-shadow: inset 0 3px 6px -6px rgba(0, 0, 0, 0.8);
+    transition: all .3s;
+}
+
+.popup__mask .popup__wrapper .popup__layer .popup__notif span {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.popup__mask .popup__wrapper .popup__layer .content--main {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.popup__mask .popup__wrapper .popup__layer .content--header, .popup__mask .popup__wrapper .popup__layer .content--main {
+    padding-bottom: 10px;
+}
+
+.popup__mask .popup__wrapper .popup__layer .form__password {
+    width: 50%;
+    margin: 0px auto;
+}
+
+.popup__mask .popup__wrapper .popup__layer .form__password .new__form__field {
+    margin: 15px 0px;
+    width: 100%;
+}
+
+.popup__mask .popup__wrapper .popup__layer .popup__layer--content .new__form__field label {
+    color: #9FBFCB;
+}
+
+.popup__mask .popup__wrapper .popup__layer .form__password .new__form__btn {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+    justify-content: center;
+    margin-top: 20px;
+}
