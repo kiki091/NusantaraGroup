@@ -99,6 +99,46 @@ class User extends BaseImplementation implements UserInterface
      */
     public function changePassword($data)
     {
-    	
+        try {
+            DB::beginTransaction();
+
+            if ($this->changePasswordUser($data)) {
+                //TODO: send mail first
+                DB::commit();
+                return $this->setResponse(trans('message.user_success_change_password'), true);
+            }
+
+            DB::rollBack();
+            return $this->setResponse(trans('message.user_failed_change_password'), false);
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return $this->setResponse($e->getMessage(), false);
+        }
+    }
+
+    /**
+     * Change Password User
+     * @param $data
+     */
+    protected function changePasswordUser($data)
+    {
+        $userId = Auth::id();
+        
+        try {
+            //$matchThese = ['id' => $userId, 'password' => Hash::make($data['old_password']) ];
+            //$users = UserModel::where($matchThese)->get();
+            $users = UserModel::find($userId);
+            if(Hash::check($data['old_password'], $users['password']))
+            {
+                $users['password']      = Hash::make($data['new_password']);
+                $save = $users->save();
+                return $save;    
+            }
+            else
+                return false;
+        } catch (Exception $e) {
+            return $this->setResponse($e->getMessage(), false);
+        }
     }
 }

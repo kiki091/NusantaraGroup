@@ -2,7 +2,118 @@
 Vue.config.devtools = true;
 Vue.config.debug = true;
 //end true devtools and config vue js
+//function change password
+Vue.http.headers.common['X-CSRF-TOKEN'] = $("#_token").attr("value");
+var vmForm = new Vue({
 
+    el: '#template_change_password',
+    data: {
+        models: {
+            old_password: '',
+            new_password: '',
+            confirm_password: '',
+            _token: ''
+        },
+        notif: '',
+        showModal: false
+    },
+
+    methods: {
+
+        showForm: function() {
+            this.models = { old_password: '', new_password: '', confirm_password: '' }
+            this.refresh()
+            this.showModal = true;
+
+            $('.popup__mask').addClass('is-visible');
+
+            // add class di container saat popup
+            $('.container__main').addClass('popupContainer');
+        },
+
+        refresh: function() {
+            $('#error-old-password').text('')
+            $('#error-new-password').text('')
+            $('#error-confirm-password').text('')
+        },
+
+        closeForm: function() {
+            this.showModal = false;
+
+            // remove class di container saat popup
+             $('.container__main').removeClass('popupContainer');
+
+            // remove class di container saat popup
+            setTimeout(function() {
+              $('.popup__mask').removeClass('is-visible');
+            }, 300);
+        },
+
+        showNotif: function(){
+            $('.popup__notif').addClass('open');
+            $('.submit-form').addClass('btn__disable');
+            setTimeout(function () {
+                $('.popup__notif').removeClass('open');
+                $('.submit-form').removeClass('btn__disable');
+            }, 5000)
+            this.notif = 'Change Password Successful';
+        },
+
+        showErrorNotif: function(){
+            $('#error-old-password').show();
+            $('#error-old-password').text('Wrong old password');
+        },
+
+        changePassword: function () {
+                var domain    = 'change-password';
+                var users     = this.models
+                
+                var old_password     = users.old_password
+                var new_password    = users.new_password
+                var confirm_password     = users.confirm_password
+                var _token     = users._token
+
+                var payload = { old_password: old_password, new_password: new_password, confirm_password: confirm_password, _token: _token }
+                this.refresh()
+
+                this.$http.post(domain, payload).then(function (response) {
+                    if (response.data.status==='') 
+                    {
+                        data = response.data
+                        if(data.old_password)
+                        {
+                            $('#error-old-password').show();
+                            $('#error-old-password').text(data.old_password);
+                        }
+
+                        if(data.new_password)
+                        {
+                            $('#error-new-password').show();
+                            $('#error-new-password').text(data.new_password);
+                        }
+
+                        if(data.confirm_password)
+                        {
+                            $('#error-confirm-password').show();
+                            $('#error-confirm-password').text(data.confirm_password);
+                        }
+                    }
+                    else if (response.data.status === false) 
+                    {
+                        this.showErrorNotif()
+                    } 
+                    else if(response.data.status===true)
+                    {
+                        this.models = { old_password: '', new_password: '', confirm_password: '' }
+                        this.showNotif()
+                    }
+                });
+            },
+
+    },
+
+});
+//end function change password
 //vue custome directive sortable js https://github.com/RubaXa/Sortable
 
 Vue.directive("sort", {
@@ -80,116 +191,6 @@ Vue.directive("sort", {
 })
 
 //end vue custome directive sortable js
-
-//function change password
-var vmForm = new Vue({
-    el: '#template_change_password',
-    data: {
-        models: {
-            old_password: '',
-            new_password: '',
-            confirm_password: ''
-        },
-        notif: '',
-        showModal: false
-    },
-
-    methods: {
-
-        showForm: function() {
-            this.models = { old_password: '', new_password: '', confirm_password: '' }
-            this.refresh()
-            this.showModal = true;
-
-            $('.popup__mask').addClass('is-visible');
-
-            // add class di container saat popup
-            $('.container__main').addClass('popupContainer');
-        },
-
-        refresh: function() {
-            $('#error-old-password').text('')
-            $('#error-new-password').text('')
-            $('#error-confirm-password').text('')
-        },
-
-        closeForm: function() {
-            this.showModal = false;
-
-            // remove class di container saat popup
-             $('.container__main').removeClass('popupContainer');
-
-            // remove class di container saat popup
-            setTimeout(function() {
-              $('.popup__mask').removeClass('is-visible');
-            }, 300);
-        },
-
-        showNotif: function(){
-            $('.popup__notif').addClass('open');
-            $('.submit-form').addClass('btn__disable');
-            setTimeout(function () {
-                $('.popup__notif').removeClass('open');
-                $('.submit-form').removeClass('btn__disable');
-            }, 5000)
-            this.notif = 'Change Password Successful';
-        },
-
-        showErrorNotif: function(){
-            $('#error-old-password').show();
-            $('#error-old-password').text('Wrong old password');
-        },
-
-        changePassword: function () {
-                var domain    = laroute.url('change-password', []);
-                var users     = this.models
-                
-                var old_password     = users.old_password
-                var new_password    = users.new_password
-                var confirm_password     = users.confirm_password
-
-                var payload = { old_password: old_password, new_password: new_password, confirm_password: confirm_password, _token:ayana.token }
-                this.refresh()
-
-                this.$http.post(domain, payload).then(function (response) {
-                    if (response.data.status==='') 
-                    {
-                        data = response.data
-                        if(data.old_password)
-                        {
-                            $('#error-old-password').show();
-                            $('#error-old-password').text(data.old_password);
-                        }
-
-                        if(data.new_password)
-                        {
-                            $('#error-new-password').show();
-                            $('#error-new-password').text(data.new_password);
-                        }
-
-                        if(data.confirm_password)
-                        {
-                            $('#error-confirm-password').show();
-                            $('#error-confirm-password').text(data.confirm_password);
-                        }
-                    }
-                    else if (response.data.status === false) 
-                    {
-                        this.showErrorNotif()
-                    } 
-                    else if(response.data.status===true)
-                    {
-                        this.models = { old_password: '', new_password: '', confirm_password: '' }
-                        this.showNotif()
-                    }
-                });
-            },
-
-    },
-
-});
-//end function change password
-
 
 function property() {
     $('.btn__add').click(function()

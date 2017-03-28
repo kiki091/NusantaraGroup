@@ -15,4 +15,6 @@
       'cms_success_ordering' => 'Order data success',
       'cms_failed_ordering' => 'Oeder data failed',
       'cms_success_store_subscribe' => 'Success subscribe mail',
+      'user_success_change_password' => 'Success change password',
+      'user_failed_change_password' => 'Failed change password',
   ];

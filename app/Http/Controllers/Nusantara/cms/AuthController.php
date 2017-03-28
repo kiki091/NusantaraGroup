@@ -167,4 +167,40 @@ class AuthController extends CmsController
         );
     }
 
+    /**
+     * Change Password
+     * @param Request $request
+     */
+    public function changePassword(Request $request)
+    {
+        $validator = Validator::make($request->input(), $this->validationChangePasswordForm());
+
+        if ($validator->fails()) {
+            //TODO: case fail
+            $old_password = $validator->messages()->first('old_password') ?: '';
+            $new_password = $validator->messages()->first('new_password') ?: '';
+            $confirm_password = $validator->messages()->first('confirm_password') ?: '';
+            $status = '';
+
+            return Response::json(compact('old_password', 'new_password', 'confirm_password', 'status'));
+
+        } else {
+            //TODO: case pass
+            return $this->user->changePassword($request->input());
+        }
+    }
+
+    /**
+     * Validation Change Password Rules
+     * @return array
+     */
+    private function validationChangePasswordForm()
+    {
+        return $rules = array(
+            'old_password'      => 'required',
+            'new_password'      => 'required',
+            'confirm_password'  => 'required|same:new_password',
+        );
+    }
+
 }

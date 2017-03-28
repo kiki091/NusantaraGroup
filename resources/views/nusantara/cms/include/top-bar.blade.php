@@ -85,6 +85,7 @@
                                     <div class="form--error--message"><span id="error-confirm-password"></span></div>
                                 </div>
                                 <div class="new__form__btn">
+                                    <input type="hidden" id="_token" name="_token" value="{{ csrf_token() }}">
                                     <button type="submit" class="btn__form__create submit-form" @click="changePassword()">Change Password</button>
                                 </div>
                             </form>

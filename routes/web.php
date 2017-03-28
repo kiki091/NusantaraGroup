@@ -94,6 +94,7 @@ Route::group(['middleware' => ['web']], function ()
     {
 		Route::get('/', 'Nusantara\cms\AuthController@index')->name('login');
 		Route::post('auth', 'Nusantara\cms\AuthController@authenticate')->name('authenticate');
+		Route::post('change-password', 'Nusantara\cms\AuthController@changePassword')->name('ChangePassword');
 		Route::get('logout', 'Nusantara\cms\AuthController@logout')->name('logout');
 		Route::get('dashboard', 'Nusantara\cms\DashboardController@index')->name('CmsDashboard');
 
