@@ -200,7 +200,7 @@ class Awards extends BaseImplementation implements AwardsInterface
         if (empty($accOfferId))
             return false;
 
-        return $this->branchOfficeTrans->where('awards_id', $accOfferId)->delete();
+        return $this->awardsTrans->where('awards_id', $accOfferId)->delete();
     }
 
     /**
@@ -325,9 +325,20 @@ class Awards extends BaseImplementation implements AwardsInterface
         return isset($data['id']) && !empty($data['id']) ? true : false;
     }
 
-    public function edit($params)
+    /**
+     * Get Data For Edit Awards
+     * @param $data
+     */
+
+    public function edit($data)
     {
-        
+        $params = [
+            "id" => isset($data['id']) ? $data['id'] : '',
+        ];
+
+        $singleAwardsData = $this->awards($params, 'asc', 'array', true);
+
+        return $this->setResponse(trans('message.cms_success_get_data'), true, $this->awardsTransformation->getSingleAwardsCmsTransform($singleAwardsData));
     }
 
     public function changeStatus($params)

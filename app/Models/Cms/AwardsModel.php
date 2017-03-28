@@ -46,7 +46,7 @@ class AwardsModel extends Model
     /**
      * @param $query
      */
-    public function scopeid($query, $id)
+    public function scopeId($query, $id)
     {
         return $query->where('id', $id);
     }

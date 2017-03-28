@@ -248,6 +248,9 @@ function crudAwards() {
                         this.models = response.data;
                         this.thumbnail = response.data.thumbnail_url
                         this.filename = response.data.filename_url
+                        this.total_description = response.data.total_description
+
+                        this.default_total_description = []
 
                         this.form_add_title = "Edit Awards"
                         $('.btn_add_awards').click()
