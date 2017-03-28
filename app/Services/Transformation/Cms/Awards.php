@@ -91,6 +91,9 @@ class Awards
 
         $dataTranform['id'] = isset($data['id']) ? $data['id'] : '';
         $dataTranform['office_name'] = isset($data['office_name']) ? $data['office_name'] : '';
+        $dataTranform['thumbnail'] = isset($data['thumbnail']) ? $data['thumbnail'] : '';
+        $dataTranform['filename'] = isset($data['filename']) ? $data['filename'] : '';
+
         $dataTranform['thumbnail_url'] = isset($data['thumbnail']) ? asset(AWARDS_IMAGES_DIRECTORY.rawurlencode($data['thumbnail'])) : '';
         $dataTranform['filename_url'] = isset($data['filename']) ? asset(AWARDS_IMAGES_DIRECTORY.rawurlencode($data['filename'])) : '';
 

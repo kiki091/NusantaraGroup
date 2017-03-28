@@ -375,9 +375,106 @@ class Awards extends BaseImplementation implements AwardsInterface
         }
     }
 
-    public function delete($params)
+    /**
+     * Get Single Branch Office
+     * @param $params
+     */
+    public function getSingleAwards($params) {
+
+        $primaryData = $this->awards($params, 'asc', 'array', true);
+
+        return $this->awardsTransformation->getSingleAwardsCmsTransform($primaryData);
+    }
+
+    /**
+     * Delete Data Awards
+     * @param $params
+     * @return mixed
+     */
+
+    public function delete($data)
     {
-        
+        try {
+            if (!isset($data['id']) && empty($data['id']))
+                return $this->setResponse(trans('message.cms_required_id'), false);
+
+            DB::beginTransaction();
+
+            $params = [
+                "id" => $data['id']
+            ];
+
+            $awardsData = $this->getSingleAwards($params);
+
+            if (!$this->removeAwardsFiles($awardsData['thumbnail'], $awardsData['filename'])) {
+                DB::rollback();
+                return $this->setResponse($this->message, false);
+            }
+            
+            if (!$this->removeAwards($params)) {
+                DB::rollback();
+                return $this->setResponse($this->message, false);
+            }
+
+            DB::commit();
+            return $this->setResponse(trans('message.cms_success_delete_data_general'), true);
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            return $this->setResponse($e->getMessage(), false);
+        }
+    }
+
+    /**
+     * remove Awards Files
+     * @param $data
+     */
+    protected function removeAwardsFiles($thumbnail, $filename)
+    {
+        try {
+
+            $thumbnail_data = isset($thumbnail) && !empty($thumbnail) ? $thumbnail : uniqid();
+            $filename_data  = isset($filename) && !empty($filename) ? $filename : uniqid();
+
+            if (file_exists('./' . AWARDS_IMAGES_DIRECTORY . $thumbnail_data)) {
+                unlink('./' . AWARDS_IMAGES_DIRECTORY . $thumbnail_data);
+            }
+
+            if (file_exists('./' . AWARDS_IMAGES_DIRECTORY . $filename_data)) {
+                unlink('./' . AWARDS_IMAGES_DIRECTORY . $filename_data);
+            }
+
+            return true;
+
+        } catch (\Exception $e) {
+            $this->message = $e->getMessage();
+            return false;
+        }
+    }
+
+    /**
+     * Remove Awards From Database
+     * @param $data
+     * @return bool
+     */
+    protected function removeAwards($data)
+    {
+        try {
+
+            $delete = $this->awards
+                ->id($data['id'])
+                ->forceDelete();
+
+            if ($delete)
+                return true;
+
+            $this->message = trans('message.cms_failed_delete_data_general');
+            return false;
+
+        } catch (\Exception $e) {
+            $this->message = $e->getMessage();
+            return false;
+        }
     }
 
     /**
