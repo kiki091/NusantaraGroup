@@ -61,10 +61,8 @@ class Awards extends BaseImplementation implements AwardsInterface
         }
 
         if(isset($data['order_by'])) {
-            $awards->orderBy($data['order_by'], $orderType);
-        } else {
             $awards->orderBy('order', $orderType);
-        }
+        } 
 
         if(isset($data['id'])) {
             $awards->id($data['id']);
