@@ -34,11 +34,11 @@ new Vue({
                                 $("#form--error--message--" + key.replace(".", "_")).text(value)
                             });
                             vm.config_notif
-                            toastr.error(response.message)
+                            toastr.error('Subscribe Failed')
 
                         } else {
                             vm.config_notif
-                            toastr.error(response.message)
+                            toastr.error('Subscribe Failed')
                         }
                     } else {
                         vm.config_notif

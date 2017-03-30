@@ -58,9 +58,9 @@
 	    <script type="text/javascript" src="{{asset('themes/front/shield/js/smoothscroll.js')}}"></script>
 
 	    <!-- Start Vue Js Component -->
-	    <script src="{{asset('js/vue.js')}}"></script>
-	    <script src="{{asset('js/vue-min.js')}}"></script>
-	    <script src="{{asset('js/vue-resource.js')}}"></script>
+	    <script src="{{asset('js/vue/1.x/vue.js')}}"></script>
+	    <script src="{{asset('js/vue/1.x/vue-min.js')}}"></script>
+	    <script src="{{asset('js/vue/1.x/vue-resource.js')}}"></script>
     	<script src="{{asset('themes/front/content/booking-service.js')}}"></script>
     	<script src="{{asset('themes/front/content/booking-test-drive.js')}}"></script>
     	<script src="{{asset('themes/front/content/footer.js')}}"></script>

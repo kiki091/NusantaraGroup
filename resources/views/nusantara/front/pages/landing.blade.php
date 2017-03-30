@@ -184,7 +184,7 @@
             <br/>
             <br/>
 
-            <div class="container" style="margin-bottom: 5%">
+            <!-- <div class="container" style="margin-bottom: 5%">
                 <div class="captions">
                     <div class="caption" name="c0">
                         <h2>Energias Renovables</h2>
@@ -203,7 +203,7 @@
                     <div class="slide" name="0" style="background-image:url(/themes/front/carousel/images/eolic.jpg)"></div>
                     <div class="slide" name="1" style="background-image:url(/themes/front/carousel/images/eolic2.jpg)"></div>
                 </div>
-            </div>
+            </div> -->
 
             <!-- ==== PORTFOLIO ==== -->
             <div class="container" id="branch_office" name="branch_office">

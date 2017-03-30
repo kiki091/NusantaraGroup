@@ -85,24 +85,27 @@
 
             <div class="row">
                 <div class="col-xs-6">
-                    <table class="table table-striped">
-                        <thead>
-                            <th class="centered">Our Address</th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="centered">
-                                    PT. Nusantara Batavia Motor
-                                    <br/>
-                                    Jl. Suryopranoto No 77-79, Jakarta Pusat
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
                     <section class="section-divider textdividerFooter divider6" id="map"></section>
                 </div>
                 <div class="col-xs-6">
+                    <section class="section-divider textdividerFooter" style="padding-top: 0px;border-bottom:none;">
+                        <table class="table table-striped">
+                            <thead>
+                                <th class="centered">Our Address</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="centered">
+                                        PT. Nusantara Batavia Motor
+                                        <br/>
+                                        Jl. Suryopranoto No 77-79, Jakarta Pusat
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
                 </div>
+            </div>
         </div><!-- container -->
         @include('nusantara.front.partials.maps-landing')
     @endsection
