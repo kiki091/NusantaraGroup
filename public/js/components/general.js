@@ -453,3 +453,11 @@ function initAwards()
     buttonClickClose();
     replaceToCkEditor();
 }
+
+function initPromotion()
+{
+    crudPromotions();
+    buttonClickOpen();
+    buttonClickClose();
+    replaceToCkEditor();
+}

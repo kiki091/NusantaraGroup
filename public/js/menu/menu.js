@@ -37,3 +37,11 @@ function menuAwards()
         initAwards()
     });
 }
+
+function menuPromotions()
+{
+    $('.right_col').load(laroute.url('/promotions', []), function()
+    {
+        initPromotion()
+    });
+}

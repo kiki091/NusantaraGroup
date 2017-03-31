@@ -168,6 +168,11 @@ Route::group(['middleware' => ['web']], function ()
 			Route::post('delete-banner', 'Nusantara\cms\pages\AwardsController@deleteBanner')->name('AwardsDeleteBanner');
 
 		});
+
+		Route::group(array('prefix' => 'promotions' ), function() {
+			Route::get('/', 'Nusantara\cms\pages\PromotionController@index')->name('Promotion');
+			Route::get('data', 'Nusantara\cms\pages\PromotionController@getData')->name('PromotionGetData');
+		});
     	
     });
 });
