@@ -96,7 +96,7 @@ class AwardsController extends CmsController
     public function storeBanner(Request $request)
     {
 
-        $validator = Validator::make($request->all(), $this->validationStore($request));
+        $validator = Validator::make($request->all(), $this->validationStoreBanner($request));
 
         if ($validator->fails()) {
             //TODO: case fail
@@ -104,7 +104,7 @@ class AwardsController extends CmsController
 
         } else {
             //TODO: case pass
-            return $this->mainBanner->store($request->except(['_token'], self::MAIN_BANNER_KEY  ));
+            return $this->mainBanner->store($request->except(['_token', 'image_url']), $this->getLocationId(), self::MAIN_BANNER_KEY);
         }
     }
 
@@ -210,6 +210,28 @@ class AwardsController extends CmsController
         {
             if (is_null($request->file('filename'))) {
                 unset($rules['filename']);
+            }
+        }
+
+        return $rules;
+    }
+
+    /**
+     * Validation Store Banner
+     * @return array
+     */
+    private function validationStoreBanner($request = array())
+    {
+        $rules = [
+            'title'               => 'required',
+            'images'              => 'required|dimensions:width='.MAIN_BANNER_WIDTH.',height='.MAIN_BANNER_HEIGHT.'|max:'. MAIN_BANNER_SIZE .'|mimes:jpg,jpeg',
+            
+        ];
+
+        if ($this->isEditMode($request->input()))
+        {
+            if (is_null($request->file('images'))) {
+                unset($rules['images']);
             }
         }
 

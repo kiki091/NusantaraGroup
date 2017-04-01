@@ -31,7 +31,7 @@
 					</div>
 				</modal>
 
-				@include('nusantara.cms.pages.main-banner.partials.form')
+				@include('nusantara.cms.pages.promotion.partials.form-banner')
 	        	@include('nusantara.cms.pages.promotion.partials.form')
 
 	        	<div class="main__content__layer" style="margin-top: 5%;">

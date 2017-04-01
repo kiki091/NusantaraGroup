@@ -99,7 +99,8 @@ Route::group(['middleware' => ['web']], function ()
 		Route::get('dashboard', 'Nusantara\cms\DashboardController@index')->name('CmsDashboard');
 
 		// Booking Services
-		Route::group(array('prefix' => 'booking-services' ), function(){
+		Route::group(array('prefix' => 'booking-services' ), function()
+		{
 			Route::get('/', 'Nusantara\cms\reservation\BookingServicesController@index')->name('BookingServices');
 			Route::get('data', 'Nusantara\cms\reservation\BookingServicesController@getData')->name('getDataBookingServices');
 			Route::post('store', 'Nusantara\cms\reservation\BookingServicesController@store')->name('storeBookingServices');
@@ -109,7 +110,8 @@ Route::group(['middleware' => ['web']], function ()
 
 		// Static Page
 
-		Route::group(array('prefix' => 'static-page' ), function(){
+		Route::group(array('prefix' => 'static-page' ), function()
+		{
 			Route::get('/', 'Nusantara\cms\pages\StaticPageController@index')->name('StaticPage');
 			Route::get('data', 'Nusantara\cms\pages\StaticPageController@getData')->name('StaticPageGetData');
 			Route::post('store', 'Nusantara\cms\pages\StaticPageController@store')->name('StoreStaticPage');
@@ -119,7 +121,8 @@ Route::group(['middleware' => ['web']], function ()
 
 		// Main Banner
 
-		Route::group(array('prefix' => 'main-banner' ), function(){
+		Route::group(array('prefix' => 'main-banner' ), function()
+		{
 			Route::get('/', 'Nusantara\cms\pages\MainBannerController@index')->name('MainBanner');
 			Route::get('data', 'Nusantara\cms\pages\MainBannerController@getData')->name('MainBannerGetData');
 			Route::post('store', 'Nusantara\cms\pages\MainBannerController@store')->name('StoreMainBanner');
@@ -131,7 +134,8 @@ Route::group(['middleware' => ['web']], function ()
 
 		// Branch Office
 
-		Route::group(array('prefix' => 'branch-office' ), function(){
+		Route::group(array('prefix' => 'branch-office' ), function()
+		{
 			Route::get('/', 'Nusantara\cms\pages\BranchOfficeController@index')->name('BranchOffice');
 			Route::get('data', 'Nusantara\cms\pages\BranchOfficeController@getData')->name('GetDataBranchOffice');
 			Route::post('store', 'Nusantara\cms\pages\BranchOfficeController@store')->name('StoreBranchOffice');
@@ -148,7 +152,8 @@ Route::group(['middleware' => ['web']], function ()
 
 		// Awards
 
-		Route::group(array('prefix' => 'awards' ), function(){
+		Route::group(array('prefix' => 'awards' ), function()
+		{
 			Route::get('/', 'Nusantara\cms\pages\AwardsController@index')->name('Awards');
 			Route::get('data', 'Nusantara\cms\pages\AwardsController@getData')->name('AwardsGetData');
 
@@ -169,9 +174,18 @@ Route::group(['middleware' => ['web']], function ()
 
 		});
 
-		Route::group(array('prefix' => 'promotions' ), function() {
+		// Promotion
+
+		Route::group(array('prefix' => 'promotions' ), function() 
+		{
 			Route::get('/', 'Nusantara\cms\pages\PromotionController@index')->name('Promotion');
 			Route::get('data', 'Nusantara\cms\pages\PromotionController@getData')->name('PromotionGetData');
+
+			Route::post('store-banner', 'Nusantara\cms\pages\PromotionController@storeBanner')->name('PromotionStoreBanner');
+			Route::post('edit-banner', 'Nusantara\cms\pages\PromotionController@editBanner')->name('PromotionEditBanner');
+			Route::post('change-status-banner', 'Nusantara\cms\pages\PromotionController@changeStatusBanner')->name('PromotionChangeStatusBanner');
+			Route::post('order-banner', 'Nusantara\cms\pages\PromotionController@orderBanner')->name('PromotionOrderBanner');
+			Route::post('delete-banner', 'Nusantara\cms\pages\PromotionController@deleteBanner')->name('PromotionDeleteBanner');
 		});
     	
     });

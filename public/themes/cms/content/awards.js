@@ -148,8 +148,8 @@ function crudAwards() {
 
                 };
 
-                $("#FormMainBanner").ajaxForm(optForm);
-                $("#FormMainBanner").submit();
+                $("#FormBannerAwards").ajaxForm(optForm);
+                $("#FormBannerAwards").submit();
             },
 
             storeDataAwards: function(event){
