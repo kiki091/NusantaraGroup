@@ -10,6 +10,13 @@ interface Promotion
      * @param $params
      * @return mixed
      */
-    public function getData($params);
+    public function getData();
+
+    /**
+     * Get Data Category Promotion
+     * @param $params
+     * @return mixed
+     */
+    public function getCategoryPromotion();
 
 }

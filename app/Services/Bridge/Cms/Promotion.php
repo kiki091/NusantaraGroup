@@ -18,9 +18,19 @@ class Promotion {
      * @param $params
      * @return mixed
      */
-    public function getData($params)
+    public function getData()
     {
-        return $this->promotion->getData($params);
+        return $this->promotion->getData();
+    }
+
+    /**
+     * Get Data Category Promotion
+     * @param $params
+     * @return mixed
+     */
+    public function getCategoryPromotion()
+    {
+        return $this->promotion->getCategoryPromotion();
     }
 
 

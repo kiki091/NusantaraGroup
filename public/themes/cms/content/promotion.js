@@ -56,10 +56,10 @@ function crudPromotions() {
             delete_payload: {
                 id: '',
             },
-            form_add_title_banner: "Banner",
+            form_add_title_banner: "Banner Promotions",
             form_add_title_category: "Category Promotions",
-            form_add_title: "Promotions",
-            sectionDelete : 'awards',
+            form_add_title: "Detail Promotions",
+            sectionDelete : 'banner',
             default_total_description : [0],
             total_description : [],
             id: '',

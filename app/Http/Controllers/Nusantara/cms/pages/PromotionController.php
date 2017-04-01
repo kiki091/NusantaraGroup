@@ -64,7 +64,8 @@ class PromotionController extends CmsController
         $location = $this->getUserLocation('id');
         $property_location_id = $location['property_id'];
 
-    	$data['awards'] = $this->awards->getData();
+    	$data['promotion'] = $this->promotion->getData();
+        $data['category_promotion'] = $this->promotion->getCategoryPromotion();
         $data['banner'] = $this->mainBanner->getData($property_location_id, self::MAIN_BANNER_KEY);
 
     	return $this->response->setResponse(trans('success_get_data'), true, $data);

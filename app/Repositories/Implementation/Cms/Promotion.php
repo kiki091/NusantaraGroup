@@ -7,9 +7,9 @@ use App\Repositories\Implementation\BaseImplementation;
 use App\Repositories\Contracts\Cms\Promotion as PromotionInterface;
 use App\Models\Promotion as PromotionModel;
 use App\Models\PromotionCategory as PromotionCategoryModels;
-use App\Models\PromotionDatail as PromotionDatailModels;
+use App\Models\PromotionDetail as PromotionDatailModels;
 use App\Models\PromotionGallery as PromotionGalleryModels;
-use App\Models\PromotionImages as PromotionImagesModels;
+use App\Models\PromotionImage as PromotionImagesModels;
 use App\Models\PromotionTrans as PromotionTransModels;
 use App\Services\Transformation\Cms\Promotion as PromotionTransformation;
 use Cache;
@@ -32,7 +32,7 @@ class Promotion extends BaseImplementation implements PromotionInterface
     protected $promotionTransformation;
     protected $uniqueIdImagePrefix = '';
 
-    function __construct(PromotionModel $promotion, PromotionCategoryModel $promotionCategory, PromotionDatailModels $promotionDatail, PromotionGalleryModels $promotionGallery, PromotionImagesModels $promotionImages, PromotionTransModels $promotionTrans, PromotionTransformation $promotionTransformation)
+    function __construct(PromotionModel $promotion, PromotionCategoryModels $promotionCategory, PromotionDatailModels $promotionDatail, PromotionGalleryModels $promotionGallery, PromotionImagesModels $promotionImages, PromotionTransModels $promotionTrans, PromotionTransformation $promotionTransformation)
     {
         $this->promotion = $promotion;
         $this->promotionCategory = $promotionCategory;
@@ -44,19 +44,30 @@ class Promotion extends BaseImplementation implements PromotionInterface
         $this->uniqueIdImagePrefix = uniqid(PREFIX_FILENAME_NUSANTARA_IMAGE);
     }
 
-    public function getData($params)
+    public function getData()
     {
         $data = [
             "is_active" => true
         ];
 
-        $promotionData = $this->awards($data, 'asc', 'array', true);
+        $promotionData = $this->promotion($data, 'asc', 'array', true);
        
-        return $this->promotionTransformation->getPromotionCmsTransform($awardsData);
+        return $this->promotionTransformation->getPromotionCmsTransform($promotionData);
+    }
+
+    public function getCategoryPromotion()
+    {
+        $data = [
+            "is_active" => true
+        ];
+
+        $promotionCategory = $this->promotionCategory($data, 'asc', 'array', true);
+       
+        return $this->promotionTransformation->getPromotionCategoryCmsTransform($promotionCategory);
     }
 
     /**
-     * Get All Data
+     * Get All Data Promotions
      * Warning: this function doesn't redis cache
      * @param array $params
      * @return array
@@ -89,6 +100,46 @@ class Promotion extends BaseImplementation implements PromotionInterface
         }
         
         return $promotion->get()->toArray();
+    }
+
+    /**
+     * Get All Data Category Promotions
+     * Warning: this function doesn't redis cache
+     * @param array $data
+     * @return array
+     */
+    protected function promotionCategory($data = array(), $orderType = 'asc', $returnType = 'array', $returnSingle = false)
+    {
+
+        $promotionCategory = $this->promotionCategory
+            ->with(['translations']);
+
+        if(isset($data['is_active'])) {
+            $promotionCategory->isActive($data['is_active']);
+        }
+
+        if(isset($data['order_by'])) {
+            $promotionCategory->orderBy('order', $orderType);
+        } 
+
+        if(isset($data['slug'])) {
+            $promotionCategory->slug($data['slug']);
+        }
+
+        if(isset($data['id'])) {
+            $promotionCategory->id($data['id']);
+        }
+
+
+        if(!$promotionCategory->count())
+            return array();
+
+        if(isset($data['id'])) 
+        {
+            return $promotionCategory->first()->toArray();
+        }
+        
+        return $promotionCategory->get()->toArray();
     }
 
 }

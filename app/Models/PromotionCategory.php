@@ -38,4 +38,12 @@ class PromotionCategory extends Model
     {
         return $query->where('category_slug', $params);
     }
+
+    /**
+     * @param $query
+     */
+    public function scopeId($query, $params = true)
+    {
+        return $query->where('id', $params);
+    }
 }
