@@ -6,23 +6,6 @@ function crudPromotions() {
     	el: '#app',
         data: {
 
-            banner:{
-                id:'',
-                title: '',
-                images : '',
-            },
-
-            categori : {
-                id : '',
-                category_name : '',
-                category_slug : '',
-                thumbnail_category : '',
-                introduction : '',
-                meta_title : '',
-                meta_keyword : '',
-                meta_description : '',
-            },
-
             promotion: {
                 id:'',
                 title: '',
@@ -48,9 +31,7 @@ function crudPromotions() {
                 meta_description : '',
             },
 
-            images : '',
             thumbnail: '',
-            thumbnail_category : '',
             filename : {0: '', 1: '', 2: '', 3: '', 4: '', 5: '', 6: '', 7: ''},
             banner_image : '',
             interior_image : '',
@@ -60,10 +41,7 @@ function crudPromotions() {
             delete_payload: {
                 id: '',
             },
-            form_add_title_banner: "Banner Promotions",
-            form_add_title_category: "Category Promotions",
             form_add_title: "Detail Promotions",
-            sectionDelete : 'banner',
             default_total_description : [0],
             total_description : [],
             id: '',
@@ -104,7 +82,7 @@ function crudPromotions() {
                 if (!files.length)
                     return;
 
-                this.banner[element] = files[0]
+                this.promotion[element] = files[0]
                 this.createImage(files[0], element);
             },
 
@@ -121,7 +99,7 @@ function crudPromotions() {
 
             removeImage: function (variable) {
                 this[variable] = '';
-                this.banner[variable] = ''
+                this.promotion[variable] = ''
             },
 
             fetchData: function(){
@@ -132,275 +110,6 @@ function crudPromotions() {
                         pushNotifV3(response.data.status, response.data.message)
                     }
                 })
-            },
-
-            storeData: function(event){
-
-                var vm = this;
-                var optForm      = {
-
-                    dataType: "json",
-
-                    beforeSend: function(){
-                        showLoadingData(true)
-                        vm.clearErorrMessage()
-                    },
-                    success: function(response){
-                        if (response.status == false) {
-                            if(response.is_error_form_validation) {
-
-                                var message_validation = ''
-                                $.each(response.message, function(key, value){
-                                    $('input[name="' + key.replace(".", "_") + '"]').focus();
-                                    $("#form--error--message--" + key.replace(".", "_")).text(value)
-                                    message_validation += '<li class="notif__content__li"><span class="text" >' + value + '</span></li>'
-                                });
-                                pushNotifMessage(response.status,response.message, message_validation);
-
-                            } else {
-                                pushNotifV3(response.status, response.message);
-                            }
-                        } else {
-                            vm.fetchData()
-                            vm.resetForm()
-                            pushNotifV3(response.status, response.message);
-                            $('.btn__add__cancel').click();
-                        }
-                    },
-                    complete: function(response){
-                        hideLoading()
-                    }
-
-                };
-
-                $("#FormBannerPromotion").ajaxForm(optForm);
-                $("#FormBannerPromotion").submit();
-            },
-
-            storeDataCategori: function(event){
-
-                var vm = this;
-                var optForm      = {
-
-                    dataType: "json",
-
-                    beforeSend: function(){
-                        showLoadingData(true)
-                        vm.clearErorrMessage()
-                    },
-                    success: function(response){
-                        if (response.status == false) {
-                            if(response.is_error_form_validation) {
-
-                                var message_validation = ''
-                                $.each(response.message, function(key, value){
-                                    $('input[name="' + key.replace(".", "_") + '"]').focus();
-                                    $("#form--error--message--" + key.replace(".", "_")).text(value)
-                                    message_validation += '<li class="notif__content__li"><span class="text" >' + value + '</span></li>'
-                                });
-                                pushNotifMessage(response.status,response.message, message_validation);
-
-                            } else {
-                                pushNotifV3(response.status, response.message);
-                            }
-                        } else {
-                            vm.fetchData()
-                            vm.resetForm()
-                            pushNotifV3(response.status, response.message);
-                            $('.btn__add__cancel').click();
-                        }
-                    },
-                    complete: function(response){
-                        hideLoading()
-                    }
-
-                };
-
-                $("#PromotionCategoriForm").ajaxForm(optForm);
-                $("#PromotionCategoriForm").submit();
-            },
-
-            editBanner: function (id) {
-                this.edit = true
-                var payload = []
-                payload['id'] = id
-
-                var form = new FormData();
-
-                for (var key in payload) {
-                    form.append(key, payload[key])
-                }
-
-                this.resetForm()
-
-                this.$http.post('/promotions/edit-banner', form).then(function(response) {
-                    response = response.data
-                    if (response.status) {
-                        this.banner = response.data;
-                        this.images = response.data.image_url
-
-                        this.form_add_title = "Edit Banner Promotion"
-                        $('.btn_add_banner').click()
-
-                    } else {
-                        pushNotifV3(response.status,response.message)
-                    }
-                })
-            },
-
-            editCategori: function (id) {
-                this.edit = true
-                var payload = []
-                payload['id'] = id
-
-                var form = new FormData();
-
-                for (var key in payload) {
-                    form.append(key, payload[key])
-                }
-
-                this.resetForm()
-
-                this.$http.post('/promotions/edit-categori', form).then(function(response) {
-                    response = response.data
-                    if (response.status) {
-                        this.categori = response.data;
-                        this.thumbnail_category = response.data.thumbnail_category_url
-
-                        this.form_add_title = "Edit Categori Promotion"
-                        $('#toggle-form-categori-content').slideDown(400)
-
-                        destroyInstanceCkEditor()
-                        replaceToCkEditor()
-
-                    } else {
-                        pushNotifV3(response.status,response.message)
-                    }
-                })
-            },
-
-            changeStatusBanner: function(id) {
-                var payload = []
-                payload['id'] = id
-
-                var form = new FormData();
-
-                for (var key in payload) {
-                    form.append(key, payload[key])
-                }
-
-                var domain = '/promotions/change-status-banner';
-                this.$http.post(domain, form).then(function(response) {
-                    response = response.data
-                    if (response.status == false) {
-                        this.fetchData()
-                        pushNotifV3(response.status,response.message);
-                    }
-                    else{
-
-                        this.fetchData()
-                        pushNotifV3(response.status,response.message);
-                    }
-                })
-            },
-
-            deleteDataBanner: function(id) {
-                
-                var domain = '/promotions/delete-banner';
-                var form = new FormData();
-
-                form.append('id', id);
-                
-                this.$http.post(domain, form).then(function (response) {
-                    response = response.data
-                    if (response.status === true)
-                    {
-                        this.delete_payload.id = '';
-                        this.fetchData()
-                        pushNotifV3(response.status, response.message);
-                    }
-
-                    this.showModal = false
-                    setTimeout(function() {
-                        $('.popup__mask__alert').removeClass('is-visible');
-                    }, 300);
-                    pushNotifV3(response.status, response.message);
-                });
-            },
-
-            sortableBanner: function() {
-                var vm = this;
-
-                setTimeout(function(){
-                    Sortable.create(document.getElementById('sort-banner'), {
-                        draggable: 'li.sort-item-banner',
-                        ghostClass: "sort-ghost",
-                        handle: '.handle',
-                        animation: 300,
-                        onUpdate: function(evt) {
-                            vm.reorderBanner(evt.oldIndex, evt.newIndex);
-                        }
-                    });
-
-                }, 100);
-            },
-
-            reorderBanner: function(oldIndex, newIndex) {
-                //get id list
-                var ids = document.getElementsByClassName('sort-item-banner'),
-                    id_order  = [].map.call(ids, function(input) {
-                        return input.getAttribute('data-id');
-                    });
-
-                var domain  = '/promotions/order-banner';
-
-                var payload = {list_order: id_order };
-
-                this.$http.post(domain, payload).then(function(response) {
-                    response = response.data
-                    if (response.status == false) {
-                        this.fetchData()
-                        pushNotifV3(response.status, response.message);
-                    }
-                    this.fetchData()
-                    pushNotifV3(response.status, response.message);
-                });
-            },
-
-            clearCkEditor: function() {
-                destroyInstanceCkEditor()
-                replaceToCkEditor()
-                this.resetFormCategoryPromotion(true)
-            },
-
-            resetFormBanner: function() {
-
-                this.banner.id = ''
-                this.banner.title = ''
-                this.images = ''
-            },
-
-            resetFormCategoryPromotion: function() {
-
-                this.categori.id = ''
-                this.categori.category_name = ''
-                this.categori.category_slug = ''
-                this.categori.introduction = ''
-                this.categori.meta_title = ''
-                this.categori.meta_keyword = ''
-                this.categori.meta_description = ''
-                this.thumbnail_category = ''
-
-                document.getElementById("PromotionCategoriForm");
-
-                $('select').prop('selectedIndex', 0);
-                $('textarea').val('');
-
-                
-                destroyInstanceCkEditor()
-                replaceToCkEditor()
-
-                this.clearErorrMessage()
             },
             
             resetForm: function() {
@@ -430,6 +139,18 @@ function crudPromotions() {
                 this.filename = {0: '', 1: '', 2: '', 3: '', 4: '', 5: '', 6: '', 7: ''};
                 this.default_total_description = [0];
                 this.total_description = [];
+
+
+                document.getElementById("PromotionDateilForm");
+
+                $('select').prop('selectedIndex', 0);
+                $('textarea').val('');
+
+                
+                destroyInstanceCkEditor()
+                replaceToCkEditor()
+
+                this.clearErorrMessage()
             },
 
             clearErorrMessage: function(){
@@ -453,7 +174,6 @@ function crudPromotions() {
         },
 
         ready: function () {
-            this.sortableBanner()
             this.fetchData()
         }
     });

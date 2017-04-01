@@ -27,6 +27,8 @@
 <script src="{{asset('themes/cms/content/booking-services.js')}}"></script>
 <script src="{{asset('themes/cms/content/branch-office.js')}}"></script>
 <script src="{{asset('themes/cms/content/promotion.js')}}"></script>
+<script src="{{asset('themes/cms/content/promotion-banner.js')}}"></script>
+<script src="{{asset('themes/cms/content/promotion-categori.js')}}"></script>
 
 <!-- jQuery plugins -->
 <!-- <script src="{{ asset('themes/cms/vendors/jquery/dist/jquery.min.js') }}"></script> -->

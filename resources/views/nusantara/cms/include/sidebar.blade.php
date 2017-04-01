@@ -45,7 +45,7 @@
                                 <a href="#main-banner" onclick="menuMainBanner()">Main Banner</a>
                             </li>
                             <li>
-                                <a href="#promotions" onclick="menuPromotions()">Promotions</a>
+                                <a href="#promotions" onclick="menuBannerPromotions()">Promotions</a>
                             </li>
                             <li>
                                 <a href="#static-page" onclick="menuStaticPage()">Static Page</a>

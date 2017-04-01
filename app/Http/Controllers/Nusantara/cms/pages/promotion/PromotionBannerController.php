@@ -1,0 +1,161 @@
+<?php
+
+namespace App\Http\Controllers\Nusantara\cms\pages\promotion;
+
+use Illuminate\Http\Request;
+use App\Custom\Facades\DataHelper;
+use App\Http\Controllers\CmsController;
+use App\Services\Api\Response as ResponseService;
+use App\Services\Bridge\Auth\User as UserServices;
+use App\Services\Bridge\Cms\MainBanner as MainBannerServices;
+
+use Auth;
+use Session;
+use Validator;
+use ValidatesRequests;
+
+class PromotionBannerController extends CmsController
+{
+	protected $user;
+	protected $response;
+    protected $mainBanner;
+    protected $validationMessage = '';
+
+    const MAIN_BANNER_KEY  = 'banner::promotion';
+
+	public function __construct(MainBannerServices $mainBanner, UserServices $user, ResponseService $response)
+    {
+        $this->user = $user;
+        $this->response = $response;
+        $this->mainBanner = $mainBanner;
+    }
+
+    /**
+     * Index Data Static Page
+     */
+
+    public function index(Request $request)
+    {
+    	if (Auth::check() == null) {
+           return redirect()->route('login');
+        }
+        
+    	$data['page_title'] = 'Promotions';
+    	$data['user'] = $this->user->setAuthSession();
+    	$data['location'] = $this->getUserLocation();
+
+        $blade = self::URL_BLADE_CMS.'.promotion.banner';
+
+        if(view()->exists($blade)) 
+        {
+            return view($blade, $data);
+        }
+        return abort(404);
+    }
+
+    /**
+     * Get Data Promotion
+     */
+
+    public function getData(Request $request)
+    {
+        $location = $this->getUserLocation('id');
+        $property_location_id = $location['property_id'];
+
+        $data['banner'] = $this->mainBanner->getData($property_location_id, self::MAIN_BANNER_KEY);
+
+    	return $this->response->setResponse(trans('success_get_data'), true, $data);
+    }
+
+    /**
+     * Store Banner Promotion
+     */
+
+    public function storeBanner(Request $request)
+    {
+        $validator = Validator::make($request->all(), $this->validationStoreBanner($request));
+
+        if ($validator->fails()) {
+            //TODO: case fail
+            return $this->response->setResponseErrorFormValidation($validator->messages(), false);
+
+        } else {
+            //TODO: case pass
+            return $this->mainBanner->store($request->except(['_token', 'image_url']), $this->getLocationId(), self::MAIN_BANNER_KEY);
+        }
+    }
+
+    /**
+     * Edit Banner Promotion
+     */
+    public function editBanner(Request $request)
+    {
+        return $this->mainBanner->edit($request->except(['_token']));
+    }
+
+    /**
+     * Change status banner Promotion
+     * @param Request $request
+     * @return mixed
+     */
+    public function changeStatusBanner(Request $request)
+    {
+        return $this->mainBanner->changeStatus($request->except(['_token']));
+        
+    }
+
+    /**
+     * Ordering banner Promotion
+     * @param Request $request
+     * @return mixed
+     */
+
+    public function orderBanner(Request $request)
+    {
+        return $this->mainBanner->order($request->input('list_order'));
+    }
+
+    /**
+     * Delete Data banner Promotion
+     * @param Request $request
+     * @return mixed
+     */
+    public function deleteBanner(Request $request)
+    {
+        return $this->mainBanner->delete($request->except(['_token']));
+        
+    }
+
+    /**
+     * Validation Store Banner Promotion
+     * @return array
+     */
+    private function validationStoreBanner($request = array())
+    {
+        $rules = [
+            'title'               => 'required',
+            'images'              => 'required|dimensions:width='.MAIN_BANNER_WIDTH.',height='.MAIN_BANNER_HEIGHT.'|max:'. MAIN_BANNER_SIZE .'|mimes:jpg,jpeg',
+            
+        ];
+
+        if ($this->isEditMode($request->input()))
+        {
+            if (is_null($request->file('images'))) {
+                unset($rules['images']);
+            }
+        }
+
+        return $rules;
+    }
+
+    /**
+     * Check is edit mode or no
+     * @param $data
+     * @return bool
+     */
+    protected function isEditMode($data)
+    {
+        return isset($data['id']) && !empty($data['id']) ? true : false;
+    }
+
+}

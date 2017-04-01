@@ -461,3 +461,19 @@ function initPromotion()
     buttonClickClose();
     replaceToCkEditor();
 }
+
+function initBannerPromotion()
+{
+    crudBannerPromotions();
+    buttonClickOpen();
+    buttonClickClose();
+    replaceToCkEditor();
+}
+
+function initCategoriPromotion()
+{
+    crudCategoriPromotions();
+    buttonClickOpen();
+    buttonClickClose();
+    replaceToCkEditor();
+}

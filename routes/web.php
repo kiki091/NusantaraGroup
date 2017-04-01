@@ -178,21 +178,32 @@ Route::group(['middleware' => ['web']], function ()
 
 		Route::group(array('prefix' => 'promotions' ), function() 
 		{
-			Route::get('/', 'Nusantara\cms\pages\PromotionController@index')->name('Promotion');
-			Route::get('data', 'Nusantara\cms\pages\PromotionController@getData')->name('PromotionGetData');
+			Route::get('/', 'Nusantara\cms\pages\promotion\PromotionController@index')->name('Promotion');
+			Route::get('data', 'Nusantara\cms\pages\promotion\PromotionController@getData')->name('PromotionGetData');
 
 			// Banner Promotion
 
-			Route::post('store-banner', 'Nusantara\cms\pages\PromotionController@storeBanner')->name('PromotionStoreBanner');
-			Route::post('edit-banner', 'Nusantara\cms\pages\PromotionController@editBanner')->name('PromotionEditBanner');
-			Route::post('change-status-banner', 'Nusantara\cms\pages\PromotionController@changeStatusBanner')->name('PromotionChangeStatusBanner');
-			Route::post('order-banner', 'Nusantara\cms\pages\PromotionController@orderBanner')->name('PromotionOrderBanner');
-			Route::post('delete-banner', 'Nusantara\cms\pages\PromotionController@deleteBanner')->name('PromotionDeleteBanner');
+			Route::group(array('prefix' => 'banner' ), function()
+			{
+				Route::get('/', 'Nusantara\cms\pages\promotion\PromotionBannerController@index')->name('PromotionBanner');
+				Route::get('data', 'Nusantara\cms\pages\promotion\PromotionBannerController@getData')->name('PromotionGetDataBanner');
+				Route::post('store', 'Nusantara\cms\pages\promotion\PromotionBannerController@storeBanner')->name('PromotionStoreBanner');
+				Route::post('edit', 'Nusantara\cms\pages\promotion\PromotionBannerController@editBanner')->name('PromotionEditBanner');
+				Route::post('change-status', 'Nusantara\cms\pages\promotion\PromotionBannerController@changeStatusBanner')->name('PromotionChangeStatusBanner');
+				Route::post('order', 'Nusantara\cms\pages\promotion\PromotionBannerController@orderBanner')->name('PromotionOrderBanner');
+				Route::post('delete', 'Nusantara\cms\pages\promotion\PromotionBannerController@deleteBanner')->name('PromotionDeleteBanner');
+			});
 
 			// Categori Promotion
+			Route::group(array('prefix' => 'categori' ), function() 
+			{
+				Route::get('/', 'Nusantara\cms\pages\promotion\PromotionCategoriController@index')->name('PromotionCategori');
+				Route::get('data', 'Nusantara\cms\pages\promotion\PromotionCategoriController@getData')->name('PromotionGetDataCategori');
+				Route::post('store', 'Nusantara\cms\pages\promotion\PromotionCategoriController@storeCategori')->name('PromotionStoreCategori');
+				Route::post('edit', 'Nusantara\cms\pages\promotion\PromotionCategoriController@editCategori')->name('PromotionEditCategori');
+			});
 
-			Route::post('store-categori', 'Nusantara\cms\pages\PromotionController@storeCategori')->name('PromotionStoreCategori');
-			Route::post('edit-categori', 'Nusantara\cms\pages\PromotionController@editCategori')->name('PromotionEditCategori');
+			
 		});
     	
     });

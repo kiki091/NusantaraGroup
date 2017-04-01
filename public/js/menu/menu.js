@@ -45,3 +45,19 @@ function menuPromotions()
         initPromotion()
     });
 }
+
+function menuBannerPromotions()
+{
+    $('.right_col').load(laroute.url('/promotions/banner', []), function()
+    {
+        initBannerPromotion()
+    });
+}
+
+function menuCategoriPromotions()
+{
+    $('.right_col').load(laroute.url('/promotions/categori', []), function()
+    {
+        initCategoriPromotion()
+    });
+}

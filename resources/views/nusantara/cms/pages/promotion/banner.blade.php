@@ -1,8 +1,7 @@
-
-    <!-- page content -->
+	<!-- page content -->
     <div id="app">
         
-    @include('nusantara.cms.include.page-title')
+    	@include('nusantara.cms.include.page-title')
         <div class="row">
 	        <div class="col-md-12 col-sm-12 col-xs-12">
 
@@ -30,22 +29,23 @@
 					</div>
 				</modal>
 
+				
 				@include('nusantara.cms.pages.promotion.partials.folder')
-	        	@include('nusantara.cms.pages.promotion.partials.form')
+				@include('nusantara.cms.pages.promotion.partials.form-banner')
 
-		        <div id="detail-promotion" class="main__content__layer" style="margin-top: 5%;">
+	        	<div id="banner" class="main__content__layer">
 		        	<div class="content__top flex-between">
 		        		<div class="content__title">
-		        			<h2>@{{ form_add_title }}</h2>
+		        			<h2>@{{ form_add_title_banner }}</h2>
 
 		        		</div>
 		        		<div class="content__btn">
-		        			<a href="#" class="btn__add btn_add_awards" id="toggle-form-detail" @click="resetForm">Add Detail Promotion</a>
+		        			<a href="#" class="btn__add btn_add_banner" id="toggle-form" @click="resetFormBanner">Add Banner Promotions</a>
 		        		</div>
 		        	</div>
 		        	<div class="content__bottom">
-						<ul class="news__list sortable" id="sort" v-sort>
-							<li class="news__list__wrapper sort-item" v-for="promotion in responseData.promotion" data-id="@{{ promotion.id }}">
+						<ul class="news__list sortable" id="sort-banner" v-sort>
+							<li class="news__list__wrapper sort-item-banner" v-for="banner in responseData.banner" data-id="@{{ banner.id }}">
 								<div class="news__list__detail">
 									<div class="drag__control">
 										<div class="handle">
@@ -53,23 +53,23 @@
 										</div>
 									</div>
 									<div class="news__list__detail__left">
-										<img :src="promotion.thumbnail_url">
+										<img :src="banner.banner_url">
 									</div>
 									<div class="news__list__detail__middle-right">
 										<div class="news__list__detail__middle">
 											<div class="news__list__desc">
 												<div class="news__name">
-													<a href="#detail-promotion" class="title__name content__edit__hover" title="Edit Data" @click="editData(promotion.id)">@{{ promotion.title }}</a>
+													<a href="#banner" class="title__name content__edit__hover" title="Edit Data" @click="editBanner(banner.id)">@{{ banner.title }}</a>
 												</div>
 											</div>
 										</div>
 										<div class="news__list__detail__right">
 											<label class="switch">
-												<input class="switch-input" id="check_1" type="checkbox" :checked="promotion.is_active == true" @change="changeStatus(promotion.id)"/>
+												<input class="switch-input" id="check_1" type="checkbox" :checked="banner.is_active == true" @change="changeStatusBanner(banner.id)"/>
                                             	<span class="switch-label" data-on="Active" data-off="Inactive"></span> <span class="switch-handle"></span>
 											</label>
-
-											<a href="#delete-data" class="btn__delete" @click="showDeleteModal(promotion.id,'promotion')">
+											
+											<a href="#delete-data" class="btn__delete" @click="showDeleteModal(banner.id,'banner')">
 												<i class="ico-delete">@include('nusantara.cms.svg-logo.ico-delete')</i>
 											</a>
 										</div>

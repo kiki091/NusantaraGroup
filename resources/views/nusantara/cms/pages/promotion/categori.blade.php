@@ -1,8 +1,6 @@
-
-    <!-- page content -->
-    <div id="app">
+	<div id="app">
         
-    @include('nusantara.cms.include.page-title')
+    	@include('nusantara.cms.include.page-title')
         <div class="row">
 	        <div class="col-md-12 col-sm-12 col-xs-12">
 
@@ -31,21 +29,21 @@
 				</modal>
 
 				@include('nusantara.cms.pages.promotion.partials.folder')
-	        	@include('nusantara.cms.pages.promotion.partials.form')
+				@include('nusantara.cms.pages.promotion.partials.form-categori')
 
-		        <div id="detail-promotion" class="main__content__layer" style="margin-top: 5%;">
+		        <div id="categori-promotion" class="main__content__layer" style="margin-top: 5%;">
 		        	<div class="content__top flex-between">
 		        		<div class="content__title">
-		        			<h2>@{{ form_add_title }}</h2>
+		        			<h2>@{{ form_add_title_category }}</h2>
 
 		        		</div>
 		        		<div class="content__btn">
-		        			<a href="#" class="btn__add btn_add_awards" id="toggle-form-detail" @click="resetForm">Add Detail Promotion</a>
+		        			<a href="#" class="btn__add btn_add_category" id="toggle-form-categori" @click="resetForm">Add Category Promotion</a>
 		        		</div>
 		        	</div>
 		        	<div class="content__bottom">
-						<ul class="news__list sortable" id="sort" v-sort>
-							<li class="news__list__wrapper sort-item" v-for="promotion in responseData.promotion" data-id="@{{ promotion.id }}">
+						<ul class="news__list sortable" id="sort-categori" v-sort>
+							<li class="news__list__wrapper sort-item-categori" v-for="category_promotion in responseData.category_promotion" data-id="@{{ category_promotion.id }}">
 								<div class="news__list__detail">
 									<div class="drag__control">
 										<div class="handle">
@@ -53,23 +51,23 @@
 										</div>
 									</div>
 									<div class="news__list__detail__left">
-										<img :src="promotion.thumbnail_url">
+										<img :src="category_promotion.thumbnail_category_url">
 									</div>
 									<div class="news__list__detail__middle-right">
 										<div class="news__list__detail__middle">
 											<div class="news__list__desc">
 												<div class="news__name">
-													<a href="#detail-promotion" class="title__name content__edit__hover" title="Edit Data" @click="editData(promotion.id)">@{{ promotion.title }}</a>
+													<a href="#categori-promotion" class="title__name content__edit__hover" title="Edit Data" @click="editCategori(category_promotion.id)">@{{ category_promotion.category_name }}</a>
 												</div>
 											</div>
 										</div>
 										<div class="news__list__detail__right">
 											<label class="switch">
-												<input class="switch-input" id="check_1" type="checkbox" :checked="promotion.is_active == true" @change="changeStatus(promotion.id)"/>
+												<input class="switch-input" id="check_1" type="checkbox" :checked="category_promotion.is_active == true" @change="changeStatus(category_promotion.id)"/>
                                             	<span class="switch-label" data-on="Active" data-off="Inactive"></span> <span class="switch-handle"></span>
 											</label>
 
-											<a href="#delete-data" class="btn__delete" @click="showDeleteModal(promotion.id,'promotion')">
+											<a href="#delete-data" class="btn__delete" @click="showDeleteModal(category_promotion.id,'category_promotion')">
 												<i class="ico-delete">@include('nusantara.cms.svg-logo.ico-delete')</i>
 											</a>
 										</div>
