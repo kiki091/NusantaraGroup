@@ -32,6 +32,7 @@
 				</modal>
 
 				@include('nusantara.cms.pages.promotion.partials.form-banner')
+	        	@include('nusantara.cms.pages.promotion.partials.form-categori')
 	        	@include('nusantara.cms.pages.promotion.partials.form')
 
 	        	<div class="main__content__layer" style="margin-top: 5%;">
@@ -88,7 +89,7 @@
 
 		        		</div>
 		        		<div class="content__btn">
-		        			<a href="#" class="btn__add btn_add_category" id="toggle-form-promotion" @click="resetForm">Add Category Promotion</a>
+		        			<a href="#" class="btn__add btn_add_category" id="toggle-form-categori" @click="resetForm">Add Category Promotion</a>
 		        		</div>
 		        	</div>
 		        	<div class="content__bottom">
@@ -135,7 +136,7 @@
 
 		        		</div>
 		        		<div class="content__btn">
-		        			<a href="#" class="btn__add btn_add_awards" id="toggle-form-promotion" @click="resetForm">Add Promotion</a>
+		        			<a href="#" class="btn__add btn_add_awards" id="toggle-form-detail" @click="resetForm">Add Detail Promotion</a>
 		        		</div>
 		        	</div>
 		        	<div class="content__bottom">

@@ -91,6 +91,24 @@ class PromotionController extends CmsController
     }
 
     /**
+     * Store Categori Promotion
+     */
+
+    public function storeCategori(Request $request)
+    {
+        $validator = Validator::make($request->all(), $this->validationStoreCategori($request));
+
+        if ($validator->fails()) {
+            //TODO: case fail
+            return $this->response->setResponseErrorFormValidation($validator->messages(), false);
+
+        } else {
+            //TODO: case pass
+            return $this->promotion->storeCategori($request->except(['_token', 'thumbnail_category_url']));
+        }
+    }
+
+    /**
      * Edit Banner Promotion
      */
     public function editBanner(Request $request)
@@ -147,6 +165,33 @@ class PromotionController extends CmsController
         {
             if (is_null($request->file('images'))) {
                 unset($rules['images']);
+            }
+        }
+
+        return $rules;
+    }
+
+    /**
+     * Validation Store Categori Promotion
+     * @return array
+     */
+    private function validationStoreCategori($request = array())
+    {
+        $rules = [
+            'category_name'         => 'required',
+            'category_slug'         => 'required',
+            'thumbnail_category'    => 'required|dimensions:width='.PROMOTION_CATEGORI_WIDTH.',height='.PROMOTION_CATEGORI_HEIGHT.'|max:'. PROMOTION_IMAGE_SIZE .'|mimes:jpg,jpeg',
+            'introduction'          => 'required',
+            'meta_title'            => 'required',
+            'meta_keyword'          => 'required',
+            'meta_description'      => 'required',
+            
+        ];
+
+        if ($this->isEditMode($request->input()))
+        {
+            if (is_null($request->file('thumbnail_category'))) {
+                unset($rules['thumbnail_category']);
             }
         }
 

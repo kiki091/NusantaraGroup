@@ -12,12 +12,15 @@ function crudPromotions() {
                 images : '',
             },
 
-            category : {
+            categori : {
                 id : '',
                 category_name : '',
                 category_slug : '',
                 thumbnail_category : '',
                 introduction : '',
+                meta_title : '',
+                meta_keyword : '',
+                meta_description : '',
             },
 
             promotion: {
@@ -66,6 +69,12 @@ function crudPromotions() {
             id: '',
             edit: false,
             responseData: {},
+        },
+        
+        filters: {
+            strSlug: function(data) {
+                return data.replace(/ /g, "-")
+            }
         },
         methods: {
 
@@ -168,6 +177,49 @@ function crudPromotions() {
                 $("#FormBannerPromotion").submit();
             },
 
+            storeDataCategori: function(event){
+
+                var vm = this;
+                var optForm      = {
+
+                    dataType: "json",
+
+                    beforeSend: function(){
+                        showLoadingData(true)
+                        vm.clearErorrMessage()
+                    },
+                    success: function(response){
+                        if (response.status == false) {
+                            if(response.is_error_form_validation) {
+
+                                var message_validation = ''
+                                $.each(response.message, function(key, value){
+                                    $('input[name="' + key.replace(".", "_") + '"]').focus();
+                                    $("#form--error--message--" + key.replace(".", "_")).text(value)
+                                    message_validation += '<li class="notif__content__li"><span class="text" >' + value + '</span></li>'
+                                });
+                                pushNotifMessage(response.status,response.message, message_validation);
+
+                            } else {
+                                pushNotifV3(response.status, response.message);
+                            }
+                        } else {
+                            vm.fetchData()
+                            vm.resetForm()
+                            pushNotifV3(response.status, response.message);
+                            $('.btn__add__cancel').click();
+                        }
+                    },
+                    complete: function(response){
+                        hideLoading()
+                    }
+
+                };
+
+                $("#PromotionCategoriForm").ajaxForm(optForm);
+                $("#PromotionCategoriForm").submit();
+            },
+
             editBanner: function (id) {
                 this.edit = true
                 var payload = []
@@ -197,7 +249,6 @@ function crudPromotions() {
             },
 
             changeStatusBanner: function(id) {
-                console.log(id)
                 var payload = []
                 payload['id'] = id
 
@@ -294,10 +345,13 @@ function crudPromotions() {
 
             resetFormCategoryPromotion: function() {
 
-                this.category.id = ''
-                this.category.category_name = ''
-                this.category.category_slug = ''
-                this.category.introduction = ''
+                this.categori.id = ''
+                this.categori.category_name = ''
+                this.categori.category_slug = ''
+                this.categori.introduction = ''
+                this.categori.meta_title = ''
+                this.categori.meta_keyword = ''
+                this.categori.meta_description = ''
                 this.thumbnail_category = ''
             },
             
@@ -332,6 +386,20 @@ function crudPromotions() {
 
             clearErorrMessage: function(){
                 $(".form--error--message").text('')
+            },
+
+            importTemplate: function(id) {
+                try {
+                    switch(id) {
+                        case 'template-introduction':
+                            CKEDITOR.instances['editor-1'].setData($('#' + id).html());
+                        break;
+                    default :
+
+                    }
+                } catch (err) {
+                    pushNotifV3(false, err.message);
+                }
             },
 
         },

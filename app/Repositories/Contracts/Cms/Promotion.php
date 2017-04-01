@@ -19,4 +19,11 @@ interface Promotion
      */
     public function getCategoryPromotion();
 
+    /**
+     * Store Data Categori Promotion
+     * @param $params
+     * @return mixed
+     */
+    public function storeCategori($params);
+
 }

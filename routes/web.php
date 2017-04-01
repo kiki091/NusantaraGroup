@@ -186,6 +186,8 @@ Route::group(['middleware' => ['web']], function ()
 			Route::post('change-status-banner', 'Nusantara\cms\pages\PromotionController@changeStatusBanner')->name('PromotionChangeStatusBanner');
 			Route::post('order-banner', 'Nusantara\cms\pages\PromotionController@orderBanner')->name('PromotionOrderBanner');
 			Route::post('delete-banner', 'Nusantara\cms\pages\PromotionController@deleteBanner')->name('PromotionDeleteBanner');
+
+			Route::post('store-categori', 'Nusantara\cms\pages\PromotionController@storeCategori')->name('PromotionStoreCategori');
 		});
     	
     });

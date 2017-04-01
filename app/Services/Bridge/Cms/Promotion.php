@@ -33,5 +33,15 @@ class Promotion {
         return $this->promotion->getCategoryPromotion();
     }
 
+    /**
+     * Store Data Categori Promotion
+     * @param $params
+     * @return mixed
+     */
+    public function storeCategori($params)
+    {
+        return $this->promotion->storeCategori($params);
+    }
+
 
 }

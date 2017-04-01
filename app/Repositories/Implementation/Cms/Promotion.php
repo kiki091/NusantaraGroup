@@ -142,4 +142,146 @@ class Promotion extends BaseImplementation implements PromotionInterface
         return $promotionCategory->get()->toArray();
     }
 
+    /*
+    * Store Categori Promotion
+    */
+
+    public function storeCategori($data)
+    {
+        try {
+
+            DB::beginTransaction();
+
+            if ($this->storeDataCategori($data) != true) {
+                DB::rollBack();
+                return $this->setResponse($this->message, false);
+            }
+
+            if ($this->uploadImageCategori($data) != true) {
+                DB::rollBack();
+                return $this->setResponse($this->message, false);
+            }
+
+            DB::commit();
+            return $this->setResponse(trans('message.cms_upload_image_success'), true);
+        } catch (\Exception $e) {
+            return $this->setResponse($e->getMessage(), false);
+        }
+    }
+
+    /**
+     * Store Data Categori Promotion
+     * @param $data
+     * @return mixed
+     */
+    protected function storeDataCategori($data)
+    {
+        try {
+
+            $store                      = $this->promotionCategory;
+
+            if ($this->isEditMode($data)) {
+                
+                $store                  = $this->promotionCategory->find($data['id']);
+            }
+
+            $store->category_name               = $data['category_name'];
+            $store->category_slug               = $data['category_slug'];
+            $store->introduction                = $data['introduction'];
+            $store->meta_title                  = $data['meta_title'];
+            $store->meta_keyword                = $data['meta_keyword'];
+            $store->meta_description            = $data['meta_description'];
+
+            if (!$this->isEditMode($data))
+            {
+                $store->is_active            = true;
+                $store->created_at           = $this->mysqlDateTimeFormat();
+                $store->thumbnail_category   = $this->uniqueIdImagePrefix . '_' .$data['thumbnail_category']->getClientOriginalName();
+            }
+            else {
+                if (!empty($data['thumbnail_category'])) {
+                    
+                    $store->thumbnail_category      = isset($data['thumbnail_category']) ? $this->uniqueIdImagePrefix . '_' . $data['thumbnail_category']->getClientOriginalName() : '';
+                }
+            }
+
+            if($save = $store->save()) {
+                $this->lastInsertId = $store->id;
+            }
+
+            return $save;
+
+        }
+        catch (\Exception $e) {
+            $this->message = $e->getMessage();
+            return false;
+        }
+    }
+
+    /**
+     * Upload Thumbnail Categori Promotion
+     * @param $data
+     * @return bool
+     */
+    protected function uploadImageCategori($data)
+    {
+        try {
+
+            if (!$this->isEditMode($data)){
+
+                if (!$this->detailImageCategoriUploader($data)){
+                    return false;
+                }
+            }
+            else{
+
+                if (!empty($data['thumbnail_category'])) {
+                    if (!$this->detailImageCategoriUploader($data)) {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+        catch (\Exception $e) {
+            $this->message = $e->getMessage();
+            return false;
+        }
+    }
+
+    /**
+     * Detail Image Uploader Categori Promotion
+     * @param $file
+     * @return bool
+     */
+    protected function detailImageCategoriUploader($data)
+    {
+        if($data['thumbnail_category']->isValid()) {
+
+            $filename = $this->uniqueIdImagePrefix . '_' . $data['thumbnail_category']->getClientOriginalName();
+
+            if (! $data['thumbnail_category']->move('./' . PROMOTION_IMAGES_CATEGORY_DIRECTORY, $filename)) {
+                $this->message = trans('message.cms_upload_image_failed');
+                return false;
+            }
+
+            return true;
+
+        } else {
+            $this->message = $data['thumbnail_category']->getErrorMessage();
+            return false;
+        }
+    }
+
+    /**
+     * Check need edit Mode or No
+     * @param $data
+     * @return bool
+     */
+    protected function isEditMode($data)
+    {
+        return isset($data['id']) && !empty($data['id']) ? true : false;
+    }
+
 }

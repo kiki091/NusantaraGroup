@@ -1,5 +1,5 @@
 <form action="#" method="POST" id="PromotionForm" enctype="multipart/form-data" files="true" @submit.prevent>
-	<div class="main__content__form__layer" id="toggle-form-promotion-content" style="display: none; margin-top: 5%;">
+	<div class="main__content__form__layer" id="toggle-form-detail-content" style="display: none; margin-top: 5%;">
 		<div class="create__form__wrapper">
 			<div class="form--top flex-between">
 				<div class="form__title"><h2>@{{ form_add_title }}</h2></div>
