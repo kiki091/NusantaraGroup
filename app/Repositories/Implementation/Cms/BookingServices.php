@@ -5,7 +5,7 @@ namespace App\Repositories\Implementation\Cms;
 use Illuminate\Http\Request;
 use App\Repositories\Implementation\BaseImplementation;
 use App\Repositories\Contracts\Cms\BookingServices as BookingServicesInterface;
-use App\Models\Cms\BookingServicesModel as BookingServicesModels;
+use App\Models\BookingServices as BookingServicesModels;
 use App\Repositories\Implementation\Cms\BranchOffice as BranchOfficeTransData;
 use App\Services\Transformation\Cms\BookingServices as BookingServicesTransformation;
 use Cache;

@@ -5,7 +5,7 @@ namespace App\Repositories\Implementation\Cms;
 use Illuminate\Http\Request;
 use App\Repositories\Implementation\BaseImplementation;
 use App\Repositories\Contracts\Cms\StaticPage as StaticPageInterface;
-use App\Models\Cms\StaticPageModel as StaticPageModels;
+use App\Models\StaticPage as StaticPageModels;
 use App\Services\Transformation\Cms\StaticPage as StaticPageTransformation;
 use Cache;
 use Session;

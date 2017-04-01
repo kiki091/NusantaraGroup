@@ -3,14 +3,15 @@
 namespace App\Repositories\Implementation\Front;
 
 use App\Repositories\Contracts\Front\Awards as AwardsInterface;
-use App\Models\Front\AwardsModel as AwardsModels;
-use App\Models\Front\AwardsModelTrans as AwardsModelsTrans;
+use App\Repositories\Implementation\BaseImplementation;
+use App\Models\Awards as AwardsModels;
+use App\Models\AwardsTrans as AwardsModelsTrans;
 use App\Services\Transformation\Front\Awards as AwardsTransformation;
 use Cache;
 use Session;
 use DB;
 
-class Awards implements AwardsInterface
+class Awards extends BaseImplementation implements AwardsInterface
 {
 
     protected $awards;

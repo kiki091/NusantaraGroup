@@ -3,13 +3,14 @@
 namespace App\Repositories\Implementation\Front;
 
 use App\Repositories\Contracts\Front\LandingPage as LandingPageInterface;
-use App\Models\Front\LandingModel as LandingModelServices;
+use App\Repositories\Implementation\BaseImplementation;
+use App\Models\Landing as LandingModelServices;
 use App\Services\Transformation\Front\LandingPage as LandingPageTransformation;
 use Cache;
 use Session;
 use DB;
 
-class LandingPage implements LandingPageInterface
+class LandingPage extends BaseImplementation implements LandingPageInterface
 {
 
     protected $landingPage;

@@ -3,13 +3,14 @@
 namespace App\Repositories\Implementation\Front;
 
 use App\Repositories\Contracts\Front\MainBanner as MainBannerInterface;
-use App\Models\Front\MainBanner as MainBannerModels;
+use App\Repositories\Implementation\BaseImplementation;
+use App\Models\MainBanner as MainBannerModels;
 use App\Services\Transformation\Front\MainBanner as MainBannerTransformation;
 use Cache;
 use Session;
 use DB;
 
-class MainBanner implements MainBannerInterface
+class MainBanner extends BaseImplementation implements MainBannerInterface
 {
 
     protected $mainBanner;

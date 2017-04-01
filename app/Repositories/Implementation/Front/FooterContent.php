@@ -3,13 +3,14 @@
 namespace App\Repositories\Implementation\Front;
 
 use App\Repositories\Contracts\Front\FooterContent as FooterContentInterface;
-use App\Models\Front\FooterContent as FooterContentServices;
+use App\Repositories\Implementation\BaseImplementation;
+use App\Models\FooterContent as FooterContentServices;
 use App\Services\Transformation\Front\FooterContent as FooterContentTransformation;
 use Cache;
 use Session;
 use DB;
 
-class FooterContent implements FooterContentInterface
+class FooterContent extends BaseImplementation implements FooterContentInterface
 {
 
     protected $footerContent;

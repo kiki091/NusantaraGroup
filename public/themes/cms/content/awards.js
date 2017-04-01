@@ -27,6 +27,7 @@ function crudAwards() {
 
             thumbnail: '',
             filename : '',
+            images : '',
             awards: [
                 { description: ''}
             ],

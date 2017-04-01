@@ -4,7 +4,7 @@ namespace App\Repositories\Implementation\Front;
 
 use App\Repositories\Implementation\BaseImplementation;
 use App\Repositories\Contracts\Front\Subscribe as SubscribeInterface;
-use App\Models\Front\SubscribeModel as SubscribeService;
+use App\Models\Subscribe as SubscribeService;
 use Cache;
 use Session;
 use DB;

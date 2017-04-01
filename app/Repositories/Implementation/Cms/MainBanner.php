@@ -5,7 +5,7 @@ namespace App\Repositories\Implementation\Cms;
 use Illuminate\Http\Request;
 use App\Repositories\Implementation\BaseImplementation;
 use App\Repositories\Contracts\Cms\MainBanner as MainBannerInterface;
-use App\Models\Cms\MainBannerModel as MainBannerModel;
+use App\Models\MainBanner as MainBannerModel;
 use App\Services\Transformation\Cms\MainBanner as MainBannerTransformation;
 use Cache;
 use Session;
@@ -397,7 +397,7 @@ class MainBanner extends BaseImplementation implements MainBannerInterface
             foreach ($data as $key => $val) {
                 $orderValue = $i++;
 
-                $mainBanner         = MainBannerModel::find($val);
+                $mainBanner         = MainBanner::find($val);
 
                 $mainBanner->order  = $orderValue;
 

@@ -3,14 +3,15 @@
 namespace App\Repositories\Implementation\Front;
 
 use App\Repositories\Contracts\Front\CompanyHistory as CompanyHistoryInterface;
-use App\Models\Front\CompanyHistoryModel as CompanyHistoryModel;
-use App\Models\Front\CompanyHistoryImageModel as CompanyHistoryImageModel;
+use App\Repositories\Implementation\BaseImplementation;
+use App\Models\CompanyHistory as CompanyHistoryModel;
+use App\Models\CompanyHistoryImage as CompanyHistoryImageModel;
 use App\Services\Transformation\Front\CompanyHistory as CompanyHistoryTransformation;
 use Cache;
 use Session;
 use DB;
 
-class CompanyHistory implements CompanyHistoryInterface
+class CompanyHistory extends BaseImplementation implements CompanyHistoryInterface
 {
 
     protected $companyHistory;

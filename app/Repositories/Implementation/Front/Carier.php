@@ -3,15 +3,16 @@
 namespace App\Repositories\Implementation\Front;
 
 use App\Repositories\Contracts\Front\Carier as CarierInterface;
-use App\Models\Front\CarierModel as CarierModel;
-use App\Models\Front\CarierCategoryModel as CarierCategoryModel;
-use App\Models\Front\CarierContentModel as CarierContentModel;
+use App\Repositories\Implementation\BaseImplementation;
+use App\Models\Carier as CarierModel;
+use App\Models\CarierCategory as CarierCategoryModel;
+use App\Models\CarierContent as CarierContentModel;
 use App\Services\Transformation\Front\Carier as CarierTransformation;
 use Cache;
 use Session;
 use DB;
 
-class Carier implements CarierInterface
+class Carier extends BaseImplementation implements CarierInterface
 {
 
     protected $carier;

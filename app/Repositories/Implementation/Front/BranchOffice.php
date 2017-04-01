@@ -3,14 +3,15 @@
 namespace App\Repositories\Implementation\Front;
 
 use App\Repositories\Contracts\Front\BranchOffice as BranchOfficeInterface;
-use App\Models\Front\CompanyBranchOfficeModel as BranchOfficeModel;
-use App\Models\Front\CompanyBranchOfficeModelTrans as BranchOfficeModelTrans;
+use App\Repositories\Implementation\BaseImplementation;
+use App\Models\BranchOffice as BranchOfficeModel;
+use App\Models\BranchOfficeTrans as BranchOfficeModelTrans;
 use App\Services\Transformation\Front\BranchOffice as BranchOfficeTransformation;
 use Cache;
 use Session;
 use DB;
 
-class BranchOffice implements BranchOfficeInterface
+class BranchOffice extends BaseImplementation implements BranchOfficeInterface
 {
 
     protected $branchOffice;

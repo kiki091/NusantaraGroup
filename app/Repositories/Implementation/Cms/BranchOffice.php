@@ -5,9 +5,9 @@ namespace App\Repositories\Implementation\Cms;
 use Illuminate\Http\Request;
 use App\Repositories\Implementation\BaseImplementation;
 use App\Repositories\Contracts\Cms\BranchOffice as BranchOfficeInterface;
-use App\Models\Cms\BranchOfficeModel as BranchOfficeModel;
-use App\Models\Cms\BranchOfficeTransModel as BranchOfficeTransModel;
-use App\Models\Cms\BranchOfficeImagesModel as BranchOfficeImagesModel;
+use App\Models\BranchOffice as BranchOfficeModel;
+use App\Models\BranchOfficeTrans as BranchOfficeTransModel;
+use App\Models\BranchOfficeImages as BranchOfficeImagesModel;
 use App\Services\Transformation\Cms\BranchOffice as BranchOfficeTransformation;
 use Cache;
 use Session;
@@ -701,7 +701,7 @@ class BranchOffice extends BaseImplementation implements BranchOfficeInterface
             foreach ($data as $key => $val) {
                 $orderValue = $i++;
 
-                $branchOffice           = BranchOfficeModel::find($val);
+                $branchOffice           = BranchOffice::find($val);
 
                 $branchOffice->order  = $orderValue;
 

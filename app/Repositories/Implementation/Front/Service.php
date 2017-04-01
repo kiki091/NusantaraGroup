@@ -2,16 +2,17 @@
 
 namespace App\Repositories\Implementation\Front;
 
+use App\Repositories\Implementation\BaseImplementation;
 use App\Repositories\Contracts\Front\Service as ServiceInterface;
-use App\Models\Front\ServiceModel as ServiceModel;
-use App\Models\Front\ServiceModelImages as ServiceModelImages;
-use App\Models\Front\ServiceModelCategory as ServiceModelCategory;
+use App\Models\Service as ServiceModel;
+use App\Models\ServiceImages as ServiceModelImages;
+use App\Models\ServiceCategory as ServiceModelCategory;
 use App\Services\Transformation\Front\Service as ServiceTransformation;
 use Cache;
 use Session;
 use DB;
 
-class Service implements ServiceInterface
+class Service extends BaseImplementation implements ServiceInterface
 {
 
     protected $services;

@@ -3,13 +3,14 @@
 namespace App\Repositories\Implementation\Front;
 
 use App\Repositories\Contracts\Front\CompanyProfile as CompanyProfileInterface;
-use App\Models\Front\CompanyProfileModel as CompanyProfileModel;
+use App\Repositories\Implementation\BaseImplementation;
+use App\Models\CompanyProfile as CompanyProfileModel;
 use App\Services\Transformation\Front\CompanyProfile as CompanyProfileTransformation;
 use Cache;
 use Session;
 use DB;
 
-class CompanyProfile implements CompanyProfileInterface
+class CompanyProfile extends BaseImplementation implements CompanyProfileInterface
 {
 
     protected $companyProfile;
