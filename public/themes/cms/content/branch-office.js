@@ -444,8 +444,9 @@ function crudBranchOffice() {
                 $('select').prop('selectedIndex', 0);
                 $('textarea').val('');
 
-/*                for (instance in CKEDITOR.instances)
-                    CKEDITOR.instances[instance].updateElement();*/
+                
+                destroyInstanceCkEditor()
+                replaceToCkEditor()
 
                 this.clearErorrMessage()
 

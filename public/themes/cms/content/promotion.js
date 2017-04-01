@@ -70,7 +70,7 @@ function crudPromotions() {
             edit: false,
             responseData: {},
         },
-        
+
         filters: {
             strSlug: function(data) {
                 return data.replace(/ /g, "-")
@@ -248,6 +248,37 @@ function crudPromotions() {
                 })
             },
 
+            editCategori: function (id) {
+                this.edit = true
+                var payload = []
+                payload['id'] = id
+
+                var form = new FormData();
+
+                for (var key in payload) {
+                    form.append(key, payload[key])
+                }
+
+                this.resetForm()
+
+                this.$http.post('/promotions/edit-categori', form).then(function(response) {
+                    response = response.data
+                    if (response.status) {
+                        this.categori = response.data;
+                        this.thumbnail_category = response.data.thumbnail_category_url
+
+                        this.form_add_title = "Edit Categori Promotion"
+                        $('#toggle-form-categori-content').slideDown(400)
+
+                        destroyInstanceCkEditor()
+                        replaceToCkEditor()
+
+                    } else {
+                        pushNotifV3(response.status,response.message)
+                    }
+                })
+            },
+
             changeStatusBanner: function(id) {
                 var payload = []
                 payload['id'] = id
@@ -336,6 +367,12 @@ function crudPromotions() {
                 });
             },
 
+            clearCkEditor: function() {
+                destroyInstanceCkEditor()
+                replaceToCkEditor()
+                this.resetFormCategoryPromotion(true)
+            },
+
             resetFormBanner: function() {
 
                 this.banner.id = ''
@@ -353,6 +390,17 @@ function crudPromotions() {
                 this.categori.meta_keyword = ''
                 this.categori.meta_description = ''
                 this.thumbnail_category = ''
+
+                document.getElementById("PromotionCategoriForm");
+
+                $('select').prop('selectedIndex', 0);
+                $('textarea').val('');
+
+                
+                destroyInstanceCkEditor()
+                replaceToCkEditor()
+
+                this.clearErorrMessage()
             },
             
             resetForm: function() {

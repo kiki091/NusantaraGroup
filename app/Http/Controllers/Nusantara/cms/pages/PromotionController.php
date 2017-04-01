@@ -117,6 +117,14 @@ class PromotionController extends CmsController
     }
 
     /**
+     * Edit Categori Promotion
+     */
+    public function editCategori(Request $request)
+    {
+        return $this->promotion->editCategori($request->except(['_token']));
+    }
+
+    /**
      * Change status banner Promotion
      * @param Request $request
      * @return mixed

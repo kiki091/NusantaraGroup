@@ -43,5 +43,14 @@ class Promotion {
         return $this->promotion->storeCategori($params);
     }
 
-
+    /**
+     * Edit Data Categori Promotion
+     * @param $params
+     * @return mixed
+     */
+    
+    public function editCategori($params)
+    {
+        return $this->promotion->editCategori($params);
+    }
 }

@@ -181,13 +181,18 @@ Route::group(['middleware' => ['web']], function ()
 			Route::get('/', 'Nusantara\cms\pages\PromotionController@index')->name('Promotion');
 			Route::get('data', 'Nusantara\cms\pages\PromotionController@getData')->name('PromotionGetData');
 
+			// Banner Promotion
+
 			Route::post('store-banner', 'Nusantara\cms\pages\PromotionController@storeBanner')->name('PromotionStoreBanner');
 			Route::post('edit-banner', 'Nusantara\cms\pages\PromotionController@editBanner')->name('PromotionEditBanner');
 			Route::post('change-status-banner', 'Nusantara\cms\pages\PromotionController@changeStatusBanner')->name('PromotionChangeStatusBanner');
 			Route::post('order-banner', 'Nusantara\cms\pages\PromotionController@orderBanner')->name('PromotionOrderBanner');
 			Route::post('delete-banner', 'Nusantara\cms\pages\PromotionController@deleteBanner')->name('PromotionDeleteBanner');
 
+			// Categori Promotion
+
 			Route::post('store-categori', 'Nusantara\cms\pages\PromotionController@storeCategori')->name('PromotionStoreCategori');
+			Route::post('edit-categori', 'Nusantara\cms\pages\PromotionController@editCategori')->name('PromotionEditCategori');
 		});
     	
     });

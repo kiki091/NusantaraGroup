@@ -66,4 +66,34 @@ class Promotion
         return $dataTranform;
     }
 
+    /*
+    * Get Single Data Categori Promotion Transformation
+    */
+
+    public function getSingleCategoriPromotionCmsTransform($data)
+    {
+        if(!is_array($data) || empty($data))
+            return array();
+
+        return $this->setSingleCategoriPromotionCmsTransform($data);
+    }
+
+    /*
+    * Set Single Data Categori Promotion Transformation
+    */
+
+    protected function setSingleCategoriPromotionCmsTransform($data)
+    {
+        $dataTransform['id'] = isset($data['id']) ? $data['id'] : '';
+        $dataTransform['category_name'] = isset($data['category_name']) ? $data['category_name'] : '';
+        $dataTransform['category_slug'] = isset($data['category_slug']) ? $data['category_slug'] : '';
+        $dataTransform['thumbnail_category_url'] = isset($data['thumbnail_category']) ? asset(PROMOTION_IMAGES_CATEGORY_DIRECTORY.rawurlencode($data['thumbnail_category'])) : '';
+        $dataTransform['introduction'] = isset($data['introduction']) ? $data['introduction'] : '';
+        $dataTransform['meta_title'] = isset($data['meta_title']) ? $data['meta_title'] : '';
+        $dataTransform['meta_keyword'] = isset($data['meta_keyword']) ? $data['meta_keyword'] : '';
+        $dataTransform['meta_description'] = isset($data['meta_description']) ? $data['meta_description'] : '';
+
+        return $dataTransform;
+    }
+
 }

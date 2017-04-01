@@ -26,4 +26,11 @@ interface Promotion
      */
     public function storeCategori($params);
 
+    /**
+     * Edit Data Categori Promotion
+     * @param $params
+     * @return mixed
+     */
+    public function editCategori($params);
+
 }

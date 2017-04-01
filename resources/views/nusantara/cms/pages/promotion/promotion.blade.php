@@ -32,10 +32,8 @@
 				</modal>
 
 				@include('nusantara.cms.pages.promotion.partials.form-banner')
-	        	@include('nusantara.cms.pages.promotion.partials.form-categori')
-	        	@include('nusantara.cms.pages.promotion.partials.form')
 
-	        	<div class="main__content__layer" style="margin-top: 5%;">
+	        	<div id="banner" class="main__content__layer" style="margin-top: 5%;">
 		        	<div class="content__top flex-between">
 		        		<div class="content__title">
 		        			<h2>@{{ form_add_title_banner }}</h2>
@@ -61,7 +59,7 @@
 										<div class="news__list__detail__middle">
 											<div class="news__list__desc">
 												<div class="news__name">
-													<a href="#edit-data-banner" class="title__name content__edit__hover" title="Edit Data" @click="editBanner(banner.id)">@{{ banner.title }}</a>
+													<a href="#banner" class="title__name content__edit__hover" title="Edit Data" @click="editBanner(banner.id)">@{{ banner.title }}</a>
 												</div>
 											</div>
 										</div>
@@ -82,7 +80,9 @@
 					</div>
 		        </div>
 
-		        <div class="main__content__layer" style="margin-top: 5%;">
+	        	@include('nusantara.cms.pages.promotion.partials.form-categori')
+
+		        <div id="categori-promotion" class="main__content__layer" style="margin-top: 5%;">
 		        	<div class="content__top flex-between">
 		        		<div class="content__title">
 		        			<h2>@{{ form_add_title_category }}</h2>
@@ -108,7 +108,7 @@
 										<div class="news__list__detail__middle">
 											<div class="news__list__desc">
 												<div class="news__name">
-													<a href="#edit-data" class="title__name content__edit__hover" title="Edit Data" @click="editData(category_promotion.id)">@{{ category_promotion.category_name }}</a>
+													<a href="#categori-promotion" class="title__name content__edit__hover" title="Edit Data" @click="editCategori(category_promotion.id)">@{{ category_promotion.category_name }}</a>
 												</div>
 											</div>
 										</div>
@@ -128,8 +128,10 @@
 						</ul>
 					</div>
 		        </div>
+		        
+	        	@include('nusantara.cms.pages.promotion.partials.form')
 
-		        <div class="main__content__layer" style="margin-top: 5%;">
+		        <div id="detail-promotion" class="main__content__layer" style="margin-top: 5%;">
 		        	<div class="content__top flex-between">
 		        		<div class="content__title">
 		        			<h2>@{{ form_add_title }}</h2>
@@ -155,7 +157,7 @@
 										<div class="news__list__detail__middle">
 											<div class="news__list__desc">
 												<div class="news__name">
-													<a href="#edit-data" class="title__name content__edit__hover" title="Edit Data" @click="editData(promotion.id)">@{{ promotion.title }}</a>
+													<a href="#detail-promotion" class="title__name content__edit__hover" title="Edit Data" @click="editData(promotion.id)">@{{ promotion.title }}</a>
 												</div>
 											</div>
 										</div>

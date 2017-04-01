@@ -284,4 +284,21 @@ class Promotion extends BaseImplementation implements PromotionInterface
         return isset($data['id']) && !empty($data['id']) ? true : false;
     }
 
+    /**
+     * Edit Data Categori Promotion
+     * @param $data
+     * @return bool
+     */
+
+    public function editCategori($data)
+    {
+        $params = [
+            "id" => isset($data['id']) ? $data['id'] : '',
+        ];
+
+        $singleCategoriPromotionData = $this->promotionCategory($params, 'asc', 'array', true);
+
+        return $this->setResponse(trans('message.cms_success_get_data'), true, $this->promotionTransformation->getSingleCategoriPromotionCmsTransform($singleCategoriPromotionData));
+    }
+
 }
