@@ -216,7 +216,7 @@ function crudAwards() {
                 this.$http.post('/awards/edit-banner', form).then(function(response) {
                     response = response.data
                     if (response.status) {
-                        this.models = response.data;
+                        this.banner = response.data;
                         this.images = response.data.image_url
 
                         this.form_add_title = "Edit Main Banner Awards"
@@ -383,6 +383,12 @@ function crudAwards() {
                 this.filename = ''
                 this.default_total_description = [0];
                 this.total_description = [];
+            },
+
+            resetFormBanner: function() {
+                this.banner.title = ''
+                this.banner.id = ''
+                this.images = ''
             },
 
             sortable: function() {

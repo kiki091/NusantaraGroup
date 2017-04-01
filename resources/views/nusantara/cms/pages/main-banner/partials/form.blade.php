@@ -4,7 +4,7 @@
 			<div class="form--top flex-between">
 				<div class="form__title"><h2>@{{ form_add_title }}</h2></div>
 				<div class="form--top__btn">
-					<a href="#" class="btn__add__cancel" @click="resetForm">Cancel</a>
+					<a href="#" class="btn__add__cancel" @click="resetFormBanner">Cancel</a>
 				</div>
 			</div>
 			<div class="form--mid">
@@ -15,7 +15,7 @@
 								<div class="new__form__field">
 									<label>Title</label>
 									<div class="field__icon">
-										<input v-model="models.title" name="title" type="text" id="title" class="form-control" placeholder="Enter the title here">
+										<input v-model="banner.title" name="title" type="text" id="title" class="form-control" placeholder="Enter the title here">
 									</div>
 									<div class="form--error--message" id="form--error--message--title"></div>
 								</div>
@@ -40,7 +40,7 @@
 									<div class="upload__tip">
 										<span><b>Upload Tip: </b>Please upload high resolution photo only with format of *jpg | jpeg. (With maximum width of {{ MAIN_BANNER_WIDTH }} x {{ MAIN_BANNER_HEIGHT }} px in landscape)</span>
 									</div>
-									<input type="hidden" name="old_images" value="@{{ models.old_images }}">
+									<input type="hidden" name="old_images" value="@{{ banner.old_images }}">
 								</div>
 							</div>
 
@@ -54,7 +54,7 @@
 					<div class="create__form__row flex-between">
 						<div class="new__form__btn">
 							<input type="hidden" id="_token" name="_token" value="{{ csrf_token() }}">
-							<input v-if="edit == true" v-model="models.id" type="hidden" name="id">
+							<input v-if="edit == true" v-model="banner.id" type="hidden" name="id">
 							<button class="btn__form" type="submit" @click="storeData">Save</button>
 						</div>
 					</div>

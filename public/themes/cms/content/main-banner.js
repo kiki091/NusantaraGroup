@@ -5,7 +5,7 @@ function crudMainBanner() {
     var controller = new Vue({
     	el: '#app',
         data: {
-            models: {
+            banner: {
                 id:'',
                 title: '',
                 images : '',
@@ -47,7 +47,7 @@ function crudMainBanner() {
                 if (!files.length)
                     return;
 
-                this.models[element] = files[0]
+                this.banner[element] = files[0]
                 this.createImage(files[0], element);
             },
 
@@ -64,7 +64,7 @@ function crudMainBanner() {
 
             removeImage: function (variable) {
                 this[variable] = '';
-                this.models[variable] = ''
+                this.banner[variable] = ''
             },
 
             fetchData: function(){
@@ -138,7 +138,7 @@ function crudMainBanner() {
                 this.$http.post('/main-banner/edit', form).then(function(response) {
                     response = response.data
                     if (response.status) {
-                        this.models = response.data;
+                        this.banner = response.data;
                         this.images = response.data.image_url
 
                         this.form_add_title = "Edit Main Banner"
@@ -199,8 +199,8 @@ function crudMainBanner() {
             },
             
             resetForm: function(){
-            	this.models.id = ''
-                this.models.title = ''
+            	this.banner.id = ''
+                this.banner.title = ''
                 this.images = ''
             },
 
