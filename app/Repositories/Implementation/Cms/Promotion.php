@@ -47,7 +47,7 @@ class Promotion extends BaseImplementation implements PromotionInterface
     public function getData()
     {
         $data = [
-            "is_active" => true
+            'order_by' => 'order'
         ];
 
         $promotionData = $this->promotion($data, 'asc', 'array', true);
@@ -58,9 +58,9 @@ class Promotion extends BaseImplementation implements PromotionInterface
     public function getCategoryPromotion()
     {
         $data = [
-            "is_active" => true
+            'order_by' => 'order'
         ];
-
+        
         $promotionCategory = $this->promotionCategory($data, 'asc', 'array', true);
        
         return $this->promotionTransformation->getPromotionCategoryCmsTransform($promotionCategory);
@@ -83,8 +83,10 @@ class Promotion extends BaseImplementation implements PromotionInterface
         }
 
         if(isset($data['order_by'])) {
-            $promotion->orderBy('order', $orderType);
-        } 
+            $promotion->orderBy($data['order_by'], $orderType);
+        }else {
+            $promotion->orderBy('order', 'asc');
+        }
 
         if(isset($data['id'])) {
             $promotion->id($data['id']);
@@ -119,8 +121,10 @@ class Promotion extends BaseImplementation implements PromotionInterface
         }
 
         if(isset($data['order_by'])) {
-            $promotionCategory->orderBy('order', $orderType);
-        } 
+            $promotionCategory->orderBy($data['order_by'], $orderType);
+        }else {
+            $promotionCategory->orderBy('order', 'asc');
+        }
 
         if(isset($data['slug'])) {
             $promotionCategory->slug($data['slug']);
@@ -299,6 +303,187 @@ class Promotion extends BaseImplementation implements PromotionInterface
         $singleCategoriPromotionData = $this->promotionCategory($params, 'asc', 'array', true);
 
         return $this->setResponse(trans('message.cms_success_get_data'), true, $this->promotionTransformation->getSingleCategoriPromotionCmsTransform($singleCategoriPromotionData));
+    }
+
+    /**
+     * Change status Categori Promotion
+     * @param $data
+     * @return bool
+     */
+
+    public function changeStatusCategori($data)
+    {
+        try {
+
+            if (!isset($data['id']) && empty($data['id']))
+
+                return $this->setResponse(trans('message.cms_required_id'), false);
+
+            DB::beginTransaction();
+
+            $oldData = $this->promotionCategory->id($data['id'])->first()->toArray();
+
+            $updatedData = [
+                'is_active' => $oldData['is_active'] ? false : true,
+                'updated_at' => $this->mysqlDateTimeFormat()
+            ];
+
+            $changeStatus = $this->promotionCategory->id($data['id'])->update($updatedData);
+
+            if($changeStatus) {
+                DB::commit();
+                return $this->setResponse(trans('message.cms_success_update_status_general'), true);
+            }
+
+            DB::rollBack();
+            return $this->setResponse(trans('message.cms_failed_update_status_general'), false);
+        } catch (\Exception $e) {
+            return $this->setResponse($e->getMessage(), false);
+        }
+    }
+
+    /**
+     * Get Single Categori Promotion
+     * @param $params
+     */
+    public function getSingleCategoriPromotion($params) {
+
+        $primaryData = $this->promotionCategory($params, 'asc', 'array', true);
+
+        return $this->promotionTransformation->getSingleCategoriPromotionCmsTransform($primaryData);
+    }
+
+    /**
+     * Delete Data Categori Promotion
+     * @param $params
+     * @return mixed
+     */
+    public function deleteCategori($data)
+    {
+        try {
+            if (!isset($data['id']) && empty($data['id']))
+                return $this->setResponse(trans('message.cms_required_id'), false);
+
+            DB::beginTransaction();
+
+            $params = [
+                "id" => $data['id']
+            ];
+            $categoriPromotionrData = $this->getSingleCategoriPromotion($params);
+
+            if (!$this->removeThumbnailCategoriFiles($categoriPromotionrData['thumbnail_category'])) {
+                DB::rollback();
+                return $this->setResponse($this->message, false);
+            }
+
+            if (!$this->removeThumbnailCategori($params)) {
+                DB::rollback();
+                return $this->setResponse($this->message, false);
+            }
+
+            DB::commit();
+            return $this->setResponse(trans('message.cms_success_delete_data_general'), true);
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            return $this->setResponse($e->getMessage(), false);
+        }
+    }
+
+    /**
+     * Remove Thumbnail Categori Promotion Files
+     * @param $data
+     */
+    protected function removeThumbnailCategoriFiles($data)
+    {
+        try {
+
+            $filename        = isset($data['thumbnail_category']) && !empty($data['thumbnail_category']) ? $data['thumbnail_category'] : uniqid();
+
+            if (file_exists('./' . PROMOTION_IMAGES_CATEGORY_DIRECTORY . $filename)) {
+                unlink('./' . PROMOTION_IMAGES_CATEGORY_DIRECTORY . $filename);
+            }
+
+            return true;
+
+        } catch (\Exception $e) {
+            $this->message = $e->getMessage();
+            return false;
+        }
+    }
+
+    /**
+     * Remove Categori Promotion Data From Database
+     * @param $data
+     * @return bool
+     */
+    protected function removeThumbnailCategori($data)
+    {
+        try {
+
+            $delete = $this->promotionCategory
+                ->id($data['id'])
+                ->forceDelete();
+
+            if ($delete)
+                return true;
+
+            $this->message = trans('message.cms_failed_delete_data_general');
+            return false;
+
+        } catch (\Exception $e) {
+            $this->message = $e->getMessage();
+            return false;
+        }
+    }
+
+    /**
+     * Order Data Categori Promotion
+     * @param $data
+     */
+    public function orderCategori($data)
+    {
+        try {
+            DB::beginTransaction();
+
+            if ($this->orderDataCategori($data)) {
+                DB::commit();
+                return $this->setResponse(trans('message.cms_success_ordering'), true);
+            }
+
+            DB::rollBack();
+            return $this->setResponse(trans('message.cms_failed_ordering'), false);
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return $this->setResponse($e->getMessage(), false);
+        }
+    }
+
+    /**
+     * Order List Data Categori Promotion
+     * @param $data
+     */
+    protected function orderDataCategori($data)
+    {
+        try {
+            $i = 1 ;
+            foreach ($data as $key => $val) {
+                $orderValue = $i++;
+
+                $promotionCategory         = $this->promotionCategory->find($val);
+
+                $promotionCategory->order  = $orderValue;
+
+                $promotionCategory->save();
+            }
+
+            return true;
+
+        } catch (Exception $e) {
+            $this->message = $e->getMessage();
+            return false;
+        }
     }
 
 }

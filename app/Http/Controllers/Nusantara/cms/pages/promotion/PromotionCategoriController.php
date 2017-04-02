@@ -92,6 +92,39 @@ class PromotionCategoriController extends CmsController
     }
 
     /**
+     * Change status Categori Promotion
+     * @param Request $request
+     * @return mixed
+     */
+    public function changeStatusCategori(Request $request)
+    {
+        return $this->promotion->changeStatusCategori($request->except(['_token']));
+        
+    }
+
+    /**
+     * Delete Data Categori Promotion
+     * @param Request $request
+     * @return mixed
+     */
+    public function deleteCategori(Request $request)
+    {
+        return $this->promotion->deleteCategori($request->except(['_token']));
+        
+    }
+
+    /**
+     * Ordering Categori Promotion
+     * @param Request $request
+     * @return mixed
+     */
+
+    public function orderCategori(Request $request)
+    {
+        return $this->promotion->orderCategori($request->input('list_order'));
+    }
+
+    /**
      * Validation Store Categori Promotion
      * @return array
      */

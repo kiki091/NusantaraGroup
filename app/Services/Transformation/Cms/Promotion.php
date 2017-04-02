@@ -87,6 +87,7 @@ class Promotion
         $dataTransform['id'] = isset($data['id']) ? $data['id'] : '';
         $dataTransform['category_name'] = isset($data['category_name']) ? $data['category_name'] : '';
         $dataTransform['category_slug'] = isset($data['category_slug']) ? $data['category_slug'] : '';
+        $dataTransform['thumbnail_category'] = isset($data['thumbnail_category']) ? $data['thumbnail_category'] : '';
         $dataTransform['thumbnail_category_url'] = isset($data['thumbnail_category']) ? asset(PROMOTION_IMAGES_CATEGORY_DIRECTORY.rawurlencode($data['thumbnail_category'])) : '';
         $dataTransform['introduction'] = isset($data['introduction']) ? $data['introduction'] : '';
         $dataTransform['meta_title'] = isset($data['meta_title']) ? $data['meta_title'] : '';

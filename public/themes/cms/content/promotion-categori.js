@@ -174,7 +174,7 @@ function crudCategoriPromotions() {
                     form.append(key, payload[key])
                 }
 
-                var domain = '/promotions/change-status-banner';
+                var domain = '/promotions/categori/change-status';
                 this.$http.post(domain, form).then(function(response) {
                     response = response.data
                     if (response.status == false) {
@@ -191,7 +191,7 @@ function crudCategoriPromotions() {
 
             deleteDataCategori: function(id) {
                 
-                var domain = '/promotions/delete-banner';
+                var domain = '/promotions/categori/delete';
                 var form = new FormData();
 
                 form.append('id', id);
@@ -223,7 +223,7 @@ function crudCategoriPromotions() {
                         handle: '.handle',
                         animation: 300,
                         onUpdate: function(evt) {
-                            vm.reorderBanner(evt.oldIndex, evt.newIndex);
+                            vm.reorderCategori(evt.oldIndex, evt.newIndex);
                         }
                     });
 
@@ -232,12 +232,12 @@ function crudCategoriPromotions() {
 
             reorderCategori: function(oldIndex, newIndex) {
                 //get id list
-                var ids = document.getElementsByClassName('sort-item-banner'),
+                var ids = document.getElementsByClassName('sort-item-categori'),
                     id_order  = [].map.call(ids, function(input) {
                         return input.getAttribute('data-id');
                     });
 
-                var domain  = '/promotions/order-banner';
+                var domain  = '/promotions/categori/order';
 
                 var payload = {list_order: id_order };
 

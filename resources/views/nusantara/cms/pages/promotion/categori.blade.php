@@ -18,7 +18,7 @@
 										<div class="new__form__btn">
 											<a href="#" class="btn__form__reset" @click.prevent="closeDeleteModal">Cancel</a>
 											
-                                    		<a href="#" class="btn__form__create" @click="deleteDataBanner(delete_payload.id)">Confirm</a>
+                                    		<a href="#" class="btn__form__create" @click="deleteDataCategori(delete_payload.id)">Confirm</a>
 										</div>
 									</div>
 									<button class="alert__message__close" @click.prevent="closeDeleteModal"></button>
@@ -63,7 +63,7 @@
 										</div>
 										<div class="news__list__detail__right">
 											<label class="switch">
-												<input class="switch-input" id="check_1" type="checkbox" :checked="category_promotion.is_active == true" @change="changeStatus(category_promotion.id)"/>
+												<input class="switch-input" id="check_1" type="checkbox" :checked="category_promotion.is_active == true" @change="changeStatusCategori(category_promotion.id)"/>
                                             	<span class="switch-label" data-on="Active" data-off="Inactive"></span> <span class="switch-handle"></span>
 											</label>
 

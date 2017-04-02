@@ -1255,6 +1255,10 @@ input, textarea, select {
     transition: all .2s;
 }
 
+.folder--nav .folder--nav--link i:hover {
+    background-color: #44C7F4;
+}
+
 .folder--nav .folder--nav--link.folder--selected i {
     background-color: #44C7F4;
 }

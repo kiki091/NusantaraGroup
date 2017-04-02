@@ -53,4 +53,40 @@ class Promotion {
     {
         return $this->promotion->editCategori($params);
     }
+
+    
+    /**
+     * Change status Categori Promotion
+     * @param $params
+     * @return mixed
+     */
+    
+    public function changeStatusCategori($params)
+    {
+        return $this->promotion->changeStatusCategori($params);
+    }
+
+    
+
+    /**
+     * Delete Data Categori Promotion
+     * @param $params
+     * @return mixed
+     */
+    
+    public function deleteCategori($params)
+    {
+        return $this->promotion->deleteCategori($params);
+    }
+
+    /**
+     * Ordering Data Categori Promotion
+     * @param $params
+     * @return mixed
+     */
+    
+    public function orderCategori($params)
+    {
+        return $this->promotion->orderCategori($params);
+    }
 }

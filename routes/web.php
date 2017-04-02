@@ -201,6 +201,9 @@ Route::group(['middleware' => ['web']], function ()
 				Route::get('data', 'Nusantara\cms\pages\promotion\PromotionCategoriController@getData')->name('PromotionGetDataCategori');
 				Route::post('store', 'Nusantara\cms\pages\promotion\PromotionCategoriController@storeCategori')->name('PromotionStoreCategori');
 				Route::post('edit', 'Nusantara\cms\pages\promotion\PromotionCategoriController@editCategori')->name('PromotionEditCategori');
+				Route::post('change-status', 'Nusantara\cms\pages\promotion\PromotionCategoriController@changeStatusCategori')->name('PromotionChangeStatusCategori');
+				Route::post('delete', 'Nusantara\cms\pages\promotion\PromotionCategoriController@deleteCategori')->name('PromotionDeleteCategori');
+				Route::post('order', 'Nusantara\cms\pages\promotion\PromotionCategoriController@orderCategori')->name('PromotionOrderCategori');
 			});
 
 			

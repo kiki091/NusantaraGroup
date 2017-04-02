@@ -33,4 +33,25 @@ interface Promotion
      */
     public function editCategori($params);
 
+    /**
+     * Change status Categori Promotion
+     * @param $params
+     * @return mixed
+     */
+    public function changeStatusCategori($params);
+
+    /**
+     * Delete Data Categori Promotion
+     * @param $params
+     * @return mixed
+     */
+    public function deleteCategori($params);
+
+    /**
+     * Ordering Data Categori Promotion
+     * @param $params
+     * @return mixed
+     */
+    public function orderCategori($params);
+
 }
