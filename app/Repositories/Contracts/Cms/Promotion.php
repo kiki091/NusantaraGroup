@@ -54,4 +54,12 @@ interface Promotion
      */
     public function orderCategori($params);
 
+    /**
+     * Store Promotion Detail
+     * @param $params
+     * @return mixed
+     */
+
+    public function storePromotion($params);
+
 }

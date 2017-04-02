@@ -89,4 +89,17 @@ class Promotion {
     {
         return $this->promotion->orderCategori($params);
     }
+
+    
+
+    /**
+     * Store Promotion Detail
+     * @param $params
+     * @return mixed
+     */
+    
+    public function storePromotion($params)
+    {
+        return $this->promotion->storePromotion($params);
+    }
 }

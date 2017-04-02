@@ -8,6 +8,7 @@ function crudPromotions() {
 
             promotion: {
                 id:'',
+                promotion_category_id: '',
                 title: '',
                 thumbnail: '',
                 equipment_interior : '',
@@ -42,11 +43,12 @@ function crudPromotions() {
                 id: '',
             },
             form_add_title: "Detail Promotions",
-            default_total_description : [0],
-            total_description : [],
+            default_total_detail_image : [0],
+            total_detail_image : [],
             id: '',
             edit: false,
             responseData: {},
+            image_big_preview: '',
         },
 
         filters: {
@@ -55,6 +57,45 @@ function crudPromotions() {
             }
         },
         methods: {
+
+            previewImage: function (filename) {
+                this.image_big_preview = filename
+            },
+
+            onImageSliderChange: function(element, index, e) {
+                var files = e.target.files || e.dataTransfer.files
+
+                if (!files.length)
+                    return;
+
+                this.promotion[element][index] = files[0]
+                this.createImageSlider(files[0], element, index);
+            },
+
+            createImageSlider: function(file, setterTo, index) {
+                var image = new Image();
+                var reader = new FileReader();
+                var vm = this;
+
+                reader.onload = function (e) {
+                    vm[setterTo][index] = e.target.result
+                };
+                reader.readAsDataURL(file);
+            },
+
+            removeImageSlider: function (element, index) {
+                this[element][index] = '';
+                this.promotion[element][index] = ''
+            },
+
+            removeImageWrapper: function(item, index) {
+                this.removeImageSlider('filename', index)
+                this.default_total_detail_image.$remove(item);
+            },
+
+            addMoreImageSlider: function() {
+                this.default_total_detail_image.splice(this.default_total_detail_image.length + 1, 0, {});
+            },
 
             showDeleteModal: function(id, sectionDelete) {
                 this.showModal = true;
@@ -162,6 +203,33 @@ function crudPromotions() {
                     switch(id) {
                         case 'template-introduction':
                             CKEDITOR.instances['editor-1'].setData($('#' + id).html());
+                        break;
+                        case 'template-side-description':
+                            CKEDITOR.instances['editor-2'].setData($('#' + id).html());
+                        break;
+                        case 'template-description':
+                            CKEDITOR.instances['editor-3'].setData($('#' + id).html());
+                        break;
+                        case 'template-equipment-interior':
+                            CKEDITOR.instances['editor-4'].setData($('#' + id).html());
+                        break;
+                        case 'template-interior-description':
+                            CKEDITOR.instances['editor-5'].setData($('#' + id).html());
+                        break;
+                        case 'template-equipment-exterior':
+                            CKEDITOR.instances['editor-6'].setData($('#' + id).html());
+                        break;
+                        case 'template-exterior-description':
+                            CKEDITOR.instances['editor-7'].setData($('#' + id).html());
+                        break;
+                        case 'template-safety-description':
+                            CKEDITOR.instances['editor-8'].setData($('#' + id).html());
+                        break;
+                        case 'template-accesories-description':
+                            CKEDITOR.instances['editor-9'].setData($('#' + id).html());
+                        break;
+                        case 'template-information':
+                            CKEDITOR.instances['editor-10'].setData($('#' + id).html());
                         break;
                     default :
 

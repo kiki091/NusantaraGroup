@@ -62,8 +62,96 @@ class PromotionController extends CmsController
         $property_location_id = $location['property_id'];
 
     	$data['promotion'] = $this->promotion->getData();
+        $data['category_promotion'] = $this->promotion->getCategoryPromotion();
 
     	return $this->response->setResponse(trans('success_get_data'), true, $data);
+    }
+
+    /**
+     * Store Promotion
+     */
+
+    public function store(Request $request)
+    {
+        $validator = Validator::make($request->all(), $this->validationStore($request));
+
+        if ($validator->fails()) {
+            //TODO: case fail
+            return $this->response->setResponseErrorFormValidation($validator->messages(), false);
+
+        } else {
+            //TODO: case pass
+            return $this->promotion->storePromotion($request->except(['_token', 'thumbnail_url']));
+        }
+    }
+
+    /**
+     * Validation Store Promotion
+     * @return array
+     */
+
+
+    private function validationStore($request = array())
+    {
+        $rules = [
+
+            'promotion_category_id'     => 'required',
+            'title'                     => 'required',
+            'slug'                      => 'required',
+            'thumbnail'                 => 'required|dimensions:width='.PROMOTION_THUMBNAIL_WIDTH.',height='.PROMOTION_THUMBNAIL_HEIGHT.'|max:'. PROMOTION_IMAGE_SIZE .'|mimes:jpg,jpeg',
+            'equipment_interior'        => 'required',
+            'equipment_exterior'        => 'required',
+            'information'               => 'required',
+            'filename'                  => 'required|dimensions:width='.PROMOTION_GALLERY_WIDTH.',height='.PROMOTION_GALLERY_HEIGHT.'|max:'. PROMOTION_IMAGE_SIZE .'|mimes:jpg,jpeg',
+            'banner_image'              => 'required|dimensions:width='.PROMOTION_BANNER_IMAGES_WIDTH.',height='.PROMOTION_BANNER_IMAGES_HEIGHT.'|max:'. PROMOTION_IMAGE_SIZE .'|mimes:jpg,jpeg',
+            'interior_image'            => 'required|dimensions:width='.PROMOTION_IMAGES_WIDTH.',height='.PROMOTION_IMAGES_HEIGHT.'|max:'. PROMOTION_IMAGE_SIZE .'|mimes:jpg,jpeg',
+            'exterior_image'            => 'required|dimensions:width='.PROMOTION_IMAGES_WIDTH.',height='.PROMOTION_IMAGES_HEIGHT.'|max:'. PROMOTION_IMAGE_SIZE .'|mimes:jpg,jpeg',
+            'safety_image'              => 'required|dimensions:width='.PROMOTION_IMAGES_WIDTH.',height='.PROMOTION_IMAGES_HEIGHT.'|max:'. PROMOTION_IMAGE_SIZE .'|mimes:jpg,jpeg',
+            'accesories_image'          => 'required|dimensions:width='.PROMOTION_IMAGES_WIDTH.',height='.PROMOTION_IMAGES_HEIGHT.'|max:'. PROMOTION_IMAGE_SIZE .'|mimes:jpg,jpeg',
+            'introduction'              => 'required',
+            'side_description'          => 'required',
+            'description'               => 'required',
+            'interior_description'      => 'required',
+            'exterior_description'      => 'required',
+            'safety_description'        => 'required',
+            'accesories_description'    => 'required',
+            'meta_title'                => 'required',
+            'meta_keyword'              => 'required',
+            'meta_description'          => 'required',
+        ];
+
+        if ($this->isEditMode($request->input()))
+        {
+            if (is_null($request->file('thumbnail'))) {
+                unset($rules['thumbnail']);
+            }
+
+            if (is_null($request->file('filename'))) {
+                unset($rules['filename']);
+            }
+
+            if (is_null($request->file('banner_image'))) {
+                unset($rules['banner_image']);
+            }
+
+            if (is_null($request->file('interior_image'))) {
+                unset($rules['interior_image']);
+            }
+
+            if (is_null($request->file('exterior_image'))) {
+                unset($rules['exterior_image']);
+            }
+
+            if (is_null($request->file('safety_image'))) {
+                unset($rules['safety_image']);
+            }
+
+            if (is_null($request->file('accesories_image'))) {
+                unset($rules['accesories_image']);
+            }
+        }
+
+        return $rules;
     }
 
     /**

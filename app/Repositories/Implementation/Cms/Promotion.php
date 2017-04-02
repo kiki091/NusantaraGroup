@@ -486,4 +486,167 @@ class Promotion extends BaseImplementation implements PromotionInterface
         }
     }
 
+    /*
+    * Store Data Promotion
+    */
+
+    public function storePromotion($data)
+    {
+        try {
+
+            DB::beginTransaction();
+
+            if ($this->storeDataPromotion($data) != true) {
+                DB::rollBack();
+                return $this->setResponse($this->message, false);
+            }
+
+            if ($this->storePromotionDetail($data) != true) {
+                DB::rollBack();
+                return $this->setResponse($this->message, false);
+            }
+
+            if (!$this->isEditMode($data))
+            {
+                if ($this->storePromotionGallery($data) != true) {
+                    DB::rollBack();
+                    return $this->setResponse($this->message, false);
+                }
+            }
+
+            if ($this->storePromotionImages($data) != true) {
+                DB::rollBack();
+                return $this->setResponse($this->message, false);
+            }
+
+            if ($this->storePromotionTranslation($data) != true) {
+                DB::rollBack();
+                return $this->setResponse($this->message, false);
+            }
+
+            DB::commit();
+            return $this->setResponse(trans('message.cms_upload_image_success'), true);
+        } catch (\Exception $e) {
+            return $this->setResponse($e->getMessage(), false);
+        }
+    }
+
+    /**
+     * Store  Promotion
+     * @param $data
+     * @return mixed
+     */
+
+    protected function storeDataPromotion($data)
+    {
+        try {
+
+            $order = 1;
+            $store              = $this->promotion;
+
+            if ($this->isEditMode($data)) {
+                $store          = $this->promotion->find($data['id']);
+            }
+
+            $store->promotion_category_id   = isset($data['promotion_category_id']) ? $data['promotion_category_id'] : "";
+            $store->title   = isset($data['title']) ? $data['title'] : "";
+            $store->slug   = isset($data['slug']) ? $data['slug'] : "";
+
+            if (!$this->isEditMode($data)) 
+            {
+                $store->thumbnail           = $this->uniqueIdImagePrefix . '_' .$data['thumbnail']->getClientOriginalName();
+                $store->is_active           = true;
+                $store->order               = $order;
+                $store->created_at          = $this->mysqlDateTimeFormat();
+
+            } else {
+                //TODO: Edit Mode Thumbnail Checker
+                if (!empty($data['thumbnail'])) {
+                    $store->thumbnail       = $this->uniqueIdImagePrefix . '_' .$data['thumbnail']->getClientOriginalName();
+                }
+            }
+
+            if($save = $store->save()) {
+                $this->lastInsertId = $store->id;
+            }
+
+            return $save;
+
+        } catch (\Exception $e) {
+            $this->message = $e->getMessage();
+            return false;
+        }
+    }
+
+    /**
+     * Store  Promotion Detail
+     * @param $data
+     * @return mixed
+     */
+
+    protected function storePromotionDetail($data)
+    {
+        try {
+
+            $order = 1;
+            $store              = $this->promotionDatail;
+
+            if ($this->isEditMode($data)) {
+                $store          = $this->promotionDatail->find($data['id']);
+            }
+
+            $store->equipment_interior   = isset($data['equipment_interior']) ? $data['equipment_interior'] : "";
+            $store->equipment_exterior   = isset($data['equipment_exterior']) ? $data['equipment_exterior'] : "";
+            $store->information   = isset($data['information']) ? $data['information'] : "";
+
+            if (!$this->isEditMode($data)) 
+            {
+                $store->promotion_id   = $this->lastInsertId;
+                $store->created_at     = $this->mysqlDateTimeFormat();
+
+            }
+
+            $save = $store->save();
+
+            return $save;
+            
+        } catch (\Exception $e) {
+            $this->message = $e->getMessage();
+            return false;
+        }
+    }
+
+    /**
+     * Store Promotion Galleri
+     * @param $data
+     * @return mixed
+     */
+    protected function storePromotionGallery($data)
+    {
+        try {
+
+            $finalData = [];
+
+            foreach ($data['filename'] as $key => $item) 
+            {
+                $finalData[] = [
+                    "promotion_id"  => $this->lastInsertId,
+                    "filename"     => $this->uniqueIdImagePrefix . '_' .$item->getClientOriginalName(),
+                    "created_at" => $this->mysqlDateTimeFormat()
+                ];
+            }
+
+            if ($this->promotionGallery->insert($finalData) != true) {
+                $this->message = trans('message.cms_upload_image_failed');
+                return false;
+            }
+
+            return true;
+
+        } catch (\Exception $e) {
+            $this->message = $e->getMessage();
+            return false;
+        }
+    }
+
 }

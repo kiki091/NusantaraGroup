@@ -1271,3 +1271,9 @@ input, textarea, select {
     padding: 18px 40px 18px 15px;
     font-size: 14px;
 }
+
+.folder--hidden {
+    visibility: hidden;
+    height: 0;
+    display: none;
+}
