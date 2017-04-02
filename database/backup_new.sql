@@ -41,7 +41,7 @@ CREATE TABLE `booking_services` (
   UNIQUE KEY `no_booking` (`no_booking`),
   KEY `branch_office_id` (`branch_office_id`),
   CONSTRAINT `booking_services_FK` FOREIGN KEY (`branch_office_id`) REFERENCES `branch_office` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -50,7 +50,7 @@ CREATE TABLE `booking_services` (
 
 LOCK TABLES `booking_services` WRITE;
 /*!40000 ALTER TABLE `booking_services` DISABLE KEYS */;
-INSERT INTO `booking_services` VALUES (1,'42300726000666','T6646AC','Jenis Kendaraan','Nama Lengkap',57654547,'user@suportcenter.com','2017-02-02','Keterangan',3,0,1,'2017-02-01 20:42:49','2017-02-01 20:42:49'),(2,'42300726000567','T6646AC','Jenis Kendaraan','Nama Lengkap',57654547,'sheqbo@gmail.com','2017-02-08','Keterangan',5,0,1,'2017-02-01 20:49:20','2017-02-01 20:49:20'),(3,'42300726000221','T6646AC','Jenis Kendaraan','Nama Lengkap',57654547,'admin@supportcenter.com','2017-02-09','Keterangan',7,0,1,'2017-02-01 21:36:20','2017-02-01 21:36:20'),(4,'42300726000667','T6646AC','Jenis Kendaraan','Nama Lengkap',57654547,'admin@supportcenter.com','2017-02-09','Keterangan',5,0,1,'2017-02-01 21:36:20','2017-02-01 21:36:20');
+INSERT INTO `booking_services` VALUES (1,'42300726000666','T6646AC','Jenis Kendaraan','Nama Lengkap',57654547,'user@suportcenter.com','2017-02-02','Keterangan',3,0,1,'2017-02-01 20:42:49','2017-02-01 20:42:49'),(2,'42300726000567','T6646AC','Jenis Kendaraan','Nama Lengkap',57654547,'sheqbo@gmail.com','2017-02-08','Keterangan',5,0,1,'2017-02-01 20:49:20','2017-02-01 20:49:20'),(3,'42300726000221','T6646AC','Jenis Kendaraan','Nama Lengkap',57654547,'admin@supportcenter.com','2017-02-09','Keterangan',7,0,1,'2017-02-01 21:36:20','2017-02-01 21:36:20'),(4,'42300726000667','T6646AC','Jenis Kendaraan','Nama Lengkap',57654547,'admin@supportcenter.com','2017-02-09','Keterangan',5,0,1,'2017-02-01 21:36:20','2017-02-01 21:36:20'),(5,'01020274575301','T6646AC','Jenis Kendaraan','Nama Lengkap',57654547,'kiki@gmail.com','2017-04-08','Keterangan',2,0,1,'2017-03-31 22:57:32','2017-03-31 22:57:32');
 /*!40000 ALTER TABLE `booking_services` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -73,7 +73,7 @@ CREATE TABLE `booking_test_drive` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -82,7 +82,7 @@ CREATE TABLE `booking_test_drive` (
 
 LOCK TABLES `booking_test_drive` WRITE;
 /*!40000 ALTER TABLE `booking_test_drive` DISABLE KEYS */;
-INSERT INTO `booking_test_drive` VALUES (1,220028721205,'Jenis Kendaraan','Nama Lengkap','sheqbo@gmail.com',57654547,'2017-02-03','Permintaan / Request','2017-02-02 01:22:05','2017-02-02 01:22:05');
+INSERT INTO `booking_test_drive` VALUES (1,220028721205,'Jenis Kendaraan','Nama Lengkap','sheqbo@gmail.com',57654547,'2017-02-03','Permintaan / Request','2017-02-02 01:22:05','2017-02-02 01:22:05'),(2,41008507150201,'Jenis Kendaraan','Nama Lengkap','kiki@gmail.com',57654547,'2017-04-08','Keterangan','2017-03-31 22:58:10','2017-03-31 22:58:10');
 /*!40000 ALTER TABLE `booking_test_drive` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -122,7 +122,7 @@ CREATE TABLE `branch_office` (
 
 LOCK TABLES `branch_office` WRITE;
 /*!40000 ALTER TABLE `branch_office` DISABLE KEYS */;
-INSERT INTO `branch_office` VALUES (1,'Nusantara BMW','nusantara-bmw','BMW Banjarmasin','<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>','img_nusantara_58ba35c39011b_bisnis_4.jpg','BMW','Jl. A. Yani km 4,5 No. 330, Banjarmasin, Tlp : 0511 – 3275000',0,2,1,'Nusantara BMW','Nusantara BMW','Nusantara BMW','2016-12-26 04:30:32',1,'2017-03-14 03:47:41'),(2,'Nusantara Daihatsu','nusantara-daihatsu','Daihatsu Banjarmasin','Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.','daihatsu.jpg','DAIHATSU','Jl. A. Yani km 4 No 323, Banjarmasin, Tlp : 0511-3264500',1,1,1,'Nusantara Daihatsu','Nusantara Daihatsu','Nusantara Daihatsu','2016-12-26 04:30:32',1,'2017-03-14 03:47:41'),(3,'Nusantara Ford','nusantara-ford','Ford Banjarmasin','Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.','ford.jpg','FORD','Jl. A. Yani km. 5,8 No. 499, Banjarmasin, Tlp : 0511 – 3271000',0,3,1,'Nusantara Ford','Nusantara Ford','Nusantara Ford','2016-12-26 04:30:32',1,'2017-03-14 03:47:41'),(4,'Nusantara KIA','nusantara-kia','Nusantara KIA Banjarmasin','<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>','img_nusantara_58ba35eea0850_nusantara-kia-motors.jpg','KIA','Jl. A. Yani km. 7, Banjarmasin, Tlp : 0511 – 3268000',1,4,1,'Nusantara KIA','Nusantara KIA','Nusantara KIA','2016-12-26 04:30:32',1,'2017-03-14 03:47:41'),(5,'GM CHEVROLET','gm-chevrolet','Nusantara Auto World Banjarmasin','<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>','img_nusantara_58ba360780a46_GM_CHEVROLET.jpg','CHEVROLET','',1,5,1,'GM CHEVROLET','GM CHEVROLET','GM CHEVROLET','2016-12-26 04:30:32',1,'2017-03-03 20:35:35'),(6,'HYUNDAI','nusantara-hyundai','Hyundai Banjarmasin','Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.','hyundai.jpg','HYUNDAI','Jl. A. Yani km 6,8, Banjarmasin, Tlp : 0511 – 7480899',1,6,1,'HYUNDAI','HYUNDAI','HYUNDAI','2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(7,'MAZDA','nusantara-mazda','Mazda Banjarmasin','Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.','mazda.jpg','MAZDA','Jl. A. Yani km 4,5 No. 330, Banjarmasin, Tlp : 0511 – 3275000',1,7,1,'MAZDA','MAZDA','MAZDA','2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(8,'MINI COOPER','nusantara-mini-cooper','Mini Cooper Jakarta Selatan','Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.','MINI.jpg','MINI COOPER','Jl. Sultan Iskandar Muda No. 16 Arteri Pondok Indah Kebayoran Lama Jakarta Selatan',1,8,1,'Mini Cooper Jakarta Selatan','Mini Cooper Jakarta Selatan','Mini Cooper Jakarta Selatan','2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(9,'BODY REPAIR','nusantara-body-repair','Nusantara Bodyshop Palembang','Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.','Nusantara_Bodyshop.jpg','BODY REPAIR','Jl.Tanjung Api Api no 99A, Palembang, Tlp : 0711 – 421930',1,9,1,'Nusantara Bodyshop Palembang','Nusantara Bodyshop Palembang','Nusantara Bodyshop Palembang','2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(21,'kiki.kurniawan@qeon.co.id','kiki.kurniawan@qeon.co.id','kiki.kurniawan@qeon.co.id','<p><span class=\"first-letter\">L</span> orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>','img_nusantara_58b55bed679fd_214x161.jpg','kiki.kurniawan@qeon.co.id','kiki.kurniawan@qeon.co.id',1,10,1,NULL,NULL,NULL,'2017-02-28 04:15:57',1,'2017-02-28 04:15:57');
+INSERT INTO `branch_office` VALUES (1,'Nusantara BMW','nusantara-bmw','BMW Banjarmasin','<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>','img_nusantara_58ba35c39011b_bisnis_4.jpg','BMW','Jl. A. Yani km 4,5 No. 330, Banjarmasin, Tlp : 0511 – 3275000',1,2,1,'Nusantara BMW','Nusantara BMW','Nusantara BMW','2016-12-26 04:30:32',1,'2017-03-28 06:36:42'),(2,'Nusantara Daihatsu','nusantara-daihatsu','Daihatsu Banjarmasin','Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.','daihatsu.jpg','DAIHATSU','Jl. A. Yani km 4 No 323, Banjarmasin, Tlp : 0511-3264500',1,1,1,'Nusantara Daihatsu','Nusantara Daihatsu','Nusantara Daihatsu','2016-12-26 04:30:32',1,'2017-03-14 03:47:41'),(3,'Nusantara Ford','nusantara-ford','Ford Banjarmasin','Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.','ford.jpg','FORD','Jl. A. Yani km. 5,8 No. 499, Banjarmasin, Tlp : 0511 – 3271000',0,3,1,'Nusantara Ford','Nusantara Ford','Nusantara Ford','2016-12-26 04:30:32',1,'2017-03-14 03:47:41'),(4,'Nusantara KIA','nusantara-kia','Nusantara KIA Banjarmasin','<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>','img_nusantara_58ba35eea0850_nusantara-kia-motors.jpg','KIA','Jl. A. Yani km. 7, Banjarmasin, Tlp : 0511 – 3268000',1,4,1,'Nusantara KIA','Nusantara KIA','Nusantara KIA','2016-12-26 04:30:32',1,'2017-03-14 03:47:41'),(5,'GM CHEVROLET','gm-chevrolet','Nusantara Auto World Banjarmasin','<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>','img_nusantara_58ba360780a46_GM_CHEVROLET.jpg','CHEVROLET','',1,5,1,'GM CHEVROLET','GM CHEVROLET','GM CHEVROLET','2016-12-26 04:30:32',1,'2017-03-03 20:35:35'),(6,'HYUNDAI','nusantara-hyundai','Hyundai Banjarmasin','Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.','hyundai.jpg','HYUNDAI','Jl. A. Yani km 6,8, Banjarmasin, Tlp : 0511 – 7480899',1,6,1,'HYUNDAI','HYUNDAI','HYUNDAI','2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(7,'MAZDA','nusantara-mazda','Mazda Banjarmasin','Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.','mazda.jpg','MAZDA','Jl. A. Yani km 4,5 No. 330, Banjarmasin, Tlp : 0511 – 3275000',1,7,1,'MAZDA','MAZDA','MAZDA','2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(8,'MINI COOPER','nusantara-mini-cooper','Mini Cooper Jakarta Selatan','Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.','MINI.jpg','MINI COOPER','Jl. Sultan Iskandar Muda No. 16 Arteri Pondok Indah Kebayoran Lama Jakarta Selatan',1,8,1,'Mini Cooper Jakarta Selatan','Mini Cooper Jakarta Selatan','Mini Cooper Jakarta Selatan','2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(9,'BODY REPAIR','nusantara-body-repair','Nusantara Bodyshop Palembang','Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.','Nusantara_Bodyshop.jpg','BODY REPAIR','Jl.Tanjung Api Api no 99A, Palembang, Tlp : 0711 – 421930',1,9,1,'Nusantara Bodyshop Palembang','Nusantara Bodyshop Palembang','Nusantara Bodyshop Palembang','2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(21,'kiki.kurniawan@qeon.co.id','kiki.kurniawan@qeon.co.id','kiki.kurniawan@qeon.co.id','<p><span class=\"first-letter\">L</span> orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>','img_nusantara_58b55bed679fd_214x161.jpg','kiki.kurniawan@qeon.co.id','kiki.kurniawan@qeon.co.id',1,10,1,NULL,NULL,NULL,'2017-02-28 04:15:57',1,'2017-02-28 04:15:57');
 /*!40000 ALTER TABLE `branch_office` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -286,7 +286,7 @@ CREATE TABLE `company_award` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
   `office_name` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
   `thumbnail` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
-  `images` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `filename` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   `is_active` int(1) DEFAULT NULL,
   `property_location_id` int(1) DEFAULT NULL,
   `order` int(3) DEFAULT NULL,
@@ -306,7 +306,7 @@ CREATE TABLE `company_award` (
 
 LOCK TABLES `company_award` WRITE;
 /*!40000 ALTER TABLE `company_award` DISABLE KEYS */;
-INSERT INTO `company_award` VALUES (1,'CHEVROLET','images.png','awards-banner.jpg',1,1,1,'GM CHEVROLET','GM CHEVROLET','GM CHEVROLET','2016-12-26 04:30:32',1,'2016-12-26 04:30:32'),(2,'KIA MOTOR','images.jpg','banner-awards-1.jpg',1,1,2,'KIA MOTOR','KIA MOTOR','KIA MOTOR','2016-12-26 04:30:32',1,'2016-12-26 04:30:32');
+INSERT INTO `company_award` VALUES (1,'CHEVROLET','images.png','awards-banner.jpg',1,1,2,'GM CHEVROLET','GM CHEVROLET','GM CHEVROLET','2016-12-26 04:30:32',1,'2017-03-28 06:19:15'),(2,'KIA MOTOR','images.jpg','banner-awards-1.jpg',1,1,3,'KIA MOTOR','KIA MOTOR','KIA MOTOR','2016-12-26 04:30:32',1,'2017-03-28 06:19:26');
 /*!40000 ALTER TABLE `company_award` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -651,7 +651,7 @@ CREATE TABLE `main_banner` (
   `created_by` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -660,7 +660,7 @@ CREATE TABLE `main_banner` (
 
 LOCK TABLES `main_banner` WRITE;
 /*!40000 ALTER TABLE `main_banner` DISABLE KEYS */;
-INSERT INTO `main_banner` VALUES (5,'banner::landing','triton-slider-rev-2_232301_161846.jpg','Main Banner Titile 2',1,1,2,'2016-12-25 17:04:03','1','2017-03-14 11:03:58'),(6,'banner::landing','triton-slider-rev-2_232301_161846.jpg','Main Banner Titile 3',1,1,1,'2016-12-25 17:04:03','1','2017-03-14 11:03:58'),(7,'banner::landing','triton-slider-rev-2_232301_161846.jpg','Main Banner Titile',1,1,3,'2016-12-25 17:04:03','1','2016-12-25 17:04:03'),(8,'banner::landing','img_nusantara_58b028c5b2f4f_214x161.jpg','Main Banner Titile',1,1,4,'2016-12-25 17:04:03','1','2017-02-26 17:06:58'),(9,'banner::landing','triton-slider-rev-2_232301_161846.jpg','Promotion Banner Titile',1,1,5,'2016-12-25 17:04:03','1','2016-12-25 17:04:03'),(10,'banner::landing','img_nusantara_58ba3935de8f1_banner.jpg','Nusantara Group Main Banner',1,1,6,'2017-03-04 03:49:09','1','2017-03-04 03:49:09'),(11,'banner::awards','triton-slider-rev-2_232301_161846.jpg','Awards Nusantara Group',1,1,1,'2017-03-04 03:49:09','1','2017-03-04 03:49:09'),(12,'banner::awards','img_nusantara_58ba3935de8f1_banner.jpg','Awards Nusantara Group',1,1,2,'2017-03-04 03:49:09','1','2017-03-04 03:49:09');
+INSERT INTO `main_banner` VALUES (5,'banner::landing','triton-slider-rev-2_232301_161846.jpg','Main Banner Titile 2 edit',1,1,2,'2016-12-25 17:04:03','1','2017-04-01 06:13:48'),(6,'banner::landing','triton-slider-rev-2_232301_161846.jpg','Main Banner Titile 3',1,1,1,'2016-12-25 17:04:03','1','2017-03-14 11:03:58'),(7,'banner::landing','triton-slider-rev-2_232301_161846.jpg','Main Banner Titile',1,1,3,'2016-12-25 17:04:03','1','2016-12-25 17:04:03'),(8,'banner::landing','img_nusantara_58b028c5b2f4f_214x161.jpg','Main Banner Titile',1,1,4,'2016-12-25 17:04:03','1','2017-02-26 17:06:58'),(9,'banner::landing','triton-slider-rev-2_232301_161846.jpg','Promotion Banner Titile',1,1,5,'2016-12-25 17:04:03','1','2016-12-25 17:04:03'),(10,'banner::landing','img_nusantara_58ba3935de8f1_banner.jpg','Nusantara Group Main Banner',1,1,6,'2017-03-04 03:49:09','1','2017-03-04 03:49:09'),(11,'banner::awards','triton-slider-rev-2_232301_161846.jpg','Awards Nusantara Group',1,1,2,'2017-03-04 03:49:09','1','2017-04-01 06:15:20'),(12,'banner::awards','img_nusantara_58ba3935de8f1_banner.jpg','Awards Nusantara Group',1,1,1,'2017-03-04 03:49:09','1','2017-03-28 08:18:28'),(15,'banner::promotion','promotional-banner-template.jpg','Banner Promotion',1,1,1,'2017-03-04 03:49:09','1','2017-04-01 09:19:08'),(16,'banner::landing','img_nusantara_58df5b7f7b306_1350x600.jpg','Banner Promotion 2',1,1,NULL,'2017-04-01 07:49:19','1','2017-04-01 07:49:19'),(18,'banner::landing','img_nusantara_58df691f2a437_1350x600.jpg','Main Banner new',1,1,NULL,'2017-04-01 08:47:27','1','2017-04-01 08:47:27'),(19,'banner::awards','img_nusantara_58df69bba432b_1350x600.jpg','Awards Banner New',1,1,NULL,'2017-04-01 08:50:03','1','2017-04-01 08:50:03'),(20,'banner::promotion','img_nusantara_58df69d26411c_1350x600.jpg','Promotion Banner New',1,1,NULL,'2017-04-01 08:50:26','1','2017-04-01 09:19:09');
 /*!40000 ALTER TABLE `main_banner` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -763,6 +763,7 @@ CREATE TABLE `promotion` (
   `thumbnail` varchar(100) DEFAULT NULL,
   `promotion_category_id` int(10) NOT NULL DEFAULT '0',
   `is_active` int(1) DEFAULT NULL,
+  `order` int(2) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -777,7 +778,7 @@ CREATE TABLE `promotion` (
 
 LOCK TABLES `promotion` WRITE;
 /*!40000 ALTER TABLE `promotion` DISABLE KEYS */;
-INSERT INTO `promotion` VALUES (1,'Mini Cabrio','mini-cabrio','thumbnail-image.png',1,1,'2017-02-02 11:06:10','2017-02-02 11:06:12'),(2,'Mini Clubman','mini-clubman','thumbnail-mini-clubman.png',1,1,'2017-02-02 11:06:10','2017-02-02 11:06:10');
+INSERT INTO `promotion` VALUES (1,'Mini Cabrio','mini-cabrio','thumbnail-image.png',1,1,1,'2017-02-02 11:06:10','2017-02-02 11:06:12'),(2,'Mini Clubman','mini-clubman','thumbnail-mini-clubman.png',1,1,2,'2017-02-02 11:06:10','2017-02-02 11:06:10');
 /*!40000 ALTER TABLE `promotion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -795,6 +796,10 @@ CREATE TABLE `promotion_category` (
   `thumbnail_category` varchar(100) DEFAULT NULL,
   `introduction` tinytext,
   `is_active` int(1) DEFAULT NULL,
+  `order` int(2) DEFAULT NULL,
+  `meta_title` varchar(200) DEFAULT NULL,
+  `meta_keyword` varchar(150) DEFAULT NULL,
+  `meta_description` text,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -808,7 +813,7 @@ CREATE TABLE `promotion_category` (
 
 LOCK TABLES `promotion_category` WRITE;
 /*!40000 ALTER TABLE `promotion_category` DISABLE KEYS */;
-INSERT INTO `promotion_category` VALUES (1,'Mini Cooper','mini-cooper','mini-cooper-banner.jpg','<p><span class=\"first-letter\">L</span>orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s</p>',1,'2017-02-02 11:08:55','2017-02-02 11:08:56'),(2,'Mazda','mazda','mazda-banner.jpg','<p><span class=\"first-letter\">L</span>orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s</p>',1,'2017-02-02 11:08:55','2017-02-02 11:08:55');
+INSERT INTO `promotion_category` VALUES (1,'Mini Cooper','mini-cooper','mini-cooper-banner.jpg','<p><span class=\"first-letter\">L</span>orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s</p>',1,2,'Mini Cooper','Mini Cooper','Mini Cooper','2017-02-02 11:08:55','2017-04-01 20:21:44'),(2,'Mazda','mazda','mazda-banner.jpg','<p><span class=\"first-letter\">L</span>orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s</p>',1,1,'Mazda','Mazda','Mazda','2017-02-02 11:08:55','2017-04-01 20:21:41');
 /*!40000 ALTER TABLE `promotion_category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1135,7 +1140,7 @@ CREATE TABLE `static_page` (
 
 LOCK TABLES `static_page` WRITE;
 /*!40000 ALTER TABLE `static_page` DISABLE KEYS */;
-INSERT INTO `static_page` VALUES (1,'Nusantara Group edit','img_nusantara_58ae8d5c61bf6_logo-nusantara.png','Nusantara Group','favicon.png','Nusantara Group','mini-chooper.jpg','Nusantara Group','<p>Nikmati pelayanan perjanjian yang mudah dan efisien secara online. </p>','<p>Jadwalkan kehadiran di showroom kami untuk mendapatkan test kendaraan idaman anda gratis.. </p>','<p>Temukan mobil impian mu dengan harga yang relatif murah dengan kualitas tinggi dan mewah.   </p>',1,1,'Nusantara Group','Nusantara Group','Nusantara Group','2016-12-24 17:00:00',1,'2017-02-25 23:57:43');
+INSERT INTO `static_page` VALUES (1,'Nusantara Group edit','img_nusantara_58ae8d5c61bf6_logo-nusantara.png','Nusantara Group','favicon.png','Nusantara Group','mini-chooper.jpg','Nusantara Group','<p>Nikmati pelayanan perjanjian yang mudah dan efisien secara online. </p>','<p>Jadwalkan kehadiran di showroom kami untuk mendapatkan test kendaraan idaman anda gratis.. </p>','<p>Temukan mobil impian mu dengan harga yang relatif murah dengan kualitas tinggi dan mewah.   </p>',1,1,'Nusantara Group','Nusantara Group','Nusantara Group','2016-12-24 17:00:00',1,'2017-03-31 23:16:39');
 /*!40000 ALTER TABLE `static_page` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1152,7 +1157,7 @@ CREATE TABLE `subscribe` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1161,7 +1166,7 @@ CREATE TABLE `subscribe` (
 
 LOCK TABLES `subscribe` WRITE;
 /*!40000 ALTER TABLE `subscribe` DISABLE KEYS */;
-INSERT INTO `subscribe` VALUES (1,'kiki@gmail.com','2016-12-25 10:03:17','2016-12-25 10:03:17'),(2,'rndra68@gmail.com','2016-12-25 10:03:43','2016-12-25 10:03:43'),(3,'user@gmail.com','2016-12-25 10:07:29','2016-12-25 10:07:29'),(4,'sheqbo@gmail.com','2016-12-25 21:52:01','2016-12-25 21:52:01'),(5,'rndra68@gmail.com','2016-12-25 21:53:15','2016-12-25 21:53:15'),(6,'kiki@gmail.com','2017-01-11 23:29:19','2017-01-11 23:29:19'),(7,'kiki@gmail.com','2017-01-11 23:29:31','2017-01-11 23:29:31'),(8,'user@gmail.com','2017-01-17 08:40:43','2017-01-17 08:40:43'),(9,'user@gmail.com','2017-01-17 09:10:33','2017-01-17 09:10:33'),(10,'user@gmail.com','2017-01-17 09:31:56','2017-01-17 09:31:56'),(11,'kiki@gmail.com','2017-01-24 22:46:15','2017-01-24 22:46:15'),(12,'sheqbo@gmail.com','2017-01-28 03:53:29','2017-01-28 03:53:29');
+INSERT INTO `subscribe` VALUES (1,'kiki@gmail.com','2016-12-25 10:03:17','2016-12-25 10:03:17'),(2,'rndra68@gmail.com','2016-12-25 10:03:43','2016-12-25 10:03:43'),(3,'user@gmail.com','2016-12-25 10:07:29','2016-12-25 10:07:29'),(4,'sheqbo@gmail.com','2016-12-25 21:52:01','2016-12-25 21:52:01'),(5,'rndra68@gmail.com','2016-12-25 21:53:15','2016-12-25 21:53:15'),(6,'kiki@gmail.com','2017-01-11 23:29:19','2017-01-11 23:29:19'),(7,'kiki@gmail.com','2017-01-11 23:29:31','2017-01-11 23:29:31'),(8,'user@gmail.com','2017-01-17 08:40:43','2017-01-17 08:40:43'),(9,'user@gmail.com','2017-01-17 09:10:33','2017-01-17 09:10:33'),(10,'user@gmail.com','2017-01-17 09:31:56','2017-01-17 09:31:56'),(11,'kiki@gmail.com','2017-01-24 22:46:15','2017-01-24 22:46:15'),(12,'sheqbo@gmail.com','2017-01-28 03:53:29','2017-01-28 03:53:29'),(13,'kiki@gmail.com','2017-03-31 22:56:54','2017-03-31 22:56:54');
 /*!40000 ALTER TABLE `subscribe` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1193,7 +1198,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'kiki','kiki@gmail.com','$2y$10$gkuA4h3SxdqtRK/mXpFNtO8zV37cD0AMLEsvfc8wyyS34Rvg/hW4K','iU5p4OuVxhO6MzkjmLRekL03OKc47IvB2GWMH8ugMvjygjXmdiip0lchLtkz',1,1,'2017-02-13 06:28:39','2017-03-05 09:48:10');
+INSERT INTO `users` VALUES (1,'kiki','kiki@gmail.com','$2y$10$gkuA4h3SxdqtRK/mXpFNtO8zV37cD0AMLEsvfc8wyyS34Rvg/hW4K','MvcW7AqLWI5qBOR9eAWSlK0VvZ0larlXS9itDFxkt7KnR2lXkRaU8vifUNed',1,1,'2017-02-13 06:28:39','2017-03-05 09:48:10');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1239,4 +1244,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-26 12:54:32
+-- Dump completed on 2017-04-02 23:13:23
