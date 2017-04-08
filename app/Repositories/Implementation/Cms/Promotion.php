@@ -279,16 +279,6 @@ class Promotion extends BaseImplementation implements PromotionInterface
     }
 
     /**
-     * Check need edit Mode or No
-     * @param $data
-     * @return bool
-     */
-    protected function isEditMode($data)
-    {
-        return isset($data['id']) && !empty($data['id']) ? true : false;
-    }
-
-    /**
      * Edit Data Categori Promotion
      * @param $data
      * @return bool
@@ -524,6 +514,26 @@ class Promotion extends BaseImplementation implements PromotionInterface
                 return $this->setResponse($this->message, false);
             }
 
+            //TODO: THUMBNAIL UPLOAD Promotion
+            if ($this->uploadThumbnailPromotion($data) != true) {
+                DB::rollBack();
+                return $this->setResponse($this->message, false);
+            }
+
+            //TODO: IMAGE PROMOTION UPLOAD
+            if ($this->uploadImagePromotionDetail($data) != true) {
+                DB::rollBack();
+                return $this->setResponse($this->message, false);
+            }
+
+            //TODO: IMAGE SLIDER UPLOAD
+            if (!$this->isEditMode($data)) {
+                if ($this->uploadImageGallery($data) != true) {
+                    DB::rollBack();
+                    return $this->setResponse($this->message, false);
+                }
+            }
+
             DB::commit();
             return $this->setResponse(trans('message.cms_upload_image_success'), true);
         } catch (\Exception $e) {
@@ -647,6 +657,403 @@ class Promotion extends BaseImplementation implements PromotionInterface
             $this->message = $e->getMessage();
             return false;
         }
+    }
+
+    /**
+    * Store Promotion Images
+    * @param $data
+    */
+
+    protected function storePromotionImages($data)
+    {
+        try {
+
+            $store                          = $this->promotionImages;
+
+            if (!$this->isEditMode($data))
+            {
+                $store->banner_image     = $this->uniqueIdImagePrefix . '_' .$data['banner_image']->getClientOriginalName();
+                $store->interior_image   = $this->uniqueIdImagePrefix . '_' .$data['interior_image']->getClientOriginalName();
+                $store->exterior_image   = $this->uniqueIdImagePrefix . '_' .$data['exterior_image']->getClientOriginalName();
+                $store->safety_image     = $this->uniqueIdImagePrefix . '_' .$data['safety_image']->getClientOriginalName();
+                $store->accesories_image = $this->uniqueIdImagePrefix . '_' .$data['accesories_image']->getClientOriginalName();
+                $store->promotion_id     = $this->lastInsertId;
+                $store->created_at       = $this->mysqlDateTimeFormat();
+                $store->updated_at       = $this->mysqlDateTimeFormat();
+
+            } else{
+
+                if (!empty($data['banner_image'])) {
+                    $store->banner_image       = $this->uniqueIdImagePrefix . '_' .$data['banner_image']->getClientOriginalName();
+                }
+
+                if (!empty($data['interior_image'])) {
+                    $store->interior_image       = $this->uniqueIdImagePrefix . '_' .$data['interior_image']->getClientOriginalName();
+                }
+
+                if (!empty($data['exterior_image'])) {
+                    $store->exterior_image       = $this->uniqueIdImagePrefix . '_' .$data['exterior_image']->getClientOriginalName();
+                }
+
+                if (!empty($data['safety_image'])) {
+                    $store->safety_image       = $this->uniqueIdImagePrefix . '_' .$data['safety_image']->getClientOriginalName();
+                }
+
+                if (!empty($data['accesories_image'])) {
+                    $store->accesories_image       = $this->uniqueIdImagePrefix . '_' .$data['accesories_image']->getClientOriginalName();
+                }
+            }
+
+            if($save = $store->save() != true) {
+                $this->message = trans('message.cms_upload_image_failed');
+                return false;
+            }
+
+            return true;
+
+        } catch (\Exception $e) {
+            $this->message = $e->getMessage();
+            return false;
+        }
+    }
+
+    /**
+     * Image Detail Promotion Uploader
+     * @param $data
+     */
+
+    protected function uploadImagePromotionDetail($data)
+    {
+        try {
+
+            if (!$this->isEditMode($data)) {
+
+                if ( !$this->imagePromotionBannerUploader($data)) {
+                    return false;
+                }
+
+                if ( !$this->imagePromotionInteriorUploader($data)) {
+                    return false;
+                }
+
+                if ( !$this->imagePromotionExteriorUploader($data)) {
+                    return false;
+                }
+
+                if ( !$this->imagePromotionSafetyUploader($data)) {
+                    return false;
+                }
+
+                if ( !$this->imagePromotionAccesoriesUploader($data)) {
+                    return false;
+                }
+
+            } else {
+                //TODO: Edit Mode
+                if (!empty($data['banner_image'])) {
+                    if (!$this->imagePromotionBannerUploader($data)) {
+                        return false;
+                    }
+                }
+
+                 //TODO: Edit Mode
+                if (!empty($data['interior_image'])) {
+                    if (!$this->imagePromotionInteriorUploader($data)) {
+                        return false;
+                    }
+                }
+
+                 //TODO: Edit Mode
+                if (!empty($data['exterior_image'])) {
+                    if (!$this->imagePromotionExteriorUploader($data)) {
+                        return false;
+                    }
+                }
+
+                 //TODO: Edit Mode
+                if (!empty($data['safety_image'])) {
+                    if (!$this->imagePromotionSafetyUploader($data)) {
+                        return false;
+                    }
+                }
+
+                 //TODO: Edit Mode
+                if (!empty($data['accesories_image'])) {
+                    if (!$this->imagePromotionAccesoriesUploader($data)) {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+
+        } catch (\Exception $e) {
+            $this->message = $e->getMessage();
+            return false;
+        }
+    }
+
+    /**
+     * Detail Banner Image Promotion Uploader
+     * @param $file
+     * @return bool
+     */
+    protected function imagePromotionBannerUploader($data)
+    {
+        if ($data['banner_image']->isValid()) {
+
+            $filename = $this->uniqueIdImagePrefix . '_' .$data['banner_image']->getClientOriginalName();
+
+            if (! $data['banner_image']->move('./' . PROMOTION_IMAGES_DIRECTORY, $filename)) {
+                $this->message = trans('message.cms_upload_thumbnail_failed');
+                return false;
+            }
+
+            return true;
+
+        } else {
+            $this->message = $data['banner_image']->getErrorMessage();
+            return false;
+        }
+    }
+
+    /**
+     * Detail Interior Image Promotion Uploader
+     * @param $file
+     * @return bool
+     */
+    protected function imagePromotionInteriorUploader($data)
+    {
+        if ($data['interior_image']->isValid()) {
+
+            $filename = $this->uniqueIdImagePrefix . '_' .$data['interior_image']->getClientOriginalName();
+
+            if (! $data['interior_image']->move('./' . PROMOTION_IMAGES_DIRECTORY, $filename)) {
+                $this->message = trans('message.cms_upload_thumbnail_failed');
+                return false;
+            }
+
+            return true;
+
+        } else {
+            $this->message = $data['interior_image']->getErrorMessage();
+            return false;
+        }
+    }
+
+    /**
+     * Detail Exterior Image Promotion Uploader
+     * @param $file
+     * @return bool
+     */
+    protected function imagePromotionExteriorUploader($data)
+    {
+        if ($data['exterior_image']->isValid()) {
+
+            $filename = $this->uniqueIdImagePrefix . '_' .$data['exterior_image']->getClientOriginalName();
+
+            if (! $data['exterior_image']->move('./' . PROMOTION_IMAGES_DIRECTORY, $filename)) {
+                $this->message = trans('message.cms_upload_thumbnail_failed');
+                return false;
+            }
+
+            return true;
+
+        } else {
+            $this->message = $data['exterior_image']->getErrorMessage();
+            return false;
+        }
+    }
+
+    /**
+     * Detail Safety Image Promotion Uploader
+     * @param $file
+     * @return bool
+     */
+    protected function imagePromotionSafetyUploader($data)
+    {
+        if ($data['safety_image']->isValid()) {
+
+            $filename = $this->uniqueIdImagePrefix . '_' .$data['safety_image']->getClientOriginalName();
+
+            if (! $data['safety_image']->move('./' . PROMOTION_IMAGES_DIRECTORY, $filename)) {
+                $this->message = trans('message.cms_upload_thumbnail_failed');
+                return false;
+            }
+
+            return true;
+
+        } else {
+            $this->message = $data['safety_image']->getErrorMessage();
+            return false;
+        }
+    }
+
+    /**
+     * Detail Accesories Image Promotion Uploader
+     * @param $file
+     * @return bool
+     */
+    protected function imagePromotionAccesoriesUploader($data)
+    {
+        if ($data['accesories_image']->isValid()) {
+
+            $filename = $this->uniqueIdImagePrefix . '_' .$data['accesories_image']->getClientOriginalName();
+
+            if (! $data['accesories_image']->move('./' . PROMOTION_IMAGES_DIRECTORY, $filename)) {
+                $this->message = trans('message.cms_upload_thumbnail_failed');
+                return false;
+            }
+
+            return true;
+
+        } else {
+            $this->message = $data['accesories_image']->getErrorMessage();
+            return false;
+        }
+    }
+
+    /**
+     * Image Gallery Uploader
+     * @param $data
+     */
+    protected function uploadImageGallery($data)
+    {
+        try {
+
+            foreach ($data['filename'] as $key => $item) {
+
+                if (!$this->detailImageGalleryUploader($item))
+                    return false;
+            }
+
+            return true;
+
+        } catch (\Exception $e) {
+            $this->message = $e->getMessage();
+            return false;
+        }
+    }
+
+    /**
+     * Detail Image Gallery Uploader
+     * @param $file
+     * @return bool
+     */
+    protected function detailImageGalleryUploader($file)
+    {
+        if ($file->isValid()) {
+
+            $filename = $this->uniqueIdImagePrefix . '_' .$file->getClientOriginalName();
+
+            if (! $file->move('./' . PROMOTION_IMAGES_GALLERY_DIRECTORY, $filename)) {
+                $this->message = trans('message.cms_upload_image_failed');
+                return false;
+            }
+
+            return true;
+
+        } else {
+            $this->message = $file->getErrorMessage();
+            return false;
+        }
+    }
+
+    /**
+     * Storing Promotion Translation to database
+     * @param $data
+     * @param $key
+     * @return bool
+     */
+    protected function storePromotionTranslation($data)
+    {
+        if ($this->isEditMode($data)) {
+            $this->removePromotionTranslation($data['id']);
+        }
+
+        $finalData = $this->promotionTransformation->getDataForPromotionTranslation($data, $this->lastInsertId, $this->isEditMode($data));
+        return $this->promotionTrans->insert($finalData);
+    }
+
+    /**
+     * Remove Promotion Translation by ID
+     * @param $mainBannerId
+     * @return bool
+     */
+    protected function removePromotionTranslation($dataId)
+    {
+        if (empty($dataId))
+            return false;
+
+        return $this->promotionTrans->where('promotion_id', $dataId)->delete();
+    }
+
+    
+
+    /**
+     * Upload Thumbnail Promotion
+     * @param $data
+     * @return bool
+     */
+    protected function uploadThumbnailPromotion($data)
+    {
+        try {
+            if (!$this->isEditMode($data)) {
+
+                if ( !$this->thumbnailPromotionUploader($data)) {
+                    return false;
+                }
+
+            } else {
+                //TODO: Edit Mode
+                if (!empty($data['thumbnail'])) {
+                    if (!$this->thumbnailPromotionUploader($data)) {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+
+        } catch (\Exception $e) {
+            $this->message = $e->getMessage();
+            return false;
+        }
+
+    }
+
+    /**
+     * Thumbnail Promotion Uploader
+     * @param $data
+     * @return bool
+     */
+    protected function thumbnailPromotionUploader($data)
+    {
+        if ($data['thumbnail']->isValid()) {
+
+            $filename = $this->uniqueIdImagePrefix . '_' .$data['thumbnail']->getClientOriginalName();
+
+            if (! $data['thumbnail']->move('./' . PROMOTION_IMAGES_DIRECTORY, $filename)) {
+                $this->message = trans('message.cms_upload_thumbnail_failed');
+                return false;
+            }
+
+            return true;
+
+        } else {
+            $this->message = $data['thumbnail']->getErrorMessage();
+            return false;
+        }
+    }
+
+    /**
+     * Check need edit Mode or No
+     * @param $data
+     * @return bool
+     */
+    protected function isEditMode($data)
+    {
+        return isset($data['id']) && !empty($data['id']) ? true : false;
     }
 
 }

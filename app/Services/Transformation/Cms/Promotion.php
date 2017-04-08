@@ -97,4 +97,52 @@ class Promotion
         return $dataTransform;
     }
 
+    /**
+     * Get Promotion Transformation For Insert
+     * @param $data
+     * @param $lastInsertId
+     * @return array|void
+     */
+    public function getDataForPromotionTranslation($data, $lastInsertId, $isEditMode)
+    {
+        if(!is_array($data) || empty($data))
+            return array();
+
+        return $this->setDataForPromotionTranslation($data, $lastInsertId, $isEditMode);
+    }
+
+    /**
+     * Set Promotion Transformation For Insert
+     * @param $data
+     * @param $lastInsertId
+     * @return array|void
+     */
+    protected function setDataForPromotionTranslation($data, $lastInsertId, $isEditMode)
+    {
+        try {
+
+            $dataTransform = [
+
+                'introduction'          => isset($data['introduction']) ? $data['introduction'] : '',
+                'side_description'      => isset($data['side_description']) ? $data['side_description'] : '',
+                'description'           => isset($data['description']) ? $data['description'] : '',
+                'interior_description'  => isset($data['interior_description']) ? $data['interior_description'] : '',
+                'exterior_description'  => isset($data['exterior_description']) ? $data['exterior_description'] : '',
+                'safety_description'    => isset($data['safety_description']) ? $data['safety_description'] : '',
+                'accesories_description'    => isset($data['accesories_description']) ? $data['accesories_description'] : '',
+                'promotion_id'          => $lastInsertId,
+                'meta_title'            => isset($data['meta_title']) ? $data['meta_title'] : '',
+                'meta_keyword'          => isset($data['meta_keyword']) ? $data['meta_keyword'] : '',
+                'meta_description'      => isset($data['meta_description']) ? $data['meta_description'] : '',
+                'created_at'            => mysqlDateTimeFormat(),
+                'updated_at'            => mysqlDateTimeFormat(),
+            ];
+
+            return $dataTransform;
+            
+        }catch (\Exception $e) {
+            return false;
+        }
+    }
+
 }

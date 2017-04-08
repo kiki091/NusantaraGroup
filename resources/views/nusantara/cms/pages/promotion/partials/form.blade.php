@@ -1,4 +1,4 @@
-<form action="#" method="POST" id="PromotionForm" enctype="multipart/form-data" files="true" @submit.prevent>
+<form action="{{ route('PromotionStoreData') }}" method="POST" id="PromotionForm" enctype="multipart/form-data" files="true" @submit.prevent>
 	<div class="main__content__form__layer" id="toggle-form-detail-content" style="display: none; margin-top: 5%;">
 		<div class="create__form__wrapper">
 			<div class="form--top flex-between">
@@ -393,7 +393,7 @@
 						<div class="new__form__btn">
 							<input type="hidden" id="_token" name="_token" value="{{ csrf_token() }}">
 							<input v-model="promotion.id" type="hidden" name="id">
-							<button class="btn__form" type="submit" @click="storeDataPromotion">Save</button>
+							<button class="btn__form" type="submit" @click="storeData">Save</button>
 						</div>
 					</div>
 				</div>

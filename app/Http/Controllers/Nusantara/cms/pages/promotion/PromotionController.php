@@ -73,7 +73,7 @@ class PromotionController extends CmsController
 
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), $this->validationStore($request));
+        /*$validator = Validator::make($request->all(), $this->validationStore($request));
 
         if ($validator->fails()) {
             //TODO: case fail
@@ -82,7 +82,9 @@ class PromotionController extends CmsController
         } else {
             //TODO: case pass
             return $this->promotion->storePromotion($request->except(['_token', 'thumbnail_url']));
-        }
+        }*/
+
+        return $this->promotion->storePromotion($request->except(['_token', 'thumbnail_url']));
     }
 
     /**
