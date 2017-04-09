@@ -8,6 +8,7 @@ use App\Http\Controllers\CmsController;
 use App\Services\Api\Response as ResponseService;
 use App\Services\Bridge\Auth\User as UserServices;
 use App\Services\Bridge\Cms\Promotion as PromotionServices;
+use App\Services\Bridge\Cms\PromotionCategory as PromotionCategoryServices;
 
 use Auth;
 use Session;
@@ -19,14 +20,16 @@ class PromotionController extends CmsController
 	protected $user;
 	protected $response;
 	protected $promotion;
+    protected $promotionCategory;
     protected $validationMessage = '';
 
 
-	public function __construct(PromotionServices $promotion, UserServices $user, ResponseService $response)
+	public function __construct(PromotionCategoryServices $promotionCategory, PromotionServices $promotion, UserServices $user, ResponseService $response)
     {
         $this->user = $user;
         $this->response = $response;
         $this->promotion = $promotion;
+        $this->promotionCategory = $promotionCategory;
     }
 
     /**
@@ -62,7 +65,7 @@ class PromotionController extends CmsController
         $property_location_id = $location['property_id'];
 
     	$data['promotion'] = $this->promotion->getData();
-        $data['category_promotion'] = $this->promotion->getCategoryPromotion();
+        $data['category_promotion'] = $this->promotionCategory->getCategoryPromotion();
 
     	return $this->response->setResponse(trans('success_get_data'), true, $data);
     }
@@ -85,6 +88,16 @@ class PromotionController extends CmsController
         }*/
 
         return $this->promotion->storePromotion($request->except(['_token', 'thumbnail_url']));
+    }
+
+    /**
+     * Edit Promotion
+     * @param $request
+     */
+
+    public function edit(Request $request)
+    {
+        return $this->promotion->edit($request->except(['_token']));
     }
 
     /**

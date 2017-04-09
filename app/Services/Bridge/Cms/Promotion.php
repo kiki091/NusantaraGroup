@@ -24,82 +24,24 @@ class Promotion {
     }
 
     /**
-     * Get Data Category Promotion
-     * @param $params
-     * @return mixed
-     */
-    public function getCategoryPromotion()
-    {
-        return $this->promotion->getCategoryPromotion();
-    }
-
-    /**
-     * Store Data Categori Promotion
-     * @param $params
-     * @return mixed
-     */
-    public function storeCategori($params)
-    {
-        return $this->promotion->storeCategori($params);
-    }
-
-    /**
-     * Edit Data Categori Promotion
-     * @param $params
-     * @return mixed
-     */
-    
-    public function editCategori($params)
-    {
-        return $this->promotion->editCategori($params);
-    }
-
-    
-    /**
-     * Change status Categori Promotion
-     * @param $params
-     * @return mixed
-     */
-    
-    public function changeStatusCategori($params)
-    {
-        return $this->promotion->changeStatusCategori($params);
-    }
-
-    
-
-    /**
-     * Delete Data Categori Promotion
-     * @param $params
-     * @return mixed
-     */
-    
-    public function deleteCategori($params)
-    {
-        return $this->promotion->deleteCategori($params);
-    }
-
-    /**
-     * Ordering Data Categori Promotion
-     * @param $params
-     * @return mixed
-     */
-    
-    public function orderCategori($params)
-    {
-        return $this->promotion->orderCategori($params);
-    }
-
-    
-
-    /**
      * Store Promotion Detail
      * @param $params
      * @return mixed
      */
     
-    public function storePromotion($params)
+    public function storePromotion($params = [])
     {
         return $this->promotion->storePromotion($params);
+    }
+
+    /**
+     * Edit Data Promotion Detail
+     * @param $params
+     * @return mixed
+     */
+    
+    public function edit($params = [])
+    {
+        return $this->promotion->edit($params);
     }
 }

@@ -181,6 +181,7 @@ Route::group(['middleware' => ['web']], function ()
 			Route::get('/', 'Nusantara\cms\pages\promotion\PromotionController@index')->name('Promotion');
 			Route::get('data', 'Nusantara\cms\pages\promotion\PromotionController@getData')->name('PromotionGetData');
 			Route::post('store', 'Nusantara\cms\pages\promotion\PromotionController@store')->name('PromotionStoreData');
+			Route::post('edit', 'Nusantara\cms\pages\promotion\PromotionController@edit')->name('PromotionEditData');
 
 			// Banner Promotion
 

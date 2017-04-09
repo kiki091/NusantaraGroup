@@ -7,7 +7,7 @@ use App\Custom\Facades\DataHelper;
 use App\Http\Controllers\CmsController;
 use App\Services\Api\Response as ResponseService;
 use App\Services\Bridge\Auth\User as UserServices;
-use App\Services\Bridge\Cms\Promotion as PromotionServices;
+use App\Services\Bridge\Cms\PromotionCategory as PromotionCategoryServices;
 
 use Auth;
 use Session;
@@ -18,15 +18,15 @@ class PromotionCategoriController extends CmsController
 {
 	protected $user;
 	protected $response;
-	protected $promotion;
+	protected $promotionCategory;
     protected $validationMessage = '';
 
 
-	public function __construct(PromotionServices $promotion, UserServices $user, ResponseService $response)
+	public function __construct(PromotionCategoryServices $promotionCategory, UserServices $user, ResponseService $response)
     {
         $this->user = $user;
         $this->response = $response;
-        $this->promotion = $promotion;
+        $this->promotionCategory = $promotionCategory;
     }
 
     /**
@@ -60,7 +60,7 @@ class PromotionCategoriController extends CmsController
     {
         $location = $this->getUserLocation('id');
         $property_location_id = $location['property_id'];
-        $data['category_promotion'] = $this->promotion->getCategoryPromotion();
+        $data['category_promotion'] = $this->promotionCategory->getCategoryPromotion();
 
     	return $this->response->setResponse(trans('success_get_data'), true, $data);
     }
@@ -79,7 +79,7 @@ class PromotionCategoriController extends CmsController
 
         } else {
             //TODO: case pass
-            return $this->promotion->storeCategori($request->except(['_token', 'thumbnail_category_url']));
+            return $this->promotionCategory->storeCategori($request->except(['_token', 'thumbnail_category_url']));
         }
     }
 
@@ -88,7 +88,7 @@ class PromotionCategoriController extends CmsController
      */
     public function editCategori(Request $request)
     {
-        return $this->promotion->editCategori($request->except(['_token']));
+        return $this->promotionCategory->editCategori($request->except(['_token']));
     }
 
     /**
@@ -98,7 +98,7 @@ class PromotionCategoriController extends CmsController
      */
     public function changeStatusCategori(Request $request)
     {
-        return $this->promotion->changeStatusCategori($request->except(['_token']));
+        return $this->promotionCategory->changeStatusCategori($request->except(['_token']));
         
     }
 
@@ -109,7 +109,7 @@ class PromotionCategoriController extends CmsController
      */
     public function deleteCategori(Request $request)
     {
-        return $this->promotion->deleteCategori($request->except(['_token']));
+        return $this->promotionCategory->deleteCategori($request->except(['_token']));
         
     }
 
@@ -121,7 +121,7 @@ class PromotionCategoriController extends CmsController
 
     public function orderCategori(Request $request)
     {
-        return $this->promotion->orderCategori($request->input('list_order'));
+        return $this->promotionCategory->orderCategori($request->input('list_order'));
     }
 
     /**

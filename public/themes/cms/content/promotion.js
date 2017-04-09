@@ -191,6 +191,42 @@ function crudPromotions() {
                 
             },
 
+            editData: function (id) {
+                this.edit = true
+                var payload = []
+                payload['id'] = id
+
+                var form = new FormData();
+
+                for (var key in payload) {
+                    form.append(key, payload[key])
+                }
+
+                this.resetForm()
+
+                this.$http.post('/promotions/edit', form).then(function(response) {
+                    response = response.data
+                    if (response.status) {
+                        this.promotion = response.data;
+                        this.thumbnail = response.data.thumbnail_url
+                        this.banner_image = response.data.banner_image_url
+                        this.interior_image = response.data.interior_image_url
+                        this.exterior_image = response.data.exterior_image_url
+                        this.accesories_image = response.data.accesories_image_url
+                        this.safety_image = response.data.safety_image_url
+
+                        this.form_add_title = "Edit Detail Promotion"
+                        $('#toggle-form-detail-content').slideDown(400)
+
+                        destroyInstanceCkEditor()
+                        replaceToCkEditor()
+
+                    } else {
+                        pushNotifV3(response.status,response.message)
+                    }
+                })
+            },
+
             fetchData: function(){
                 this.$http.get('/promotions/data', []).then(function (response) {
                     if(response.data.status == true) {
