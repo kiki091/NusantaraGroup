@@ -44,4 +44,48 @@ class Promotion {
     {
         return $this->promotion->edit($params);
     }
+
+    /**
+     * Edit Image Promotion Gallery
+     * @param $params
+     * @return mixed
+     */
+    
+    public function editImageSlider($params = [])
+    {
+        return $this->promotion->editImageSlider($params);
+    }
+
+    /**
+     * Change Status Promotion
+     * @param $params
+     * @return mixed
+     */
+    
+    public function changeStatus($params = [])
+    {
+        return $this->promotion->changeStatus($params);
+    }
+
+    /**
+     * Delete Data Promotion
+     * @param $params
+     * @return mixed
+     */
+    
+    public function delete($params = [])
+    {
+        return $this->promotion->delete($params);
+    }
+
+    /**
+     * Delete Image Promotion Gallery
+     * @param $params
+     * @return mixed
+     */
+    
+    public function deleteImageSlider($params = [])
+    {
+        return $this->promotion->deleteImageSlider($params);
+    }
 }

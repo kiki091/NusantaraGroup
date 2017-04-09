@@ -34,6 +34,8 @@ function crudPromotions() {
 
             thumbnail: '',
             filename : {0: '', 1: '', 2: '', 3: '', 4: '', 5: '', 6: '', 7: ''},
+            filename_edit : {0: '', 1: '', 2: '', 3: '', 4: '', 5: '', 6: '', 7: ''},
+            gallery_edit : {0: '', 1: '', 2: '', 3: '', 4: '', 5: '', 6: '', 7: ''},
             banner_image : '',
             interior_image : '',
             exterior_image : '',
@@ -91,6 +93,31 @@ function crudPromotions() {
             removeImageWrapper: function(item, index) {
                 this.removeImageSlider('filename', index)
                 this.default_total_detail_image.$remove(item);
+            },
+
+            removeImageSliderFromServer: function (id, index) {
+
+                var payload = []
+                payload['id'] = id
+
+                var form = new FormData();
+
+                for (var key in payload) {
+                    form.append(key, payload[key])
+                }
+
+                var domain = '/promotions/delete-image-slider';
+                this.$http.post(domain, form).then(function(response) {
+                    response = response.data
+
+                    if (response.status) {
+                        this.total_detail_image.$remove(index)
+                        
+                        pushNotifV3(response.status, response.message)
+                    }
+
+                    pushNotifV3(response.status, response.message)
+                })
             },
 
             addMoreImageSlider: function() {
@@ -227,6 +254,131 @@ function crudPromotions() {
                 })
             },
 
+            editImageSlider: function (id) {
+                this.edit   = true
+
+                var payload = []
+                payload['id'] = id
+
+                var form = new FormData();
+
+                for (var key in payload) {
+                    form.append(key, payload[key])
+                }
+
+                this.resetForm()
+
+                var domain = '/promotions/edit';
+                this.$http.post(domain, form).then(function(response) {
+                    response = response.data
+                    if (response.status) {
+                        this.id = response.data.id
+                        this.filename_edit = response.data.filename_url
+                        this.total_detail_image = response.data.total_detail_image
+                        this.gallery_edit = response.data.gallery
+
+                        this.form_add_title = "Edit Image Slider Promotion"
+                        this.default_total_detail_image = [];
+                        $('#toggle-form-photo-uploader-content').slideDown(400)
+
+                    } else {
+                        pushNotifV3(response.status, response.message)
+                    }
+                })
+            },
+
+            postEditImageSlider: function(event) {
+                var vm = this;
+                var optForm      = {
+
+                    dataType: "json",
+
+                    beforeSerialize: function(form, options) {
+                        for (instance in CKEDITOR.instances)
+                            CKEDITOR.instances[instance].updateElement();
+                    },
+                    beforeSend: function(){
+                        showLoadingData(true)
+                        vm.clearErorrMessage()
+                    },
+                    success: function(response){
+                        if (response.status == false) {
+                            if(response.is_error_form_validation) {
+
+                                var message_validation = ''
+                                $.each(response.message, function(key, value){
+                                    $('input[id="' + key.replace(".", "_") + '"]').focus();
+                                    $("#form--error--message--" + key.replace(".", "_")).text(value)
+                                    message_validation += '<li class="notif__content__li"><span class="text" >' + value + '</span></li>'
+                                });
+                                pushNotifMessage(response.status,response.message, message_validation);
+
+                            } else {
+                                pushNotifV3(response.status, response.message);
+                            }
+                        } else {
+                            vm.fetchData()
+                            vm.resetForm()
+                            pushNotifV3(response.status, response.message);
+                            $('.btn__add__cancel').click();
+                        }
+                    },
+                    complete: function(response){
+                        hideLoading()
+                    }
+
+                };
+
+                $("#PromotionFormEditImageSliderForm").ajaxForm(optForm);
+                $("#PromotionFormEditImageSliderForm").submit();
+            },
+
+            changeStatus: function(id) {
+                
+                var payload = []
+                payload['id'] = id
+
+                var form = new FormData();
+
+                for (var key in payload) {
+                    form.append(key, payload[key])
+                }
+
+                var domain = '/promotions/change-status';
+                this.$http.post(domain, form).then(function(response) {
+                    response = response.data
+                    if (response.status == false) {
+                        this.fetchData()
+                        pushNotifV3(response.status,response.message);
+                    }
+                    else{
+                        pushNotifV3(response.status,response.message);
+                    }
+                })
+            },
+
+            deleteData: function(id) {
+                
+                var domain = '/promotions/delete';
+                var form = new FormData();
+
+                form.append('id', id);
+                
+                this.$http.post(domain, form).then(function (response) {
+                    response = response.data
+                    if (response.status === true)
+                    {
+                        this.delete_payload.id = '';
+                        this.fetchData()
+                    }
+                    this.showModal = false
+                    setTimeout(function() {
+                        $('.popup__mask__alert').removeClass('is-visible');
+                    }, 300);
+                    pushNotifV3(response.status, response.message);
+                });
+            },
+
             fetchData: function(){
                 this.$http.get('/promotions/data', []).then(function (response) {
                     if(response.data.status == true) {
@@ -262,8 +414,8 @@ function crudPromotions() {
                 this.safety_image = ''
                 this.accesories_image = ''
                 this.filename = {0: '', 1: '', 2: '', 3: '', 4: '', 5: '', 6: '', 7: ''};
-                this.default_total_description = [0];
-                this.total_description = [];
+                this.default_total_image = [0];
+                this.total_image = [];
 
 
                 document.getElementById("PromotionDateilForm");

@@ -182,6 +182,12 @@ Route::group(['middleware' => ['web']], function ()
 			Route::get('data', 'Nusantara\cms\pages\promotion\PromotionController@getData')->name('PromotionGetData');
 			Route::post('store', 'Nusantara\cms\pages\promotion\PromotionController@store')->name('PromotionStoreData');
 			Route::post('edit', 'Nusantara\cms\pages\promotion\PromotionController@edit')->name('PromotionEditData');
+			Route::post('change-status', 'Nusantara\cms\pages\promotion\PromotionController@changeStatus')->name('PromotionChangeStatus');
+			Route::post('delete', 'Nusantara\cms\pages\promotion\PromotionController@delete')->name('PromotionDeleteData');
+
+
+			Route::post('edit-slider', 'Nusantara\cms\pages\promotion\PromotionController@editImageSlider')->name('PromotionEditImageSlider');
+			Route::post('delete-image-slider', 'Nusantara\cms\pages\promotion\PromotionController@deleteImageSlider')->name('PromotionDeleteImageSlider');
 
 			// Banner Promotion
 

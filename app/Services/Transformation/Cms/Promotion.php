@@ -192,87 +192,12 @@ class Promotion
         $dataTransform['meta_keyword'] = isset($data['translation'][0]['meta_keyword']) ? $data['translation'][0]['meta_keyword'] : '';
         $dataTransform['meta_description'] = isset($data['translation'][0]['meta_description']) ? $data['translation'][0]['meta_description'] : '';
 
-        // $dataTransform['promotion_detail'] = $this->getDataPromotionDetailTransform($data['detail']);
-        // $dataTransform['promotion_translation'] = $this->getDataPromotionTranslationTransform($data['translation']);
-        // $dataTransform['promotion_image'] = $this->getDataPromotionImagesTransform($data['images']);
+        $dataTransform['total_detail_image'] = isset($data['gallery']) ? $this->setDefaultTotalDetailImage($data['gallery']) : [];
 
-        $dataTranform['total_detail_image'] = isset($data['gallery']) ? $this->setDefaultTotalDetailImage($data['gallery']) : [];
-
-        $dataTranform['filename_url'] = isset($data['gallery']) ? $this->setImageUrlImagesForEdit($data['gallery'], 'filename') : [];
-        $dataTranform['promotion_gallery'] = isset($data['gallery']) ? $this->populateImagesForEdit($data['gallery'], 'filename') : [];
+        $dataTransform['filename_url'] = isset($data['gallery']) ? $this->setImageUrlImagesForEdit($data['gallery'], 'filename') : [];
+        $dataTransform['gallery'] = isset($data['gallery']) ? $this->populateImagesForEdit($data['gallery'], 'filename') : [];
 
         return $dataTransform;
-    }
-
-    /*
-     * Get Single Data Promotion Translation 
-     */
-
-    protected function getDataPromotionDetailTransform($data)
-    {
-        
-        $dataTransform = array_map(function($data)
-        {
-            return [
-                'id' => isset($data['id']) ? $data['id'] : '',
-                'equipment_interior' => isset($data['equipment_interior']) ? $data['equipment_interior'] : '',
-                'equipment_exterior' => isset($data['equipment_exterior']) ? $data['equipment_exterior'] : '',
-                'information' => isset($data['information']) ? $data['information'] : '',
-                'promotion_id' => isset($data['promotion_id']) ? $data['promotion_id'] : '',
-                
-            ];
-        }, $data);
-
-        return $dataTransform;
-    }
-
-    /*
-     * Get Single Data Promotion Detail 
-     */
-
-    protected function getDataPromotionTranslationTransform($data)
-    {
-        $dataTranform = array_map(function($data)
-        {
-            return [
-                'id' => isset($data['id']) ? $data['id'] : '',
-                'introduction' => isset($data['introduction']) ? $data['introduction'] : '',
-                'side_description' => isset($data['side_description']) ? $data['side_description'] : '',
-                'description' => isset($data['description']) ? $data['description'] : '',
-                'interior_description' => isset($data['interior_description']) ? $data['interior_description'] : '',
-                'exterior_description' => isset($data['exterior_description']) ? $data['exterior_description'] : '',
-                'safety_description' => isset($data['safety_description']) ? $data['safety_description'] : '',
-                'accesories_description' => isset($data['accesories_description']) ? $data['accesories_description'] : '',
-                'meta_title' => isset($data['meta_title']) ? $data['meta_title'] : '',
-                'meta_keyword' => isset($data['meta_keyword']) ? $data['meta_keyword'] : '',
-                'meta_description' => isset($data['meta_description']) ? $data['meta_description'] : '',
-                
-            ];
-        }, $data);
-        
-        return $dataTranform;
-    }
-
-    /*
-     * Get Single Data Promotion Images 
-     */
-
-    protected function getDataPromotionImagesTransform($data)
-    {
-        $dataTranform = array_map(function($data)
-        {
-            return [
-                'id' => isset($data['id']) ? $data['id'] : '',
-                'banner_image' => isset($data['banner_image']) ? asset(PROMOTION_IMAGES_DIRECTORY.rawurlencode($data['banner_image'])) : '',
-                'interior_image' => isset($data['interior_image']) ? asset(PROMOTION_IMAGES_DIRECTORY.rawurlencode($data['interior_image'])) : '',
-                'exterior_image' => isset($data['exterior_image']) ? asset(PROMOTION_IMAGES_DIRECTORY.rawurlencode($data['exterior_image'])) : '',
-                'accesories_image' => isset($data['accesories_image']) ? asset(PROMOTION_IMAGES_DIRECTORY.rawurlencode($data['accesories_image'])) : '',
-                'safety_image' => isset($data['safety_image']) ? asset(PROMOTION_IMAGES_DIRECTORY.rawurlencode($data['safety_image'])) : '',
-                
-            ];
-        }, $data);
-        
-        return $dataTranform;
     }
 
     /**

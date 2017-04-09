@@ -76,7 +76,7 @@ class PromotionController extends CmsController
 
     public function store(Request $request)
     {
-        /*$validator = Validator::make($request->all(), $this->validationStore($request));
+        $validator = Validator::make($request->all(), $this->validationStore($request));
 
         if ($validator->fails()) {
             //TODO: case fail
@@ -84,10 +84,8 @@ class PromotionController extends CmsController
 
         } else {
             //TODO: case pass
-            return $this->promotion->storePromotion($request->except(['_token', 'thumbnail_url']));
-        }*/
-
-        return $this->promotion->storePromotion($request->except(['_token', 'thumbnail_url']));
+            return $this->promotion->storePromotion($request->except(['_token', 'thumbnail_url', 'banner_image_url', 'interior_image_url', 'exterior_image_url', 'safety_image_url', 'accesories_image_url']));
+        }
     }
 
     /**
@@ -98,6 +96,59 @@ class PromotionController extends CmsController
     public function edit(Request $request)
     {
         return $this->promotion->edit($request->except(['_token']));
+    }
+
+    /**
+     * Edit Image Slider
+     */
+
+    public function editImageSlider(Request $request)
+    {
+        
+        $validator = Validator::make($request->all(), $this->validateEditImageSlider($request));
+
+        if ($validator->fails()) {
+            //TODO: case fail
+            return $this->response->setResponseErrorFormValidation($validator->messages(), false);
+
+        } else {
+            //TODO: case pass
+            return $this->promotion->editImageSlider($request->except(['_token']));
+        }
+        
+    }
+
+    /**
+     * Change status
+     * @param Request $request
+     * @return mixed
+     */
+    public function changeStatus(Request $request)
+    {
+        return $this->promotion->changeStatus($request->except(['_token']));
+        
+    }
+
+    /**
+     * Delete Data
+     * @param Request $request
+     * @return mixed
+     */
+    public function delete(Request $request)
+    {
+        return $this->promotion->delete($request->except(['_token']));
+        
+    }
+
+    /**
+     * Delete Image Slider
+     * @param Request $request
+     * @return mixed
+     */
+    public function deleteImageSlider(Request $request)
+    {
+        return $this->promotion->deleteImageSlider($request->except(['_token']));
+        
     }
 
     /**
@@ -117,7 +168,7 @@ class PromotionController extends CmsController
             'equipment_interior'        => 'required',
             'equipment_exterior'        => 'required',
             'information'               => 'required',
-            'filename'                  => 'required|dimensions:width='.PROMOTION_GALLERY_WIDTH.',height='.PROMOTION_GALLERY_HEIGHT.'|max:'. PROMOTION_IMAGE_SIZE .'|mimes:jpg,jpeg',
+            'filename.*'                  => 'required|dimensions:width='.PROMOTION_GALLERY_WIDTH.',height='.PROMOTION_GALLERY_HEIGHT.'|max:'. PROMOTION_IMAGE_SIZE .'|mimes:jpg,jpeg',
             'banner_image'              => 'required|dimensions:width='.PROMOTION_BANNER_IMAGES_WIDTH.',height='.PROMOTION_BANNER_IMAGES_HEIGHT.'|max:'. PROMOTION_IMAGE_SIZE .'|mimes:jpg,jpeg',
             'interior_image'            => 'required|dimensions:width='.PROMOTION_IMAGES_WIDTH.',height='.PROMOTION_IMAGES_HEIGHT.'|max:'. PROMOTION_IMAGE_SIZE .'|mimes:jpg,jpeg',
             'exterior_image'            => 'required|dimensions:width='.PROMOTION_IMAGES_WIDTH.',height='.PROMOTION_IMAGES_HEIGHT.'|max:'. PROMOTION_IMAGE_SIZE .'|mimes:jpg,jpeg',
@@ -165,6 +216,20 @@ class PromotionController extends CmsController
                 unset($rules['accesories_image']);
             }
         }
+
+        return $rules;
+    }
+
+    /**
+     * Validation Store Edit Gallery Promotion
+     * @return array
+     */
+
+    private function validateEditImageSlider($request = array())
+    {
+        $rules = [
+            'filename.*'                => 'required|dimensions:width='.PROMOTION_GALLERY_WIDTH.',height='.PROMOTION_GALLERY_HEIGHT.'|max:'. PROMOTION_IMAGE_SIZE .'|mimes:jpeg,jpg',
+        ];
 
         return $rules;
     }

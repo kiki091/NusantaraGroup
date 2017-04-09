@@ -780,7 +780,7 @@ input, textarea, select {
 }
 
 #toggle-form-photo-uploader-content .form__photo__uploader {
-  max-width: 670px; }
+  max-width: auto; }
 
 .form__photo__uploader {
   background-color: #F6F8F9;

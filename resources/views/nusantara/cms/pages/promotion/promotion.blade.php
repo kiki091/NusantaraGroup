@@ -32,6 +32,7 @@
 
 				@include('nusantara.cms.pages.promotion.partials.folder')
 	        	@include('nusantara.cms.pages.promotion.partials.form')
+	        	@include('nusantara.cms.pages.promotion.partials.form-edit-image-slider')
 
 		        <div id="detail-promotion" class="main__content__layer" style="margin-top: 5%;">
 		        	<div class="content__top flex-between">
@@ -68,6 +69,10 @@
 												<input class="switch-input" id="check_1" type="checkbox" :checked="promotion.is_active == true" @change="changeStatus(promotion.id)"/>
                                             	<span class="switch-label" data-on="Active" data-off="Inactive"></span> <span class="switch-handle"></span>
 											</label>
+
+											<a href="#edit-image-slider" class="btn__action__list" @click="editImageSlider(promotion.id)">
+												<i class="ico-photo-edit flex">@include('nusantara.cms.svg-logo.ico-photo-edit')</i>
+											</a>
 
 											<a href="#delete-data" class="btn__delete" @click="showDeleteModal(promotion.id,'promotion')">
 												<i class="ico-delete">@include('nusantara.cms.svg-logo.ico-delete')</i>

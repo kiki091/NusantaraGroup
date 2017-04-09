@@ -28,4 +28,36 @@ interface Promotion
 
     public function edit($params);
 
+    /**
+     * Edit Image Promotion Gallery
+     * @param $params
+     * @return mixed
+     */
+
+    public function editImageSlider($params);
+
+    /**
+     * Change Status Promotion
+     * @param $params
+     * @return mixed
+     */
+
+    public function changeStatus($params);
+
+    /**
+     * Delete Data Promotion
+     * @param $params
+     * @return mixed
+     */
+
+    public function delete($params);
+
+    /**
+     * Delete Image Promotion Gallery
+     * @param $params
+     * @return mixed
+     */
+
+    public function deleteImageSlider($params);
+
 }

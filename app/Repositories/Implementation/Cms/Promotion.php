@@ -677,6 +677,115 @@ class Promotion extends BaseImplementation implements PromotionInterface
     }
 
     /**
+     * Edit Image Slider Promotion Gallery
+     * @param $data
+     */
+    public function editImageSlider($data)
+    {
+        try {
+
+            DB::beginTransaction();
+
+            $this->lastInsertId = $data['id'];
+
+            if ($this->storePromotionGallery($data) != true) {
+                DB::rollBack();
+                return $this->setResponse($this->message, false);
+            }
+
+            if ($this->uploadImageGallery($data) != true) {
+                DB::rollBack();
+                return $this->setResponse($this->message, false);
+            }
+
+            DB::commit();
+            return $this->setResponse(trans('message.cms_update_image_slider_success'), true);
+
+        } catch (\Exception $e) {
+            return $this->setResponse($e->getMessage(), false);
+        }
+    }
+
+    /**
+     * Delete Image Slider  Promotion Gallery
+     * @param $data
+     */
+
+    public function deleteImageSlider($data)
+    {
+        try {
+            if (!isset($data['id']) && empty($data['id']))
+                return $this->setResponse(trans('message.cms_required_id'), false);
+
+            DB::beginTransaction();
+
+            $oldData = $this->promotionGallery->find($data['id']);
+
+            if($this->promotionGallery->where('id', $data['id'])->delete()) {
+
+                unlink('./'.PROMOTION_IMAGES_GALLERY_DIRECTORY . $oldData->filename);
+
+                DB::commit();
+                
+                return $this->setResponse(trans('message.cms_success_delete_data_general'), true);
+            }
+
+            DB::rollBack();
+            return $this->setResponse(trans('message.cms_failed_delete_data_general'), false);
+
+        } catch (\Exception $e) {
+            return $this->setResponse($e->getMessage(), false);
+        }
+    }
+
+    /**
+     * Change Status Promotion Detail
+     * @param $data
+     */
+
+    public function changeStatus($data)
+    {
+        try {
+
+            if (!isset($data['id']) && empty($data['id']))
+
+                return $this->setResponse(trans('message.cms_required_id'), false);
+
+            DB::beginTransaction();
+
+            $oldData = $this->promotion->id($data['id'])->first()->toArray();
+
+            $updatedData = [
+                'is_active' => $oldData['is_active'] ? false : true,
+                'updated_at' => $this->mysqlDateTimeFormat()
+            ];
+
+            $changeStatus = $this->promotion->id($data['id'])->update($updatedData);
+
+            if($changeStatus) {
+                DB::commit();
+                return $this->setResponse(trans('message.cms_success_update_status_general'), true);
+            }
+
+            DB::rollBack();
+            return $this->setResponse(trans('message.cms_failed_update_status_general'), false);
+        } catch (\Exception $e) {
+            return $this->setResponse($e->getMessage(), false);
+        }
+    }
+
+    /**
+     * Delete Data Promotion Detail
+     * @param $params
+     * @return mixed
+     */
+    
+    public function delete($data)
+    {
+
+    }
+
+    /**
      * Check need edit Mode or No
      * @param $data
      * @return bool

@@ -160,6 +160,8 @@ function crudBranchOffice() {
 
                     if (response.status) {
                         this.total_detail_image.$remove(index)
+                        
+                        pushNotifV3(response.status, response.message)
                     }
 
                     pushNotifV3(response.status, response.message)
