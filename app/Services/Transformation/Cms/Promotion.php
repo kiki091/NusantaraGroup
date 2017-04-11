@@ -166,6 +166,7 @@ class Promotion
         //dd($data['detail']);
         $dataTransform['id'] = isset($data['id']) ? $data['id'] : '';
         $dataTransform['title'] = isset($data['title']) ? $data['title'] : '';
+        $dataTransform['thumbnail_image'] = isset($data['thumbnail']) ? $data['thumbnail'] : '';
         $dataTransform['thumbnail_url'] = isset($data['thumbnail']) ? asset(PROMOTION_IMAGES_DIRECTORY.rawurlencode($data['thumbnail'])) : '';
         $dataTransform['promotion_category_id'] = isset($data['promotion_category_id']) ? $data['promotion_category_id'] : '';
 
@@ -173,11 +174,19 @@ class Promotion
         $dataTransform['equipment_interior'] = isset($data['detail'][0]['equipment_interior']) ? $data['detail'][0]['equipment_interior'] : '';
         $dataTransform['information'] = isset($data['detail'][0]['information']) ? $data['detail'][0]['information'] : '';
 
-
+        $dataTransform['banner_images'] = isset($data['images'][0]['banner_image']) ? $data['images'][0]['banner_image'] : '';
         $dataTransform['banner_image_url'] = isset($data['images'][0]['banner_image']) ? asset(PROMOTION_IMAGES_DIRECTORY.rawurlencode($data['images'][0]['banner_image'])) : '';
+
+        $dataTransform['interior_images'] = isset($data['images'][0]['interior_image']) ? $data['images'][0]['interior_image'] : '';
         $dataTransform['interior_image_url'] = isset($data['images'][0]['interior_image']) ? asset(PROMOTION_IMAGES_DIRECTORY.rawurlencode($data['images'][0]['interior_image'])) : '';
+
+        $dataTransform['exterior_images'] = isset($data['images'][0]['exterior_image']) ? $data['images'][0]['exterior_image'] : '';
         $dataTransform['exterior_image_url'] = isset($data['images'][0]['exterior_image']) ? asset(PROMOTION_IMAGES_DIRECTORY.rawurlencode($data['images'][0]['exterior_image'])) : '';
+
+        $dataTransform['accesories_images'] = isset($data['images'][0]['accesories_image']) ? $data['images'][0]['accesories_image'] : '';
         $dataTransform['accesories_image_url'] = isset($data['images'][0]['accesories_image']) ? asset(PROMOTION_IMAGES_DIRECTORY.rawurlencode($data['images'][0]['accesories_image'])) : '';
+
+        $dataTransform['safety_images'] = isset($data['images'][0]['safety_image']) ? $data['images'][0]['safety_image'] : '';
         $dataTransform['safety_image_url'] = isset($data['images'][0]['safety_image']) ? asset(PROMOTION_IMAGES_DIRECTORY.rawurlencode($data['images'][0]['safety_image'])) : '';
 
 
@@ -195,6 +204,7 @@ class Promotion
         $dataTransform['total_detail_image'] = isset($data['gallery']) ? $this->setDefaultTotalDetailImage($data['gallery']) : [];
 
         $dataTransform['filename_url'] = isset($data['gallery']) ? $this->setImageUrlImagesForEdit($data['gallery'], 'filename') : [];
+
         $dataTransform['gallery'] = isset($data['gallery']) ? $this->populateImagesForEdit($data['gallery'], 'filename') : [];
 
         return $dataTransform;
@@ -254,6 +264,7 @@ class Promotion
      */
     protected function populateImagesForEdit($data, $index)
     {
+        
         try {
 
             $dataTransform = array_map(function($data)
@@ -263,6 +274,8 @@ class Promotion
                     'filename' => isset($data['filename']) ? $data['filename'] : '',
                 ];
             }, $data);
+
+            return $dataTransform;
 
         } catch (\Exception $e) {
             return [];

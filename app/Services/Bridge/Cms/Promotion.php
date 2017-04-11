@@ -79,6 +79,17 @@ class Promotion {
     }
 
     /**
+     * Order Data Promotion
+     * @param $params
+     * @return mixed
+     */
+    
+    public function order($params = [])
+    {
+        return $this->promotion->order($params);
+    }
+
+    /**
      * Delete Image Promotion Gallery
      * @param $params
      * @return mixed

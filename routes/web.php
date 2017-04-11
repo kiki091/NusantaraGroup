@@ -184,6 +184,7 @@ Route::group(['middleware' => ['web']], function ()
 			Route::post('edit', 'Nusantara\cms\pages\promotion\PromotionController@edit')->name('PromotionEditData');
 			Route::post('change-status', 'Nusantara\cms\pages\promotion\PromotionController@changeStatus')->name('PromotionChangeStatus');
 			Route::post('delete', 'Nusantara\cms\pages\promotion\PromotionController@delete')->name('PromotionDeleteData');
+			Route::post('order', 'Nusantara\cms\pages\promotion\PromotionController@order')->name('PromotionOrderData');
 
 
 			Route::post('edit-slider', 'Nusantara\cms\pages\promotion\PromotionController@editImageSlider')->name('PromotionEditImageSlider');

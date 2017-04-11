@@ -782,7 +782,240 @@ class Promotion extends BaseImplementation implements PromotionInterface
     
     public function delete($data)
     {
+        try {
+            if (!isset($data['id']) && empty($data['id']))
+                return $this->setResponse(trans('message.cms_required_id'), false);
 
+            DB::beginTransaction();
+
+            $params = [
+                "id" => $data['id']
+            ];
+
+            $promotionData = $this->getSinglePromotion($params);
+
+            if (!$this->removePromotionThumbnailFiles($promotionData['thumbnail_image'])) {
+                DB::rollback();
+                return $this->setResponse($this->message, false);
+            }
+
+            if (!$this->removePromotionGalleryFiles($promotionData['gallery'])) {
+                DB::rollback();
+                return $this->setResponse($this->message, false);
+            }
+
+            if (!$this->removePromotionFiles($promotionData['banner_images'],$promotionData['interior_images'],$promotionData['exterior_images'],$promotionData['accesories_images'],$promotionData['safety_images'])) {
+                DB::rollback();
+                return $this->setResponse($this->message, false);
+            }
+            
+            if (!$this->removePromotion($params)) {
+                DB::rollback();
+                return $this->setResponse($this->message, false);
+            }
+
+            DB::commit();
+            return $this->setResponse(trans('message.cms_success_delete_data_general'), true);
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            return $this->setResponse($e->getMessage(), false);
+        }
+    }
+
+    /**
+     * Get Single Promotion Detail
+     * @param $params
+     */
+    public function getSinglePromotion($params) {
+
+        $primaryData = $this->promotion($params, 'asc', 'array', true);
+
+        return $this->promotionTransformation->getSinglePromotionCmsTransform($primaryData);
+    }
+
+    /**
+     * remove Promotion Thumbnail Files
+     * @param $data
+     */
+    protected function removePromotionThumbnailFiles($data)
+    {
+        try {
+
+            $filename        = isset($data) && !empty($data) ? $data : uniqid();
+
+            if (file_exists('./' . PROMOTION_IMAGES_DIRECTORY . $filename)) {
+                unlink('./' . PROMOTION_IMAGES_DIRECTORY . $filename);
+            }
+
+            return true;
+
+        } catch (\Exception $e) {
+            $this->message = $e->getMessage();
+            return false;
+        }
+    }
+
+    /**
+     * remove Promotion Gallery Files
+     * @param $data
+     */
+    protected function removePromotionGalleryFiles($data)
+    {
+
+        try {
+
+            foreach ($data as $key => $item) {
+
+                if (!$this->deleteImageGalleryFiles($item))
+                    return false;
+            }
+
+            return true;
+
+        } catch (\Exception $e) {
+            $this->message = $e->getMessage();
+            return false;
+        }
+    }
+
+    protected function deleteImageGalleryFiles($data)
+    {
+        try {
+
+            $filename        = isset($data['filename']) && !empty($data['filename']) ? $data['filename'] : uniqid();
+
+            if (file_exists('./' . PROMOTION_IMAGES_GALLERY_DIRECTORY . $filename)) {
+                unlink('./' . PROMOTION_IMAGES_GALLERY_DIRECTORY . $filename);
+            }
+
+            return true;
+
+        } catch (\Exception $e) {
+            return [];
+        }
+    }
+
+    /**
+     * remove Promotion Detail Files
+     * @param $data
+     */
+    protected function removePromotionFiles($banner, $interior, $exterior, $accesories, $safety)
+    {
+        try {
+
+            $filename['banner_images']        = isset($data['banner_images']) && !empty($data['banner_images']) ? $data : uniqid();
+
+            if (file_exists('./' . PROMOTION_IMAGES_DIRECTORY . $filename['banner_images'])) {
+                unlink('./' . PROMOTION_IMAGES_DIRECTORY . $filename['banner_images']);
+            }
+
+            $filename['interior_images']        = isset($data['interior_images']) && !empty($data['interior_images']) ? $data : uniqid();
+
+            if (file_exists('./' . PROMOTION_IMAGES_DIRECTORY . $filename['interior_images'])) {
+                unlink('./' . PROMOTION_IMAGES_DIRECTORY . $filename['interior_images']);
+            }
+
+            $filename['exterior_images']        = isset($data['exterior_images']) && !empty($data['exterior_images']) ? $data : uniqid();
+
+            if (file_exists('./' . PROMOTION_IMAGES_DIRECTORY . $filename['exterior_images'])) {
+                unlink('./' . PROMOTION_IMAGES_DIRECTORY . $filename['exterior_images']);
+            }
+
+            $filename['accesories_images']        = isset($data['accesories_images']) && !empty($data['accesories_images']) ? $data : uniqid();
+
+            if (file_exists('./' . PROMOTION_IMAGES_DIRECTORY . $filename['accesories_images'])) {
+                unlink('./' . PROMOTION_IMAGES_DIRECTORY . $filename['accesories_images']);
+            }
+
+            $filename['safety_images']        = isset($data['safety_images']) && !empty($data['safety_images']) ? $data : uniqid();
+
+            if (file_exists('./' . PROMOTION_IMAGES_DIRECTORY . $filename['safety_images'])) {
+                unlink('./' . PROMOTION_IMAGES_DIRECTORY . $filename['safety_images']);
+            }
+
+            return true;
+
+        } catch (\Exception $e) {
+            $this->message = $e->getMessage();
+            return false;
+        }
+    }
+
+    /**
+     * Remove Promotion Detail From Database
+     * @param $data
+     * @return bool
+     */
+    protected function removePromotion($data)
+    {
+        try {
+
+            $delete = $this->promotion
+                ->id($data['id'])
+                ->forceDelete();
+
+            if ($delete)
+                return true;
+
+            $this->message = trans('message.cms_failed_delete_data_general');
+            return false;
+
+        } catch (\Exception $e) {
+            $this->message = $e->getMessage();
+            return false;
+        }
+    }
+
+    /**
+     * Order Data Promotion Detail
+     * @param $params
+     * @return mixed
+     */
+    
+    public function order($data)
+    {
+        try {
+            DB::beginTransaction();
+
+            if ($this->orderData($data)) {
+                DB::commit();
+                return $this->setResponse(trans('message.cms_success_ordering'), true);
+            }
+
+            DB::rollBack();
+            return $this->setResponse(trans('message.cms_failed_ordering'), false);
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return $this->setResponse($e->getMessage(), false);
+        }
+    }
+
+    /**
+     * Order List Data
+     * @param $data
+     */
+    protected function orderData($data)
+    {
+        try {
+            $i = 1 ;
+            foreach ($data as $key => $val) {
+                $orderValue = $i++;
+
+                $promotion           = $this->promotion->find($val);
+
+                $promotion->order  = $orderValue;
+
+                $promotion->save();
+            }
+
+            return true;
+
+        } catch (Exception $e) {
+            $this->message = $e->getMessage();
+            return false;
+        }
     }
 
     /**

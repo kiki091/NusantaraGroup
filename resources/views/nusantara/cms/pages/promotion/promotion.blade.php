@@ -20,7 +20,7 @@
 										<div class="new__form__btn">
 											<a href="#" class="btn__form__reset" @click.prevent="closeDeleteModal">Cancel</a>
 											
-                                    		<a href="#" class="btn__form__create" @click="deleteDataBanner(delete_payload.id)">Confirm</a>
+                                    		<a href="#" class="btn__form__create" @click="deleteData(delete_payload.id)">Confirm</a>
 										</div>
 									</div>
 									<button class="alert__message__close" @click.prevent="closeDeleteModal"></button>

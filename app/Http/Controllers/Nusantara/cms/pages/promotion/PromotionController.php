@@ -152,6 +152,17 @@ class PromotionController extends CmsController
     }
 
     /**
+     * Ordering 
+     * @param Request $request
+     * @return mixed
+     */
+
+    public function order(Request $request)
+    {
+        return $this->promotion->order($request->input('list_order'));
+    }
+
+    /**
      * Validation Store Promotion
      * @return array
      */

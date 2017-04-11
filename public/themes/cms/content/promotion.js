@@ -379,6 +379,45 @@ function crudPromotions() {
                 });
             },
 
+            sortable: function() {
+                var vm = this;
+
+                setTimeout(function(){
+                    Sortable.create(document.getElementById('sort'), {
+                        draggable: 'li.sort-item',
+                        ghostClass: "sort-ghost",
+                        handle: '.handle',
+                        animation: 300,
+                        onUpdate: function(evt) {
+                            vm.reorder(evt.oldIndex, evt.newIndex);
+                        }
+                    });
+
+                }, 100);
+            },
+
+            reorder: function(oldIndex, newIndex) {
+                //get id list
+                var ids = document.getElementsByClassName('sort-item'),
+                    id_order  = [].map.call(ids, function(input) {
+                        return input.getAttribute('data-id');
+                    });
+
+                var domain  = '/promotions/order';
+
+                var payload = {list_order: id_order };
+
+                this.$http.post(domain, payload).then(function(response) {
+                    response = response.data
+                    if (response.status == false) {
+                        this.fetchData()
+                        pushNotifV3(response.status, response.message);
+                    }
+                    this.fetchData()
+                    pushNotifV3(response.status, response.message);
+                });
+            },
+
             fetchData: function(){
                 this.$http.get('/promotions/data', []).then(function (response) {
                     if(response.data.status == true) {
@@ -478,6 +517,7 @@ function crudPromotions() {
         },
 
         ready: function () {
+            this.sortable()
             this.fetchData()
         }
     });

@@ -53,6 +53,14 @@ interface Promotion
     public function delete($params);
 
     /**
+     * Order Data Promotion
+     * @param $params
+     * @return mixed
+     */
+
+    public function order($params);
+
+    /**
      * Delete Image Promotion Gallery
      * @param $params
      * @return mixed
