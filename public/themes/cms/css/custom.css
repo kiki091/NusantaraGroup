@@ -1259,6 +1259,15 @@ input, textarea, select {
     background-color: #44C7F4;
 }
 
+#folder--selected {
+    cursor: default;
+    pointer-events: none;
+}
+
+#folder--selected i {
+    background-color: #44C7F4;
+}
+
 .folder--nav .folder--nav--link.folder--selected i {
     background-color: #44C7F4;
 }

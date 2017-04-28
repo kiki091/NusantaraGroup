@@ -42,3 +42,13 @@ define('COMPANY_HISTORY_IMAGES_DIRECTORY','images/db/company_history/');
 define('STATIC_PAGE_LOGO_IMAGE_DIRECTORY','images/db/main_page/logo/');
 define('STATIC_PAGE_FAVICON_IMAGE_DIRECTORY','images/db/main_page/favicon/');
 define('STATIC_PAGE_OG_IMAGE_DIRECTORY','images/db/main_page/share_image/');
+
+
+// Carier Categori Images Directory
+
+define('CARIER_IMAGES_DIRECTORY', 'images/db/carier/');
+
+
+// News Images Directory
+
+define('NEWS_IMAGES_DIRECTORY', 'images/db/news/');

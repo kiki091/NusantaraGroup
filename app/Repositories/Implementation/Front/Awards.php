@@ -28,7 +28,7 @@ class Awards extends BaseImplementation implements AwardsInterface
     public function getAwards()
     {
         $awardsData = $this->awards();
-        //dd($mainBannerData);
+        
         return $this->awardsTransformation->getAwardsFrontTransform($awardsData);
     }
 

@@ -29,6 +29,11 @@
 <script src="{{asset('themes/cms/content/promotion.js')}}"></script>
 <script src="{{asset('themes/cms/content/promotion-banner.js')}}"></script>
 <script src="{{asset('themes/cms/content/promotion-categori.js')}}"></script>
+<script src="{{asset('themes/cms/content/carier-categori.js')}}"></script>
+<script src="{{asset('themes/cms/content/carier-detail.js')}}"></script>
+<script src="{{asset('themes/cms/content/event-category.js')}}"></script>
+<script src="{{asset('themes/cms/content/event-detail.js')}}"></script>
+<script src="{{asset('themes/cms/content/news.js')}}"></script>
 
 <!-- jQuery plugins -->
 <!-- <script src="{{ asset('themes/cms/vendors/jquery/dist/jquery.min.js') }}"></script> -->

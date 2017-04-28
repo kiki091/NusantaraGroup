@@ -217,6 +217,78 @@ Route::group(['middleware' => ['web']], function ()
 
 			
 		});
+
+		// Carier 
+
+		Route::group(array('prefix' => 'carier' ), function() 
+		{
+			Route::get('/', 'Nusantara\cms\pages\carier\CarierController@index')->name('Carier');
+			Route::get('data', 'Nusantara\cms\pages\carier\CarierController@getData')->name('CarierGetData');
+			Route::post('store-banner', 'Nusantara\cms\pages\carier\CarierController@storeBanner')->name('CarierStoreBanner');
+			Route::post('edit-banner', 'Nusantara\cms\pages\carier\CarierController@editBanner')->name('CarierEditBanner');
+			Route::post('change-status-banner', 'Nusantara\cms\pages\carier\CarierController@changeStatusBanner')->name('CarierChangeStatusBanner');
+			Route::post('delete-banner', 'Nusantara\cms\pages\carier\CarierController@deleteBanner')->name('CarierDeleteBanner');
+			Route::post('order-banner', 'Nusantara\cms\pages\carier\CarierController@orderBanner')->name('CarierOrderBanner');
+
+			Route::post('store', 'Nusantara\cms\pages\carier\CarierController@store')->name('CarierStore');
+			Route::post('edit', 'Nusantara\cms\pages\carier\CarierController@edit')->name('CarierEdit');
+			Route::post('change-status', 'Nusantara\cms\pages\carier\CarierController@changeStatus')->name('CarierChangeStatus');
+			Route::post('delete', 'Nusantara\cms\pages\carier\CarierController@delete')->name('CarierDelete');
+			Route::post('order', 'Nusantara\cms\pages\carier\CarierController@order')->name('CarierOrder');
+
+			Route::group(array('prefix' => 'detail' ), function()
+			{
+				Route::get('/', 'Nusantara\cms\pages\carier\CarierDetailController@index')->name('CarierDetail');
+				Route::get('data', 'Nusantara\cms\pages\carier\CarierDetailController@getData')->name('CarierDetailGetData');
+				Route::post('store', 'Nusantara\cms\pages\carier\CarierDetailController@store')->name('CarierDetailStore');
+				Route::post('edit', 'Nusantara\cms\pages\carier\CarierDetailController@edit')->name('CarierDetailEdit');
+				Route::post('change-status', 'Nusantara\cms\pages\carier\CarierDetailController@changeStatus')->name('CarierDetailChangeStatus');
+				Route::post('delete', 'Nusantara\cms\pages\carier\CarierDetailController@delete')->name('CarierDetailDelete');
+				Route::post('order', 'Nusantara\cms\pages\carier\CarierDetailController@order')->name('CarierDetailOrder');
+			});
+		});
+
+		// Event And Services
+
+		Route::group(array('prefix' => 'event' ), function()
+		{
+			Route::group(array('prefix' => 'category' ), function()
+			{
+				Route::get('/', 'Nusantara\cms\pages\event\EventCategoriController@index')->name('EventCategori');
+				Route::get('data', 'Nusantara\cms\pages\event\EventCategoriController@getData')->name('EventCategoriGetData');
+				Route::post('store', 'Nusantara\cms\pages\event\EventCategoriController@store')->name('EventCategoriStoreData');
+				Route::post('edit', 'Nusantara\cms\pages\event\EventCategoriController@edit')->name('EventCategoriEditData');
+				Route::post('change-status', 'Nusantara\cms\pages\event\EventCategoriController@changeStatus')->name('EventCategoriChangeStatusData');
+				Route::post('order', 'Nusantara\cms\pages\event\EventCategoriController@order')->name('EventCategoriOrderData');
+			});
+
+			Route::group(array('prefix' => 'detail' ), function()
+			{
+				Route::get('/', 'Nusantara\cms\pages\event\EventDetailController@index')->name('EventDetail');
+				Route::get('data', 'Nusantara\cms\pages\event\EventDetailController@getData')->name('EventDetailGetData');
+				Route::post('store', 'Nusantara\cms\pages\event\EventDetailController@store')->name('EventDetailStoreData');
+				Route::post('edit', 'Nusantara\cms\pages\event\EventDetailController@edit')->name('EventDetailEditData');
+				Route::post('change-status', 'Nusantara\cms\pages\event\EventDetailController@changeStatus')->name('EventDetailChangeStatusData');
+				Route::post('order', 'Nusantara\cms\pages\event\EventDetailController@order')->name('EventDetailOrderData');
+				Route::post('delete', 'Nusantara\cms\pages\event\EventDetailController@delete')->name('EventDetailDeleteData');
+				Route::post('edit-image-slider', 'Nusantara\cms\pages\event\EventDetailController@editImageSlider')->name('EventDetailFormEditImageSlider');
+				Route::post('delete-image-slider', 'Nusantara\cms\pages\event\EventDetailController@deleteImageSlider')->name('EventDetailDeleteImageSlider');
+			});
+		});
+		
+
+		Route::group(array('prefix' => 'news' ), function()
+		{
+			Route::get('/', 'Nusantara\cms\pages\news\NewsController@index')->name('News');
+			Route::get('data', 'Nusantara\cms\pages\news\NewsController@getData')->name('NewsGetData');
+			Route::post('store', 'Nusantara\cms\pages\news\NewsController@store')->name('NewsStoreData');
+			Route::post('edit', 'Nusantara\cms\pages\news\NewsController@edit')->name('NewsEditData');
+			Route::post('change-status', 'Nusantara\cms\pages\news\NewsController@changeStatus')->name('NewsChangeStatusData');
+			Route::post('order', 'Nusantara\cms\pages\news\NewsController@order')->name('NewsOrderData');
+			Route::post('delete', 'Nusantara\cms\pages\news\NewsController@delete')->name('NewsDeleteData');
+			Route::post('edit-image-slider', 'Nusantara\cms\pages\news\NewsController@editImageSlider')->name('NewsFormEditImageSlider');
+			Route::post('delete-image-slider', 'Nusantara\cms\pages\news\NewsController@deleteImageSlider')->name('NewsDeleteImageSlider');
+		});
     	
     });
 });

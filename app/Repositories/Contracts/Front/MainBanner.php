@@ -11,6 +11,6 @@ interface MainBanner
      * @param $params
      * @return mixed
      */
-    public function getMainBanner();
+    public function getMainBanner($params);
 
 }

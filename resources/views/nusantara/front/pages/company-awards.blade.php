@@ -37,16 +37,16 @@
                     @foreach($awards as $office_name)
                         @foreach($office_name as $key=> $item)
                         <div class="row">
-                            <div class="col-lg-6 centered">
+                            <div class="col-lg-4 centered">
                                 <p>
-                                    <img class="img-responsive"  src="{{ $item['thumbnail'] }}" alt="{{ $item['office_name'] or '' }}">
+                                    <img class="img-responsive images-awards"  src="{{ $item['thumbnail'] }}" alt="{{ $item['office_name'] or '' }}">
                                 </p>
                             </div>
 
-                            <div class="col-lg-6">
+                            <div class="col-lg-8">
                                 
                                 <p>
-                                    <table class="table table-striped">
+                                    <table class="table table-striped table-awards">
                                         <thead>
                                             <th class="centered">{{ $item['office_name'] or '' }}</th>
                                         </thead>

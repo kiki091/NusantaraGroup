@@ -18,8 +18,8 @@ class MainBanner {
      * @param $params
      * @return mixed
      */
-    public function getMainBanner()
+    public function getMainBanner($params = [])
     {
-        return $this->MainBanner->getMainBanner();
+        return $this->MainBanner->getMainBanner($params);
     }
 }

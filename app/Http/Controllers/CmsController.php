@@ -23,6 +23,10 @@ class CmsController extends Controller
     {
         $this->user = $user;
         $this->setJavascriptVariable();
+
+        if (Auth::check() == null) {
+           return redirect()->route('login');
+        }
     }
 
     /**

@@ -26,7 +26,7 @@ class Awards
         {
             return [
                 'office_name' => isset($data['office_name']) ? $data['office_name'] : '',
-                'awards_description' => $this->setDetailTranslation($data),
+                'awards_description' => $this->setDetailTranslation($data['translation']),
 
                 'meta_title' => isset($data['meta_title']) ? $data['meta_title'] : '',
                 'meta_keyword' => isset($data['meta_keyword']) ? $data['meta_keyword'] : '',
@@ -53,7 +53,7 @@ class Awards
         try {
 
             $returnValue = [];
-            foreach ($data['translations'] as $key => $item) {
+            foreach ($data as $key => $item) {
                 $returnValue[] = $item['description'];
             }
 

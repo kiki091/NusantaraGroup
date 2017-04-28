@@ -29,11 +29,6 @@ class ServiceController extends FrontController
      * @return \Illuminate\Http\Response
      */
 
-    public function index(Request $request)
-    {
-
-    }
-
     public function category($slug)
     {
 
@@ -57,7 +52,8 @@ class ServiceController extends FrontController
         $data['landing_page'] = $this->landingPage->getlandingPage();
         $data['footer_content'] = $this->footerContent->getFooterContent();
         $data['seo'] = $this->service->getSeoService($slug);
-
+        $data['count'] = count($data['service_detail']['slider']);
+        
         if(!empty($data['service_detail']) && $data['service_detail'] != Null)
         {
             $blade = self::URL_BLADE_FRONT_SITE.'.service-detail';

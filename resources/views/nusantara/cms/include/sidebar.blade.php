@@ -42,7 +42,16 @@
                                 <a href="#branch-office" onclick="menuBranchOffice()">Branch Office</a>
                             </li>
                             <li>
+                                <a href="#carier" onclick="menuCarierCategori()">Carier</a>
+                            </li>
+                            <li>
+                                <a href="#event-services" onclick="menuEvent()">Event & Service</a>
+                            </li>
+                            <li>
                                 <a href="#main-banner" onclick="menuMainBanner()">Main Banner</a>
+                            </li>
+                            <li>
+                                <a href="#news" onclick="menuNews()">News</a>
                             </li>
                             <li>
                                 <a href="#promotions" onclick="menuBannerPromotions()">Promotions</a>

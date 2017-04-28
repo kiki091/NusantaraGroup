@@ -33,7 +33,12 @@
         width: 100%;
     }
 }
-
+.table-awards {
+    font-size: 12px;
+}
+.images-awards {
+    opacity: 0.7;
+}
 .container-content {
     padding-right: 15px;
     margin-right: auto;

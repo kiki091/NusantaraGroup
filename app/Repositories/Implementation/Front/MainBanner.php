@@ -22,13 +22,14 @@ class MainBanner extends BaseImplementation implements MainBannerInterface
         $this->mainBannerTransformation = $mainBannerTransformation;
     }
 
-    public function getMainBanner($param = array())
+    public function getMainBanner($data)
     {
-        $data = [
+        $param = [
             'is_active' => true,
+            'banner_key' => $data
         ];
 
-        $mainBannerData = $this->mainBanner($data, 'asc', 'array', true);
+        $mainBannerData = $this->mainBanner($param, 'asc', 'array', true);
         //dd($mainBannerData);
         return $this->mainBannerTransformation->getMainBannerFrontTransform($mainBannerData);
     }
@@ -44,6 +45,10 @@ class MainBanner extends BaseImplementation implements MainBannerInterface
 
         $mainBanner = $this->mainBanner->with('property_location');
         
+        if(isset($data['banner_key'])) {
+            $mainBanner->isKey($data['banner_key']);
+        }
+
         if(isset($data['is_active'])) {
             $mainBanner->isActive($data['is_active']);
         }

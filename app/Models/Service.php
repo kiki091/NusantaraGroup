@@ -37,6 +37,11 @@ class Service extends Model
         return $this->hasMany('App\Models\ServiceImages', 'services_id', 'id');
     }
 
+    public function category()
+    {
+        return $this->hasMany('App\Models\ServiceCategory', 'id', 'services_id');
+    }
+
     /***************** Scope *****************/
 
     /**
@@ -58,5 +63,10 @@ class Service extends Model
     public function scopeServicesCategoryId($query, $params = true)
     {
         return $query->where('service_category_id', $params);
+    }
+
+    public function scopeId($query, $id)
+    {
+        return $query->where('id', $id);
     }
 }

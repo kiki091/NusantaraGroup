@@ -45,6 +45,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('App\Repositories\Contracts\Cms\Awards', 'App\Repositories\Implementation\Cms\Awards');
         $this->app->bind('App\Repositories\Contracts\Cms\PromotionCategory', 'App\Repositories\Implementation\Cms\PromotionCategory');
         $this->app->bind('App\Repositories\Contracts\Cms\Promotion', 'App\Repositories\Implementation\Cms\Promotion');
+        $this->app->bind('App\Repositories\Contracts\Cms\Carier', 'App\Repositories\Implementation\Cms\Carier');
+        $this->app->bind('App\Repositories\Contracts\Cms\CarierDetail', 'App\Repositories\Implementation\Cms\CarierDetail');
+        $this->app->bind('App\Repositories\Contracts\Cms\EventCategory', 'App\Repositories\Implementation\Cms\EventCategory');
+        $this->app->bind('App\Repositories\Contracts\Cms\EventDetail', 'App\Repositories\Implementation\Cms\EventDetail');
+        $this->app->bind('App\Repositories\Contracts\Cms\News', 'App\Repositories\Implementation\Cms\News');
     }
 
     /**
@@ -75,6 +80,11 @@ class AppServiceProvider extends ServiceProvider
             'App\Repositories\Contracts\Cms\Awards',
             'App\Repositories\Contracts\Cms\PromotionCategory',
             'App\Repositories\Contracts\Cms\Promotion',
+            'App\Repositories\Contracts\Cms\Carier',
+            'App\Repositories\Contracts\Cms\CarierDetail',
+            'App\Repositories\Contracts\Cms\EventCategory',
+            'App\Repositories\Contracts\Cms\EventDetail',
+            'App\Repositories\Contracts\Cms\News',
         );
     }
 }

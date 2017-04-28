@@ -198,8 +198,24 @@ class BranchOfficeController extends CmsController
 
         if ($this->isEditMode($request->input()))
         {
-            if (is_null($request->file('images.*'))) {
-                unset($rules['images.*']);
+            if (is_null($request->file('thumbnail'))) {
+                unset($rules['thumbnail']);
+            }
+
+            if (is_null($request->file('title_description.address'))) {
+                unset($rules['branch_office.title_description']);
+            }
+            
+            if (is_null($request->file('branch_office.address'))) {
+                unset($rules['branch_office.address']);
+            }
+
+            if (is_null($request->file('branch_office.latitude'))) {
+                unset($rules['branch_office.latitude']);
+            }
+
+            if (is_null($request->file('branch_office.longitude'))) {
+                unset($rules['branch_office.longitude']);
             }
         }
 

@@ -24,6 +24,8 @@ class LandingController extends FrontController
     protected $response;
     protected $validationMessage = '';
 
+    const MAIN_BANNER_KEY = 'banner::landing';
+
     /**
      * Display a listing of the resource.
      *
@@ -44,7 +46,7 @@ class LandingController extends FrontController
 
     public function index(Request $request)
     {
-        $data['main_banners'] = $this->mainBanner->getMainBanner();
+        $data['main_banners'] = $this->mainBanner->getMainBanner(self::MAIN_BANNER_KEY);
         $data['landing_page'] = $this->landingPage->getlandingPage();
         $data['branch_office'] = $this->branchOffice->getBranchOffice();
         $data['company_profile'] = $this->companyProfile->getCompanyProfile();

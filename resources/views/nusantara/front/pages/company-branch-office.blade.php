@@ -82,12 +82,7 @@
                         </p>
                     </div><!-- col-lg-6 -->
                     <div class="col-sm-6 col-xs-12">
-                        <p>
-                            <span class="first-letter">
-                                {{ substr($branch_office['description'],0,1) }}
-                            </span>
-                            {{ substr($branch_office['description'],1) }}
-                        </p>
+                        {!! $branch_office['description'] !!}
                         <!-- ==== MAPS ==== -->
                         <section class="section-divider textdividerFooter divider6" id="map-office"></section>
                     </div>

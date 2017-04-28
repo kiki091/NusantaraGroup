@@ -4,8 +4,8 @@ namespace App\Repositories\Implementation\Front;
 
 use App\Repositories\Contracts\Front\Carier as CarierInterface;
 use App\Repositories\Implementation\BaseImplementation;
-use App\Models\Carier as CarierModel;
-use App\Models\CarierCategory as CarierCategoryModel;
+use App\Models\CarierDetail as CarierModel;
+use App\Models\Carier as CarierCategoryModel;
 use App\Models\CarierContent as CarierContentModel;
 use App\Services\Transformation\Front\Carier as CarierTransformation;
 use Cache;

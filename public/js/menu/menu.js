@@ -61,3 +61,44 @@ function menuCategoriPromotions()
         initCategoriPromotion()
     });
 }
+
+function menuCarierCategori()
+{
+    $('.right_col').load(laroute.url('/carier', []), function()
+    {
+        initCarierCategori()
+    });
+}
+
+function menuCarierDetail()
+{
+    $('.right_col').load(laroute.url('/carier/detail', []), function()
+    {
+        initCarierDetail()
+    });
+}
+
+
+function menuEvent()
+{
+    $('.right_col').load(laroute.url('/event/category', []), function()
+    {
+        initEventCategory()
+    });
+}
+
+function menuEventDetail()
+{
+    $('.right_col').load(laroute.url('/event/detail', []), function()
+    {
+        initEventDetail()
+    });
+}
+
+function menuNews()
+{
+    $('.right_col').load(laroute.url('/news', []), function()
+    {
+        initNews()
+    });
+}

@@ -1,6 +1,9 @@
 <?php 
 
   return [
+      'failed' => 'Your email or password do not match our records.',
+      'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+
   		'cms_required_id' => 'Required id.',
       'cms_success_get_data' => 'Success get data..',
   		'cms_success_update_status_general' => 'Success update status.',

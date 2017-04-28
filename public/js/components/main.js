@@ -267,3 +267,134 @@ $(document).ready(function() {
     $('#notif-group div').first().css('display', 'block');
   });
 });
+
+function moveCheck() {
+
+      //Helper function to keep table row from collapsing when being sorted
+      var fixHelperModified = function(e, li) {
+      var $originals = li.children();
+      var $helper = li.clone();
+
+      $helper.children().each(function(index)
+      {
+        $(this).width($originals.eq(index).width())
+      });
+        return $helper;
+      };
+
+      //Make diagnosis table sortable
+      $(".table-test ul").sortable({
+        axis: 'y',
+        opacity: 0.7,
+        handle: '.handle',
+        placeholder: 'plcehldr',
+        start: function(ev, ui){
+          isMoved = false;
+          init_X = cX = ev.pageX;
+          init_Y = cY = ev.pageY;
+          sortingEl = ui.item;
+          placeholderEl = ui.placeholder;
+          sortingEl.addClass("sort-el").siblings().addClass("sort-items sort-trans");
+          sortingItems = $(this).find('.sort-items');
+          $(this).addClass("sort-active");
+          sort_items_length = sortingItems.length;
+          if (!isMoved) {
+          minTop = sortingEl[0].offsetTop;
+            maxTop = sortingEl.parent().outerHeight() - minTop - sortingEl.outerHeight();
+            sortingElHeight = sortingEl.outerHeight()+5; // 3 is[margin(top+bottom)/2]
+          }
+        },
+        sort: function(ev,ui){
+          isMoved = true;
+          cX = ev.pageX;
+          cY = ev.pageY;
+          new_Y =  cY - init_Y;
+
+          if (new_Y < -minTop){
+            new_Y = -minTop;
+          }
+          if (new_Y > maxTop){
+            new_Y = maxTop;
+          }
+          sortingEl.css({"transform":"translateY("+new_Y+"px)"});
+
+          sortingItems.each(function () {
+            var currentEl = $(this);
+            if (currentEl[0] === sortingEl[0]) return;
+            var currentElOffset = currentEl[0].offsetTop;
+            var currentElHeight = currentEl.outerHeight();
+            var sortingElOffset = sortingEl[0].offsetTop + new_Y;
+
+            if ((sortingElOffset >= currentElOffset - currentElHeight / 2) && sortingEl.index() < currentEl.index()) {
+              currentEl.css({"transform":"translateY(-"+sortingElHeight+"px)"});
+              placeholderEl.insertAfter(currentEl);
+            }
+            else if ((sortingElOffset <= currentElOffset + currentElHeight / 2) && sortingEl.index() > currentEl.index()) {
+            currentEl.css({"transform":"translateY("+sortingElHeight+"px)"});
+              placeholderEl.insertBefore(currentEl);
+              return false;
+            }
+            else {
+              $(this).css({"transform":"translateY(0px)"});
+            }
+          });
+        },
+        stop: function(ev,ui){
+          $(this).removeClass("sort-active");
+          isMoved = false;
+          sortingEl.removeAttr("style").removeClass("sort-el");
+          sortingItems.removeClass("sort-trans sort-items").removeAttr("style");
+        }
+      }).disableSelection();
+
+
+      //Renumber table rows
+      function renumber_table(tableID) {
+        $(tableID + " li").each(function() {
+          count = $(this).parent().children().index($(this)) + 1;
+          //console.log(count);
+          //$(this).find('.priority').val(count);
+          $(this).find('.priority').html(count);
+          //$('input[name=priority]').val(count);
+        });
+      }
+
+      var checkedList = $('.table-test ul');
+      var unCheckedList = $('.checkbox-test  ul');
+      var checkBoxInput = $('.checkbox--input');
+
+      $(document).on('change', '.checkbox--input', function(){
+        if (this.checked){
+          $(this).closest('li').appendTo(checkedList);
+          renumber_table('.table-test');
+        }
+        else if (!this.checked){
+          $(this).closest('li').appendTo(unCheckedList);
+          renumber_table('.table-test');
+        }
+
+        var rs = checkedList.find('li').size();
+        if (rs>0){
+          $('.bg--placeholder').hide(); 
+          // console.log('lebih dari 0');
+        }
+        else{
+          $('.bg--placeholder').show();
+        }
+
+
+        if(rs>2){
+          // console.log('lebih dari 3');
+          $('.checkbox-test').find('.checkbox--label').addClass('disabled');      
+        }
+        else{
+          $('.checkbox-test').find('.checkbox--label').removeClass('disabled');
+        }
+      });
+      if(checkedList.length==0){
+        $('.bg--placeholder').show();
+      }
+      if(checkedList.length>=3){
+        unCheckedList.find('.checkbox--input').addClass('disable'); 
+      }
+}

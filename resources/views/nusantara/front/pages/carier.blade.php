@@ -46,7 +46,6 @@
                             <span class="first-letter">K</span>ami mengundang seluruh professional untuk dapat bersama-sama mengembangkan karir, kualitas hidup, berpikir lebih terbuka dan tidak lupa mengesampingkan kerja keras. Kami menyadari bahwa karyawan adalah suatu asset yang berharga bagi perusahaan. Maka dari itu kami mengharapkan kerja sama dari kedua belah pihak dan komunikasi dua arah yang akan menghasilkan sebuah kesuksesan.
                         </p>
                         <p>
-
                             Silakan melihat lowongan yang tersedia dibawah ini dan jika tidak ada lowongan yang tersedia atau yang tidak sesuai dengan harapan anda, mohon dapat mengisi formulir yang telah disediakan.
                         </p>
                     </div>

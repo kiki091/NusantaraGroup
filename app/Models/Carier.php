@@ -6,23 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Carier extends Model
 {
-    protected $table = 'carier';
+    protected $table = 'carier_category';
     public $timestamps = true;
 
 
     protected $fillable = [
-	    'job_title', 
-	    'slug',
-	    'job_description', 
-	    'carier_category_id'
+	    'category_name', 
+	    'thumbnail'
     ];
 
-    public function category()
+    public function detail()
     {
-        return $this->belongsTo('App\Models\CarierCategory', 'carier_category_id', 'id');
+        return $this->hasMany('App\Models\CarierDetail', 'id', 'carier_category_id');
     }
-
-    /***************** Scope *****************/
 
     /**
      * @param $query
@@ -30,5 +26,13 @@ class Carier extends Model
     public function scopeIsActive($query, $params = true)
     {
         return $query->where('is_active', $params);
+    }
+
+    /**
+     * @param $query
+     */
+    public function scopeId($query, $id)
+    {
+        return $query->where('id', $id);
     }
 }

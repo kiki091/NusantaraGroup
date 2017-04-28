@@ -477,3 +477,44 @@ function initCategoriPromotion()
     buttonClickClose();
     replaceToCkEditor();
 }
+
+function initCarierCategori()
+{
+    crudCarierCategori();
+    buttonClickOpen();
+    buttonClickClose();
+    replaceToCkEditor();
+}
+
+function initCarierDetail()
+{
+    crudCarierDetail();
+    buttonClickOpen();
+    buttonClickClose();
+    replaceToCkEditor();
+}
+
+function initEventCategory()
+{
+    crudEventCategory();
+    buttonClickOpen();
+    buttonClickClose();
+    replaceToCkEditor();
+}
+
+function initEventDetail()
+{
+    crudEventDetail();
+    buttonClickOpen();
+    buttonClickClose();
+    replaceToCkEditor();
+}
+
+function initNews()
+{
+    crudNews();
+    buttonClickOpen();
+    buttonClickClose();
+    replaceToCkEditor();
+    moveCheck();
+}
